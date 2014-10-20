@@ -24,3 +24,10 @@ ext/mkinstalldirs
 ext/run-tests.php
 ext/.deps
 ext/libtool
+
+# Other
+phpunit.xml
+composer.lock
+composer.phar
+autoload.php
+/vendor/

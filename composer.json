@@ -1,0 +1,24 @@
+{
+    "name": "golovanov/php-ext-zf2",
+    "description": "Zend Framework 2 delivered as a C-extension (Zephir)",
+    "require": {
+        "zendframework/zendframework": "2.3.3"
+    },
+    "require-dev": {
+        "phpdocumentor/reflection-docblock": "2.*",
+        "phpunit/phpunit": "*",
+        "doctrine/annotations": ">=1.0",
+        "ircmaxell/random-lib": "dev-master",
+        "ircmaxell/security-lib": "dev-master",
+        "mikey179/vfsStream": "1.2.*",
+        "fabpot/php-cs-fixer": "dev-master",
+        "satooshi/php-coveralls": "dev-master",
+        "phpunit/phpcov": "*"
+    },
+    "authors": [
+        {
+            "name": "Igor Golovanov",
+            "email": "igor.golovanov@gmail.com"
+        }
+    ]
+}

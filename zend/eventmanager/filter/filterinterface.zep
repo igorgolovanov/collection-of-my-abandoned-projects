@@ -1,0 +1,61 @@
+/*
+* This file is part of the php-ext-zf2 package.
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
+
+namespace Zend\EventManager\Filter;
+
+/**
+ * Interface for intercepting filter chains
+ */
+interface FilterInterface
+{
+    /**
+     * Execute the filter chain
+     *
+     * @param  string|object $context
+     * @param  array $params
+     * @return mixed
+     */
+    public function run(var context, array! params = []);
+
+    /**
+     * Attach an intercepting filter
+     *
+     * @param  callable $callback
+     * @return CallbackHandler
+     */
+    public function attach(callback);
+
+    /**
+     * Detach an intercepting filter
+     *
+     * @param  CallbackHandler $filter
+     * @return bool
+     */
+    public function detach(filter) -> boolean;
+
+    /**
+     * Get all intercepting filters
+     *
+     * @return array
+     */
+    public function getFilters() -> array;
+
+    /**
+     * Clear all filters
+     *
+     * @return void
+     */
+    public function clearFilters() -> void;
+
+    /**
+     * Get all filter responses
+     *
+     * @return ResponseCollection
+     */
+    public function getResponses();
+
+}
