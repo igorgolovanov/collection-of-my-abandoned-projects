@@ -83,7 +83,30 @@
 
 ### ZendPermissionsAcl
 
+- Zend\Permissions\Acl\Assertion\Exception\InvalidAssertionException
+- Zend\Permissions\Acl\Assertion\AssertionAggregate
+- Zend\Permissions\Acl\Assertion\AssertionInterface
+- Zend\Permissions\Acl\Assertion\AssertionAggregate
+- Zend\Permissions\Acl\Exception\AssertionManager
+- Zend\Permissions\Acl\Exception\InvalidArgumentException
+- Zend\Permissions\Acl\Exception\RuntimeException
+- Zend\Permissions\Acl\Resource\GenericResource
+- Zend\Permissions\Acl\Resource\ResourceInterface
+- Zend\Permissions\Acl\Role\GenericRole
+- Zend\Permissions\Acl\Role\Registry
+- Zend\Permissions\Acl\Role\RoleInterface
+- Zend\Permissions\Acl\AclInterface
+
 ### ZendPermissionsRbac
+
+- Zend\Permissions\Rbac\Exception\ExceptionInterface
+- Zend\Permissions\Rbac\Exception\InvalidArgumentException
+- Zend\Permissions\Rbac\AbstractIterator
+- Zend\Permissions\Rbac\AbstractRole
+- Zend\Permissions\Rbac\AssertionInterface
+- Zend\Permissions\Rbac\Rbac
+- Zend\Permissions\Rbac\Role
+- Zend\Permissions\Rbac\RoleInterface
 
 ### ZendProgressBar
 
