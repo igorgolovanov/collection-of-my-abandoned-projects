@@ -50,18 +50,18 @@
 
 ### ZendLoader
 
-Zend\Loader\Exception\BadMethodCallException
-Zend\Loader\Exception\DomainException
-Zend\Loader\Exception\ExceptionInterface
-Zend\Loader\Exception\InvalidArgumentException
-Zend\Loader\Exception\InvalidPathException
-Zend\Loader\Exception\MissingResourceNamespaceException
-Zend\Loader\Exception\PluginLoaderException
-Zend\Loader\Exception\RuntimeException
-Zend\Loader\Exception\SecurityException
-Zend\Loader\ShortNameLocator
-Zend\Loader\PluginClassLocator
-Zend\Loader\SplAutoloader
+- Zend\Loader\Exception\BadMethodCallException
+- Zend\Loader\Exception\DomainException
+- Zend\Loader\Exception\ExceptionInterface
+- Zend\Loader\Exception\InvalidArgumentException
+- Zend\Loader\Exception\InvalidPathException
+- Zend\Loader\Exception\MissingResourceNamespaceException
+- Zend\Loader\Exception\PluginLoaderException
+- Zend\Loader\Exception\RuntimeException
+- Zend\Loader\Exception\SecurityException
+- Zend\Loader\ShortNameLocator
+- Zend\Loader\PluginClassLocator
+- Zend\Loader\SplAutoloader
 
 ### ZendLog
 
