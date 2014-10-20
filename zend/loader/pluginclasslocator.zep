@@ -27,7 +27,7 @@ interface PluginClassLocator extends ShortNameLocator, \IteratorAggregate, \Trav
      * @param  mixed $shortName
      * @return void
      */
-    public function unregisterPlugin(var shortName) -> void;
+    public function unregisterPlugin(string shortName) -> void;
 
     /**
      * Get a list of all registered plugins
