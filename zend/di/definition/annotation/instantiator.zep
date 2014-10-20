@@ -26,5 +26,4 @@ class Instantiator implements AnnotationInterface
     {
         let this->content = content;
     }
-
 }

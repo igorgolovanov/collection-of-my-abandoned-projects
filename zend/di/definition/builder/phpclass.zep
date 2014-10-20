@@ -30,12 +30,12 @@ class PhpClass
     /**
      * @var InjectionMethod[]
      */
-    protected injectionMethods; // []
+    protected injectionMethods = [];
 
     /**
      * @var array
      */
-    protected superTypes; // []
+    protected superTypes = [];
 
     /**
      * Set name
@@ -128,7 +128,7 @@ class PhpClass
         var method;
 
         let builder = this->defaultMethodBuilder;
-        let method = new {builder}();
+        let method = <InjectionMethod> new {builder}();
 
         if name !== null {
             method->setName(name);

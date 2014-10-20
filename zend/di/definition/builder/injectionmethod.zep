@@ -22,13 +22,13 @@ class InjectionMethod
     /**
      * @var array
      */
-    protected parameters; // []
+    protected parameters = [];
 
     /**
      * @param  string|null $name
      * @return self
      */
-    public function setName(string name) -> <InjectionMethod>
+    public function setName(string name) -> self
     {
         let this->name = name;
         return this;
@@ -49,7 +49,7 @@ class InjectionMethod
      * @param  mixed|null      $default
      * @return InjectionMethod
      */
-    public function addParameter(string name, string $class = null, isRequired = null, $default = null) -> <InjectionMethod>
+    public function addParameter(string name, var $class = null, var isRequired = null, var $default = null) -> self
     {
         array param = [];
 
@@ -76,12 +76,54 @@ class InjectionMethod
      * @param mixed $requirement
      * @return int
      */
-    public static function detectMethodRequirement(requirement) -> int
+    public static function detectMethodRequirement(var requirement) -> int
     {
-        string type;
         int result = 0;
+        string type, req;
 
-        // todo
+        let type = typeof requirement;
+
+        if type == "boolean" {
+            if requirement {
+                return Di::METHOD_IS_REQUIRED;
+            }
+            return Di::METHOD_IS_OPTIONAL;
+        }
+
+        if requirement === null {
+            //This is mismatch to ClassDefinition::addMethod is it ok ? is optional?
+            return Di::METHOD_IS_REQUIRED;
+        }
+
+        if type == "int" {
+            return requirement;
+        }
+
+        if type == "string" {
+            let req = strtolower(requirement);
+
+            switch req {
+                case "eager":
+                    let result = Di::METHOD_IS_EAGER;
+                    break;
+                case "instantiator":
+                    let result = Di::METHOD_IS_INSTANTIATOR;
+                    break;
+                case "constructor":
+                    let result = Di::METHOD_IS_CONSTRUCTOR;
+                    break;
+                case "optional":
+                    let result = Di::METHOD_IS_OPTIONAL;
+                    break;
+                case "aware":
+                    let result = Di::METHOD_IS_AWARE;
+                    break;
+                case "required":
+                case "require":
+                default:
+                    let result = Di::METHOD_IS_REQUIRED;
+            }
+        }
         return result;
     }
 

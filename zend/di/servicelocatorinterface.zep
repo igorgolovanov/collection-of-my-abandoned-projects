@@ -17,6 +17,6 @@ interface ServiceLocatorInterface extends LocatorInterface
      * @param  mixed                   $service
      * @return ServiceLocatorInterface
      */
-    public function set(string name, service) -> <ServiceLocatorInterface>;
+    public function set(string name, var service) -> <ServiceLocatorInterface>;
 
 }

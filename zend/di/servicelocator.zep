@@ -31,19 +31,19 @@ class ServiceLocator implements ServiceLocatorInterface
      *
      * @var array
      */
-    protected map; // []
+    protected map = [];
 
     /**
      * Registered services and cached values
      *
      * @var array
      */
-    protected services; // []
+    protected services = [];
 
     /**
      * {@inheritDoc}
      */
-    public function set(string name, service) -> <ServiceLocator>
+    public function set(string name, var service) -> self
     {
         let this->services[name] = service;
 

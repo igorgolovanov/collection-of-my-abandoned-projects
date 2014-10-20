@@ -22,7 +22,7 @@ class BuilderDefinition implements DefinitionInterface
     /**
      * @var Builder\PhpClass[]
      */
-    protected classes; // []
+    protected classes = [];
 
     /**
      * Create classes from array
@@ -32,7 +32,44 @@ class BuilderDefinition implements DefinitionInterface
      */
     public function createClassesFromArray(array! builderData) -> void
     {
+        var className, classInfo, instance, builder, 
+            type, typeData, superType, 
+            injectionMethodName, injectionMethodData, injectionMethod, 
+            parameterName, parameterType;
 
+        for className, classInfo in builderData {
+            let builder = new Builder\PhpClass();
+            builder->setName(className);
+
+            for type, typeData in classInfo {
+                switch strtolowe(type) {
+                    case "supertypes":
+                        for superType in typeData {
+                            builder->addSuperType(superType);
+                        }
+                        break;
+                    case "instantiator":
+                        builder->setInstantiator(typeData);
+                        break;    
+                    case "methods":
+                    case "method":
+                        for injectionMethodName, injectionMethodData in typeData {
+                            let injectionMethod = new Builder\InjectionMethod();
+                            injectionMethod->setName(injectionMethodName);
+
+                            for parameterName, parameterType in injectionMethodData {
+                                if !parameterType {
+                                    let parameterType = null;
+                                }
+                                injectionMethod->addParameter(parameterName, parameterType);
+                            }
+                            builder->addInjectionMethod(injectionMethod);
+                        }
+                        break;    
+                }
+            }
+            this->addClass(builder);
+        }
     }
 
     /**
@@ -154,7 +191,7 @@ class BuilderDefinition implements DefinitionInterface
      * {@inheritDoc}
      * @throws \Zend\Di\Exception\RuntimeException
      */
-    public function getClassSupertypes(string $class)
+    public function getClassSupertypes(string $class) -> array
     {
 
     }
@@ -163,7 +200,7 @@ class BuilderDefinition implements DefinitionInterface
      * {@inheritDoc}
      * @throws \Zend\Di\Exception\RuntimeException
      */
-    public function getInstantiator($class)
+    public function getInstantiator(string $class) -> string|array
     {
 
     }
@@ -172,7 +209,7 @@ class BuilderDefinition implements DefinitionInterface
      * {@inheritDoc}
      * @throws \Zend\Di\Exception\RuntimeException
      */
-    public function hasMethods($class)
+    public function hasMethods(string $class) -> boolean
     {
 
     }
@@ -181,7 +218,7 @@ class BuilderDefinition implements DefinitionInterface
      * {@inheritDoc}
      * @throws \Zend\Di\Exception\RuntimeException
      */
-    public function getMethods($class)
+    public function getMethods(string $class) -> array
     {
 
     }
@@ -190,7 +227,7 @@ class BuilderDefinition implements DefinitionInterface
      * {@inheritDoc}
      * @throws \Zend\Di\Exception\RuntimeException
      */
-    public function hasMethod($class, method)
+    public function hasMethod(string $class, string method) -> boolean
     {
 
     }
@@ -198,7 +235,7 @@ class BuilderDefinition implements DefinitionInterface
     /**
      * {@inheritDoc}
      */
-    public function hasMethodParameters($class, method)
+    public function hasMethodParameters(string $class, string method) -> boolean
     {
 
     }
@@ -207,7 +244,7 @@ class BuilderDefinition implements DefinitionInterface
      * {@inheritDoc}
      * @throws \Zend\Di\Exception\RuntimeException
      */
-    public function getMethodParameters($class, method)
+    public function getMethodParameters(string $class, string method) -> array
     {
 
     }

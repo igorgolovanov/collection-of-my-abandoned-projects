@@ -74,7 +74,7 @@ interface DefinitionInterface
      * @param $method
      * @return bool
      */
-    public function hasMethodParameters($class, method) -> boolean;
+    public function hasMethodParameters(string $class, string method) -> boolean;
 
     /**
      * getMethodParameters() return information about a methods parameters.

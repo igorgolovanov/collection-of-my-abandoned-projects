@@ -17,7 +17,7 @@ class ArrayDefinition implements DefinitionInterface
     /**
      * @var array
      */
-    protected dataArray; // []
+    protected dataArray = [];
 
     /**
      * @param array $dataArray
@@ -25,15 +25,17 @@ class ArrayDefinition implements DefinitionInterface
     public function __construct(array! dataArray)
     {
         string className, type;
-        var definition, requirement;
+        var definition, requirement, methods;
 
-        for definition, className in dataArray {
+        for className, definition in dataArray {
             let definition = array_change_key_case(definition, CASE_LOWER);
 
-            if isset definition["methods"] && typeof definition["methods"] == "array" {
-                for requirement, type in definition["methods"] {
-                    if typeof requirement != "int"  {
-                        let definition["methods"][type] = InjectionMethod::detectMethodRequirement(requirement);
+            if fetch methods, definition["methods"] {
+                if typeof methods == "array" {
+                    for requirement, type in methods {
+                        if typeof requirement != "int"  {
+                            let definition["methods"][type] = InjectionMethod::detectMethodRequirement(requirement);
+                        }
                     }
                 }
             }
@@ -64,57 +66,110 @@ class ArrayDefinition implements DefinitionInterface
     /**
      * {@inheritDoc}
      */
-    public function getClassSupertypes($class)
+    public function getClassSupertypes(string $class) -> array
     {
+        var classData, supertypes;
+        array emptyArray = [];
 
+        if fetch classData, this->dataArray[$class] {
+            if fetch supertypes, classData["supertypes"] {
+                return supertypes;
+            }
+        }
+
+        return emptyArray;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getInstantiator($class)
+    public function getInstantiator(string $class) -> string|array
     {
+        var classData, instantiator;
 
+        if fetch classData, this->dataArray[$class] {
+            if !fetch instantiator, classData["instantiator"] {
+                let instantiator = "__construct";
+            }
+        }
+        return instantiator;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function hasMethods($class)
+    public function hasMethods(string $class) -> boolean
     {
+        var classData, methods;
+        int count = 0;
 
+        if fetch classData, this->dataArray[$class] {
+            if fetch methods, classData["methods"] {
+                let count = count(methods);
+            }
+        }
+        return count > 0;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function hasMethod($class, method)
+    public function hasMethod(string $class, string method) -> boolean
     {
+        var classData, methods;
 
+        if fetch classData, this->dataArray[$class] {
+            if fetch methods, classData["methods"] {
+                if isset methods[method] {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getMethods($class)
+    public function getMethods(string $class) -> array
     {
+        var classData, methods;
+        array emptyArray = [];
 
+        if fetch classData, this->dataArray[$class] {
+            if fetch methods, classData["methods"] {
+                return methods;
+            }
+        }
+
+        return emptyArray;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function hasMethodParameters($class, method)
+    public function hasMethodParameters(string $class, string method) -> boolean
     {
-
+        return isset this->dataArray[$class]["parameters"][method];
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getMethodParameters($class, method)
+    public function getMethodParameters(string $class, string method) -> boolean
     {
+        var params, classParams, methodParams;
+        array emptyArray = [];
 
+        if fetch params, this->dataArray[$class] {
+            if fetch classParams, params["parameters"] {
+                if fetch methodParams, classParams[method] {
+                    return methodParams;
+                }
+            }
+        }
+
+        return emptyArray;
     }
 
     /**

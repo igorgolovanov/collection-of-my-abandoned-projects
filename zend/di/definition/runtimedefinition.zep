@@ -19,7 +19,7 @@ class RuntimeDefinition implements DefinitionInterface
     /**
      * @var array
      */
-    protected classes; // []
+    protected classes = [];
 
     /**
      * @var bool
@@ -34,7 +34,7 @@ class RuntimeDefinition implements DefinitionInterface
     /**
      * @var array
      */
-    protected injectionMethods; // []
+    protected injectionMethods = []; 
 
     /**
      * Constructor
@@ -93,7 +93,7 @@ class RuntimeDefinition implements DefinitionInterface
     /**
      * {@inheritDoc}
      */
-    public function hasClass($class)
+    public function hasClass(string $class)
     {
 
     }
@@ -101,7 +101,7 @@ class RuntimeDefinition implements DefinitionInterface
     /**
      * {@inheritDoc}
      */
-    public function getClassSupertypes($class)
+    public function getClassSupertypes(string $class)
     {
 
     }
@@ -109,7 +109,7 @@ class RuntimeDefinition implements DefinitionInterface
     /**
      * {@inheritDoc}
      */
-    public function getInstantiator($class)
+    public function getInstantiator(string $class)
     {
 
     }
@@ -117,7 +117,7 @@ class RuntimeDefinition implements DefinitionInterface
     /**
      * {@inheritDoc}
      */
-    public function hasMethods($class)
+    public function hasMethods(string $class)
     {
 
     }
@@ -125,7 +125,7 @@ class RuntimeDefinition implements DefinitionInterface
     /**
      * {@inheritDoc}
      */
-    public function hasMethod($class, method)
+    public function hasMethod(string $class, string method)
     {
 
     }
@@ -133,7 +133,7 @@ class RuntimeDefinition implements DefinitionInterface
     /**
      * {@inheritDoc}
      */
-    public function getMethods($class)
+    public function getMethods(string $class)
     {
 
     }
@@ -141,7 +141,7 @@ class RuntimeDefinition implements DefinitionInterface
     /**
      * {@inheritDoc}
      */
-    public function hasMethodParameters($class, method)
+    public function hasMethodParameters(string $class, string method)
     {
 
     }
@@ -149,7 +149,7 @@ class RuntimeDefinition implements DefinitionInterface
     /**
      * {@inheritDoc}
      */
-    public function getMethodParameters($class, method)
+    public function getMethodParameters(string $class, string method)
     {
 
     }
@@ -157,7 +157,7 @@ class RuntimeDefinition implements DefinitionInterface
     /**
      * @param string $class
      */
-    protected function hasProcessedClass(string $class)
+    protected function hasProcessedClass(string string string $class)
     {
 
     }

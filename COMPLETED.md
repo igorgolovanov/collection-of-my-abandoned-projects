@@ -12,6 +12,38 @@
 
 ### ZendCode
 
+- Zend\Code\Annotation\AnnotationCollection
+- Zend\Code\Annotation\AnnotationInterface
+- Zend\Code\Annotation\AnnotationManager
+- Zend\Code\Annotation\Parser\ParserInterface
+- Zend\Code\Annotation\Parser\GenericAnnotationParser
+- Zend\Code\Exception\BadMethodCallException
+- Zend\Code\Exception\ExceptionInterface
+- Zend\Code\Exception\InvalidArgumentException
+- Zend\Code\Exception\RuntimeException
+
+- Zend\Code\Generator\DocBlock\Tag\AbstractTypeableTag
+- Zend\Code\Generator\DocBlock\Tag\AuthorTag
+- Zend\Code\Generator\DocBlock\Tag\GenericTag
+- Zend\Code\Generator\DocBlock\Tag\LicenseTag
+- Zend\Code\Generator\DocBlock\Tag\MethodTag
+- Zend\Code\Generator\DocBlock\Tag\ParamTag
+- Zend\Code\Generator\DocBlock\Tag\PropertyTag
+- Zend\Code\Generator\DocBlock\Tag\ReturnTag
+- Zend\Code\Generator\DocBlock\Tag\TagInterface
+- Zend\Code\Generator\DocBlock\Tag\ThrowsTag
+- Zend\Code\Generator\DocBlock\TagManager
+- Zend\Code\Generator\Exception\ExceptionInterface
+- Zend\Code\Generator\Exception\InvalidArgumentException
+- Zend\Code\Generator\Exception\RuntimeException
+- Zend\Code\Generator\AbstractGenerator
+- Zend\Code\Generator\GeneratorInterface
+
+- Zend\Code\Generic\Prototype\PrototypeClassFactory
+- Zend\Code\Generic\Prototype\PrototypeGenericInterface
+- Zend\Code\Generic\Prototype\PrototypeInterface
+
+
 ### ZendConfig
 
 ### ZendConsole
@@ -23,6 +55,17 @@
 ### ZendDebug
 
 ### ZendDi
+
+- Zend\Di\Definition\Annotation\Inject
+- Zend\Di\Definition\Annotation\Instantiator
+- Zend\Di\Definition\Builder\InjectionMethod
+- Zend\Di\Definition\Builder\PhpClass
+- Zend\Di\Definition\ArrayDefinition
+- Zend\Di\Definition\DefinitionInterface
+- Zend\Di\Definition\PartialMarker
+- Zend\Di\LocatorInterface
+- Zend\Di\ServiceLocatorInterface
+- Zend\Di\ServiceLocator
 
 ### ZendDom
 
@@ -115,6 +158,8 @@
 ### ZendServer
 
 ### ZendServiceManager
+
+- Zend\ServiceManager\
 
 ### ZendSession
 
