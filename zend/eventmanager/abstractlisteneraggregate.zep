@@ -15,7 +15,7 @@ abstract class AbstractListenerAggregate implements ListenerAggregateInterface
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
      */
-    protected listeners; // []
+    protected listeners = [];
 
     /**
      * {@inheritDoc}
@@ -25,10 +25,10 @@ abstract class AbstractListenerAggregate implements ListenerAggregateInterface
         var index, callback;
         boolean detached;
 
-        for callback, index in this->listeners {
+        for index, callback in this->listeners {
             let detached = events->detach(callback);
             if detached {
-                unset(this->listeners[index]);
+                unset this->listeners[index];
             }
         }
     }

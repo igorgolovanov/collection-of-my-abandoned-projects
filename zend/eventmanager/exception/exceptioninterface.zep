@@ -8,8 +8,8 @@
 namespace Zend\EventManager\Exception;
 
 /**
- * Base exception interface
- */
+* Base exception interface
+*/
 interface ExceptionInterface
 {
 }

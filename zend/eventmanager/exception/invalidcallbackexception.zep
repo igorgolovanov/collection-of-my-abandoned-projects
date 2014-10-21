@@ -8,8 +8,8 @@
 namespace Zend\EventManager\Exception;
 
 /**
- * Invalid callback exception
- */
+* Invalid callback exception
+*/
 class InvalidCallbackException extends DomainException implements ExceptionInterface
 {
 }

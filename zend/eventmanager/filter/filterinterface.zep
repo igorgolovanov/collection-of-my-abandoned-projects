@@ -7,9 +7,12 @@
 
 namespace Zend\EventManager\Filter;
 
+use Zend\EventManager\ResponseCollection;
+use Zend\Stdlib\CallbackHandler;
+
 /**
- * Interface for intercepting filter chains
- */
+* Interface for intercepting filter chains
+*/
 interface FilterInterface
 {
     /**
@@ -27,7 +30,7 @@ interface FilterInterface
      * @param  callable $callback
      * @return CallbackHandler
      */
-    public function attach(callback);
+    public function attach(var callback) -> <CallbackHandler>;
 
     /**
      * Detach an intercepting filter
@@ -35,7 +38,7 @@ interface FilterInterface
      * @param  CallbackHandler $filter
      * @return bool
      */
-    public function detach(filter) -> boolean;
+    public function detach(<CallbackHandler> filter) -> boolean;
 
     /**
      * Get all intercepting filters
@@ -56,6 +59,5 @@ interface FilterInterface
      *
      * @return ResponseCollection
      */
-    public function getResponses();
-
+    public function getResponses() -> <ResponseCollection>;
 }

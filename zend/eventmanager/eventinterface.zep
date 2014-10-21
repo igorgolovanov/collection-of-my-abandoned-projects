@@ -40,7 +40,7 @@ interface EventInterface
      * @param  mixed $default Default value to return if parameter does not exist
      * @return mixed
      */
-    public function getParam(string name, $default = null);
+    public function getParam(string name, var $default = null);
 
     /**
      * Set the event name
@@ -73,7 +73,7 @@ interface EventInterface
      * @param  mixed $value
      * @return void
      */
-    public function setParam(string name, value) -> void;
+    public function setParam(string name, var value) -> void;
 
     /**
      * Indicate whether or not the parent EventManagerInterface should stop propagating events

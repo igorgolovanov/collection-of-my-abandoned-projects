@@ -10,9 +10,9 @@ namespace Zend\EventManager;
 use Zend\Stdlib\CallbackHandler;
 
 /**
- * FilterChain: intercepting filter manager
- */
-class FilterChain implements \Filter\FilterInterface
+* FilterChain: intercepting filter manager
+*/
+class FilterChain implements Filter\FilterInterface
 {
     /**
      * @var Filter\FilterIterator All filters
@@ -38,7 +38,7 @@ class FilterChain implements \Filter\FilterInterface
      * @param  mixed $argv Associative array of arguments
      * @return mixed
      */
-    public function run(context, array! argv = [])
+    public function run(var context, array! argv = [])
     {
         var chain, filters, next, returns, callback;
 
@@ -50,7 +50,7 @@ class FilterChain implements \Filter\FilterInterface
         }
 
         let next = chain->extract();
-        if unlikely next instanceof CallbackHandler {
+        if !(next instanceof CallbackHandler) {
             return;
         }
         let callback = next->getCallback();
@@ -72,7 +72,7 @@ class FilterChain implements \Filter\FilterInterface
         var filter, filters;
         array metadata = [];
 
-        if empty callback {
+        if unlikely empty callback {
             throw new Exception\InvalidCallbackException("No callback provided");
         }
         let metadata["priority"] = priority;
@@ -126,7 +126,7 @@ class FilterChain implements \Filter\FilterInterface
      *
      * @return null|ResponseCollection
      */
-    public function getResponses() -> <ResponseCollection>|null
+    public function getResponses() -> <ResponseCollection>
     {
         return null;
     }

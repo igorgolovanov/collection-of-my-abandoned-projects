@@ -24,11 +24,11 @@ class FilterIterator extends SplPriorityQueue
      * @param  mixed $datum
      * @return bool
      */
-    public function contains(datum) -> boolean
+    public function contains(var datum) -> boolean
     {
         var chain, item;
 
-        let chain = clone this;
+        let chain = <FilterIterator> clone this;
 
         for item in chain {
             if item === datum {
@@ -47,14 +47,13 @@ class FilterIterator extends SplPriorityQueue
      * @param  mixed $datum
      * @return bool
      */
-    public function remove(datum) -> boolean
+    public function remove(var datum) -> boolean
     {
         boolean removed = false;
         array items = [];
         var item, data, priority;
 
         this->setExtractFlags(self::EXTR_BOTH);
-
         this->rewind();
 
         while !this->isEmpty() {
@@ -90,7 +89,7 @@ class FilterIterator extends SplPriorityQueue
      * @param  FilterIterator $chain
      * @return mixed
      */
-    public function next(context = null, array! params = [], <FilterIterator> chain = null)
+    public function next(var context = null, array! params = [], <FilterIterator> chain = null)
     {
         var next, callback, returns;
         if empty context || chain->isEmpty() {
@@ -98,7 +97,7 @@ class FilterIterator extends SplPriorityQueue
         }
 
         let next = this->extract();
-        if !next instanceof CallbackHandler {
+        if !(next instanceof CallbackHandler) {
             return;
         }
         let callback = next->getCallback();

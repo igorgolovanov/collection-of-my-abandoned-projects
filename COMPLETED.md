@@ -80,6 +80,30 @@
 
 ### ZendEventManager
 
+- Zend\EventManager\Exception\DomainException
+- Zend\EventManager\Exception\ExceptionInterface
+- Zend\EventManager\Exception\InvalidArgumentException
+- Zend\EventManager\Exception\InvalidCallbackException
+- Zend\EventManager\Filter\FilterInterface
+- Zend\EventManager\Filter\FilterIterator
+- Zend\EventManager\AbstractListenerAggregate
+- Zend\EventManager\Event
+- Zend\EventManager\EventInterface
+- Zend\EventManager\EventManager
+- Zend\EventManager\EventManagerAwareInterface
+- Zend\EventManager\EventManagerInterface
+- Zend\EventManager\EventsCapableInterface
+- Zend\EventManager\FilterChain
+- Zend\EventManager\GlobalEventManager
+- Zend\EventManager\ListenerAggregateInterface
+- Zend\EventManager\ResponseCollection
+- Zend\EventManager\SharedEventAggregateAwareInterface
+- Zend\EventManager\SharedEventManager
+- Zend\EventManager\SharedEventManagerInterface
+- Zend\EventManager\SharedEventManagerAwareInterface
+- Zend\EventManager\SharedListenerAggregateInterface
+- Zend\EventManager\StaticEventManager
+
 ### ZendFeed
 
 ### ZendFile

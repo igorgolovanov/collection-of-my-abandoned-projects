@@ -42,12 +42,16 @@ class StaticEventManager extends SharedEventManager implements SharedEventManage
      */
     public static function getInstance() -> <StaticEventManager>
     {
+        string className;
+        var instance;
 
-        // todo: change self -> static
-        if self::instance === null {
-             self::setInstance(new self());
+        if static::instance === null {
+            let className = get_called_class();
+            let instance = <StaticEventManager> new {className}();
+
+            static::setInstance(instance);
         }
-        return self::instance;
+        return static::instance;
     }
 
     /**
@@ -58,9 +62,7 @@ class StaticEventManager extends SharedEventManager implements SharedEventManage
      */
     public static function setInstance(<SharedEventManagerInterface> instance) -> void
     {
-
-        // todo: change self -> static
-        let self::instance = instance;
+        let static::instance = instance;
     }
 
     /**
@@ -70,9 +72,7 @@ class StaticEventManager extends SharedEventManager implements SharedEventManage
      */
     public static function hasInstance() -> boolean
     {
-
-        // todo: change self -> static
-        return self::instance instanceof SharedEventManagerInterface;
+        return static::instance instanceof SharedEventManagerInterface;
     }
 
     /**
@@ -82,9 +82,7 @@ class StaticEventManager extends SharedEventManager implements SharedEventManage
      */
     public static function resetInstance() -> void
     {
-
-        // todo: change self -> static
-        let self::instance = null;
+        let static::instance = null;
     }
 
 }

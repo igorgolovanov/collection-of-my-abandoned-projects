@@ -23,7 +23,7 @@ class SharedEventManager implements SharedEventAggregateAwareInterface, SharedEv
      * Identifiers with event connections
      * @var array
      */
-    protected identifiers; // []
+    protected identifiers = [];
 
     /**
      * Attach a listener to an event
@@ -55,7 +55,7 @@ class SharedEventManager implements SharedEventAggregateAwareInterface, SharedEv
      * @param  int $priority Priority at which listener should execute
      * @return CallbackHandler|array Either CallbackHandler or array of CallbackHandlers
      */
-    public function attach(var id, string event, callback, int priority = 1) -> array|<CallbackHandler>
+    public function attach(var id, string event, var callback, int priority = 1) -> array|<CallbackHandler>
     {
         array ids, listeners = [];
         var i, identifiers, eventManager;

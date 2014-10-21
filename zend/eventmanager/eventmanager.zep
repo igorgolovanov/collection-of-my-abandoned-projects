@@ -25,7 +25,7 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
      * Subscribed events and their listeners
      * @var array Array of PriorityQueue objects
      */
-    protected events; // []
+    protected events = [];
 
     /**
      * @var string Class representing the event being emitted
@@ -36,7 +36,7 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
      * Identifiers, used to pull shared signals from SharedEventManagerInterface instance
      * @var array
      */
-    protected identifiers; // []
+    protected identifiers = [];
 
     /**
      * Shared event manager
@@ -79,6 +79,7 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
     {
         let this->sharedManager = sharedEventManager;
         StaticEventManager::setInstance(sharedEventManager);
+
         return this;
     }
 
@@ -106,11 +107,12 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
     public function getSharedManager() -> <SharedEventManagerInterface>|boolean
     {
         var sharedManager;
-        let sharedManager = this->sharedManager;
 
+        let sharedManager = this->sharedManager;
         if sharedManager === false || sharedManager instanceof SharedEventManagerInterface {
             return sharedManager;
         }
+
         if !StaticEventManager::hasInstance() {
             return false;
         }
@@ -184,7 +186,7 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
      * @return ResponseCollection All listener return values
      * @throws Exception\InvalidCallbackException
      */
-    public function trigger(var event, var target = null, var argv = [], callback = null) -> <ResponseCollection>
+    public function trigger(var event, var target = null, var argv = [], var callback = null) -> <ResponseCollection>
     {
         var e, callback;
         string eventClass;
@@ -237,7 +239,7 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
      * @return ResponseCollection
      * @throws Exception\InvalidCallbackException if invalid callable provided
      */
-    public function triggerUntil(var event, var target, var argv = null, callback = null) -> <ResponseCollection>
+    public function triggerUntil(var event, var target, var argv = null, var callback = null) -> <ResponseCollection>
     {
         var e, callback;
         string eventClass;
@@ -309,10 +311,7 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
 
         // Null callback is invalid
         if callback === null {
-            let exceptionMsg = sprintf(
-                "%s: expects a callback; none provided",
-                __METHOD__
-            );
+            let exceptionMsg = __METHOD__ . ": expects a callback; none provided"ж
             throw new Exception\InvalidArgumentException(exceptionMsg);
         }
 
@@ -378,11 +377,7 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
             } else {
                 let expected = typeof listener;
             }
-            let exceptionMsg = sprintf(
-                "%s: expected a ListenerAggregateInterface or CallbackHandler; received \"%s\"",
-                __METHOD__,
-                expected
-            );
+            let exceptionMsg = __METHOD__ . ": expected a ListenerAggregateInterface or CallbackHandler; received \"" . expected . "\"";
             throw new Exception\InvalidArgumentException(exceptionMsg);
         }
         

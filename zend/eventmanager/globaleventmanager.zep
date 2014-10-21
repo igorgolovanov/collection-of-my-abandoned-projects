@@ -31,7 +31,7 @@ class GlobalEventManager
      */
     public static function setEventCollection(<EventManagerInterface> events = null) -> void
     {
-        let self::events = events; // todo: change self -> static
+        let static::events = events;
     }
 
     /**
@@ -41,13 +41,12 @@ class GlobalEventManager
      */
     public static function getEventCollection() -> <EventManagerInterface>
     {
-        // todo: change self -> static
         var events;
-        let events = self::events;
+        let events = static::events;
 
         if events === null {
             let events = new EventManager();
-            self::setEventCollection(events);
+            static::setEventCollection(events);
         }
         return events;
     }
@@ -62,9 +61,8 @@ class GlobalEventManager
      */
     public static function trigger(string event, var context, var argv = []) -> <ResponseCollection>
     {
-        // todo: change self -> static
         var events;
-        let events = <EventManagerInterface> self::getEventCollection();
+        let events = <EventManagerInterface> static::getEventCollection();
 
         return events->trigger(event, context, argv);
     }
@@ -79,11 +77,10 @@ class GlobalEventManager
      * @param  callable $callback
      * @return ResponseCollection
      */
-    public static function triggerUntil(string event, var context, var argv, callback) -> <ResponseCollection>
+    public static function triggerUntil(string event, var context, var argv, var callback) -> <ResponseCollection>
     {
-        // todo: change self -> static
         var events;
-        let events = <EventManagerInterface> self::getEventCollection();
+        let events = <EventManagerInterface> static::getEventCollection();
 
         return events->triggerUntil(event, context, argv, callback);
     }
@@ -100,7 +97,7 @@ class GlobalEventManager
     {
         // todo: change self -> static
         var events;
-        let events = <EventManagerInterface> self::getEventCollection();
+        let events = <EventManagerInterface> static::getEventCollection();
 
         return events->attach(event, callback, priority);
     }
@@ -114,8 +111,7 @@ class GlobalEventManager
     public static function detach(<CallbackHandler> listener) -> boolean
     {
         var events;
-        // todo: change self -> static
-        let events = <EventManagerInterface> self::getEventCollection();
+        let events = <EventManagerInterface> static::getEventCollection();
 
         return events->detach(listener);
     }
@@ -128,7 +124,6 @@ class GlobalEventManager
     public static function getEvents() -> array
     {
         var events;
-        // todo: change self -> static
         let events = <EventManagerInterface> self::getEventCollection();
 
         return events->getEvents();
@@ -143,8 +138,7 @@ class GlobalEventManager
     public static function getListeners(string event) -> array|<PriorityQueue>
     {
         var events;
-        // todo: change self -> static
-        let events = <EventManagerInterface> self::getEventCollection();
+        let events = <EventManagerInterface> static::getEventCollection();
 
         return events->getListeners(event);
     }
@@ -158,8 +152,7 @@ class GlobalEventManager
     public static function clearListeners(string event) -> void
     {
         var events;
-        // todo: change self -> static
-        let events = <EventManagerInterface> self::getEventCollection();
+        let events = <EventManagerInterface> static::getEventCollection();
 
         events->clearListeners(event);
     }

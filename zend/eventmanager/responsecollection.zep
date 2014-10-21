@@ -35,6 +35,7 @@ class ResponseCollection extends SplStack
     public function setStopped(boolean flag) -> <ResponseCollection>
     {
         let this->stopped = flag;
+        
         return this;
     }
 

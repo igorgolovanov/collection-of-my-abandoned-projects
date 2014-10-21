@@ -7,9 +7,12 @@
 
 namespace Zend\EventManager;
 
+use Traversable;
+use Zend\Stdlib\CallbackHandler;
+
 /**
- * Interface for messengers
- */
+* Interface for messengers
+*/
 interface EventManagerInterface extends SharedEventManagerAwareInterface
 {
     /**
@@ -29,7 +32,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * @param  null|callable $callback
      * @return ResponseCollection
      */
-    public function trigger(string event, var target = null, var argv = [], callback = null) -> <ResponseCollection>;
+    public function trigger(string event, var target = null, var argv = [], var callback = null) -> <ResponseCollection>;
 
     /**
      * Trigger an event until the given callback returns a boolean false
@@ -46,7 +49,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * @param  callable $callback
      * @return ResponseCollection
      */
-    public function triggerUntil(string event, var target, var argv = null, callback = null) -> <ResponseCollection>;
+    public function triggerUntil(string event, var target, var argv = null, var callback = null) -> <ResponseCollection>;
 
     /**
      * Attach a listener to an event

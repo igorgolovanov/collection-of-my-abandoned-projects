@@ -28,7 +28,7 @@ class Event implements EventInterface
     /**
      * @var array|ArrayAccess|object The event parameters
      */
-    protected params; // []
+    protected params = [];
 
     /**
      * @var bool Whether or not to stop propagation
@@ -46,7 +46,7 @@ class Event implements EventInterface
      */
     public function __construct(string name = null, var target = null, var params = null)
     {
-        if name !== null {
+        if !empty name {
             this->setName(name);
         }
         if target !== null {
@@ -90,14 +90,15 @@ class Event implements EventInterface
      */
     public function setParams(var params) -> <Event>
     {
-        string type;
+        string type, exceptionMsg;
+
         let type = typeof params;
         if type != "array" && type != "object" {
-            throw new Exception\InvalidArgumentException(
-                sprintf("Event parameters must be an array or object; received \"%s\"", type)
-            );
+            let exceptionMsg = "Event parameters must be an array or object; received \"" . type . "\"";
+            throw new Exception\InvalidArgumentException(exceptionMsg);
         }
         let this->params = params;
+
         return this;
     }
 
@@ -120,7 +121,7 @@ class Event implements EventInterface
      * @param  mixed $default
      * @return mixed
      */
-    public function getParam(var name, $default = null)
+    public function getParam(var name, var $default = null)
     {
         var params, item;
         let params = this->params;
