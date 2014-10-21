@@ -31,5 +31,5 @@
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-permissions-acl": "self.version",
         "zendframework/zend-permissions-rbac": "self.version"
-    },
+    }
 }
