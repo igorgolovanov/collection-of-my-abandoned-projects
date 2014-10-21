@@ -1,23 +1,28 @@
+/*
+* This file is part of the php-ext-zf2 package.
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
 
 namespace Zend\Code\Reflection;
 
-class MethodReflection extends \ReflectionMethod implements \Reflector, ReflectionInterface
+use ReflectionMethod as PhpReflectionMethod;
+use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Scanner\AnnotationScanner;
+use Zend\Code\Scanner\CachingFileScanner;
+
+class MethodReflection extends PhpReflectionMethod implements ReflectionInterface
 {
+    /**
+     * Constant use in @MethodReflection to display prototype as an array
+     */
     const PROTOTYPE_AS_ARRAY = "prototype_as_array";
 
+    /**
+     * Constant use in @MethodReflection to display prototype as a string
+     */
     const PROTOTYPE_AS_STRING = "prototype_as_string";
-
-    const IS_STATIC = 1;
-
-    const IS_PUBLIC = 256;
-
-    const IS_PROTECTED = 512;
-
-    const IS_PRIVATE = 1024;
-
-    const IS_ABSTRACT = 2;
-
-    const IS_FINAL = 4;
 
     /**
      * @var AnnotationScanner

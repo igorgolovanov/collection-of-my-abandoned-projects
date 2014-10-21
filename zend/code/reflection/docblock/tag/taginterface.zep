@@ -7,12 +7,13 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-interface TagInterface extends \Zend\Code\Generic\Prototype\PrototypeInterface
+use Zend\Code\Generic\Prototype\PrototypeInterface;
+
+interface TagInterface extends PrototypeInterface
 {
     /**
      * @param  string $content
      * @return void
      */
     public function initialize(string content) -> void;
-
 }

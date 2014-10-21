@@ -1,7 +1,15 @@
+/*
+* This file is part of the php-ext-zf2 package.
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
 
 namespace Zend\Code\Reflection;
 
-class FileReflection implements ReflectionInterface, \Reflector
+use Zend\Code\Scanner\CachingFileScanner;
+
+class FileReflection implements ReflectionInterface
 {
     /**
      * @var string
@@ -26,27 +34,27 @@ class FileReflection implements ReflectionInterface, \Reflector
     /**
      * @var string
      */
-    protected namespaces; // []
+    protected namespaces = [];
 
     /**
      * @var array
      */
-    protected uses; // []
+    protected uses = [];
 
     /**
      * @var array
      */
-    protected requiredFiles; // []
+    protected requiredFiles = [];
 
     /**
      * @var ClassReflection[]
      */
-    protected classes; // []
+    protected classes = [];
 
     /**
      * @var FunctionReflection[]
      */
-    protected functions; // []
+    protected functions = [];
 
     /**
      * @var string
@@ -61,7 +69,32 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     public function __construct(string filename, boolean includeIfNotAlreadyIncluded = false)
     {
+        var fileRealPath;
+        string exceptionMsg;
+        array included;
 
+        let fileRealPath = realpath(filename);
+        if fileRealPath === false {
+            let fileRealPath = stream_resolve_include_path(filename);
+        }
+
+        if unlikely !fileRealPath {
+            let exceptionMsg = "No file for " . fileRealPath . " was found.";
+            throw new Exception\InvalidArgumentException(exceptionMsg);
+        }
+
+        let included = get_included_files();
+
+        if !in_array(fileRealPath, included) {
+            if !includeIfNotAlreadyIncluded {
+                let exceptionMsg = "File " . filename . " must be required before it can be reflected";
+                throw new Exception\RuntimeException(exceptionMsg);
+            }
+            require fileRealPath;
+        }
+
+        let this->filePath = fileRealPath;
+        let this->reflect();
     }
 
     /**
@@ -72,7 +105,7 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     public static function export()
     {
-
+        return null;
     }
 
     /**
@@ -82,7 +115,8 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     public function getFileName() -> string
     {
-
+        // @todo get file name from path
+        return this->filePath;
     }
 
     /**
@@ -92,7 +126,7 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     public function getStartLine() -> int
     {
-
+        return this->startLine;
     }
 
     /**
@@ -102,7 +136,7 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     public function getEndLine() -> int
     {
-
+        return this->endLine;
     }
 
     /**
@@ -110,15 +144,24 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     public function getDocComment() -> string
     {
-
+        return this->docComment;
     }
 
     /**
      * @return DocBlockReflection
      */
-    public function getDocBlock() -> <DocBlockReflection>
+    public function getDocBlock() -> <DocBlockReflection>|boolean
     {
+        string docComment;
+        var instance;
 
+        let docComment = this->getDocComment();
+        if !docComment {
+            return false;
+        }
+        let instance = new DocBlockReflection(docComment);
+
+        return instance;
     }
 
     /**
@@ -126,7 +169,7 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     public function getNamespaces() -> array
     {
-
+        return this->namespaces;
     }
 
     /**
@@ -134,7 +177,13 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     public function getNamespace() -> string
     {
+        var ns;
 
+        if fetch ns, this->namespaces[0] {
+            return ns;
+        }
+
+        return null;
     }
 
     /**
@@ -142,7 +191,7 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     public function getUses() -> array
     {
-
+        return this->uses;
     }
 
     /**
@@ -152,7 +201,14 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     public function getClasses() -> array
     {
+        var cl;
+        array classes = [];
 
+        for cl in this->classes {
+            let classes[] = new ClassReflection(cl);
+        }
+
+        return classes;
     }
 
     /**
@@ -162,7 +218,14 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     public function getFunctions() -> array
     {
+        var func;
+        array functions = [];
 
+        for func in this->functions {
+            let functions[] = new FunctionReflection(func);
+        }
+
+        return functions;
     }
 
     /**
@@ -172,9 +235,24 @@ class FileReflection implements ReflectionInterface, \Reflector
      * @return ClassReflection
      * @throws Exception\InvalidArgumentException for invalid class name or invalid reflection class
      */
-    public function getClass(string name = null) -> <ClassReflection>
+    public function getClass(var name = null) -> <ClassReflection>
     {
+        var selected;
+        string exceptionMsg;
 
+        if name === null {
+            reset(this->classes);
+            let selected = current(this->classes);
+
+            return new ClassReflection(selected);
+        }
+
+        if unlikely !in_array(name, this->classes) {
+            let exceptionMsg = "Class by name " . name . " not found.";
+            throw new Exception\InvalidArgumentException(exceptionMsg);
+        }
+
+        return new ClassReflection(name);
     }
 
     /**
@@ -184,12 +262,18 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     public function getContents() -> string
     {
+        var contents;
 
+        let contents = file_get_contents(this->filePath);
+        if contents === false {
+            return "";
+        }
+        return contents;
     }
 
-    public function toString()
+    public function toString() -> string
     {
-
+        return ""; // @todo
     }
 
     /**
@@ -202,7 +286,7 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     public function __toString() -> string
     {
-
+        return "";  
     }
 
     /**
@@ -214,7 +298,15 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     protected function reflect() -> void
     {
+        var scanner;
 
+        let scanner = new CachingFileScanner(this->filePath);
+
+        let this->docComment    = scanner->getDocComment();
+        let this->requiredFiles = scanner->getIncludes();
+        let this->classes       = scanner->getClassNames();
+        let this->namespaces    = scanner->getNamespaces();
+        let this->uses          = scanner->getUses();
     }
 
     /**
@@ -225,7 +317,25 @@ class FileReflection implements ReflectionInterface, \Reflector
      */
     protected function checkFileDocBlock(array tokens) -> void
     {
+        var token, value;
+        int type, lineNum;
 
+        for token in tokens {
+            let type = token[0];
+            let value = token[1];
+            let lineNum = token[2];
+
+            if type == T_OPEN_TAG || type == T_WHITESPACE {
+                continue;
+            }
+            if type == T_DOC_COMMENT {
+                let this->docComment = value;
+                let this->startLine = lineNum + substr_count(value, "\n") + 1;
+
+                return;
+            }
+            return;
+        }
     }
 
 }

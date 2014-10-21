@@ -7,12 +7,12 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-class ReturnTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeInterface, PhpDocTypedTagInterface
+class ReturnTag implements TagInterface, PhpDocTypedTagInterface
 {
     /**
      * @var array
      */
-    protected types; // []
+    protected types = [];
 
     /**
      * @var string
@@ -24,7 +24,7 @@ class ReturnTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeI
      */
     public function getName() -> string
     {
-
+        return "return";
     }
 
     /**
@@ -33,21 +33,47 @@ class ReturnTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeI
      */
     public function initialize(string tagDocBlockLine) -> void
     {
+        array matches = [], types;
+        var description, type;
 
+        if !preg_match("#((?:[\w|\\\]+(?:\[\])*\|?)+)(?:\s+(.*))?#s", tagDocBlockLine, matches) {
+            return;
+        }
+
+        if fetch type, matches[1] {
+            let types = explode("|", type);
+            let this->types = type;
+        }
+        if fetch description, matches[2] {
+            if !empty description {
+                let this->description = description;
+            }
+        }
     }
 
     /**
+     * Get return variable type
+     *
      * @return string
      * @deprecated 2.0.4 use getTypes instead
      */
     public function getType() -> string
     {
+        array types;
+        string type;
 
+        let types = this->getTypes();
+        let type = implode("|", types);
+
+        return type;
     }
 
-    public function getTypes()
+    /**
+     * @return array
+     */
+    public function getTypes() -> array
     {
-
+        return this->types;
     }
 
     /**
@@ -55,7 +81,8 @@ class ReturnTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeI
      */
     public function getDescription() -> string
     {
-
+        return this->description;
     }
+
 
 }

@@ -1,13 +1,25 @@
+/*
+* This file is part of the php-ext-zf2 package.
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
 
 namespace Zend\Code\Reflection;
 
-class FunctionReflection extends \ReflectionFunction implements \Reflector, ReflectionInterface
+use ReflectionFunction;
+
+class FunctionReflection extends ReflectionFunction implements ReflectionInterface
 {
+    /**
+     * Constant use in @FunctionReflection to display prototype as an array
+     */
     const PROTOTYPE_AS_ARRAY = "prototype_as_array";
 
+    /**
+     * Constant use in @FunctionReflection to display prototype as a string
+     */
     const PROTOTYPE_AS_STRING = "prototype_as_string";
-
-    const IS_DEPRECATED = 262144;
 
     /**
      * Get function DocBlock

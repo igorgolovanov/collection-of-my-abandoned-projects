@@ -7,14 +7,24 @@
 
 namespace Zend\Code\Reflection\DocBlock;
 
-class TagManager extends \Zend\Code\Generic\Prototype\PrototypeClassFactory
+use Zend\Code\Generic\Prototype\PrototypeClassFactory;
+use Zend\Code\Reflection\DocBlock\Tag\TagInterface;
+
+class TagManager extends PrototypeClassFactory
 {
     /**
      * @return void
      */
     public function initializeDefaultTags() -> void
     {
-
+        this->addPrototype(new Tag\ParamTag());
+        this->addPrototype(new Tag\ReturnTag());
+        this->addPrototype(new Tag\MethodTag());
+        this->addPrototype(new Tag\PropertyTag());
+        this->addPrototype(new Tag\AuthorTag());
+        this->addPrototype(new Tag\LicenseTag());
+        this->addPrototype(new Tag\ThrowsTag());
+        this->setGenericPrototype(new Tag\GenericTag());
     }
 
     /**
@@ -22,9 +32,17 @@ class TagManager extends \Zend\Code\Generic\Prototype\PrototypeClassFactory
      * @param string $content
      * @return TagInterface
      */
-    public function createTag(string tagName, string content = null)
+    public function createTag(string tagName, string content = null) -> <TagInterface>
     {
+        var tag;
 
+        let tag = <TagInterface> this->getClonedPrototype(tagName);
+
+        if !empty content {
+            tag->initialize(content);
+        }
+
+        return tag;
     }
 
 }

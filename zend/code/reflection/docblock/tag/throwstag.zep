@@ -7,12 +7,12 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-class ThrowsTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeInterface, PhpDocTypedTagInterface
+class ThrowsTag implements TagInterface, PhpDocTypedTagInterface
 {
     /**
      * @var array
      */
-    protected types; // []
+    protected types = [];
 
     /**
      * @var string
@@ -24,7 +24,7 @@ class ThrowsTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeI
      */
     public function getName() -> string
     {
-
+        return "throws";
     }
 
     /**
@@ -33,7 +33,22 @@ class ThrowsTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeI
      */
     public function initialize(string tagDocBlockLine) -> void
     {
+        array matches = [], types;
+        var description, type;
 
+        if !preg_match("#([\w|\\\]+)(?:\s+(.*))?#", tagDocBlockLine, matches) {
+            return;
+        }
+
+        if fetch type, matches[1] {
+            let types = explode("|", type);
+            let this->types = type;
+        }
+        if fetch description, matches[2] {
+            if !empty description {
+                let this->description = description;
+            }
+        }
     }
 
     /**
@@ -44,7 +59,13 @@ class ThrowsTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeI
      */
     public function getType() -> string
     {
+        array types;
+        string type;
 
+        let types = this->getTypes();
+        let type = implode("|", types);
+
+        return type;
     }
 
     /**
@@ -52,7 +73,7 @@ class ThrowsTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeI
      */
     public function getTypes() -> array
     {
-
+        return this->types;
     }
 
     /**
@@ -60,7 +81,7 @@ class ThrowsTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeI
      */
     public function getDescription() -> string
     {
-
+        return this->description;
     }
 
 }

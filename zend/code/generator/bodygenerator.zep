@@ -7,11 +7,8 @@
 
 namespace Zend\Code\Generator;
 
-class BodyGenerator extends AbstractGenerator implements GeneratorInterface
+class BodyGenerator extends AbstractGenerator
 {
-    const LINE_FEED = "
-";
-
     /**
      * @var string
      */
@@ -23,7 +20,9 @@ class BodyGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function setContent(string content) -> <BodyGenerator>
     {
+        let this->content = content;
 
+        return this;
     }
 
     /**
@@ -31,7 +30,7 @@ class BodyGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function getContent() -> string
     {
-
+        return this->content;
     }
 
     /**
@@ -39,7 +38,11 @@ class BodyGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function generate() -> string
     {
+        string content;
 
+        let content = this->getContent();
+
+        return content;
     }
 
 }

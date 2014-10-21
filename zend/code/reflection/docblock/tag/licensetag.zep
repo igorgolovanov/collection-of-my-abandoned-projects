@@ -7,7 +7,7 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-class LicenseTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeInterface
+class LicenseTag implements TagInterface
 {
     /**
      * @var string
@@ -24,7 +24,7 @@ class LicenseTag implements TagInterface, \Zend\Code\Generic\Prototype\Prototype
      */
     public function getName() -> string
     {
-
+        return "license";
     }
 
     /**
@@ -34,7 +34,24 @@ class LicenseTag implements TagInterface, \Zend\Code\Generic\Prototype\Prototype
      */
     public function initialize(string tagDocblockLine)
     {
+        array match = [];
+        var url, licenseName;
 
+        if !preg_match("#^([\S]*)(?:\s+(.*))?$#m", tagDocblockLine, match) {
+            return;
+        }
+
+        if fetch url, match[1] {
+            if url !== "" {
+                let this->url = trim(url);
+            }
+        }
+
+        if fetch licenseName, match[1] {
+            if licenseName !== "" {
+                let this->licenseName = licenseName;
+            }
+        }
     }
 
     /**
@@ -42,7 +59,7 @@ class LicenseTag implements TagInterface, \Zend\Code\Generic\Prototype\Prototype
      */
     public function getUrl() -> string
     {
-
+        return this->url;
     }
 
     /**
@@ -50,12 +67,17 @@ class LicenseTag implements TagInterface, \Zend\Code\Generic\Prototype\Prototype
      */
     public function getLicenseName() -> string
     {
-
+        return this->licenseName;
     }
 
     public function __toString()
     {
+        string name, output;
 
+        let name = this->getName();
+        let output = "DocBlock Tag [ * @" . name . " ]" . PHP_EOL;
+
+        return output;
     }
 
 }

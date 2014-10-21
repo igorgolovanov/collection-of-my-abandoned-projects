@@ -7,12 +7,12 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-class ParamTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeInterface, PhpDocTypedTagInterface
+class ParamTag implements TagInterface, PhpDocTypedTagInterface
 {
     /**
      * @var array
      */
-    protected types; // []
+    protected types = [];
 
     /**
      * @var string
@@ -29,7 +29,7 @@ class ParamTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeIn
      */
     public function getName() -> string
     {
-
+        return "param";
     }
 
     /**
@@ -39,7 +39,28 @@ class ParamTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeIn
      */
     public function initialize(string tagDocBlockLine)
     {
+        array matches = [], types;
+        var description, type, variableName;
 
+        if !preg_match("#((?:[\w|\\\]+(?:\[\])*\|?)+)(?:\s+(\$\S+))?(?:\s+(.*))?#s", tagDocBlockLine, matches) {
+            return;
+        }
+
+        if fetch type, matches[1] {
+            let types = explode("|", type);
+            let this->types = type;
+        }
+        if fetch variableName, matches[2] {
+            if !empty variableName {
+                let this->variableName = variableName;
+            }
+        } 
+
+        if fetch description, matches[3] {
+            if !empty description {
+                let this->description = description;
+            }
+        }
     }
 
     /**
@@ -50,12 +71,29 @@ class ParamTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeIn
      */
     public function getType() -> string
     {
+        array types;
+        string type;
 
+        let types = this->getTypes();
+        let type = implode("|", types);
+
+        return type;
     }
 
-    public function getTypes()
+    /**
+     * @return array
+     */
+    public function getTypes() -> array
     {
+        return this->types;
+    }
 
+    /**
+     * @return string
+     */
+    public function getDescription() -> string
+    {
+        return this->description;
     }
 
     /**
@@ -65,15 +103,7 @@ class ParamTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeIn
      */
     public function getVariableName() -> string
     {
-
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription() -> string
-    {
-
+        return this->variableName;
     }
 
 }

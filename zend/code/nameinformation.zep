@@ -17,7 +17,7 @@ class NameInformation
     /**
      * @var array
      */
-    protected uses; // []
+    protected uses = [];
 
     /**
      * @param  string $namespace
@@ -25,7 +25,12 @@ class NameInformation
      */
     public function __construct(string $namespace = null, array! uses = [])
     {
-
+        if !empty $namespace {
+            this->setNamespace($namespace);
+        }
+        if !empty uses {
+            this->setUses(uses);
+        }
     }
 
     /**
@@ -34,7 +39,9 @@ class NameInformation
      */
     public function setNamespace(string $namespace) -> <NameInformation>
     {
+        let this->$namespace = $namespace;
 
+        return this->$namespace;
     }
 
     /**
@@ -42,7 +49,7 @@ class NameInformation
      */
     public function getNamespace() -> string
     {
-
+        return this->$namespace;
     }
 
     /**
@@ -50,7 +57,7 @@ class NameInformation
      */
     public function hasNamespace() -> boolean
     {
-
+        return !empty this->$namespace;
     }
 
     /**
@@ -59,7 +66,10 @@ class NameInformation
      */
     public function setUses(array! uses) -> <NameInformation>
     {
+        let this->uses = [];
+        this->addUses(uses);
 
+        return this;
     }
 
     /**
@@ -68,7 +78,19 @@ class NameInformation
      */
     public function addUses(array! uses) -> <NameInformation>
     {
+        var key, value;
 
+        for key, value in uses {
+            if typeof key == "int" {
+                this->addUse(value);
+                continue;
+            }
+            if typeof key == "string" {
+                this->addUse(key, value);
+            }
+        }
+
+        return this;
     }
 
     /**
@@ -85,7 +107,7 @@ class NameInformation
      */
     public function getUses() -> array
     {
-
+        return this->uses;
     }
 
     /**

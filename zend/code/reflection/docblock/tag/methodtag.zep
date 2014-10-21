@@ -7,14 +7,14 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-class MethodTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeInterface, PhpDocTypedTagInterface
+class MethodTag implements TagInterface, PhpDocTypedTagInterface
 {
     /**
      * Return value type
      *
      * @var array
      */
-    protected types; // []
+    protected types = [];
 
     /**
      * @var string
@@ -38,7 +38,7 @@ class MethodTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeI
      */
     public function getName() -> string
     {
-
+        return "method";
     }
 
     /**
@@ -48,7 +48,33 @@ class MethodTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeI
      */
     public function initialize(string tagDocblockLine)
     {
+        array matches = [], types;
+        var description, type, methodName, isStatic;
 
+        if !preg_match("#^(static[\s]+)?(.+[\s]+)?(.+\(\))[\s]*(.*)$#m", tagDocBlockLine, matches) {
+            return;
+        }
+
+        if fetch isStatic, matches[1] {
+            if isStatic {
+                let this->isStatic = true;
+            }
+        }
+        if fetch type, matches[2] {
+            let type = rtrim(type);
+            let types = explode("|", type);
+            let this->types = type;
+        }
+
+        if fetch methodName, matches[3] {
+            let this->methodName = methodName;
+        } 
+
+        if fetch description, matches[4] {
+            if !empty description {
+                let this->description = description;
+            }
+        }
     }
 
     /**
@@ -59,12 +85,29 @@ class MethodTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeI
      */
     public function getReturnType() -> string
     {
+        array types;
+        string type;
 
+        let types = this->getTypes();
+        let type = implode("|", types);
+
+        return type;
     }
 
-    public function getTypes()
+    /**
+     * @return array
+     */
+    public function getTypes() -> array
     {
+        return this->types;
+    }
 
+    /**
+     * @return string
+     */
+    public function getDescription() -> string
+    {
+        return this->description;
     }
 
     /**
@@ -72,15 +115,7 @@ class MethodTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeI
      */
     public function getMethodName() -> string
     {
-
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getDescription() -> string
-    {
-
+        return this->methodName;
     }
 
     /**
@@ -88,12 +123,17 @@ class MethodTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeI
      */
     public function isStatic() -> boolean
     {
-
+        return this->isStatic;
     }
 
     public function __toString()
     {
+        string name, output;
 
+        let name = this->getName();
+        let output = "DocBlock Tag [ * @" . name . " ]" . PHP_EOL;
+
+        return output;
     }
 
 }

@@ -7,14 +7,12 @@
 
 namespace Zend\Code\Generator;
 
-class ClassGenerator extends AbstractGenerator implements GeneratorInterface
+use Zend\Code\Reflection\ClassReflection;
+
+class ClassGenerator extends AbstractGenerator
 {
-    const FLAG_ABSTRACT = 1;
-
-    const FLAG_FINAL = 2;
-
-    const LINE_FEED = "
-";
+    const FLAG_ABSTRACT = 0x01;
+    const FLAG_FINAL    = 0x02;
 
     /**
      * @var FileGenerator
@@ -49,22 +47,22 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
     /**
      * @var array Array of string names
      */
-    protected implementedInterfaces; // []
+    protected implementedInterfaces = [];
 
     /**
      * @var PropertyGenerator[] Array of properties
      */
-    protected properties; // []
+    protected properties = [];
 
     /**
      * @var MethodGenerator[] Array of methods
      */
-    protected methods; // []
+    protected methods = [];
 
     /**
      * @var array Array of string names
      */
-    protected uses; // []
+    protected uses = [];
 
     /**
      * Build a Code Generation Php Object from a Class Reflection
@@ -72,9 +70,89 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      * @param  ClassReflection $classReflection
      * @return ClassGenerator
      */
-    public static function fromReflection(classReflection) -> <ClassGenerator>
+    public static function fromReflection(<ClassReflection> classReflection) -> <ClassGenerator>
     {
+        string className, name, docComment, ns, declaringClassName, parentClassName;
+        var cg, sourceContent, docBlock, parentClass, val, reflectionProperty, 
+            declaringClass, property, reflectionMethod, method;
+        array interfaces, interfacesRefl, interfacesParent, 
+            interfaceNames = [], properties = [], methods = [];
 
+        let className = get_called_class();
+        let name = classReflection->getName();
+        // class generator
+        let cg = <ClassReflection> new {className}(name);
+        let sourceContent = cg->getSourceContent();
+
+        cg->setSourceContent(sourceContent);
+        cg->setSourceDirty(false);
+
+
+        let docComment = classReflection->getDocComment()
+
+        if docComment != "" {
+            let docBlock = classReflection->getDocBlock();
+            let docBlock = DocBlockGenerator::fromReflection(docBlock);
+
+            cg->setDocBlock(docBlock);
+        }
+
+        // set the namespace
+        if classReflection->inNamespace() {
+            let ns = classReflection->getNamespaceName();
+            cg->setNamespaceName(ns);
+        }
+
+        let parentClass = <ClassReflection> classReflection->getParentClass();
+
+        if parentClass {
+            let parentClassName = parentClass->getName();
+            cg->setExtendedClass(parentClassName);
+
+            let interfacesParent = parentClass->getInterfaces();
+            let interfacesRefl = classReflection->getInterfaces();
+
+            let interfaces = array_diff(interfacesRefl, interfacesParent);
+        } else {
+            let interfaces = classReflection->getInterfaces();
+        }
+
+        for val in interfaces {
+            let interfaceNames[] = val->getName();
+        }
+
+        cg->setImplementedInterfaces(interfaceNames);
+
+        for reflectionProperty in classReflection->getProperties() {
+            let declaringClass = <ClassReflection> reflectionProperty->getDeclaringClass();
+            let declaringClassName = declaringClass->getName();
+
+            if declaringClassName == name {
+                let property = <PropertyGenerator> PropertyGenerator::fromReflection(reflectionProperty);
+                let properties[] = property;
+            }
+        }
+
+        cg->addProperties(properties);
+
+        for reflectionMethod in classReflection->getMethods() {
+            let name = cg->getName();
+            let ns = cg->getNamespaceName();
+            if !empty ns {
+                let name = ns . "\\" . name;
+            }
+            let declaringClass = <ClassReflection> reflectionProperty->getDeclaringClass();
+            let declaringClassName = declaringClass->getName();
+
+            if declaringClassName == name {
+                let method = <MethodGenerator> MethodGenerator::fromReflection(reflectionMethod);
+                let methods[] = method;
+            }
+        }
+
+        cg->addMethods(methods);
+
+        return cg;
     }
 
     /**
@@ -96,7 +174,57 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public static function fromArray(array! $array) -> <ClassGenerator>
     {
+        var cg, key, value, docBlock;
+        string className, name, normilizedKey;
+        array wildcards = [".", "-", "_"];
 
+        if unlikely !isset $array["name"] {
+            throw new Exception\InvalidArgumentException(
+                "Class generator requires that a name is provided for this object"
+            );
+        }
+
+        let className = get_called_class();
+        let name = $array["name"];
+        let cg = <ClassReflection> new {className}(name);
+
+        for key, value in $array {
+            let normilizedKey = str_replace(wildcards, "", key);
+            switch normilizedKey->lower() {
+                case "containingfile":
+                    cg->setContainingFileGenerator(value);
+                    break;
+                case "namespacename":
+                    cg->setNamespaceName(value);
+                    break;
+                case "docblock":
+                    if value instanceof DocBlockGenerator {
+                        let docBlock = value;
+                    } else {
+                        let docBlock = DocBlockGenerator::fromArray(value);
+                    }
+                    cg->setDocBlock(docBlock);
+                    break;
+                case "flags":
+                    cg->setFlags(value);
+                    break;
+                case "extendedclass":
+                    cg->setExtendedClass(value);
+                    break;
+                case "implementedinterfaces":
+                    cg->setImplementedInterfaces(value);
+                    break;
+                case "properties":
+                    cg->addProperties(value);
+                    break;
+                case "methods":
+                    cg->addMethods(value);
+                    break;
+
+            }
+        }
+
+        return cg;
     }
 
     /**
@@ -109,9 +237,32 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      * @param  array $methods
      * @param  DocBlockGenerator $docBlock
      */
-    public function __construct(string name = null, string namespaceName = null, var flags = null, string extends = null, array interfaces = [], array properties = [], array methods = [], <DocBlockGenerator> docBlock = null)
+    public function __construct(string name = null, string namespaceName = null, var flags = null, string $extends = null, array interfaces = [], array properties = [], array methods = [], <DocBlockGenerator> docBlock = null)
     {
-
+        if !empty name {
+            this->setName(name);
+        }
+        if !empty namespaceName {
+            this->setNamespaceName(namespaceName);
+        }
+        if flags !== null {
+            this->setFlags(flags);
+        }
+        if !empty properties {
+            this->addProperties(properties);
+        }
+        if !empty $extends {
+            this->setExtendedClass($extends);
+        }
+        if !empty interfaces {
+            this->setImplementedInterfaces(interfaces);
+        }
+        if !empty methods {
+            this->addMethods(methods);
+        }
+        if docBlock !== null {
+            this->setDocBlock(docBlock);
+        }
     }
 
     /**
@@ -120,7 +271,16 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function setName(string name) -> <ClassGenerator>
     {
+        string namespaceName;
+        if strstr(name, "\\") {
+            let namespaceName = substr(name, 0, strrpos(name, "\\"));
+            let name = substr(name, strrpos(name, "\\") + 1);
 
+            this->setNamespaceName(namespaceName);
+        }
+        let this->name = name;
+
+        return this;
     }
 
     /**
@@ -128,7 +288,7 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function getName() -> string
     {
-
+        return this->name;
     }
 
     /**
@@ -137,7 +297,9 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function setNamespaceName(string namespaceName) -> <ClassGenerator>
     {
+        let this->namespaceName = namespaceName;
 
+        return this;
     }
 
     /**
@@ -145,7 +307,7 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function getNamespaceName() -> string
     {
-
+        return this->namespaceName;
     }
 
     /**
@@ -154,7 +316,9 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function setContainingFileGenerator(<FileGenerator> fileGenerator) -> <ClassGenerator>
     {
+        let this->containingFileGenerator = fileGenerator;
 
+        return this;
     }
 
     /**
@@ -162,7 +326,7 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function getContainingFileGenerator() -> <FileGenerator>
     {
-
+        return this->containingFileGenerator;
     }
 
     /**
@@ -171,7 +335,9 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function setDocBlock(<DocBlockGenerator> docBlock) -> <ClassGenerator>
     {
+        let this->docBlock = docBlock;
 
+        return this;
     }
 
     /**
@@ -179,7 +345,7 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function getDocBlock() -> <DocBlockGenerator>
     {
-
+        return this->docBlock;
     }
 
     /**
@@ -188,7 +354,21 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function setFlags(var flags) -> <ClassGenerator>
     {
+        array flagsArray;
+        var flag;
 
+        if typeof flags == "array" {
+            let flagsArray = flags;
+            let flags = 0x00;
+
+            for flag in flagsArray {
+                let flags = flags | flag;
+            }
+        }
+
+        let this->flags = flags;
+
+        return this;
     }
 
     /**
@@ -197,7 +377,9 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function addFlag(string flag) -> <ClassGenerator>
     {
+        this->setFlags(this->flags | flag);
 
+        return this;
     }
 
     /**
@@ -206,7 +388,9 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function removeFlag(string flag) -> <ClassGenerator>
     {
+        this->setFlags(this->flags & ~flag);
 
+        return this;
     }
 
     /**
@@ -215,7 +399,11 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function setAbstract(boolean isAbstract) -> <ClassGenerator>
     {
-
+        if isAbstract {
+            this->addFlag(self::FLAG_ABSTRACT);
+        } else {
+            this->removeFlag(self::FLAG_ABSTRACT);
+        }
     }
 
     /**
@@ -223,7 +411,7 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function isAbstract() -> boolean
     {
-
+        return this->flags & self::FLAG_ABSTRACT;
     }
 
     /**
@@ -232,7 +420,11 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function setFinal(boolean isFinal) -> <ClassGenerator>
     {
-
+        if isFinal {
+            this->addFlag(self::FLAG_FINAL);
+        } else {
+            this->removeFlag(self::FLAG_FINAL);
+        }
     }
 
     /**
@@ -240,7 +432,7 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function isFinal() -> boolean
     {
-
+        return this->flags & self::FLAG_FINAL;
     }
 
     /**
@@ -249,7 +441,9 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function setExtendedClass(string extendedClass) -> <ClassGenerator>
     {
+        let this->extendedClass = extendedClass;
 
+        return this;
     }
 
     /**
@@ -257,7 +451,7 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function getExtendedClass() -> string
     {
-
+        return this->extendedClass;
     }
 
     /**
@@ -266,7 +460,7 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function setImplementedInterfaces(array! implementedInterfaces) -> <ClassGenerator>
     {
-
+        let this->implementedInterfaces = implementedInterfaces;
     }
 
     /**
@@ -274,7 +468,7 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function getImplementedInterfaces() -> array
     {
-
+        return this->implementedInterfaces;
     }
 
     /**
@@ -283,7 +477,24 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function addProperties(array! properties) -> <ClassGenerator>
     {
+        var property;
+        array callback;
 
+        for property in properties {
+            if property instanceof PropertyGenerator {
+                this->addPropertyFromGenerator(property);
+                continue;
+            } 
+            if typeof property == "string" {
+                this->addProperty(property);
+                continue;
+            }
+            if typeof property == "array" {
+                let callback = [this, "addProperty"];
+                call_user_func_array(callback, property);
+            }
+        }
+        return this;
     }
 
     /**
@@ -297,7 +508,18 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function addProperty(string name, var defaultValue = null, int flags = Zend\Code\Generator\PropertyGenerator::FLAG_PUBLIC) -> <ClassGenerator>
     {
+        string exceptionMsg;
+        var pg;
 
+        if unlikely empty name {
+            let exceptionMsg = __METHOD__ . " expects string for name";
+            throw new Exception\InvalidArgumentException(exceptionMsg);
+        }
+        let pg = new PropertyGenerator(name, defaultValue, flags)
+
+        this->addPropertyFromGenerator(pg);
+
+        return this;
     }
 
     /**
@@ -309,7 +531,18 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function addPropertyFromGenerator(<PropertyGenerator> property) -> <ClassGenerator>
     {
+        string propertyName, exceptionMsg;
 
+        let propertyName = property->getName();
+
+        if unlikely isset this->properties[propertyName] {
+            let exceptionMsg = "A property by name " . propertyName . " already exists in this class.";
+            throw new Exception\InvalidArgumentException(exceptionMsg);
+        }
+
+        let this->properties[propertyName] = property;
+
+        return this;
     }
 
     /**
@@ -321,7 +554,13 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function addUse(string $use, string useAlias = null) -> <ClassGenerator>
     {
+        if !empty useAlias {
+            let $use = $use . " as " . useAlias;
+        }
 
+        let this->uses[$use] = $use;
+
+        return this;
     }
 
     /**
@@ -329,16 +568,27 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function getProperties() -> array
     {
-
+        return this->properties;
     }
 
     /**
      * @param  string $propertyName
      * @return PropertyGenerator|false
      */
-    public function getProperty(string propertyName) -> <PropertyGenerator>
+    public function getProperty(string propertyName) -> <PropertyGenerator>|boolean
     {
+        array properties;
+        var property;
+        string name;
 
+        let properties = this->getProperties();
+        for property in properties {
+            let name = property->getName();
+            if name == propertyName {
+                return property;
+            }
+        }
+        return false;
     }
 
     /**
@@ -348,7 +598,7 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function getUses() -> array
     {
-
+        return array_values(this->uses);
     }
 
     /**
@@ -357,7 +607,7 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function hasProperty(string propertyName) -> boolean
     {
-
+        return isset this->properties[propertyName];
     }
 
     /**
@@ -366,7 +616,25 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function addMethods(array! methods) -> <ClassGenerator>
     {
+        var method;
+        array callback;
 
+        for method in methods {
+            if method instanceof MethodGenerator {
+                this->addMethodFromGenerator(method);
+                continue;
+            }
+            if typeof method == "string" {
+                this->addMethod(method);
+                continue;
+            }
+            if typeof method == "array" {
+                let callback = [this, "addMethod"];
+                call_user_func_array(callback, method);
+            }
+        }
+
+        return this;
     }
 
     /**
@@ -380,9 +648,21 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      * @throws Exception\InvalidArgumentException
      * @return ClassGenerator
      */
-    public function addMethod(string name = null, array! parameters = [], int flags = Zend\Code\Generator\MethodGenerator::FLAG_PUBLIC, string body = null, string docBlock = null) -> <ClassGenerator>
+    public function addMethod(string name = null, array! parameters = [], int flags = MethodGenerator::FLAG_PUBLIC, string body = null, string docBlock = null) -> <ClassGenerator>
     {
+        string exceptionMsg;
+        var mg;
 
+        if unlikely empty name {
+            let exceptionMsg = __METHOD__ . " expects string for name";
+            throw new Exception\InvalidArgumentException(exceptionMsg);
+        }
+
+        let mg = new MethodGenerator(name, parameters, flags, body, docBlock);
+
+        this->addMethodFromGenerator(mg);
+
+        return this;
     }
 
     /**
@@ -394,7 +674,18 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function addMethodFromGenerator(<MethodGenerator> method) -> <ClassGenerator>
     {
+        string methodName, exceptionMsg;
 
+        let methodName = property->getName();
+
+        if unlikely isset this->hasMethod(methodName) {
+            let exceptionMsg = "A method by name " . methodName . " already exists in this class.";
+            throw new Exception\InvalidArgumentException(exceptionMsg);
+        }
+
+        let this->methods[methodName->lower()] = method;
+
+        return this;
     }
 
     /**
@@ -402,16 +693,21 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function getMethods() -> array
     {
-
+        return this->methods;
     }
 
     /**
      * @param  string $methodName
      * @return MethodGenerator|false
      */
-    public function getMethod(string methodName) -> <MethodGenerator>
+    public function getMethod(string methodName) -> <MethodGenerator>|boolean
     {
+        var method;
 
+        if this->hasMethod(methodName) {
+            return this->methods[methodName->lower()];
+        }
+        return false;
     }
 
     /**
@@ -420,7 +716,11 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function removeMethod(string methodName) -> <ClassGenerator>
     {
+        if this->hasMethod(methodName) {
+            unset this->methods[methodName->lower()];
+        }
 
+        return this;
     }
 
     /**
@@ -429,7 +729,7 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function hasMethod(string methodName) -> boolean
     {
-
+        return isset this->methods[methodName->lower()];
     }
 
     /**
@@ -437,7 +737,29 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function isSourceDirty() -> boolean
     {
+        var docBlock, property, method;
+        array properties, methods;
 
+        let docBlock = <DocBlockGenerator> this->getDocBlock();
+        if docBlock && docBlock->isSourceDirty() {
+            return true;
+        }
+
+        let properties = this->getProperties();
+        for property in properties {
+            if property->isSourceDirty() {
+                return true;
+            }
+        }
+
+        let methods = this->getMethods();
+        for method in methods {
+            if method->isSourceDirty() {
+                return true;
+            }
+        }
+
+        return parent::isSourceDirty();
     }
 
     /**
@@ -445,7 +767,104 @@ class ClassGenerator extends AbstractGenerator implements GeneratorInterface
      */
     public function generate() -> string
     {
+        string output, ns, use1, name, implementedStr, propertyStr, methodStr, docBlockStr;
+        array uses, implemented, properties, methods;
+        var docBlock, property, method;
 
+        if this->isSourceDirty() {
+            let output = this->getSourceContent();
+            if !empty output {
+                return output;
+            }
+        }
+
+        let output = "";
+        let ns = this->getNamespaceName();
+        let uses = this->getUses();
+        let docBlock = <DocBlockGenerator> this->getDocBlock();
+        let name = this->getName();
+        let properties = this->getProperties();
+        let implemented = this->getImplementedInterfaces();
+        let methods = this->getMethods(); 
+
+        if !empty ns {
+            let output = output . "namespace " . ns . ";" . self::LINE_FEED . self::LINE_FEED;
+        }
+
+        if !empty uses {
+            for use1 in uses {
+                let output = output . "use " . use1 . ";" . self::LINE_FEED;
+            }
+            let output = output . self::LINE_FEED;
+        }
+
+        if docBlock !== null {
+            docBlock->setIndentation("");
+            let docBlockStr = docBlock->generate();
+            let output = output . docBlockStr;
+        }
+
+        if this->isAbstract() {
+            let output = output . "abstract ";
+        }
+        let output = output . "class " . name;
+
+        if !empty implemented {
+            let implementedStr = implode(", ", implemented);
+            let output = output . " implements " . implementedStr;
+        }
+
+        let output = output . self::LINE_FEED . "{" . self::LINE_FEED . self::LINE_FEED;
+
+        if !empty properties {
+            for property in properties {
+                let propertyStr = property->generate();
+                let output = output . propertyStr . self::LINE_FEED . self::LINE_FEED;
+            }
+        }
+
+        if !empty methods {
+            for property in methods {
+                let methodStr = method->generate();
+                let output = output . methodStr . self::LINE_FEED;
+            }
+        }
+
+        let output = output . self::LINE_FEED . "}" . self::LINE_FEED;
+
+        return output;
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

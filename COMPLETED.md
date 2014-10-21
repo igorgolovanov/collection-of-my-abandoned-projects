@@ -19,7 +19,6 @@
 - Zend\Code\Exception\ExceptionInterface
 - Zend\Code\Exception\InvalidArgumentException
 - Zend\Code\Exception\RuntimeException
-
 - Zend\Code\Generator\DocBlock\Tag\AbstractTypeableTag
 - Zend\Code\Generator\DocBlock\Tag\AuthorTag
 - Zend\Code\Generator\DocBlock\Tag\GenericTag
@@ -35,12 +34,35 @@
 - Zend\Code\Generator\Exception\InvalidArgumentException
 - Zend\Code\Generator\Exception\RuntimeException
 - Zend\Code\Generator\AbstractGenerator
+- Zend\Code\Generator\BodyGenerator
+- Zend\Code\Generator\ClassGenerator
+
 - Zend\Code\Generator\GeneratorInterface
 
 - Zend\Code\Generic\Prototype\PrototypeClassFactory
 - Zend\Code\Generic\Prototype\PrototypeGenericInterface
 - Zend\Code\Generic\Prototype\PrototypeInterface
+- Zend\Code\Reflection\DocBlock\Tag\AuthorTag
+- Zend\Code\Reflection\DocBlock\Tag\GenericTag
+- Zend\Code\Reflection\DocBlock\Tag\LicenseTag
+- Zend\Code\Reflection\DocBlock\Tag\MethodTag
+- Zend\Code\Reflection\DocBlock\Tag\ParamTag
+- Zend\Code\Reflection\DocBlock\Tag\PhpDocTypedTagInterface
+- Zend\Code\Reflection\DocBlock\Tag\PropertyTag
+- Zend\Code\Reflection\DocBlock\Tag\ReturnTag
+- Zend\Code\Reflection\DocBlock\Tag\TagInterface
+- Zend\Code\Reflection\DocBlock\Tag\ThrowsTag
+- Zend\Code\Reflection\DocBlock\TagManager
+- Zend\Code\Reflection\Exception\BadMethodCallException
+- Zend\Code\Reflection\Exception\ExceptionInterface
+- Zend\Code\Reflection\Exception\InvalidArgumentException
+- Zend\Code\Reflection\Exception\RuntimeException
+- Zend\Code\Reflection\ClassReflection
+- Zend\Code\Reflection\DocBlockReflection
+- Zend\Code\Reflection\FileReflection
 
+- Zend\Code\Reflection\PropertyReflection
+- Zend\Code\Reflection\ReflectionInterface
 
 ### ZendConfig
 

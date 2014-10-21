@@ -1,13 +1,20 @@
+/*
+* This file is part of the php-ext-zf2 package.
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
 
 namespace Zend\Code\Reflection;
 
-class ClassReflection extends \ReflectionClass implements \Reflector, ReflectionInterface
+use ReflectionClass;
+use Zend\Code\Annotation\AnnotationCollection;
+use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Scanner\AnnotationScanner;
+use Zend\Code\Scanner\FileScanner;
+
+class ClassReflection extends ReflectionClass implements ReflectionInterface
 {
-    const IS_IMPLICIT_ABSTRACT = 16;
-
-    const IS_EXPLICIT_ABSTRACT = 32;
-
-    const IS_FINAL = 64;
 
     /**
      * @var AnnotationScanner
@@ -26,7 +33,13 @@ class ClassReflection extends \ReflectionClass implements \Reflector, Reflection
      */
     public function getDeclaringFile() -> <FileReflection>
     {
+        var instance;
+        string fileName;
 
+        let fileName = this->getFileName();
+        let instance = new FileReflection(fileName);
+
+        return instance;
     }
 
     /**
@@ -35,18 +48,53 @@ class ClassReflection extends \ReflectionClass implements \Reflector, Reflection
      * @return DocBlockReflection
      * @throws Exception\ExceptionInterface for missing DocBock or invalid reflection class
      */
-    public function getDocBlock() -> <DocBlockReflection>
+    public function getDocBlock() -> <DocBlockReflection>|boolean
     {
+        string docComment;
 
+        if empty this->docBlock {
+            let docComment = this->getDocComment();
+            if docComment == "" {
+                return false;
+            }
+
+            let this->docBlock = new DocBlockReflection(this);
+        }
+
+        return this->docBlock;
     }
 
     /**
      * @param  AnnotationManager $annotationManager
      * @return AnnotationCollection
      */
-    public function getAnnotations(annotationManager)
+    public function getAnnotations(<AnnotationManager> annotationManager) -> <AnnotationCollection>|boolean
     {
+        string docComment, fileName, name;
+        var fileScanner, nameInformation, annotations;
 
+        let docComment = this->getDocComment();
+        if docComment == "" {
+            return false;
+        }
+
+        if this->annotations {
+            return this->annotations;
+        }
+
+        let fileName = this->getFileName();
+        let fileScanner = <FileScanner> this->createFileScanner(fileName);
+        let name = this->getName();
+        let nameInformation = fileScanner->getClassNameInformation(name);
+
+        if !nameInformation {
+            return false;
+        }
+
+        let annotations = new AnnotationScanner(annotationManager, docComment, nameInformation);
+        let this->annotations = annotations;
+
+        return annotations;
     }
 
     /**
@@ -57,7 +105,21 @@ class ClassReflection extends \ReflectionClass implements \Reflector, Reflection
      */
     public function getStartLine(boolean includeDocComment = false) -> int
     {
+        string docComment;
+        var docBlock;
+        int startLine;
 
+        if includeDocComment {
+            let docComment = this->getDocComment();
+            if docComment != "" {
+                let docBlock = <DocBlockReflection> this->getDocBlock();
+                let startLine = docBlock->getStartLine();
+
+                return startLine;
+            }
+        }
+
+        return parent::getStartLine();
     }
 
     /**
@@ -68,7 +130,29 @@ class ClassReflection extends \ReflectionClass implements \Reflector, Reflection
      */
     public function getContents(boolean includeDocBlock = true) -> string
     {
+        var fileName, ;
+        int startNum, endNum, startLine, endLine;
+        array lines, filelines;
+        string result;
 
+        let fileName = this->getFileName();
+        if fileName === false || !file_exists(fileName) {
+            return "";
+        }
+        let filelines = file(fileName);
+        let startLine = this->getStartLine();
+        let endLine = this->getEndLine();
+        let startNum = this->getStartLine(includeDocBlock);
+        let endNum = endLine - startLine;
+
+        // Ensure we get between the open and close braces
+        let lines = array_slice(filelines, startNum, endNum);
+        array_unshift(lines, filelines[startNum - 1]);
+
+        let result = implode("", lines);
+        let result = strstr(result, "{");
+
+        return result;
     }
 
     /**
@@ -78,6 +162,21 @@ class ClassReflection extends \ReflectionClass implements \Reflector, Reflection
      */
     public function getInterfaces() -> array
     {
+        array phpReflections, zendReflections = [];
+        var phpReflection, instance;
+        string name;
+
+        let phpReflections =  parent::getInterfaces();
+        for phpReflection in phpReflections {
+            let name = phpReflection->getName();
+            let instance = new ClassReflection(name);
+
+            let zendReflections[] = instance;
+        }
+
+        unset phpReflections;
+
+        return zendReflections;
 
     }
 
@@ -89,7 +188,17 @@ class ClassReflection extends \ReflectionClass implements \Reflector, Reflection
      */
     public function getMethod(string name) -> <MethodReflection>
     {
+        string className, methodName;
+        var method, instance;
 
+        let className = this->getName();
+        let method = <MethodReflection> parent::getMethod(name);
+        let methodName = method->getName();
+        let instance = new MethodReflection(className, methodName);
+
+        unset method;
+
+        return method;
     }
 
     /**
@@ -100,7 +209,22 @@ class ClassReflection extends \ReflectionClass implements \Reflector, Reflection
      */
     public function getMethods(int filter = -1) -> array
     {
+        array methods, result = [];
+        var method, instance;
+        string methodName, className;
 
+        let className = this->getName();
+        let methods = parent::getMethods(filter);
+        for method in methods {
+            let methodName = method->getName();
+            let instance = new MethodReflection(className, methodName);
+
+            let methods[] = instance;
+        }
+
+        unset methods;
+
+        return result;
     }
 
     /**
@@ -110,7 +234,20 @@ class ClassReflection extends \ReflectionClass implements \Reflector, Reflection
      */
     public function getParentClass() -> <ClassReflection>|boolean
     {
+        var phpReflection, zendReflection;
+        string className;
 
+        let phpReflection = parent::getParentClass();
+        if phpReflection {
+            let className = phpReflection->getName();
+            let zendReflection = new ClassReflection(name);
+
+            unset phpReflection;
+
+            return zendReflection;
+        }
+
+        return false;
     }
 
     /**
@@ -121,7 +258,17 @@ class ClassReflection extends \ReflectionClass implements \Reflector, Reflection
      */
     public function getProperty(string name) -> <PropertyReflection>
     {
+        string className, propertyName;
+        var property, instance;
 
+        let className = this->getName();
+        let property = <PropertyReflection> parent::getProperty(name);
+        let propertyName = property->getName();
+        let instance = new PropertyReflection(className, propertyName);
+
+        unset property;
+
+        return property;
     }
 
     /**
@@ -132,17 +279,32 @@ class ClassReflection extends \ReflectionClass implements \Reflector, Reflection
      */
     public function getProperties(int filter = -1) -> array
     {
+        array properties, result = [];
+        var property, instance;
+        string propertyName, className;
 
+        let className = this->getName();
+        let properties = parent::getProperties(filter);
+        for property in properties {
+            let propertyName = property->getName();
+            let instance = new PropertyReflection(className, propertyName);
+
+            let properties[] = instance;
+        }
+
+        unset properties;
+
+        return result;
     }
 
-    public function toString()
+    public function toString() -> string
     {
-
+        return parent::__toString();
     }
 
-    public function __toString()
+    public function __toString() -> string
     {
-
+        return parent::__toString();
     }
 
     /**
@@ -155,9 +317,9 @@ class ClassReflection extends \ReflectionClass implements \Reflector, Reflection
      *
      * @return FileScanner
      */
-    protected function createFileScanner(string filename)
+    protected function createFileScanner(string filename) -> <FileScanner>
     {
-
+        return new FileScanner(filename);
     }
 
 }

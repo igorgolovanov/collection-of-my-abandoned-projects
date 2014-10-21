@@ -7,7 +7,7 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-class AuthorTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeInterface
+class AuthorTag implements TagInterface
 {
     /**
      * @var string

@@ -7,7 +7,9 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-class GenericTag implements TagInterface, \Zend\Code\Generic\Prototype\PrototypeInterface, \Zend\Code\Generic\Prototype\PrototypeGenericInterface
+use Zend\Code\Generic\Prototype\PrototypeGenericInterface;
+
+class GenericTag implements TagInterface, PrototypeGenericInterface
 {
     /**
      * @var string
@@ -27,14 +29,14 @@ class GenericTag implements TagInterface, \Zend\Code\Generic\Prototype\Prototype
     /**
      * @var array
      */
-    protected values; // []
+    protected values = [];
 
     /**
      * @param  string $contentSplitCharacter
      */
     public function __construct(string contentSplitCharacter = " ")
     {
-
+        let this->contentSplitCharacter = contentSplitCharacter;
     }
 
     /**
@@ -43,7 +45,7 @@ class GenericTag implements TagInterface, \Zend\Code\Generic\Prototype\Prototype
      */
     public function initialize(string tagDocBlockLine) -> void
     {
-
+        this->parse(tagDocBlockLine);
     }
 
     /**
@@ -53,7 +55,7 @@ class GenericTag implements TagInterface, \Zend\Code\Generic\Prototype\Prototype
      */
     public function getName() -> string
     {
-
+        return this->name;
     }
 
     /**
@@ -61,7 +63,7 @@ class GenericTag implements TagInterface, \Zend\Code\Generic\Prototype\Prototype
      */
     public function setName(string name)
     {
-
+        let this->name = name;
     }
 
     /**
@@ -69,7 +71,7 @@ class GenericTag implements TagInterface, \Zend\Code\Generic\Prototype\Prototype
      */
     public function getContent() -> string
     {
-
+        return this->content;
     }
 
     /**
@@ -78,7 +80,11 @@ class GenericTag implements TagInterface, \Zend\Code\Generic\Prototype\Prototype
      */
     public function returnValue(int position) -> string
     {
-
+        var value;
+        if fetch value, this->values[position] {
+            return value;
+        }
+        return "";
     }
 
     /**
@@ -91,7 +97,11 @@ class GenericTag implements TagInterface, \Zend\Code\Generic\Prototype\Prototype
      */
     public function __toString() -> string
     {
+        string output;
 
+        let output = "DocBlock Tag [ * @" . this->name . " ]" . PHP_EOL;
+
+        return output;
     }
 
     /**
@@ -99,7 +109,12 @@ class GenericTag implements TagInterface, \Zend\Code\Generic\Prototype\Prototype
      */
     protected function parse(string docBlockLine)
     {
+        array values;
 
+        let values = explode(this->contentSplitCharacter, docBlockLine);
+
+        let this->content = docBlockLine->trim();
+        let this->values = values;
     }
 
 }
