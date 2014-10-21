@@ -157,9 +157,19 @@
 
 ### ZendServer
 
-### ZendServiceManager
+- Zend\Server\Exception\BadMethodCallException
+- Zend\Server\Exception\ExceptionInterface
+- Zend\Server\Exception\InvalidArgumentException
+- Zend\Server\Exception\RuntimeException
+- Zend\Server\Method\Callback
+- Zend\Server\Method\Definition
+- Zend\Server\Method\Parameter
+- Zend\Server\Method\Prototype
+- Zend\Server\AbstractServer
+- Zend\Server\Client
+- Zend\Server\Server
 
-- Zend\ServiceManager\
+### ZendServiceManager
 
 ### ZendSession
 

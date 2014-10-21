@@ -7,5 +7,4 @@
 */
 
 return array(
-	'Zend\Loader',
 );

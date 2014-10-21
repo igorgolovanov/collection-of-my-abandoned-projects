@@ -1,4 +1,3 @@
-<?php
 /*
 * This file is part of the php-ext-zf2 package.
 *
@@ -6,9 +5,11 @@
 * file that was distributed with this source code.
 */
 
+namespace Zend\Server\Reflection;
+
 /**
- * Lit of classes which must be skipped.
+ * Function Reflection
  */
-return array(
-	'Zend\Code\Annotation\Parser\DoctrineAnnotationParser',
-);
+class ReflectionFunction extends AbstractFunction
+{
+}

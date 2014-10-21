@@ -10,5 +10,6 @@
  * Lit of namespaces which must be skipped.
  */
 return array(
-	'Zend\Loader'
+	'Zend\Loader',
+	'Zend\Code\Reflection'
 );

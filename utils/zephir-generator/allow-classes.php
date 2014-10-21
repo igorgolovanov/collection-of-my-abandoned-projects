@@ -7,5 +7,5 @@
 */
 
 return array(
-
+	//'Zend\Code\Annotation\AnnotationInterface'
 );

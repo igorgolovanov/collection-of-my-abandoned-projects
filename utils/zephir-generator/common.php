@@ -315,12 +315,13 @@ function zephir_generate_property(ReflectionProperty $property)
 
     $defaults = $property->getDeclaringClass()->getDefaultProperties();
     if(isset($defaults[$property->getName()])) {
-        if (is_array($defaults[$property->getName()])) {
-            // not supported yet
-            $content .= '; // ' . zephir_print_value($defaults[$property->getName()]);
-        } else {
-            $content .= ' = ' . zephir_print_value($defaults[$property->getName()]) . ';';
-        }
+        // if (is_array($defaults[$property->getName()])) {
+        //     // not supported yet
+        //     $content .= '; // ' . zephir_print_value($defaults[$property->getName()]);
+        // } else {
+        //     $content .= ' = ' . zephir_print_value($defaults[$property->getName()]) . ';';
+        // }
+        $content .= ' = ' . zephir_print_value($defaults[$property->getName()]) . ';';
     } else {
         $content .= ';';
     }

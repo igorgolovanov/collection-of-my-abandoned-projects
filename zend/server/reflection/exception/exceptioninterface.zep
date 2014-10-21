@@ -1,4 +1,3 @@
-<?php
 /*
 * This file is part of the php-ext-zf2 package.
 *
@@ -6,9 +5,11 @@
 * file that was distributed with this source code.
 */
 
+namespace Zend\Server\Reflection\Exception;
+
 /**
- * Lit of classes which must be skipped.
+ * Zend\Server\Reflection exceptions
  */
-return array(
-	'Zend\Code\Annotation\Parser\DoctrineAnnotationParser',
-);
+interface ExceptionInterface extends \Zend\Server\Exception\ExceptionInterface
+{
+}

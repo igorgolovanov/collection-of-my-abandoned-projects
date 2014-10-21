@@ -1,4 +1,3 @@
-<?php
 /*
 * This file is part of the php-ext-zf2 package.
 *
@@ -6,9 +5,8 @@
 * file that was distributed with this source code.
 */
 
-/**
- * Lit of classes which must be skipped.
- */
-return array(
-	'Zend\Code\Annotation\Parser\DoctrineAnnotationParser',
-);
+namespace Zend\Server\Exception;
+
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
+{
+}
