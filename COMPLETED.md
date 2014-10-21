@@ -110,6 +110,8 @@
 
 ### ZendFilter
 
+- Zend\Filter\FilterInterface
+
 ### ZendForm
 
 ### ZendHttp
@@ -117,6 +119,8 @@
 ### ZendI18n
 
 ### ZendInputFilter
+
+- Zend\InputFilter\InputFilterInterface
 
 ### ZendJson
 
@@ -138,6 +142,9 @@
 - Zend\Loader\SplAutoloader
 
 ### ZendLog
+
+- Zend\Log\LoggerAwareInterface
+- Zend\Log\LoggerInterface
 
 ### ZendMail
 
