@@ -6,8 +6,6 @@
 
 ### ZendCache
 
-### ZendCache
-
 ### ZendCaptcha
 
 ### ZendCode
@@ -45,6 +43,15 @@
 
 
 ### ZendConfig
+
+- Zend\Config\Exceptio\ExceptionInterface
+- Zend\Config\Exceptio\InvalidArgumentException
+- Zend\Config\Exceptio\RuntimeException
+- Zend\Config\Processor\ProcessorInterface
+- Zend\Config\Reader\ReaderInterface
+- Zend\Config\Writer\WriterInterface
+- Zend\Config\Writer\ReaderPluginManager
+- Zend\Config\Writer\WriterPluginManager
 
 ### ZendConsole
 
