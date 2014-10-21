@@ -202,6 +202,19 @@
 
 ### ZendValidator
 
+- Zend\Validator\Exception\BadMethodCallException
+- Zend\Validator\Exception\ExceptionInterface
+- Zend\Validator\Exception\ExtensionNotLoadedException
+- Zend\Validator\Exception\InvalidArgumentException
+- Zend\Validator\Exception\InvalidMagicMimeFileException
+- Zend\Validator\Exception\RuntimeException
+- Zend\Validator\Translator\TranslatorInterface
+- Zend\Validator\Translator\TranslatorAwareInterface
+- Zend\Validator\ValidatorChain
+- Zend\Validator\ValidatorInterface
+- Zend\Validator\ValidatorPluginManager
+- Zend\Validator\ValidatorPluginManagerAwareInterface
+
 ### ZendVersion
 
 ### ZendView

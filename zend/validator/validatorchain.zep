@@ -7,7 +7,9 @@
 
 namespace Zend\Validator;
 
-class ValidatorChain implements \Countable, ValidatorInterface
+use Countable;
+
+class ValidatorChain implements Countable, ValidatorInterface
 {
     /**
      * @var ValidatorPluginManager
@@ -36,7 +38,6 @@ class ValidatorChain implements \Countable, ValidatorInterface
     public function count() -> int
     {
         int count;
-
         let count = count(this->validators);
 
         return count;
@@ -49,7 +50,10 @@ class ValidatorChain implements \Countable, ValidatorInterface
      */
     public function getPluginManager() -> <ValidatorPluginManager>
     {
-        
+        if empty this->plugins {
+            this->setPluginManager(new ValidatorPluginManager());
+        }
+        return this->plugins;
     }
 
     /**
@@ -58,9 +62,11 @@ class ValidatorChain implements \Countable, ValidatorInterface
      * @param  ValidatorPluginManager $plugins Plugin manager
      * @return ValidatorChain
      */
-    public function setPluginManager(<ValidatorPluginManager> plugins) -> <ValidatorChain>
+    public function setPluginManager(<ValidatorPluginManager> plugins) -> self
     {
+        let this->plugins = plugins;
 
+        return this;
     }
 
     /**
@@ -72,7 +78,12 @@ class ValidatorChain implements \Countable, ValidatorInterface
      */
     public function plugin(string name, array! options = null) -> <ValidatorInterface>
     {
+        var plugins, plugin;
 
+        let plugins = <ValidatorPluginManager> this->getPluginManager();
+        let plugin = <ValidatorInterface> plugins->get(name, options);
+
+        return plugin;
     }
 
     /**
@@ -85,9 +96,18 @@ class ValidatorChain implements \Countable, ValidatorInterface
      * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
-    public function attach(<ValidatorInterface> validator, boolean breakChainOnFailure = false) -> <ValidatorChain>
+    public function attach(<ValidatorInterface> validator, boolean breakChainOnFailure = false) -> self
     {
+        array info;
 
+        let info = [
+            "instance": validator,
+            "breakChainOnFailure": breakChainOnFailure
+        ];
+
+        let this->validators[] = info;
+
+        return this;
     }
 
     /**
@@ -98,9 +118,11 @@ class ValidatorChain implements \Countable, ValidatorInterface
      * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
-    public function addValidator(<ValidatorInterface> validator, boolean breakChainOnFailure = false) -> <ValidatorChain>
+    public function addValidator(<ValidatorInterface> validator, boolean breakChainOnFailure = false) -> self
     {
+        this->attach(validator, breakChainOnFailure);
 
+        return this;
     }
 
     /**
@@ -115,7 +137,15 @@ class ValidatorChain implements \Countable, ValidatorInterface
      */
     public function prependValidator(<ValidatorInterface> validator, boolean breakChainOnFailure = false) -> <ValidatorChain>
     {
+        array info;
 
+        let info = [
+            "instance": validator,
+            "breakChainOnFailure": breakChainOnFailure
+        ];
+        array_unshift(this->validators, info);
+
+        return this; 
     }
 
     /**
@@ -128,7 +158,21 @@ class ValidatorChain implements \Countable, ValidatorInterface
      */
     public function attachByName(string name, array options = [], boolean breakChainOnFailure = false) -> <ValidatorChain>
     {
+        var bcf, validator;
 
+        if fetch bcf, options["break_chain_on_failure"] {
+            let breakChainOnFailure = bcf;
+        }
+
+        if fetch bcf, options["breakchainonfailure"] {
+            let breakChainOnFailure = bcf;
+        }
+
+        let validator = <ValidatorInterface> this->plugin(name, options);
+
+        this->attach(validator, breakChainOnFailure);
+
+        return this;
     }
 
     /**
@@ -140,9 +184,10 @@ class ValidatorChain implements \Countable, ValidatorInterface
      * @param  bool   $breakChainOnFailure
      * @return ValidatorChain
      */
-    public function addByName(string name, array options = [], boolean breakChainOnFailure = false) -> <ValidatorChain>
+    public function addByName(string name, array options = [], boolean breakChainOnFailure = false) -> self
     {
-
+        this->attachByName(name, options, breakChainOnFailure);
+        return this;
     }
 
     /**
@@ -153,9 +198,14 @@ class ValidatorChain implements \Countable, ValidatorInterface
      * @param  bool   $breakChainOnFailure
      * @return ValidatorChain
      */
-    public function prependByName(string name, array options = [], boolean breakChainOnFailure = false) -> <ValidatorChain>
+    public function prependByName(string name, var options = [], boolean breakChainOnFailure = false) -> self
     {
+        var validator;
 
+        let validator = <ValidatorInterface> this->plugin(name, options);
+        this->prependValidator(validator, breakChainOnFailure);
+
+        return this;
     }
 
     /**
@@ -167,9 +217,28 @@ class ValidatorChain implements \Countable, ValidatorInterface
      * @param  mixed $context Extra "context" to provide the validator
      * @return bool
      */
-    public function isValid(value, context = null) -> boolean
+    public function isValid(var value, var context = null) -> boolean
     {
+        boolean result = true;
+        var element, validator;
+        array messages;
 
+        let this->messages = [];
+        for element in this->validators {
+            let validator = <ValidatorInterface> element["instance"];
+            if validator->isValid(value, context) {
+                continue;
+            }
+            let result = false;
+            let messages = validator->getMessages();
+            let this->messages = array_replace_recursive(this->messages, messages);
+
+            if isset element["breakChainOnFailure"] && element["breakChainOnFailure"] {
+                break;
+            }
+        }
+
+        return result;
     }
 
     /**
@@ -178,9 +247,18 @@ class ValidatorChain implements \Countable, ValidatorInterface
      * @param ValidatorChain $validatorChain
      * @return ValidatorChain
      */
-    public function merge(<ValidatorChain> validatorChain) -> <ValidatorChain>
+    public function merge(<ValidatorChain> validatorChain) -> self
     {
+        var validator;
+        array validators;
 
+        let validators = validatorChain->getValidators();
+
+        for validator in validators {
+            let this->validators[] = validator;
+        }
+
+        return this;
     }
 
     /**
@@ -190,7 +268,7 @@ class ValidatorChain implements \Countable, ValidatorInterface
      */
     public function getMessages() -> array
     {
-
+        return this->messages;
     }
 
     /**
@@ -200,7 +278,7 @@ class ValidatorChain implements \Countable, ValidatorInterface
      */
     public function getValidators() -> array
     {
-
+        return this->validators;
     }
 
     /**
@@ -209,9 +287,9 @@ class ValidatorChain implements \Countable, ValidatorInterface
      * @param  mixed $value
      * @return bool
      */
-    public function __invoke(value) -> boolean
+    public function __invoke(var value) -> boolean
     {
-
+        return this->isValid(value);
     }
 
     /**
@@ -226,7 +304,7 @@ class ValidatorChain implements \Countable, ValidatorInterface
      */
     public function __sleep() -> array
     {
-
+        return ["validators", "messages"];
     }
 
 }

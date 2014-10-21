@@ -7,6 +7,5 @@
 
 namespace Zend\Validator\Exception;
 
-class InvalidMagicMimeFileException extends InvalidArgumentException implements ExceptionInterface
-{
-}
+class InvalidMagicMimeFileException extends InvalidArgumentException
+{}

@@ -192,9 +192,14 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      * @param  array $messages
      * @return AbstractValidator
      */
-    public function setMessages(array! messages) -> <AbstractValidator>
+    public function setMessages(array! messages) -> self
     {
+        var key, message;
 
+        for key, message in messages {
+            this->setMessages(message, key);
+        }
+        return this;
     }
 
     /**
@@ -234,7 +239,17 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     protected function error(string messageKey, string value = null) -> void
     {
+        array keys;
 
+        if empty messageKey {
+            let keys = array_keys(this->abstractOptions["messageTemplates"]);
+            let messageKey = current(keys);
+        }
+
+        if empty value {
+            let value = this->value;
+        }
+        let this->abstractOptions["messages"][messageKey] = this->createMessage(messageKey, value);
     }
 
     /**
@@ -244,7 +259,7 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     protected function getValue()
     {
-
+         return this->value;
     }
 
     /**
@@ -253,9 +268,10 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      * @param  mixed $value
      * @return void
      */
-    protected function setValue(value) -> void
+    protected function setValue(var value) -> void
     {
-
+        let this->value = value;
+        let this->abstractOptions["messages"] = [];
     }
 
     /**
@@ -264,9 +280,11 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      * @param  bool $flag
      * @return AbstractValidator
      */
-    public function setValueObscured(boolean flag) -> <AbstractValidator>
+    public function setValueObscured(boolean flag) -> self
     {
+        let this->abstractOptions["valueObscured"] = flag;
 
+        return this;
     }
 
     /**
@@ -277,7 +295,14 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     public function isValueObscured() -> boolean
     {
+        var valueObscured;
 
+        if fetch valueObscured, this->abstractOptions["valueObscured"] {
+            if valueObscured {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -288,9 +313,13 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      * @return AbstractValidator
      * @throws Exception\InvalidArgumentException
      */
-    public function setTranslator(<Translator\TranslatorInterface> translator = null, string textDomain = null) -> <AbstractValidator>
+    public function setTranslator(<Translator\TranslatorInterface> translator = null, string textDomain = null) -> self
     {
-
+        let this->abstractOptions["translator"] = translator;
+        if !empty textDomain {
+            this->setTranslatorTextDomain(textDomain);
+        }
+        return this;
     }
 
     /**
@@ -300,7 +329,20 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     public function getTranslator() -> <Translator\TranslatorInterface>
     {
+        var translator;
 
+        if !this->isTranslatorEnabled() {
+            return null;
+        }
+        if fetch translator, this->abstractOptions["translator"] {
+            if translator {
+                return true;
+            }
+        }
+        let translator = self::getDefaultTranslator();
+        let this->abstractOptions["translator"] = translator;
+
+        return translator;
     }
 
     /**
@@ -310,7 +352,14 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     public function hasTranslator() -> boolean
     {
+        var translator;
 
+        if fetch translator, this->abstractOptions["translator"] {
+            if translator {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -321,7 +370,9 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     public function setTranslatorTextDomain(string textDomain = "default") -> <AbstractValidator>
     {
+        let this->abstractOptions["translatorTextDomain"] = textDomain;
 
+        return this;
     }
 
     /**
@@ -331,7 +382,17 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     public function getTranslatorTextDomain() -> string
     {
+        var translatorTextDomain;
 
+        if fetch translatorTextDomain, this->abstractOptions["translatorTextDomain"] {
+            if !empty translatorTextDomain {
+                return translatorTextDomain;
+            }
+        }
+        let translatorTextDomain = self::getDefaultTranslatorTextDomain();
+        let this->abstractOptions["translatorTextDomain"] = translatorTextDomain;
+
+        return translatorTextDomain;
     }
 
     /**
@@ -344,7 +405,11 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     public static function setDefaultTranslator(<Translator\TranslatorInterface> translator = null, string textDomain = null) -> void
     {
+        let static::defaultTranslator = translator;
 
+        if !empty textDomain {
+            self::setDefaultTranslatorTextDomain(textDomain);
+        }
     }
 
     /**
@@ -354,7 +419,7 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     public static function getDefaultTranslator() -> <Translator\TranslatorInterface>
     {
-
+        return static::defaultTranslator;
     }
 
     /**
@@ -364,7 +429,7 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     public static function hasDefaultTranslator() -> boolean
     {
-
+        return static::defaultTranslator;
     }
 
     /**
@@ -375,7 +440,7 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     public static function setDefaultTranslatorTextDomain(string textDomain = "default") -> void
     {
-
+        let static::defaultTranslatorTextDomain = textDomain;
     }
 
     /**
@@ -385,7 +450,7 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     public static function getDefaultTranslatorTextDomain() -> string
     {
-
+        return static::defaultTranslatorTextDomain;
     }
 
     /**
@@ -394,9 +459,11 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      * @param  bool $flag
      * @return AbstractValidator
      */
-    public function setTranslatorEnabled(boolean flag = true) -> <AbstractValidator>
+    public function setTranslatorEnabled(boolean flag = true) -> self
     {
-
+        let this->abstractOptions["translatorEnabled"] = flag;
+        
+        return this;
     }
 
     /**
@@ -406,7 +473,10 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     public function isTranslatorEnabled() -> boolean
     {
-
+        if isset this->abstractOptions["translatorEnabled"] && this->abstractOptions["translatorEnabled"] {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -416,7 +486,7 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     public static function getMessageLength() -> int
     {
-
+        return static::messageLength;
     }
 
     /**
@@ -426,7 +496,7 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     public static function setMessageLength(int length = -1)
     {
-
+        let static::messageLength = length;
     }
 
     /**
@@ -438,7 +508,14 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      */
     protected function translateMessage(string messageKey, string message) -> string
     {
+        var translator;
+        string translated, textDomain;
 
+        let translator = <Translator\TranslatorInterface> this->getTranslator();
+        let textDomain = this->getTranslatorTextDomain();
+        let translated = translator->translate(message, textDomain);
+
+        return translated;
     }
 
 }

@@ -7,6 +7,5 @@
 
 namespace Zend\Validator\Exception;
 
-class ExtensionNotLoadedException extends RuntimeException implements ExceptionInterface
-{
-}
+class ExtensionNotLoadedException extends RuntimeException
+{}

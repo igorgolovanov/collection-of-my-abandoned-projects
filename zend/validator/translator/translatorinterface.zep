@@ -15,6 +15,6 @@ interface TranslatorInterface
      * @param  string $locale
      * @return string
      */
-    public function translate(string message, string textDomain = "default", string locale = null) -> string;
+    public function translate(string message, string textDomain = "default", var locale = null) -> string;
 
 }
