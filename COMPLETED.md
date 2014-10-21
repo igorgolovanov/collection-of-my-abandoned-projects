@@ -178,6 +178,34 @@
 
 ### ZendModuleManager
 
+- Zend\ModuleManager\Exception\ExceptionInterface
+- Zend\ModuleManager\Exception\InvalidArgumentException
+- Zend\ModuleManager\Exception\MissingDependencyModuleException
+- Zend\ModuleManager\Exception\RuntimeException
+- Zend\ModuleManager\Feature\AutoloaderProviderInterface
+- Zend\ModuleManager\Feature\BootstrapListenerInterface
+- Zend\ModuleManager\Feature\ConfigProviderInterface
+- Zend\ModuleManager\Feature\ConsoleBannerProviderInterface
+- Zend\ModuleManager\Feature\ConsoleUsageProviderInterface
+- Zend\ModuleManager\Feature\ControllerPluginProviderInterface
+- Zend\ModuleManager\Feature\ControllerProviderInterface
+- Zend\ModuleManager\Feature\DependencyIndicatorInterface
+- Zend\ModuleManager\Feature\FilterProviderInterface
+- Zend\ModuleManager\Feature\FormElementProviderInterface
+- Zend\ModuleManager\Feature\HydratorProviderInterface
+- Zend\ModuleManager\Feature\InitProviderInterface
+- Zend\ModuleManager\Feature\InputFilterProviderInterface
+- Zend\ModuleManager\Feature\LocatorRegisteredInterface
+- Zend\ModuleManager\Feature\LogProcessorProviderInterface
+- Zend\ModuleManager\Feature\LogWriterProviderInterface
+- Zend\ModuleManager\Feature\RouteProviderInterface
+- Zend\ModuleManager\Feature\SerializerProviderInterface
+- Zend\ModuleManager\Feature\ServiceProviderInterface
+- Zend\ModuleManager\Feature\ValidatorProviderInterface
+- Zend\ModuleManager\Feature\ViewHelperProviderInterface
+
+- Zend\ModuleManager\ModuleManagerInterface
+
 ### ZendMvc
 
 ### ZendNavigation
