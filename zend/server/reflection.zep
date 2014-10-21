@@ -7,6 +7,9 @@
 
 namespace Zend\Server;
 
+use Zend\Server\Reflection\ReflectionClass;
+use Zend\Server\Reflection\ReflectionFunction;
+
 /**
  * Reflection for determining method signatures to use with server classes
  */
@@ -29,9 +32,24 @@ class Reflection
      * @return \Zend\Server\Reflection\ReflectionClass
      * @throws \Zend\Server\Reflection\Exception\InvalidArgumentException
      */
-    public static function reflectClass(var $class, var argv = false, string $namespace = "") -> <Reflection\ReflectionClass>
+    public static function reflectClass(var $class, var argv = false, string $namespace = "") -> <ReflectionClass>
     {
+        var reflection;
 
+        if typeof $class == "object" {
+            let reflection = new \ReflectionObject($class);
+        } else {
+            if unlikely !class_exists($class) {
+                throw new Reflection\Exception\InvalidArgumentException("Invalid class or object passed to attachClass()");
+            } 
+            let reflection = new \ReflectionClass($class);
+        }
+
+        if unlikely typeof argv != "array" {
+            throw new Reflection\Exception\InvalidArgumentException("Invalid argv argument passed to reflectClass");
+        }
+
+        return new ReflectionClass(reflection, $namespace, argv);
     }
 
     /**
@@ -53,7 +71,21 @@ class Reflection
      */
     public static function reflectFunction(string $function, var argv = false, string $namespace = "") -> <Reflection\ReflectionFunction>
     {
+        string exceptionMsg;
+        var reflection;
 
+        if unlikely empty $function || !function_exists($function) {
+            let exceptionMsg = "Invalid function \"" . $function . "\" passed to reflectFunction";
+            throw new Reflection\Exception\InvalidArgumentException(exceptionMsg);
+        }
+
+        if unlikely typeof argv != "array" {
+            throw new Reflection\Exception\InvalidArgumentException("Invalid argv argument passed to reflectFunction");
+        }
+
+        let reflection = new \ReflectionFunction($function);
+
+        return new ReflectionFunction(reflection, $namespace, argv);
     }
 
 }

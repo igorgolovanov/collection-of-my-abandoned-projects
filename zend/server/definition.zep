@@ -7,10 +7,13 @@
 
 namespace Zend\Server;
 
+use Countable;
+use Iterator;
+
 /**
  * Server methods metadata
  */
-class Definition implements \Countable, \Iterator, \Traversable
+class Definition implements Countable, Iterator
 {
     /**
      * @var array Array of \Zend\Server\Method\Definition objects
@@ -27,9 +30,11 @@ class Definition implements \Countable, \Iterator, \Traversable
      *
      * @param  null|array $methods
      */
-    public function __construct(array methods = null)
+    public function __construct(var methods = null)
     {
-
+        if typeof methods == "array" {
+            this->setMethods(methods);
+        }
     }
 
     /**
@@ -38,9 +43,11 @@ class Definition implements \Countable, \Iterator, \Traversable
      * @param mixed $flag
      * @return \Zend\Server\Definition
      */
-    public function setOverwriteExistingMethods(flag) -> <Definition>
+    public function setOverwriteExistingMethods(boolean flag) -> self
     {
+        let this->overwriteExistingMethods = flag;
 
+        return this;
     }
 
     /**
@@ -51,9 +58,40 @@ class Definition implements \Countable, \Iterator, \Traversable
      * @return \Zend\Server\Definition
      * @throws \Zend\Server\Exception\InvalidArgumentException if duplicate or invalid method provided
      */
-    public function addMethod(var method, string name = null) -> <Definition>
+    public function addMethod(var method, var name = null) -> self
     {
+        string exceptionMsg;
 
+        if typeof method == "array" {
+            let method = new Method\Definition(method);
+        } else {
+            if unlikely !(method instanceof Method\Definition) {
+                throw new Exception\InvalidArgumentException("Invalid method provided");
+            }
+        }
+
+        if typeof name = "int" || typeof name = "float"{
+            let name = null;
+        }
+
+        if name !== null {
+            method->setName(name);
+        } else {
+            let name = method->getName();
+        }
+
+        if unlikely name === null {
+            throw new Exception\InvalidArgumentException("No method name provided");
+        }
+
+        if !this->overwriteExistingMethods && isset this->methods[name] {
+            let exceptionMsg = "Method by name of \"" . name . "\" already exists";
+            throw new Exception\InvalidArgumentException(exceptionMsg);
+        }
+
+        let this->methods[name] = method;
+
+        return this;
     }
 
     /**
@@ -62,9 +100,15 @@ class Definition implements \Countable, \Iterator, \Traversable
      * @param  array $methods Array of \Zend\Server\Method\Definition objects or arrays
      * @return \Zend\Server\Definition
      */
-    public function addMethods(array! methods) -> <Definition>
+    public function addMethods(array! methods) -> self
     {
+        var key, method;
 
+        for key, method in methods {
+            this->addMethod(method, key);
+        }
+
+        return this;
     }
 
     /**
@@ -73,9 +117,12 @@ class Definition implements \Countable, \Iterator, \Traversable
      * @param  array $methods Array of \Zend\Server\Method\Definition objects or arrays
      * @return \Zend\Server\Definition
      */
-    public function setMethods(array! methods) -> <Definition>
+    public function setMethods(array! methods) -> self
     {
+        this->clearMethods();
+        this->addMethods(methods);
 
+        return this;
     }
 
     /**
@@ -86,7 +133,7 @@ class Definition implements \Countable, \Iterator, \Traversable
      */
     public function hasMethod(string method) -> boolean
     {
-
+        return array_key_exists(method, this->methods);
     }
 
     /**
@@ -95,9 +142,12 @@ class Definition implements \Countable, \Iterator, \Traversable
      * @param  string $method
      * @return null|\Zend\Server\Method\Definition
      */
-    public function getMethod(string method) -> <Method\Definition>
+    public function getMethod(string method) -> <Method\Definition>|boolean
     {
-
+        if this->hasMethod(method) {
+            return this->methods[method];
+        }
+        return false;
     }
 
     /**
@@ -107,7 +157,7 @@ class Definition implements \Countable, \Iterator, \Traversable
      */
     public function getMethods() -> array
     {
-
+        return this->methods;
     }
 
     /**
@@ -116,9 +166,12 @@ class Definition implements \Countable, \Iterator, \Traversable
      * @param  string $method
      * @return \Zend\Server\Definition
      */
-    public function removeMethod(string method) -> <Definition>
+    public function removeMethod(string method) -> self
     {
-
+        if this->hasMethod(method) {
+            unset this->methods[method];
+        }
+        return this;
     }
 
     /**
@@ -126,9 +179,10 @@ class Definition implements \Countable, \Iterator, \Traversable
      *
      * @return \Zend\Server\Definition
      */
-    public function clearMethods() -> <Definition>
+    public function clearMethods() -> self
     {
-
+        let this->methods = [];
+        return this;
     }
 
     /**
@@ -138,7 +192,15 @@ class Definition implements \Countable, \Iterator, \Traversable
      */
     public function toArray() -> array
     {
+        array result = [], methods;
+        var method, key;
 
+        let methods = this->getMethods();
+        for key, method in methods {
+            let result[key] = method->toArray();
+        }
+
+        return result;
     }
 
     /**
@@ -148,7 +210,10 @@ class Definition implements \Countable, \Iterator, \Traversable
      */
     public function count() -> int
     {
+        var count;
+        let count = count(this->methods);
 
+        return count;
     }
 
     /**
@@ -158,7 +223,10 @@ class Definition implements \Countable, \Iterator, \Traversable
      */
     public function current() -> <Method\Definition>
     {
+        var current;
+        let current = <Method\Definition> current(this->methods);
 
+        return current;
     }
 
     /**
@@ -168,7 +236,10 @@ class Definition implements \Countable, \Iterator, \Traversable
      */
     public function key() -> int|string
     {
+        var key;
+        let key = key(this->methods);
 
+        return key;
     }
 
     /**
@@ -178,7 +249,10 @@ class Definition implements \Countable, \Iterator, \Traversable
      */
     public function next() -> <Method\Definition>
     {
+        var next;
+        let next = next(this->methods);
 
+        return next;
     }
 
     /**
@@ -188,7 +262,7 @@ class Definition implements \Countable, \Iterator, \Traversable
      */
     public function rewind() -> void
     {
-
+        reset(this->methods);
     }
 
     /**
@@ -198,7 +272,11 @@ class Definition implements \Countable, \Iterator, \Traversable
      */
     public function valid() -> boolean
     {
+        boolean valid;
 
+        let valid = this->current();
+
+        return valid;
     }
 
 }

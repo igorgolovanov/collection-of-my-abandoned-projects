@@ -7,9 +7,9 @@
 
 namespace Zend\Server\Reflection\Exception;
 
+use Zend\Server\Exception\ExceptionInterface as Exception;
 /**
- * Zend\Server\Reflection exceptions
- */
-interface ExceptionInterface extends \Zend\Server\Exception\ExceptionInterface
-{
-}
+* Zend\Server\Reflection exceptions
+*/
+interface ExceptionInterface extends Exception
+{}

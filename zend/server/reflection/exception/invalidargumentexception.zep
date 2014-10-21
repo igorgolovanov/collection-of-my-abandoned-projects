@@ -7,6 +7,7 @@
 
 namespace Zend\Server\Reflection\Exception;
 
-class InvalidArgumentException extends \Zend\Server\Exception\InvalidArgumentException implements \Zend\Server\Exception\ExceptionInterface, ExceptionInterface
-{
-}
+use Zend\Server\Exception;
+
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
+{}

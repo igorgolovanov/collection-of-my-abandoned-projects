@@ -46,7 +46,10 @@ class ReflectionParameter
      */
     public function __construct(<ReflectionParameter> r, string type = "mixed", string description = "")
     {
-
+        let this->reflection = r;
+    
+        this->setType(type);
+        this->setDescription(description);
     }
 
     /**
@@ -59,7 +62,18 @@ class ReflectionParameter
      */
     public function __call(string method, array args)
     {
+        var reflection, result;
+        array callback;
 
+        let reflection = <\ReflectionParameter> this->reflection;
+
+        if unlikely !method_exists(reflection, method) {
+            throw new Exception\BadMethodCallException("Invalid reflection method");
+        }
+        let callback = [reflection, method];
+        let result = call_user_func_array(callback, args);
+
+        return result;
     }
 
     /**
@@ -69,7 +83,7 @@ class ReflectionParameter
      */
     public function getType() -> string
     {
-
+        return this->type;
     }
 
     /**
@@ -81,7 +95,10 @@ class ReflectionParameter
      */
     public function setType(string type) -> void
     {
-
+        if unlikely typeof type != "string" && type !== null {
+            throw new Exception\InvalidArgumentException("Invalid parameter type"); 
+        }
+        let this->type = type;
     }
 
     /**
@@ -91,7 +108,7 @@ class ReflectionParameter
      */
     public function getDescription() -> string
     {
-
+        return this->description;
     }
 
     /**
@@ -103,7 +120,10 @@ class ReflectionParameter
      */
     public function setDescription(string description) -> void
     {
-
+        if unlikely typeof description != "string" && description !== null {
+            throw new Exception\InvalidArgumentException("Invalid parameter description"); 
+        }
+        let this->description = description;
     }
 
     /**
@@ -114,7 +134,7 @@ class ReflectionParameter
      */
     public function setPosition(int index) -> void
     {
-
+        let this->position = index;
     }
 
     /**
@@ -124,7 +144,7 @@ class ReflectionParameter
      */
     public function getPosition() -> int
     {
-
+        return this->position;
     }
 
 }

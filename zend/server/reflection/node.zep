@@ -37,9 +37,12 @@ class Node
      * @param \Zend\Server\Reflection\Node $parent Optional
      * @return \Zend\Server\Reflection\Node
      */
-    public function __construct(value, <\Zend\Server\Reflection\Node> parent = null) -> <Node>
+    public function __construct(var value, <Node> parent = null) -> void
     {
-
+        let this->value = value;
+        if parent !== null {
+            this->setParent(parent, true);
+        }
     }
 
     /**
@@ -50,9 +53,13 @@ class Node
      * and should always be attached
      * @return void
      */
-    public function setParent(<\Zend\Server\Reflection\Node> node, boolean $new = false) -> void
+    public function setParent(<Node> node, boolean $new = false) -> void
     {
+        let this->parent = node;
 
+        if $new {
+            node->attachChild(this);
+        }
     }
 
     /**
@@ -62,9 +69,15 @@ class Node
      * @access public
      * @return \Zend\Server\Reflection\Node New child node
      */
-    public function createChild(value) -> <Node>
+    public function createChild(var value) -> <Node>
     {
+        string className;
+        var instance;
 
+        let className = get_called_class();
+        let instance = <Node> new {className}(value, this);
+
+        return instance;
     }
 
     /**
@@ -73,9 +86,16 @@ class Node
      * @param \Zend\Server\Reflection\Node $node
      * @return void
      */
-    public function attachChild(<\Zend\Server\Reflection\Node> node) -> void
+    public function attachChild(<Node> node) -> void
     {
+        var parent;
 
+        let this->children[] = node;
+        let parent = node->getParent();
+
+        if parent !== this {
+            node->setParent(this);
+        }
     }
 
     /**
@@ -85,7 +105,7 @@ class Node
      */
     public function getChildren() -> array
     {
-
+        return this->children;
     }
 
     /**
@@ -95,7 +115,10 @@ class Node
      */
     public function hasChildren() -> boolean
     {
+        int count;
+        let count = count(this->children);
 
+        return count > 0;
     }
 
     /**
@@ -105,7 +128,7 @@ class Node
      */
     public function getParent() -> <Node>
     {
-
+        return this->parent;
     }
 
     /**
@@ -115,7 +138,7 @@ class Node
      */
     public function getValue()
     {
-
+        return this->value;
     }
 
     /**
@@ -124,9 +147,9 @@ class Node
      * @param mixed $value
      * @return void
      */
-    public function setValue(value) -> void
+    public function setValue(var value) -> void
     {
-
+        let this->value = value;
     }
 
     /**
@@ -140,7 +163,33 @@ class Node
      */
     public function getEndPoints() -> array
     {
+        array endPoints = [], childEndPoints;
+        var child, value;
 
+        if !this->hasChildren() {
+            return endPoints;
+        }
+
+        for child in this->children {
+            let value = child->getValue();
+
+            if value === null {
+                let endPoints[] = this;
+                continue;
+            }
+
+            if child->hasChildren() {
+                let childEndPoints = child->getEndPoints();
+                if !empty childEndPoints {
+                    let endPoints = array_merge(endPoints, childEndPoints);
+                }
+                continue;
+            } else {
+                let endPoints[] = child;
+            }
+        }
+
+        return endPoints;
     }
 
 }

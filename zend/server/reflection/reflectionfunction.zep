@@ -8,8 +8,8 @@
 namespace Zend\Server\Reflection;
 
 /**
- * Function Reflection
- */
+* Function Reflection
+*/
 class ReflectionFunction extends AbstractFunction
 {
 }

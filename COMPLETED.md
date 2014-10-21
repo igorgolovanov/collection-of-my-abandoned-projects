@@ -165,8 +165,23 @@
 - Zend\Server\Method\Definition
 - Zend\Server\Method\Parameter
 - Zend\Server\Method\Prototype
+- Zend\Server\Reflection\Exception\BadMethodCallException
+- Zend\Server\Reflection\Exception\ExceptionInterface
+- Zend\Server\Reflection\Exception\InvalidArgumentException
+- Zend\Server\Reflection\Exception\RuntimeException
+- Zend\Server\Reflection\AbstractFunction
+- Zend\Server\Reflection\Node
+- Zend\Server\Reflection\Prototype
+- Zend\Server\Reflection\ReflectionClass
+- Zend\Server\Reflection\ReflectionFunction
+- Zend\Server\Reflection\ReflectionMethod
+- Zend\Server\Reflection\ReflectionParameter
+- Zend\Server\Reflection\ReflectionReturnValue
 - Zend\Server\AbstractServer
+- Zend\Server\Cache
 - Zend\Server\Client
+- Zend\Server\Definition
+- Zend\Server\Reflection
 - Zend\Server\Server
 
 ### ZendServiceManager

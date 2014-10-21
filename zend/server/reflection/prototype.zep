@@ -17,6 +17,9 @@ class Prototype
     /** @var ReflectionParameter[] */
     protected params;
 
+    /** @var ReflectionReturnValue */
+    protected $return;
+
     /**
      * Constructor
      *
@@ -24,9 +27,18 @@ class Prototype
      * @param ReflectionParameter[] $params
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct(<ReflectionReturnValue> return, array! params = [])
+    public function __construct(<ReflectionReturnValue> $return, array! params = [])
     {
+        var param;
 
+        let this->$return = $return;
+
+        for param in params {
+            if unlikely !(param instanceof ReflectionParameter) {
+                throw new Exception\InvalidArgumentException("One or more params are invalid");
+            }
+        }
+        let this->params = params;
     }
 
     /**
@@ -36,7 +48,13 @@ class Prototype
      */
     public function getReturnType() -> string
     {
+        var refl;
+        string type;
 
+        let refl = <ReflectionReturnValue> this->$return;
+        let type = refl->getType();
+
+        return type;
     }
 
     /**
@@ -46,7 +64,7 @@ class Prototype
      */
     public function getReturnValue() -> <ReflectionReturnValue>
     {
-
+        return this->$return;
     }
 
     /**
@@ -56,7 +74,7 @@ class Prototype
      */
     public function getParameters() -> array
     {
-
+        return this->params;
     }
 
 }

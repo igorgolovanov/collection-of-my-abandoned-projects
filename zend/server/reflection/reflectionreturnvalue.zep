@@ -34,7 +34,8 @@ class ReflectionReturnValue
      */
     public function __construct(string type = "mixed", string description = "")
     {
-
+        this->setType(type);
+        this->setDescription(description);
     }
 
     /**
@@ -44,7 +45,7 @@ class ReflectionReturnValue
      */
     public function getType() -> string
     {
-
+        return this->type;
     }
 
     /**
@@ -54,9 +55,12 @@ class ReflectionReturnValue
      * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public function setType(string type) -> void
+    public function setType(var type) -> void
     {
-
+        if unlikely typeof type != "string" && type !== null {
+            throw new Exception\InvalidArgumentException("Invalid parameter type"); 
+        }
+        let this->type = type;
     }
 
     /**
@@ -66,7 +70,7 @@ class ReflectionReturnValue
      */
     public function getDescription() -> string
     {
-
+        return this->description;
     }
 
     /**
@@ -76,9 +80,12 @@ class ReflectionReturnValue
      * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public function setDescription(string description) -> void
+    public function setDescription(var description) -> void
     {
-
+        if unlikely typeof description != "string" && description !== null {
+            throw new Exception\InvalidArgumentException("Invalid parameter description"); 
+        }
+        let this->description = description;
     }
 
 }

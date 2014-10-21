@@ -7,6 +7,8 @@
 
 namespace Zend\Server\Reflection;
 
+use ReflectionClass as PhpReflectionClass;
+
 /**
  * Class/Object reflection
  *
@@ -50,9 +52,31 @@ class ReflectionClass
      * @param string $namespace
      * @param mixed $argv
      */
-    public function __construct(reflection, string $namespace = null, argv = false)
+    public function __construct(<PhpReflectionClass> reflection, string $namespace = null, var argv = false)
     {
+        var method, methodRefl;
+        array methods;
+        string ns, name;
 
+        let this->reflection = reflection;
+        this->setNamespace($namespace);
+
+        let methods = reflection->getMethods();
+        for method in methods {
+
+            // Don't aggregate magic methods
+            let name = method->getName();
+            if substr(name, 0, 2) == "__" {
+                continue;
+            }
+
+            if method->isPublic() {
+                let ns = this->getNamespace();
+                // Get signatures and description
+                let methodRefl = new ReflectionMethod(this, method, ns, argv);
+                let this->methods[] = methodRefl;
+            }
+        }
     }
 
     /**
@@ -65,7 +89,19 @@ class ReflectionClass
      */
     public function __call(string method, array args)
     {
+        var reflection, result;
+        array callback;
 
+        let reflection = <PhpReflectionClass> this->reflection;
+
+        if unlikely !method_exists(reflection, method) {
+             throw new Exception\BadMethodCallException("Invalid reflection method");
+        }
+
+        let callback = [reflection, method];
+        let result = call_user_func_array(callback, args);
+
+        return result;
     }
 
     /**
@@ -79,7 +115,12 @@ class ReflectionClass
      */
     public function __get(string key)
     {
-
+        var value;
+        
+        if fetch value, this->config[key] {
+            return value;
+        }
+        return null;
     }
 
     /**
@@ -91,9 +132,9 @@ class ReflectionClass
      * @param mixed $value
      * @return void
      */
-    public function __set(string key, value) -> void
+    public function __set(string key, var value) -> void
     {
-
+        let this->config[key] = value;
     }
 
     /**
@@ -104,7 +145,7 @@ class ReflectionClass
      */
     public function getMethods() -> array
     {
-
+        return this->methods;
     }
 
     /**
@@ -114,7 +155,7 @@ class ReflectionClass
      */
     public function getNamespace() -> string
     {
-
+        return this->$namespace;
     }
 
     /**
@@ -126,7 +167,16 @@ class ReflectionClass
      */
     public function setNamespace(string $namespace) -> void
     {
+        if empty $namespace {
+            let this->$namespace = "";
+            return;
+        }
 
+        if unlikely typeof $namespace != "string" || !preg_match("/[a-z0-9_\.]+/i", $namespace) {
+            throw new Exception\InvalidArgumentException("Invalid namespace");
+        }
+
+        let this->$namespace = $namespace;
     }
 
     /**
@@ -139,7 +189,9 @@ class ReflectionClass
      */
     public function __wakeup() -> void
     {
+        string name;
 
+        let name = this->getName();
+        let this->reflection = new PhpReflectionClass(name);
     }
-
 }

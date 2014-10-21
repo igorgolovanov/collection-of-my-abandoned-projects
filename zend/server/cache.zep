@@ -7,6 +7,8 @@
 
 namespace Zend\Server;
 
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * \Zend\Server\Cache: cache server definitions
  */
@@ -15,7 +17,7 @@ class Cache
     /**
      * @var array Methods to skip when caching server
      */
-    protected static skipMethods = [];
+    protected static skipMethods; // todo: []
 
     /**
      * Cache a file containing the dispatch list.
@@ -32,7 +34,35 @@ class Cache
      */
     public static function save(string filename, <\Zend\Server\Server> server) -> boolean
     {
+        var methods, definition, method, test;
+        array skipMethods;
+        string name, serialized;
 
+        if empty filename || (!file_exists(filename) && !is_writable(dirname(filename))) {
+            return false;
+        }
+
+        let methods = server->getFunctions();
+
+        if methods instanceof Definition {
+            let definition = new Definition();
+            for method in methods {
+                let skipMethods = static::skipMethods;
+                let name = method->getName();
+                if in_array(name, skipMethods) {
+                    continue;
+                }
+                definition->addMethod(method);
+            }
+            let methods = definition;
+        }
+
+        ErrorHandler::start();
+        let serialized = serialize(methods);
+        let test = file_put_contents(filename, serialized);
+        ErrorHandler::stop();
+
+        return test !== 0;
     }
 
     /**
@@ -68,7 +98,31 @@ class Cache
      */
     public static function get(string filename, <\Zend\Server\Server> server) -> boolean
     {
+        var dispatch, dispatchArray;
 
+        if empty filename || !file_exists(filename) || !is_rreadable(filename) {
+            return false;
+        }
+
+        ErrorHandler::start();
+        let dispatch = file_get_contents(filename);
+        ErrorHandler::stop();
+
+        if dispatch === false {
+            return false;
+        }
+
+        ErrorHandler::start(E_NOTICE);
+        let dispatchArray = unserialize(dispatch);
+        ErrorHandler::stop();
+
+        if dispatchArray === false {
+            return false;
+        }
+
+        server->loadFunctions(dispatchArray);
+        
+        return true;
     }
 
     /**
@@ -79,7 +133,11 @@ class Cache
      */
     public static function delete(string filename) -> boolean
     {
-
+        if !empty filename && file_exists(filename) {
+            unlink(filename);
+            return true;
+        }
+        return false;
     }
 
 }
