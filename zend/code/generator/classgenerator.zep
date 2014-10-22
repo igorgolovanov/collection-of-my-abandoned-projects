@@ -88,7 +88,7 @@ class ClassGenerator extends AbstractGenerator
         cg->setSourceDirty(false);
 
 
-        let docComment = classReflection->getDocComment()
+        let docComment = classReflection->getDocComment();
 
         if docComment != "" {
             let docBlock = classReflection->getDocBlock();

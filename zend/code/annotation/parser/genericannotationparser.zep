@@ -100,7 +100,7 @@ class GenericAnnotationParser implements ParserInterface
                 let type = get_class(annotation);
             }
 
-            let exceptionMsg = __METHOD__ ": expects an instance of " . __NAMESPACE__ . "\\AnnotationInterface; received \"" . type . "\"";
+            let exceptionMsg = __METHOD__ . ": expects an instance of " . __NAMESPACE__ . "\\AnnotationInterface; received \"" . type . "\"";
             throw new Exception\InvalidArgumentException(exceptionMsg);
         }
 
