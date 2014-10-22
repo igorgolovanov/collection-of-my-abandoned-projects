@@ -46,13 +46,11 @@ abstract class AbstractOptions implements ParameterObjectInterface
         }
 
         if unlikely typeof options !== "array" && !(options instanceof Traversable) {
-            let exceptionMsg = "Parameter provided to %s must be an %s, %s or %s";
-            let exceptionMsg = sprintf(exceptionMsg, __METHOD__, "array", "Traversable", "Zend\Stdlib\AbstractOptions");
-        
+            let exceptionMsg = "Parameter provided to " . __METHOD__ . " must be an array, Traversable or Zend\\Stdlib\\AbstractOptions";
             throw new Exception\InvalidArgumentException(exceptionMsg);
         }
 
-        for value, key in options {
+        for key, value in options {
             this->__set(key, value);
         }
 
@@ -71,7 +69,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
         var key, value;   
         string normalizedKey;   
 
-        for value, key in this {
+        for key, value in this {
             if key === "__strictMode__" {
                 continue;
             }
@@ -106,12 +104,12 @@ abstract class AbstractOptions implements ParameterObjectInterface
         let setter = str_replace(" ", "", setter);
         let setter = "set" + setter;
 
-        if unlikely (this->__strictMode__ && !method_exists(this, setter)) {
+        if unlikely this->__strictMode__ && !method_exists(this, setter) {
             let exceptionMsg = "The option \"" 
-                            + key 
-                            + "\" does not have a matching "
-                            + setter
-                            + " setter method which must be defined";
+                            . key 
+                            . "\" does not have a matching "
+                            . setter
+                            . " setter method which must be defined";
 
             throw new Exception\BadMethodCallException(exceptionMsg);                
         }
@@ -141,10 +139,10 @@ abstract class AbstractOptions implements ParameterObjectInterface
 
         if unlikely !method_exists(this, getter) {
             let exceptionMsg = "The option \"" 
-                            + key 
-                            + "\" does not have a matching "
-                            + setter
-                            + " getter method which must be defined";
+                            . key 
+                            . "\" does not have a matching "
+                            . setter
+                            . " getter method which must be defined";
 
             throw new Exception\BadMethodCallException(exceptionMsg);                
         }
@@ -182,7 +180,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
         try {
             this->__set(key, null);
         } catch (Exception\BadMethodCallException e) {
-            let exceptionMsg = "The class property $" + key + "cannot be unset as NULL is an invalid value for it";
+            let exceptionMsg = "The class property $" . key . "cannot be unset as NULL is an invalid value for it";
             throw new Exception\InvalidArgumentException(exceptionMsg, 0, e);
         }
     }

@@ -14,7 +14,7 @@ interface ParameterObjectInterface
      * @param mixed $value
      * @return void
      */
-    public function __set(string key, value) -> void;
+    public function __set(string key, var value) -> void;
 
     /**
      * @param string $key

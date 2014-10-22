@@ -41,7 +41,7 @@ class CallbackHandler
      * @param  string|array|object|callable $callback PHP callback
      * @param  array                        $metadata  Callback metadata
      */
-    public function __construct(var callback, array! metadata = [])
+    public function __construct(callable callback, array! metadata = [])
     {
         let this->metadata = metadata;
         this->registerCallback(callback);
@@ -54,9 +54,10 @@ class CallbackHandler
      * @throws Exception\InvalidCallbackException
      * @return void
      */
-    protected function registerCallback(callback) -> void
+    protected function registerCallback(callable callback) -> void
     {
         if unlikely !is_callable(callback) {
+            // todo: remove this exception and use callable type
             throw new Exception\InvalidCallbackException("Invalid callback provided; not callable");
         }
         let this->callback = callback;
@@ -87,14 +88,13 @@ class CallbackHandler
 
         let callback = this->getCallback();
 
-        // todo: change self -> static
         // Minor performance tweak, if the callback gets called more than once
-        if self::isPhp54 === null {
-            let self:isPhp54 = version_compare(PHP_VERSION, "5.4.0rc1", ">=");
+        if static::isPhp54 === null {
+            let static:isPhp54 = version_compare(PHP_VERSION, "5.4.0rc1", ">=");
         }
 
         let argCount = count(args);
-        let isPhp54 = self::isPhp54;
+        let isPhp54 = static::isPhp54;
 
         if isPhp54 && typeof callback == "string" {
             let result = this->validateStringCallbackFor54(callback);
@@ -220,27 +220,21 @@ class CallbackHandler
         let method = parts[1];
 
         if unlikely !class_exists(className) {
-            let exceptionMsg = "Static method call \"%s\" refers to a class that does not exist";
-            let exceptionMsg = sprintf(exceptionMsg, callback);
-
+            let exceptionMsg = "Static method call \"" . callback . "\" refers to a class that does not exist";
             throw new Exception\InvalidCallbackException(exceptionMsg);
         }
 
         let ref = new ReflectionClass(className);
 
         if unlikely !ref->hasMethod(method) {
-            let exceptionMsg = "Static method call \"%s\" refers to a class that does not exist";
-            let exceptionMsg = sprintf(exceptionMsg, callback);
-
+            let exceptionMsg = "Static method call \"" . callback . "\" refers to a class that does not exist";
             throw new Exception\InvalidCallbackException(exceptionMsg);
         }
 
         let m = <\ReflectionMethod> ref->getMethod(method);
 
         if unlikely !m->isStatic() {
-            let exceptionMsg = "Static method call \"%s\" refers to a class that does not exist";
-            let exceptionMsg = sprintf(exceptionMsg, callback);
-
+            let exceptionMsg = "Static method call \"" . callback . "\" refers to a class that does not exist";
             throw new Exception\InvalidCallbackException(exceptionMsg);
         }
 

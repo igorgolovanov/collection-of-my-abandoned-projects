@@ -53,22 +53,22 @@ abstract class StringUtils
     {
         // todo: change self -> static
 
-        if self::wrapperRegistry === null {
-            let self::wrapperRegistry = [];
+        if static::wrapperRegistry === null {
+            let static::wrapperRegistry = [];
 
             if extension_loaded("intl") {
-                 let self::wrapperRegistry[] = "Zend\Stdlib\StringWrapper\Intl";
+                 let static::wrapperRegistry[] = "Zend\\Stdlib\\StringWrapper\\Intl";
             }
             if extension_loaded("mbstring") {
-                 let self::wrapperRegistry[] = "Zend\Stdlib\StringWrapper\MbString";
+                 let static::wrapperRegistry[] = "Zend\\Stdlib\\StringWrapper\\MbString";
             }
             if extension_loaded("iconv") {
-                 let self::wrapperRegistry[] = "Zend\Stdlib\StringWrapper\Iconv";
+                 let static::wrapperRegistry[] = "Zend\\Stdlib\\StringWrapper\\Iconv";
             }
 
-            let self::wrapperRegistry[] = "Zend\Stdlib\StringWrapper\Native";
+            let static::wrapperRegistry[] = "Zend\\Stdlib\\StringWrapper\\Native";
         }
-        return self::wrapperRegistry;
+        return static::wrapperRegistry;
     }
 
     /**
@@ -79,9 +79,8 @@ abstract class StringUtils
      */
     public static function registerWrapper(string wrapper) -> void
     {
-        // todo: change self -> static
-        if !in_array(wrapper, self::wrapperRegistry, true) {
-            let self::wrapperRegistry[] = wrapper;
+        if !in_array(wrapper, static::wrapperRegistry, true) {
+            let static::wrapperRegistry[] = wrapper;
         }
     }
 
@@ -93,12 +92,11 @@ abstract class StringUtils
      */
     public static function unregisterWrapper(string wrapper) -> void
     {
-        // todo: change self -> static
         var index;
-        let index = array_search(wrapper, self::wrapperRegistry, true);
+        let index = array_search(wrapper, static::wrapperRegistry, true);
 
         if index !== false {
-            unset self::wrapperRegistry[index];
+            unset static::wrapperRegistry[index];
         }
     }
 
@@ -109,8 +107,7 @@ abstract class StringUtils
      */
     public static function resetRegisteredWrappers() -> void
     {
-        // todo: change self -> static
-        let self::wrapperRegistry = null;
+        let static::wrapperRegistry = null;
     }
 
     /**
@@ -128,8 +125,7 @@ abstract class StringUtils
         string wrapperClass, exceptionMsg;
         var wrapper;
 
-        // todo: change self -> static
-        let wrapers = self::getRegisteredWrappers();
+        let wrapers = static::getRegisteredWrappers();
 
         for wrapperClass in wrapers {
             if {wrapperClass}::isSupported(encoding, convertEncoding) {
@@ -140,9 +136,9 @@ abstract class StringUtils
             }
         }
 
-        let exceptionMsg = "No wrapper found supporting \"" + encoding + "\"";
+        let exceptionMsg = "No wrapper found supporting \"" . encoding . "\"";
         if convertEncoding !== null {
-            let exceptionMsg = exceptionMsg + " and \"" + convertEncoding + "\"";
+            let exceptionMsg = exceptionMsg . " and \"" . convertEncoding . "\"";
         }
         throw new Exception\RuntimeException(exceptionMsg);
     }
@@ -154,8 +150,7 @@ abstract class StringUtils
      */
     public static function getSingleByteEncodings() -> array
     {
-        // todo: change self -> static
-        return self::singleByteEncodings;
+        return static::singleByteEncodings;
     }
 
     /**
@@ -167,8 +162,8 @@ abstract class StringUtils
     public static function isSingleByteEncoding(string encoding) -> boolean
     {
         array encodings;
-        // todo: change self -> static
-        let encodings = self::singleByteEncodings
+
+        let encodings = static::singleByteEncodings
 
         return in_array(encoding->upper(), encodings);
     }
@@ -196,17 +191,16 @@ abstract class StringUtils
      */
     public static function hasPcreUnicodeSupport() -> boolean
     {
-        // todo: change self -> static
-        if self::hasPcreUnicodeSupport === null {
+        if static::hasPcreUnicodeSupport === null {
             ErrorHandler::start();
             if defined("PREG_BAD_UTF8_OFFSET_ERROR") && preg_match("/\pL/u", "a") == 1 {
-                let self::hasPcreUnicodeSupport = true;
+                let static::hasPcreUnicodeSupport = true;
             } else {
-                let self::hasPcreUnicodeSupport = false;
+                let static::hasPcreUnicodeSupport = false;
             }
             ErrorHandler::end();
         }
-        return self::hasPcreUnicodeSupport;
+        return static::hasPcreUnicodeSupport;
     }
 
 }

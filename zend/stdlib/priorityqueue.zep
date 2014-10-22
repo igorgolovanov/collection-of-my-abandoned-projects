@@ -34,14 +34,14 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * Inner queue class to use for iteration
      * @var string
      */
-    protected queueClass = "Zend\Stdlib\SplPriorityQueue";
+    protected queueClass = "Zend\\Stdlib\\SplPriorityQueue";
 
     /**
      * Actual items aggregated in the priority queue. Each item is an array
      * with keys "data" and "priority".
      * @var array
      */
-    protected items; // []
+    protected items = [];
 
     /**
      * Inner queue object
@@ -94,7 +94,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
         var key, item, queue, data;
         int priority;
 
-        for item, key in this->items {
+        for key, item in this->items {
             if item["data"] === datum {
                 let found = true;
                 break;
@@ -297,7 +297,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * @param  mixed $datum
      * @return bool
      */
-    public function contains(datum) -> boolean
+    public function contains(var datum) -> boolean
     {
         var item;
 
@@ -343,10 +343,8 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
             let queueClass = this->queueClass;
             let queue = new {queueClass}();
 
-            if unlikely !queue instanceof SplPriorityQueue {
-                let exceptionMsg = "PriorityQueue expects an internal queue of type SplPriorityQueue; received \"%s\"";
-                let exceptionMsg = sprintf(exceptionMsg, queueClass);
-
+            if unlikely !(queue instanceof SplPriorityQueue) {
+                let exceptionMsg = "PriorityQueue expects an internal queue of type SplPriorityQueue; received \"" . queueClass . "\"";
                 throw new Exception\DomainException(exceptionMsg);
             }
             let this->queue = queue;

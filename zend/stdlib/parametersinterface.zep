@@ -7,7 +7,17 @@
 
 namespace Zend\Stdlib;
 
-interface ParametersInterface extends \ArrayAccess, \Countable, \Serializable, \Traversable
+use ArrayAccess;
+use Countable;
+use Serializable;
+use Traversable;
+
+/*
+* Basically, an ArrayObject. You could simply define something like:
+* class QueryParams extends ArrayObject implements Parameters {}
+* and have 90% of the functionality
+*/
+interface ParametersInterface extends ArrayAccess, Countable, Serializable, Traversable
 {
     /**
      * Constructor
@@ -61,7 +71,7 @@ interface ParametersInterface extends \ArrayAccess, \Countable, \Serializable, \
      * @param mixed|null $default
      * @return mixed
      */
-    public function get(string name, $default = null);
+    public function get(string name, var $default = null);
 
     /**
      * Set
@@ -70,6 +80,6 @@ interface ParametersInterface extends \ArrayAccess, \Countable, \Serializable, \
      * @param mixed $value
      * @return ParametersInterface
      */
-    public function set(string name, value) -> <ParametersInterface>;
+    public function set(string name, var value) -> <ParametersInterface>;
 
 }

@@ -20,7 +20,7 @@ abstract class ErrorHandler
      *
      * @var array
      */
-    protected static stack; // []
+    protected static stack; // todo: []
 
     /**
      * Check if this error handler is active
@@ -29,7 +29,6 @@ abstract class ErrorHandler
      */
     public static function started() -> boolean
     {
-        // todo: change self -> static
         return static::getNestedLevel();
     }
 
@@ -40,8 +39,7 @@ abstract class ErrorHandler
      */
     public static function getNestedLevel() -> int
     {
-        // todo: change self -> static
-        return count(self::stack);
+        return count(static::stack);
     }
 
     /**
@@ -49,19 +47,18 @@ abstract class ErrorHandler
      *
      * @param int $errorLevel
      */
-    public static function start(int errorLevel = E_WARNING)
+    public static function start(int errorLevel = \E_WARNING)
     {
         array callback;
         string className;
 
-        // todo: change self -> static
-        if !self::stack {
+        if !static::stack {
             let className = get_called_class();
             let callback = [className, "addError"];
 
             set_error_handler(callback, errorLevel);
         }
-        let self::stack[] = null;
+        let static::stack[] = null;
     }
 
     /**
@@ -74,12 +71,11 @@ abstract class ErrorHandler
     public static function stop(boolean $throw = false) -> <\ErrorException>|null
     {
         var errorException;
-        // todo: change self -> static
 
-        if self::stack {
-            let errorException = array_pop(self::stack);
+        if static::stack {
+            let errorException = array_pop(static::stack);
 
-            if !self::stack {
+            if !static::stack {
                 restore_error_handler();
             }
 
@@ -98,11 +94,10 @@ abstract class ErrorHandler
      */
     public static function clean() -> void
     {
-        // todo: change self -> static
-        if self::stack {
+        if static::stack {
             restore_error_handler();
         }
-        let self::stack = [];
+        let static::stack = [];
     }
 
     /**
@@ -119,9 +114,8 @@ abstract class ErrorHandler
         int count;
         var stack;
 
-        // todo: change self -> static
-        let count = count(self::stack);
-        let stack = & self::stack[count - 1];
+        let count = count(static::stack);
+        let stack = & static::stack[count - 1]; // todo: support &
         let stack = new ErrorException(errstr, 0, errno, errfile, errline, stack);
     }
 

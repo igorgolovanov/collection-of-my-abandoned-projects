@@ -14,7 +14,7 @@ class Message implements MessageInterface
     /**
      * @var array
      */
-    protected metadata; // []
+    protected metadata = х;
 
     /**
      * @var string
@@ -32,7 +32,7 @@ class Message implements MessageInterface
      * @throws Exception\InvalidArgumentException
      * @return Message
      */
-    public function setMetadata(var spec, value = null) -> <Message>
+    public function setMetadata(var spec, var value = null) -> <Message>
     {
         string type, exceptionMsg;
         var key, value;
@@ -42,18 +42,16 @@ class Message implements MessageInterface
             return this;
         }
 
-        if unlikely (typeof spec != "array" && !spec instanceof Traversable) {
+        if unlikely typeof spec != "array" && !(spec instanceof Traversable) {
             let type = typeof spec;
             if type == "object" {
                 let type = get_class(spec);
             }
-            let exceptionMsg = "Expected a string, array, or Traversable argument in first position; received \"%s\"";
-            let exceptionMsg = sprintf(exceptionMsg, type);
-
+            let exceptionMsg = "Expected a string, array, or Traversable argument in first position; received \"" . type . "\"";
             throw new Exception\InvalidArgumentException(exceptionMsg);
         }
 
-        for value, key in spec {
+        for key, value in spec {
             let this->metadata[key] = value;
         }
         return this;
@@ -67,7 +65,7 @@ class Message implements MessageInterface
      * @throws Exception\InvalidArgumentException
      * @return mixed
      */
-    public function getMetadata(var key = null, $default = null)
+    public function getMetadata(var key = null, var $default = null)
     {
         var v;
 
@@ -75,7 +73,7 @@ class Message implements MessageInterface
             return this->metadata;
         }
 
-        if unlikely is_scalar(key) {
+        if unlikely !is_scalar(key) {
             throw new Exception\InvalidArgumentException("Non-scalar argument provided for key");
         }
 
@@ -91,7 +89,7 @@ class Message implements MessageInterface
      * @param  mixed $value
      * @return Message
      */
-    public function setContent(value) -> <Message>
+    public function setContent(var value) -> <Message>
     {
         let this->content = content;
         return this;

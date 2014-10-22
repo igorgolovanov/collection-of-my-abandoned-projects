@@ -13,10 +13,10 @@ use IteratorAggregate;
 use Serializable;
 
 /**
- * Custom framework ArrayObject implementation
- *
- * Extends version-specific "abstract" implementation.
- */
+* Custom framework ArrayObject implementation
+*
+* Extends version-specific "abstract" implementation.
+*/
 class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Countable
 {
     /**
@@ -71,16 +71,14 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
      * @param  mixed $key
      * @return bool
      */
-    public function __isset(key) -> boolean
+    public function __isset(var key) -> boolean
     {
         string exceptionMsg;
         if this->flag == self::ARRAY_AS_PROPS {
             return this->offsetExists(key);
         }
         if unlikely in_array(key, this->protectedProperties) {
-            let exceptionMsg = "\"%s\" is a protected property, use a different key";
-            let exceptionMsg = sprintf(exceptionMsg, key);
-
+            let exceptionMsg = "\"" . key . "\" is a protected property, use a different key";
             throw new Exception\InvalidArgumentException(exceptionMsg);
         }
 
@@ -94,7 +92,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
      * @param  mixed $value
      * @return void
      */
-    public function __set(key, value) -> void
+    public function __set(var key, var value) -> void
     {
         string exceptionMsg;
 
@@ -102,9 +100,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
             return this->offsetSet(key, value);
         }
         if unlikely in_array(key, this->protectedProperties) {
-            let exceptionMsg = "\"%s\" is a protected property, use a different key";
-            let exceptionMsg = sprintf(exceptionMsg, key);
-
+            let exceptionMsg = "\"" . key . "\" is a protected property, use a different key";
             throw new Exception\InvalidArgumentException(exceptionMsg);
         }
 
@@ -117,7 +113,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
      * @param  mixed $key
      * @return void
      */
-    public function __unset(key) -> void
+    public function __unset(var key) -> void
     {
         string exceptionMsg;
 
@@ -125,9 +121,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
             return this->offsetUnset(key);
         }
         if unlikely in_array(key, this->protectedProperties) {
-            let exceptionMsg = "\"%s\" is a protected property, use a different key";
-            let exceptionMsg = sprintf(exceptionMsg, key);
-
+            let exceptionMsg = "\"" . key . "\" is a protected property, use a different key";
             throw new Exception\InvalidArgumentException(exceptionMsg);
         }
 
@@ -140,7 +134,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
      * @param  mixed $key
      * @return mixed
      */
-    public function &__get(key)
+    public function &__get(var key)
     {
         string exceptionMsg;
         var ret;
@@ -150,9 +144,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
             return ret;
         }
         if unlikely in_array(key, this->protectedProperties) {
-            let exceptionMsg = "\"%s\" is a protected property, use a different key";
-            let exceptionMsg = sprintf(exceptionMsg, key);
-
+            let exceptionMsg = "\"" . key . "\" is a protected property, use a different key";
             throw new Exception\InvalidArgumentException(exceptionMsg);
         }
 
@@ -165,7 +157,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
      * @param  mixed $value
      * @return void
      */
-    public function append(value) -> void
+    public function append(var value) -> void
     {
         let this->storage[] = value;
     }
@@ -202,7 +194,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
         array storage;
 
         let type = typeof data;
-        if unlikely (type != "array" && type != "object") {
+        if unlikely type != "array" && type != "object" {
             throw new Exception\InvalidArgumentException("Passed variable is not an array or object, using empty array instead");
         }
 
@@ -331,7 +323,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
      * @param  mixed $value
      * @return void
      */
-    public function offsetSet(key, value) -> void
+    public function offsetSet(var key, var value) -> void
     {
         let this->storage[key] = value;
     }
@@ -342,7 +334,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
      * @param  mixed $key
      * @return void
      */
-    public function offsetUnset(key) -> void
+    public function offsetUnset(var key) -> void
     {
         if this->offsetExists(key) {
             unset this->storage[key];
@@ -406,7 +398,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
      * @param  callable $function
      * @return void
      */
-    public function uasort($function) -> void
+    public function uasort(callable $function) -> void
     {
         if is_callable($function) {
             uasort(this->storage, $function);
@@ -419,7 +411,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
      * @param  callable $function
      * @return void
      */
-    public function uksort($function) -> void
+    public function uksort(callable $function) -> void
     {
         if is_callable($function) {
             uksort(this->storage, $function);

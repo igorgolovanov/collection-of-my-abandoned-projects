@@ -94,7 +94,7 @@ class Parameters extends PhpArrayObject implements ParametersInterface
      * @param mixed $default optional default value
      * @return mixed
      */
-    public function get(string name, $default = null)
+    public function get(string name, var $default = null)
     {
         if this->offsetExists(name) {
             return parent::offsetGet(name);
@@ -107,7 +107,7 @@ class Parameters extends PhpArrayObject implements ParametersInterface
      * @param mixed $value
      * @return Parameters
      */
-    public function set(string name, value) -> <Parameters>
+    public function set(string name, var value) -> <Parameters>
     {
         this->offsetSet(name, value);
         return this;

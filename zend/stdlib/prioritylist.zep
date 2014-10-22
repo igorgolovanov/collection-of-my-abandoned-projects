@@ -11,8 +11,8 @@ use Countable;
 use Iterator;
 
 /**
- * Priority list
- */
+* Priority list
+*/
 class PriorityList implements Iterator, Countable
 {
     const EXTR_DATA = 0x00000001;
@@ -24,7 +24,7 @@ class PriorityList implements Iterator, Countable
      *
      * @var array
      */
-    protected items; // []
+    protected items = [];
 
     /**
      * Serial assigned to items to preserve LIFO.
@@ -61,7 +61,7 @@ class PriorityList implements Iterator, Countable
      * @param  int $priority
      * @return void
      */
-    public function insert(string name, value, int priority = 0) -> void
+    public function insert(string name, var value, int priority = 0) -> void
     {
         array data = [];
         int serial;
@@ -83,10 +83,8 @@ class PriorityList implements Iterator, Countable
         string exceptionMsg;
 
         if unlikely !isset this->items[name] {
-            let exceptionMsg = "item %s not found";
-            let exceptionMsg = sprintf(exceptionMsg, name); 
-
-            throw new \Exception(exceptionMsg);
+            let exceptionMsg = "item " . name . " not found";
+            throw new \InvalidArgumentException(exceptionMsg);
         }
     }
 
@@ -143,11 +141,10 @@ class PriorityList implements Iterator, Countable
      */
     protected function sort() -> void
     {
-        array callback = [];
+        array callback;
 
         if !this->sorted {
-            let callback[] = this;
-            let callback[] = "compare";
+            let callback = [this, "compare"];
             uasort(this->items, callback);
             let this->sorted = true;
         }
@@ -294,13 +291,40 @@ class PriorityList implements Iterator, Countable
      */
     public function toArray(int flag = self::EXTR_DATA) -> array
     {
+        array callback;
+
         this->sort();
 
         if flag == self::EXTR_BOTH {
             return this->items;
         }
 
-        // todo: array_map
+        if flag == self::EXTR_PRIORITY {
+            let callback = [this, "_returnItemPriority"];
+        } else {
+            let callback = [this, "_returnItemData"];
+        }
+
+        return array_map(callback, this->items);
     }
 
+    private function _returnItemPriority(array item)
+    {
+        var priority;
+
+        if fetch priority, item["priority"] {
+            return priority;
+        }
+        return null;
+    }
+
+    private function _returnItemData(array item)
+    {
+        var data;
+
+        if fetch data, item["data"] {
+            return data;
+        }
+        return null;
+    }
 }

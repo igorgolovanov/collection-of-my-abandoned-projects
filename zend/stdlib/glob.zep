@@ -32,12 +32,10 @@ abstract class Glob
      */
     public static function glob(string pattern, int flags = 0, boolean forceFallback = false) -> array
     {
-        // todo: change self -> static
-
-        if defined('CLOB_BRACE') || forceFallback {
-            return self::fallbackGlob(pattern, flags);
+        if defined("CLOB_BRACE") || forceFallback {
+            return static::fallbackGlob(pattern, flags);
         }
-        return self::systemGlob(pattern, flags);
+        return static::systemGlob(pattern, flags);
     }
 
     /**
@@ -105,7 +103,7 @@ abstract class Glob
 
         // todo: change self -> static
         if !flags & self::GLOB_BRACE {
-            return self::systemGlob(pattern, flags);
+            return static::systemGlob(pattern, flags);
         }
 
         let flags = flags & ~self::GLOB_BRACE;
@@ -132,22 +130,22 @@ abstract class Glob
         }
 
         if begin === false {
-            return self::systemGlob(pattern, flags);
+            return static::systemGlob(pattern, flags);
         }
 
         let p = begin + 1;
-        let next = self::nextBraceSub(pattern, p, flags);
+        let next = static::nextBraceSub(pattern, p, flags);
         if next === null {
-            return self::systemGlob(pattern, flags);
+            return static::systemGlob(pattern, flags);
         }
 
         let rest = next;
 
         while pattern[rest] !== "}" {
             let p = rest + 1;
-            let rest = self::nextBraceSub(pattern, p, flags);
+            let rest = static::nextBraceSub(pattern, p, flags);
             if rest === null {
-                return self::systemGlob(pattern, flags);
+                return static::systemGlob(pattern, flags);
             }
         }
 
@@ -158,7 +156,7 @@ abstract class Glob
             let subPattern = subPattern + substr(pattern, p, next - p);
             let subPattern = subPattern + substr(pattern, rest + 1);
 
-            let result = self::fallbackGlob(subPattern, flags | self::GLOB_BRACE);
+            let result = static::fallbackGlob(subPattern, flags | self::GLOB_BRACE);
 
             if !empty result {
                 let paths = array_merge(paths, result);
@@ -169,7 +167,7 @@ abstract class Glob
             }
 
             let p = next + 1;
-            let next = self::nextBraceSub(pattern, p, flags);
+            let next = static::nextBraceSub(pattern, p, flags);
         }
 
         return array_unique(paths);

@@ -30,7 +30,7 @@ class SplPriorityQueue extends \SplPriorityQueue implements \Serializable
      * @param  mixed $priority
      * @return void
      */
-    public function insert(datum, priority) -> void
+    public function insert(var datum, var priority) -> void
     {
         var serial;
 

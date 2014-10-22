@@ -15,7 +15,7 @@ interface MessageInterface
      * @param  string|int|array|\Traversable $spec
      * @param  mixed $value
      */
-    public function setMetadata(var spec, value = null);
+    public function setMetadata(var spec, var value = null);
 
     /**
      * Get metadata
@@ -31,7 +31,7 @@ interface MessageInterface
      * @param  mixed $content
      * @return mixed
      */
-    public function setContent(content);
+    public function setContent(var content);
 
     /**
      * Get content

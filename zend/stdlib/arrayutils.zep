@@ -236,7 +236,6 @@ abstract class ArrayUtils
      */
     public static function iteratorToArray(var iterator, boolean recursive = true) -> array
     {
-        // todo: change self -> static
         string exceptionMsg;
         array data;
         var key, value;
@@ -260,13 +259,13 @@ abstract class ArrayUtils
         }
 
         let data = [];
-        for value, key in iterator {
+        for key, value in iterator {
             if is_scalar(value) {
                 let data[key] = value;
                 continue;
             }
             if typeof value == "array" || value instanceof Traversable {
-                let data[key] = self::iteratorToArray(value, recursive);
+                let data[key] = static::iteratorToArray(value, recursive);
                 continue;
             }
             let data[key] = value;
@@ -288,10 +287,9 @@ abstract class ArrayUtils
      */
     public static function merge(array! a, array! b, boolean preserveNumericKeys = false) -> array
     {
-        // todo: change self -> static
         var key, value, av;
 
-        for value, key in b {
+        for key, value in b {
             if isset a[key] {
                 if typeof value == "integer" && !preserveNumericKeys {
                     let a[] = value;
@@ -300,7 +298,7 @@ abstract class ArrayUtils
                 if typeof value == "array" {
                     let av = a[key];
                     if typeof av == "array" {
-                        let a[key] = self::merge(av, value, preserveNumericKeys);
+                        let a[key] = static::merge(av, value, preserveNumericKeys);
                         continue;
                     }
                 }
