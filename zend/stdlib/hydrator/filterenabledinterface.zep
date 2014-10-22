@@ -7,7 +7,11 @@
 
 namespace Zend\Stdlib\Hydrator;
 
-interface FilterEnabledInterface extends \Filter\FilterProviderInterface
+use Zend\Stdlib\Hydrator\Filter\FilterInterface;
+use Zend\Stdlib\Hydrator\Filter\FilterComposite;
+use Zend\Stdlib\Hydrator\Filter\FilterProviderInterface;
+
+interface FilterEnabledInterface extends FilterProviderInterface
 {
     /**
      * Add a new filter to take care of what needs to be hydrated.
@@ -32,7 +36,7 @@ interface FilterEnabledInterface extends \Filter\FilterProviderInterface
      * @param int $condition
      * @return FilterComposite
      */
-    public function addFilter(string name, filter, int condition = Zend\Stdlib\Hydrator\Filter\FilterComposite::CONDITION_OR);
+    public function addFilter(string name, var filter, int condition = FilterComposite::CONDITION_OR) -> <FilterComposite>;
 
     /**
      * Check whether a specific filter exists at key $name or not
@@ -53,6 +57,6 @@ interface FilterEnabledInterface extends \Filter\FilterProviderInterface
      * @param $name
      * @return FilterComposite
      */
-    public function removeFilter(name);
+    public function removeFilter(string name) -> <FilterComposite>;
 
 }

@@ -7,7 +7,9 @@
 
 namespace Zend\Stdlib\StringWrapper;
 
-class Iconv extends AbstractStringWrapper implements StringWrapperInterface
+use Zend\Stdlib\Exception;
+
+class Iconv extends AbstractStringWrapper
 {
     /**
      * List of supported character sets (upper case)
@@ -178,7 +180,7 @@ class Iconv extends AbstractStringWrapper implements StringWrapperInterface
      */
     public static function getSupportedEncodings() -> array
     {
-        return self::encodings; // todo: change self -> static
+        return static::encodings;
     }
 
     /**
@@ -204,6 +206,7 @@ class Iconv extends AbstractStringWrapper implements StringWrapperInterface
     public function strlen(string str) -> int
     {
         string encoding;
+
         let encoding = this->getEncoding();
 
         return iconv_strlen(str, encoding);
@@ -220,6 +223,7 @@ class Iconv extends AbstractStringWrapper implements StringWrapperInterface
     public function substr(string str, int offset = 0, int length = null) -> string
     {
         string encoding;
+
         let encoding = this->getEncoding();
 
         return iiconv_substr(str, offset, length, encoding);
@@ -236,6 +240,7 @@ class Iconv extends AbstractStringWrapper implements StringWrapperInterface
     public function strpos(string haystack, string needle, int offset = 0) -> int
     {
         string encoding;
+
         let encoding = this->getEncoding();
 
         return iconv_strpos(haystack, needle, offset, encoding);

@@ -41,9 +41,7 @@ class NumberOfParameterFilter implements FilterInterface
         try {
             let reflectionMethod = new ReflectionMethod(property);
         } catch (ReflectionException exception) {
-            throw new InvalidArgumentException(
-                "Method $property doesn't exist"
-            );
+            throw new InvalidArgumentException("Method $property doesn't exist");
         }
 
         let numberOfParameters = reflectionMethod->getNumberOfParameters();

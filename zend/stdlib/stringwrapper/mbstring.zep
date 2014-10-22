@@ -9,7 +9,7 @@ namespace Zend\Stdlib\StringWrapper;
 
 use Zend\Stdlib\Exception;
 
-class MbString extends AbstractStringWrapper implements StringWrapperInterface
+class MbString extends AbstractStringWrapper
 {
     /**
      * List of supported character sets (upper case)
@@ -30,19 +30,19 @@ class MbString extends AbstractStringWrapper implements StringWrapperInterface
         var indexIso885916;
 
         // todo: change self -> static
-        if self::encodings === null {
+        if static::encodings === null {
             let encodings = mb_list_encodings();
             let encodings = array_map("strtoupper", encodings);
-            let self::encodings = encodings;
+            let static::encodings = encodings;
 
             // FIXME: Converting € (UTF-8) to ISO-8859-16 gives a wrong result
             let indexIso885916 = array_search("ISO-8859-16", encodings, true);
             if indexIso885916 !== false {
-                unset self::encodings[indexIso885916];
+                unset static::encodings[indexIso885916];
             }
         }
 
-        return self::encodings;
+        return static::encodings;
     }
 
     /**

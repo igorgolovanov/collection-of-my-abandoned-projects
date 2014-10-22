@@ -43,13 +43,33 @@ class ClosureStrategy implements StrategyInterface
      * @param callable $hydrateFunc - anonymous function, that hydrate values
      * into object
      */
-    public function __construct(var extractFunc = null, var hydrateFunc = null)
+    public function __construct(callable extractFunc = null, callable hydrateFunc = null)
     {
-        if !empty extractFunc {
-
+        if extractFunc !== null {
+            // todo: remove when zephir will be supported type "callable"
+            if unlikely !is_callable(extractFunc) {
+                throw new \InvalidArgumentException("$extractFunc must be callable");
+            }
         } else {
-            
+            let extractFunc = [this, "_dummyCallback"];
         }
+
+        if hydrateFunc !== null {
+            // todo: remove when zephir will be supported type "callable"
+            if unlikely !is_callable(hydrateFunc) { 
+                throw new \InvalidArgumentException("$hydrateFunc must be callable");
+            }
+        } else {
+            let hydrateFunc = [this, "_dummyCallback"];
+        }
+
+        let this->extractFunc = extractFunc;
+        let this->hydrateFunc = hydrateFunc;
+    }
+
+    private function _dummyCallback(var value)
+    {
+        return value;
     }
 
     /**
@@ -59,9 +79,14 @@ class ClosureStrategy implements StrategyInterface
      * @param  array $object The object is optionally provided as context.
      * @return mixed Returns the value that should be extracted.
      */
-    public function extract(value, array $object = null)
+    public function extract(var value, object $object = null)
     {
-        // todo
+        var callback, result;
+
+        let callback = this->extractFunc;
+        let result = call_user_func(callback, value, $object);
+
+        return result;
     }
 
     /**
@@ -71,9 +96,14 @@ class ClosureStrategy implements StrategyInterface
      * @param  array $data  The whole data is optionally provided as context.
      * @return mixed Returns the value that should be hydrated.
      */
-    public function hydrate(value, array data = null)
+    public function hydrate(var value, array data = null)
     {
-        // todo
+        var callback, result;
+
+        let callback = this->hydrateFunc;
+        let result = call_user_func(callback, value, data);
+
+        return result;
     }
 
 }

@@ -16,7 +16,7 @@ class GetFilter implements FilterInterface
      * @param string $property The name of the property
      * @return bool
      */
-    public function filter(string property) -> bool
+    public function filter(string property) -> boolean
     {
     	var pos, str;
 

@@ -21,18 +21,18 @@ class SerializableStrategy implements StrategyInterface
     /**
      * @var array
      */
-    protected serializerOptions; // [] // todo array
+    protected serializerOptions = [];
 
     /**
      *
      * @param mixed $serializer string or SerializerAdapter
      * @param mixed $serializerOptions
      */
-    public function __construct(serializer, serializerOptions = null)
+    public function __construct(var serializer, array serializerOptions = null)
     {
         this->setSerializer(serializer);
 
-        if isset serializerOptions {
+        if !empty serializerOptions {
             this->setSerializerOptions(serializerOptions);
         }
     }
@@ -43,7 +43,7 @@ class SerializableStrategy implements StrategyInterface
      * @param mixed $value The original value.
      * @return mixed Returns the value that should be extracted.
      */
-    public function extract(value)
+    public function extract(var value)
     {
         var serializer;
         let serializer = <SerializerAdapter> this->getSerializer();
@@ -57,7 +57,7 @@ class SerializableStrategy implements StrategyInterface
      * @param mixed $value The original value.
      * @return mixed Returns the value that should be hydrated.
      */
-    public function hydrate(value)
+    public function hydrate(var value)
     {
         var serializer;
         let serializer = <SerializerAdapter> this->getSerializer();
@@ -78,9 +78,7 @@ class SerializableStrategy implements StrategyInterface
         let type = typeof serializer;
 
         if type != "string" && !serializer instanceof SerializerAdapter {
-            let exceptionMsg = "%s expects either a string serializer name or Zend\Serializer\Adapter\AdapterInterface instance; received \"%s\"";
-            let exceptionMsg = sprintf(exceptionMsg, __METHOD__, type);
-
+            let exceptionMsg = __METHOD__ . "expects either a string serializer name or Zend\\Serializer\\Adapter\\AdapterInterface instance; received \"" . type . "\"";
             throw new InvalidArgumentException(exceptionMsg);
         }
         let this->serializer = serializer;
@@ -120,7 +118,7 @@ class SerializableStrategy implements StrategyInterface
      * @param  mixed $serializerOptions
      * @return SerializableStrategy
      */
-    public function setSerializerOptions(serializerOptions) -> <SerializableStrategy>
+    public function setSerializerOptions(array serializerOptions) -> <SerializableStrategy>
     {
         let this->serializerOptions = serializerOptions;
         return this;
@@ -131,7 +129,7 @@ class SerializableStrategy implements StrategyInterface
      *
      * @return mixed
      */
-    public function getSerializerOptions()
+    public function getSerializerOptions() -> array
     {
         return this->serializerOptions;
     }

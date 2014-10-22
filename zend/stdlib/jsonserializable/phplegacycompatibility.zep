@@ -22,6 +22,5 @@ interface PhpLegacyCompatibility
      * @return mixed
      * @see    http://php.net/manual/jsonserializable.jsonserialize.php
      */
-    public function jsonSerialize();
-
+    public function jsonSerialize() -> string;
 }

@@ -45,7 +45,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
             let options = options->toArray();
         }
 
-        if unlikely (typeof options !== "array" && !options instanceof Traversable) {
+        if unlikely typeof options !== "array" && !(options instanceof Traversable) {
             let exceptionMsg = "Parameter provided to %s must be an %s, %s or %s";
             let exceptionMsg = sprintf(exceptionMsg, __METHOD__, "array", "Traversable", "Zend\Stdlib\AbstractOptions");
         

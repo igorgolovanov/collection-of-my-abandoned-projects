@@ -10,7 +10,7 @@ namespace Zend\Stdlib\StringWrapper;
 use Zend\Stdlib\Exception;
 use Zend\Stdlib\StringUtils;
 
-class Native extends AbstractStringWrapper implements StringWrapperInterface
+class Native extends AbstractStringWrapper
 {
     /**
      * The character encoding working on
@@ -33,8 +33,7 @@ class Native extends AbstractStringWrapper implements StringWrapperInterface
         string encodingUpper;
         array supportedEncodings;
 
-        // todo: change self -> static
-        let supportedEncodings = self::getSupportedEncodings();
+        let supportedEncodings = static::getSupportedEncodings();
         let encodingUpper = encoding->upper();
 
         if !in_array(encodingUpper, supportedEncodings) {
@@ -74,8 +73,7 @@ class Native extends AbstractStringWrapper implements StringWrapperInterface
         array supportedEncodings;
         string encodingUpper, exceptionMsg;
 
-        // todo: change self -> static
-        let supportedEncodings = self::getSupportedEncodings(); 
+        let supportedEncodings = static::getSupportedEncodings(); 
         let encodingUpper = encoding->upper();
 
         if unlikely !in_array(encodingUpper, supportedEncodings) {

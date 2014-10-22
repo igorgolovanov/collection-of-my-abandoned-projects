@@ -15,6 +15,6 @@ interface ExtractionInterface
      * @param  object $object
      * @return array
      */
-    public function extract(object $object) -> array;
+    public function extract(object! $object) -> array;
 
 }

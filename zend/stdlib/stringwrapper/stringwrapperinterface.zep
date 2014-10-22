@@ -94,7 +94,7 @@ interface StringWrapperInterface
      * @param  bool $cut
      * @return string
      */
-    public function wordWrap(string str, int width = 75, string $break = "", boolean cut = false) -> string;
+    public function wordWrap(string str, int width = 75, string $break = "\n", boolean cut = false) -> string;
 
     /**
      * Pad a string to a certain length with another string

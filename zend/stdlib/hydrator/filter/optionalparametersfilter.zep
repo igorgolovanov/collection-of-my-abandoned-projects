@@ -33,26 +33,25 @@ class OptionalParametersFilter implements FilterInterface
     {
         var exception, reflectionMethod;
         array mandatoryParameters, callback, parameters;
+        boolean propertyCache;
 
-        // todo: change self -> static
-        if isset self::propertiesCache[property] {
-            return self::propertiesCache[property];
+        if !fetch propertyCache, static::propertiesCache[property] {
+            try {
+                let reflectionMethod = new ReflectionMethod(property);
+            } catch (ReflectionException exception) {
+                let exceptionMsg = "Method " . property . " doesn't exist";
+                throw new InvalidArgumentException(exceptionMsg);
+            }
+
+            let parameters = reflectionMethod->getParameters();
+            let callback = [this, "filterParameters"];
+            let mandatoryParameters = array_filter(parameters, callback);
+
+            let propertyCache = empty mandatoryParameters;
+            let static::propertiesCache[property] = propertyCache;
         }
 
-        try {
-            let reflectionMethod = new ReflectionMethod(property);
-        } catch (ReflectionException exception) {
-            let exceptionMsg = sprintf("Method %s doesn't exist", property);
-            throw new InvalidArgumentException(exceptionMsg);
-        }
-
-        let parameters = reflectionMethod->getParameters();
-        let callback = [this, "filterParameters"];
-        let mandatoryParameters = array_filter(parameters, callback);
-
-        let self::propertiesCache[property] = empty mandatoryParameters;
-
-        return self::propertiesCache[property];
+        return propertiesCache;
     }
 
     private function filterParameters(<ReflectionParameter> parameter) -> boolean

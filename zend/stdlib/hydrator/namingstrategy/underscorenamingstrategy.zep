@@ -54,14 +54,14 @@ class UnderscoreNamingStrategy implements NamingStrategyInterface
     {
         var filter;
 
-        // todo: change self -> static
-        if self::underscoreToCamelCaseFilter instanceof FilterChain {
-            return self::underscoreToCamelCaseFilter;
+        if static::underscoreToCamelCaseFilter instanceof FilterChain {
+            return static::underscoreToCamelCaseFilter;
         }
 
         let filter = new FilterChain();
         filter->attachByName("WordUnderscoreToCamelCase");
-        let self::underscoreToCamelCaseFilter = filter;
+
+        let static::underscoreToCamelCaseFilter = filter;
 
         return filter;
     }
@@ -71,17 +71,18 @@ class UnderscoreNamingStrategy implements NamingStrategyInterface
      */
     protected function getCamelCaseToUnderscoreFilter() -> <FilterChain>
     {
-        // todo: change self -> static
         var filter;
 
-        if self::camelCaseToUnderscoreFilter instanceof FilterChain {
-            return self::camelCaseToUnderscoreFilter;
+        if static::camelCaseToUnderscoreFilter instanceof FilterChain {
+            return static::camelCaseToUnderscoreFilter;
         }
 
         let filter = new FilterChain();
+        
         filter->attachByName("WordCamelCaseToUnderscore");
         filter->attachByName("StringToLower");
-        let self::camelCaseToUnderscoreFilter = filter;
+
+        let static::camelCaseToUnderscoreFilter = filter;
 
         return filter;
     }

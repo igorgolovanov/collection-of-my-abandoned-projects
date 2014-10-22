@@ -42,20 +42,16 @@ class FilterComposite implements FilterInterface
         var key, value;
         string exceptionMsg;
 
-        for value, key in orFilter {
-            if !is_callable(value) && !value instanceof FilterInterface {
-                let exceptionMsg = "The value of %s should be either a callable or an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface'";
-                let exceptionMsg = sprintf(exceptionMsg, key);
-
+        for key, value in orFilter {
+            if unlikely !is_callable(value) && !(value instanceof FilterInterface) {
+                let exceptionMsg = "The value of " . key . " should be either a callable or an instance of Zend\\Stdlib\\Hydrator\\Filter\\FilterInterface'";
                 throw new InvalidArgumentException(exceptionMsg);
             }
         }
 
         for value, key in andFilter {
-            if !is_callable(value) && !value instanceof FilterInterface {
-                let exceptionMsg = "The value of %s should be either a callable or an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface'";
-                let exceptionMsg = sprintf(exceptionMsg, key);
-
+            if unlikely !is_callable(value) && !(value instanceof FilterInterface) {
+                let exceptionMsg = "The value of " . key . " should be either a callable or an instance of Zend\\Stdlib\\Hydrator\\Filter\\FilterInterface'";
                 throw new InvalidArgumentException(exceptionMsg);
             }
         }
@@ -88,25 +84,24 @@ class FilterComposite implements FilterInterface
      * @throws InvalidArgumentException
      * @return FilterComposite
      */
-    public function addFilter(string name, <FilterInterface> filter, int condition = self::CONDITION_OR) -> <FilterComposite>
+    public function addFilter(string name, var filter, int condition = self::CONDITION_OR) -> <FilterComposite>
     {
         string exceptionMsg;
 
-        if !is_callable(filter) && !filter instanceof FilterInterface {
-            let exceptionMsg = "The value of %s should be either a callable or an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface'";
-            let exceptionMsg = sprintf(exceptionMsg, name);
-
+       if unlikely !is_callable(value) && !(value instanceof FilterInterface) {
+            let exceptionMsg = "The value of " . key . " should be either a callable or an instance of Zend\\Stdlib\\Hydrator\\Filter\\FilterInterface'";
             throw new InvalidArgumentException(exceptionMsg);
         }
 
-        if condition === self::CONDITION_OR {
-            let this->orFilter[name] = filter;
-        } else {
-            if condition === self::CONDITION_AND {
+        switch condition {
+            case self::CONDITION_OR:
+                let this->orFilter[name] = filter;
+                break;
+            case self::CONDITION_AND:
                 let this->andFilter[name] = filter;
-            }
+                break;
         }
-
+        
         return this;
     }
 

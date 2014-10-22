@@ -7,6 +7,8 @@
 
 namespace Zend\Stdlib\Hydrator;
 
+use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
+
 interface StrategyEnabledInterface
 {
     /**
@@ -16,7 +18,7 @@ interface StrategyEnabledInterface
      * @param StrategyInterface $strategy The strategy to register.
      * @return StrategyEnabledInterface
      */
-    public function addStrategy(string name, strategy) -> <StrategyEnabledInterface>;
+    public function addStrategy(string name, <StrategyInterface> strategy) -> <StrategyEnabledInterface>;
 
     /**
      * Gets the strategy with the given name.
@@ -24,7 +26,7 @@ interface StrategyEnabledInterface
      * @param string $name The name of the strategy to get.
      * @return StrategyInterface
      */
-    public function getStrategy(string name);
+    public function getStrategy(string name) -> <StrategyInterface>;
 
     /**
      * Checks if the strategy with the given name exists.

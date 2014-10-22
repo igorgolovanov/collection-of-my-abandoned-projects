@@ -21,23 +21,21 @@ class ObjectProperty extends AbstractHydrator
      * @return array
      * @throws Exception\BadMethodCallException for a non-object $object
      */
-    public function extract(object $object) -> array
+    public function extract(object! $object) -> array
     {
         string exceptionMsg;
         array data;
         var name, value, filter, extracted;
 
         if unlikely typeof $object != "object" {
-            let exceptionMsg = "%s expects the provided $object to be a PHP object";
-            let exceptionMsg = sprintf(exceptionMsg, __METHOD__);
-
+            let exceptionMsg = __METHOD__ . " expects the provided $object to be a PHP object";
             throw new Exception\BadMethodCallException(exceptionMsg);
         }
 
         let data = get_object_vars($object);
         let filter = <FilterInterface> this->getFilter();
 
-        for value, name in data {
+        for name, value in data {
             if !filter->filter(name) {
                 unset data[name];
                 continue;
@@ -65,19 +63,17 @@ class ObjectProperty extends AbstractHydrator
      * @return object
      * @throws Exception\BadMethodCallException for a non-object $object
      */
-    public function hydrate(array! data, object $object) -> object
+    public function hydrate(array! data, object! $object) -> object
     {
         string exceptionMsg;
         var name, value, property;
 
         if unlikely typeof $object != "object" {
-            let exceptionMsg = "%s expects the provided $object to be a PHP object";
-            let exceptionMsg = sprintf(exceptionMsg, __METHOD__);
-
+           let exceptionMsg = __METHOD__ . " expects the provided $object to be a PHP object";
             throw new Exception\BadMethodCallException(exceptionMsg);
         }
 
-        for value, name in data {
+        for name, value in data {
             let property = this->hydrateName(name, data);
             let $object->{property} = this->hydrateValue(property, value, data);
         }

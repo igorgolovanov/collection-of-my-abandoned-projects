@@ -33,7 +33,7 @@ class MethodMatchFilter implements FilterInterface
         let this->exclude = exclude;
     }
 
-    public function filter(property)
+    public function filter(string property)
     {
         var pos, str;
         string method;

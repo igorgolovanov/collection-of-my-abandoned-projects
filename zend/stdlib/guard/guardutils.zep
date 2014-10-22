@@ -18,7 +18,7 @@ use Traversable;
  */
 abstract class GuardUtils
 {
-    const DEFAULT_EXCEPTION_CLASS = "Zend\Stdlib\Exception\InvalidArgumentException";
+    const DEFAULT_EXCEPTION_CLASS = "Zend\\Stdlib\\Exception\\InvalidArgumentException";
 
     /**
      * Verifies that the data is an array or Traversable
@@ -28,20 +28,18 @@ abstract class GuardUtils
      * @param  string $exceptionClass FQCN for the exception
      * @throws \Exception
      */
-    public static function guardForArrayOrTraversable(data, string dataName = "Argument", string! exceptionClass = self::DEFAULT_EXCEPTION_CLASS)
+    public static function guardForArrayOrTraversable(var data, string dataName = "Argument", string! exceptionClass = self::DEFAULT_EXCEPTION_CLASS)
     {
-        string message, type;
+        string exceptionMsg, type;
 
         let type = typeof data;
 
-        if typeof data != type && !data instanceof Traversable {
+        if type !== "array" && !(data instanceof Traversable) {
             if type == "object" {
                 let type = get_class(data);
             }
-            let message = "%s must be an array or Traversable, [%s] given";
-            let message = sprintf(message, dataName, type);
-
-            throw new {exceptionClass}(message);
+            let exceptionMsg = dataName . " must be an array or Traversable, [" . type . "] given";
+            throw new {exceptionClass}(exceptionMsg);
         }
     }
 
@@ -53,15 +51,13 @@ abstract class GuardUtils
      * @param  string $exceptionClass FQCN for the exception
      * @throws \Exception
      */
-    public static function guardAgainstEmpty(data, string dataName = "Argument", string! exceptionClass = self::DEFAULT_EXCEPTION_CLASS)
+    public static function guardAgainstEmpty(var data, string dataName = "Argument", string! exceptionClass = self::DEFAULT_EXCEPTION_CLASS)
     {
-        string message;
+        string exceptionMsg;
 
         if empty data {
-            let message = "%s cannot be empty";
-            let message = sprintf(message, dataName);
-
-            throw new {exceptionClass}(message);
+            let exceptionMsg = dataName . " cannot be empty";
+            throw new {exceptionClass}(exceptionMsg);
         }
     }
 
@@ -73,15 +69,13 @@ abstract class GuardUtils
      * @param  string $exceptionClass FQCN for the exception
      * @throws \Exception
      */
-    public static function guardAgainstNull(data, string dataName = "Argument", string! exceptionClass = self::DEFAULT_EXCEPTION_CLASS)
+    public static function guardAgainstNull(var data, string dataName = "Argument", string! exceptionClass = self::DEFAULT_EXCEPTION_CLASS)
     {
         string message;
 
         if data === null {
-            let message = "%s cannot be null";
-            let message = sprintf(message, dataName);
-
-            throw new {exceptionClass}(message);
+            let exceptionMsg = dataName . " cannot be null";
+            throw new {exceptionClass}(exceptionMsg);
         }
     }
 

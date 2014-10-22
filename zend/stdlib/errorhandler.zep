@@ -30,7 +30,7 @@ abstract class ErrorHandler
     public static function started() -> boolean
     {
         // todo: change self -> static
-        return self::getNestedLevel();
+        return static::getNestedLevel();
     }
 
     /**

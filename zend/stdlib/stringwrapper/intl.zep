@@ -9,7 +9,7 @@ namespace Zend\Stdlib\StringWrapper;
 
 use Zend\Stdlib\Exception;
 
-class Intl extends AbstractStringWrapper implements StringWrapperInterface
+class Intl extends AbstractStringWrapper
 {
     /**
      * List of supported character sets (upper case)
@@ -25,7 +25,7 @@ class Intl extends AbstractStringWrapper implements StringWrapperInterface
      */
     public static function getSupportedEncodings() -> array
     {
-        return self::encodings; // todo: change self -> static
+        return static::encodings;
     }
 
     /**
@@ -64,7 +64,7 @@ class Intl extends AbstractStringWrapper implements StringWrapperInterface
     public function substr(string str, int offset = 0, int length = null) -> string
     {
         // Due fix of PHP #62759 The third argument returns an empty string if is 0 or null.
-        if length !== null {
+        if length {
             return grapheme_substr(str, offset, length);
         }
         return grapheme_substr(str, offset);

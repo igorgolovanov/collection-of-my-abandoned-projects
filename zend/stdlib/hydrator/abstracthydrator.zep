@@ -66,9 +66,7 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
             return strategy;
         }
 
-        let exceptionMsg = "%s: no strategy by name of \"%s\", and no wildcard strategy present";
-        let exceptionMsg = sprintf(exceptionMsg, __METHOD__, name);
-
+        let exceptionMsg = __METHOD__ . ": no strategy by name of \"" . name . "\", and no wildcard strategy present";
         throw new Exception\InvalidArgumentException(exceptionMsg);
     }
 
@@ -119,7 +117,7 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      * @param  mixed  $object The object is optionally provided as context.
      * @return mixed
      */
-    public function extractValue(string name, value, $object = null)
+    public function extractValue(string name, var value, object $object = null)
     {
         var strategy;
 
@@ -138,7 +136,7 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      * @param array $data The whole data is optionally provided as context.
      * @return mixed
      */
-    public function hydrateValue(string name, value, array data = null)
+    public function hydrateValue(string name, var value, array data = null)
     {
         var strategy;
 
@@ -156,7 +154,7 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      * @param null   $object  The object is optionally provided as context.
      * @return mixed
      */
-    public function extractName(string name, $object = null)
+    public function extractName(string name, object $object = null)
     {
         var strategy;
 
@@ -216,7 +214,7 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      * @param int $condition
      * @return Filter\FilterComposite
      */
-    public function addFilter(string name, <FilterInterface> filter, int condition = FilterComposite::CONDITION_OR) -> <FilterComposite>
+    public function addFilter(string name, var filter, int condition = FilterComposite::CONDITION_OR) -> <FilterComposite>
     {
         var filterComposite;
         let filterComposite = <FilterComposite> this->filterComposite;
@@ -249,7 +247,7 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      * @param $name
      * @return Filter\FilterComposite
      */
-    public function removeFilter(name) -> <FilterComposite>
+    public function removeFilter(string name) -> <FilterComposite>
     {
         var filterComposite;
         let filterComposite = <FilterComposite> this->filterComposite;
@@ -275,7 +273,7 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      *
      * @return NamingStrategyInterface
      */
-    public function getNamingStrategy() -> <NamingStrategyInterface>
+    public function getNamingStrategy() -> <NamingStrategyInterface>|null
     {
         return this->namingStrategy;
     }

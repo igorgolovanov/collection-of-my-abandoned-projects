@@ -30,28 +30,28 @@ class HydratorPluginManager extends AbstractPluginManager
      *
      * @var array
      */
-    protected invokableClasses; // ["arrayserializable": "Zend\Stdlib\Hydrator\ArraySerializable", "classmethods": "Zend\Stdlib\Hydrator\ClassMethods", "objectproperty": "Zend\Stdlib\Hydrator\ObjectProperty", "reflection": "Zend\Stdlib\Hydrator\Reflection"]
+    protected invokableClasses = [
+        "arrayserializable" : "Zend\\Stdlib\\Hydrator\\ArraySerializable", 
+        "classmethods"      : "Zend\\Stdlib\\Hydrator\\ClassMethods", 
+        "objectproperty"    : "Zend\\Stdlib\\Hydrator\\ObjectProperty", 
+        "reflection"        : "Zend\\Stdlib\\Hydrator\\Reflection"
+    ];
 
     /**
      * {@inheritDoc}
      */
-    public function validatePlugin(plugin)
+    public function validatePlugin(var plugin)
     {
         string exceptionMsg, type;
 
-        if plugin instanceof HydratorInterface {
-            return;
+        if unlikely !(plugin instanceof HydratorInterface) {
+            let type = typeof plugin;
+            if type == "object" {
+                let type = get_class(plugin);
+            }
+            let exceptionMsg = "Plugin of type " . type . " is invalid; must implement Zend\\Stdlib\\Hydrator\\HydratorInterface";
+            throw new Exception\RuntimeException(exceptionMsg);
         }
-
-        let type = typeof plugin;
-        if type == "object" {
-            let type = get_class(plugin);
-        }
-
-        let exceptionMsg = "Plugin of type %s is invalid; must implement Zend\Stdlib\Hydrator\HydratorInterface";
-        let exceptionMsg = sprintf(exceptionMsg, type);
-
-        throw new Exception\RuntimeException(exceptionMsg);
     }
 
 }

@@ -10,9 +10,9 @@ namespace Zend\Stdlib\Hydrator\Aggregate;
 use Zend\EventManager\Event;
 
 /**
- * Event triggered when the {@see \Zend\Stdlib\Hydrator\Aggregate\AggregateHydrator} extracts
- * data from an object
- */
+* Event triggered when the {@see \Zend\Stdlib\Hydrator\Aggregate\AggregateHydrator} extracts
+* data from an object
+*/
 class ExtractEvent extends Event
 {
     const EVENT_EXTRACT = "extract";
@@ -30,13 +30,13 @@ class ExtractEvent extends Event
     /**
      * @var array
      */
-    protected extractedData; // []
+    protected extractedData = []; 
 
     /**
      * @param object $target
      * @param object $extractionObject
      */
-    public function __construct(object target, object extractionObject)
+    public function __construct(object! target, object! extractionObject)
     {
         let this->target = target;
         let this->extractionObject = extractionObject;
@@ -57,7 +57,7 @@ class ExtractEvent extends Event
      *
      * @return void
      */
-    public function setExtractionObject(object extractionObject) -> void
+    public function setExtractionObject(object! extractionObject) -> void
     {
         let this->extractionObject = extractionObject;
     }

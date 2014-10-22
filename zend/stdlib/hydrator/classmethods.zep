@@ -118,11 +118,53 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
      * @return array
      * @throws Exception\BadMethodCallException for a non-object $object
      */
-    public function extract(object $object) -> array
+    public function extract(object! $object) -> array
     {
-        if unlikely typeof $object != "object" {
+        string exceptionMsg, methodPath;
+        var filter, objectFilter, method, callableMethodFilter, attribute, 
+            value, extractedValue;
+        array attributes = [], methods;
 
+        if unlikely typeof $object != "object" {
+            let exceptionMsg = __METHOD__ . " expects the provided $object to be a PHP object";
+            throw new Exception\BadMethodCallException(exceptionMsg);
         }
+
+        if $object instanceof FilterProviderInterface {
+            let objectFilter = <FilterInterface> $object->getFilter();
+            let filter = new FilterComposite([objectFilter], [new MethodMatchFilter("getFilter")]);
+        } else {
+            let filter = <FilterComposite> this->filterComposite;
+        }
+
+        let methods = get_class_methods($object);
+        let callableMethodFilter = <FilterInterface> this->callableMethodFilter;
+
+        for method in methods {
+            let methodPath = get_class($object) . "::" . method;
+            if !filter->filter(methodPath) {
+                continue;
+            }
+            if !callableMethodFilter->filter(methodPath) {
+                continue;
+            }
+            let attribute = method;
+
+            if preg_match("/^get/", method) {
+                let attribute = substr(method, 3);
+                if !property_exists($object, attribute) {
+                    let attribute = lcfirst(attribute);
+                }
+            }
+
+            let attribute = this->extractName(attribute, $object);
+            let value = $object->{method}();
+            let extractedValue = this->extractValue(attribute, value, $object);
+
+            let attributes[attribute] = extractedValue;
+        }
+
+         return attributes;
     }
 
     /**
@@ -135,9 +177,28 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
      * @return object
      * @throws Exception\BadMethodCallException for a non-object $object
      */
-    public function hydrate(array! data, object $object) -> object
+    public function hydrate(array! data, object! $object) -> object
     {
+        var property, value, hydratedValue;
+        array callback;
+        string methodName;
 
+        if unlikely typeof $object != "object" {
+            let exceptionMsg = __METHOD__ . " expects the provided $object to be a PHP object";
+            throw new Exception\BadMethodCallException(exceptionMsg);
+        }
+
+        for property, value in data {
+            let methodName = "set" . ucfirst(this->hydrateName(property, data));
+            let callback = [$object, methodName];
+
+            if is_callable(callback) {
+                let hydratedValue = this->hydrateValue(property, value, data);
+                $object->{method}(hydratedValue);
+            }
+        }
+
+        return $object;
     }
 
 }

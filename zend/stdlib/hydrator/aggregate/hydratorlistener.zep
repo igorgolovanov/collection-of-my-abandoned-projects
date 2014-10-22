@@ -35,7 +35,7 @@ class HydratorListener extends AbstractListenerAggregate
     /**
      * {@inheritDoc}
      */
-    public function attach(<EventManagerInterface> events, integer priority = 1)
+    public function attach(<EventManagerInterface> events, int priority = 1)
     {
         array callbackOnHydrate, callbackOnExtract;
         var handlerOnHydrate, handlerOnExtract;

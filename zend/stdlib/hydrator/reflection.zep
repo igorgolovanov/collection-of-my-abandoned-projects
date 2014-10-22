@@ -7,17 +7,18 @@
 
 namespace Zend\Stdlib\Hydrator;
 
+
 use ReflectionClass;
 use Zend\Stdlib\Exception;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 
-class Reflection extends AbstractHydrator implements NamingStrategyEnabledInterface, \Filter\FilterProviderInterface, FilterEnabledInterface, StrategyEnabledInterface, HydrationInterface, \Zend\Stdlib\Extractor\ExtractionInterface, HydratorInterface
+class Reflection extends AbstractHydrator
 {
     /**
      * Simple in-memory array cache of ReflectionProperties used.
      * @var array
      */
-    protected static reflProperties; // []
+    protected static reflProperties; // todo: []
 
     /**
      * Extract values from an object
@@ -25,7 +26,7 @@ class Reflection extends AbstractHydrator implements NamingStrategyEnabledInterf
      * @param  object $object
      * @return array
      */
-    public function extract(object $object) -> array
+    public function extract(object! $object) -> array
     {
         array result = [], reflProperties;
         var property, filter, value, extractValue;
@@ -58,7 +59,7 @@ class Reflection extends AbstractHydrator implements NamingStrategyEnabledInterf
      * @param  object $object
      * @return object
      */
-    public function hydrate(array! data, object $object) -> object
+    public function hydrate(array! data, object! $object) -> object
     {
         array reflProperties;
         var key, value, hydrateValue;
@@ -66,7 +67,7 @@ class Reflection extends AbstractHydrator implements NamingStrategyEnabledInterf
 
         let reflProperties = self::getReflProperties($object);
 
-        for value, key in reflProperties {
+        for key, value in reflProperties {
             let name = this->hydrateName(key, data);
             if isset reflProperties[name] {
                 let hydrateValue = this->hydrateValue(name, value, data);
@@ -91,9 +92,7 @@ class Reflection extends AbstractHydrator implements NamingStrategyEnabledInterf
         var property, refClass;
         array reflProperties;
 
-        // todo: change self -> static
         let type = typeof input;
-
         if type == "object" {
             let input = get_class(input);
         } else {
@@ -102,21 +101,21 @@ class Reflection extends AbstractHydrator implements NamingStrategyEnabledInterf
             }
         }
 
-       if fetch property, self::reflProperties[input] {
+       if fetch property, static::reflProperties[input] {
             return property;
        }
 
-       let self::reflProperties[input] = [];
+       let static::reflProperties[input] = [];
        let refClass = new ReflectionClass(input);
        let reflProperties = refClass->getProperties();
 
        for property in reflProperties {
             property->setAccessible(true);
             let propertyName = property->getName();
-            let self::reflProperties[input][propertyName] = property;
+            let static::reflProperties[input][propertyName] = property;
        }
 
-       return self::reflProperties[input];
+       return static::reflProperties[input];
     }
 
 }

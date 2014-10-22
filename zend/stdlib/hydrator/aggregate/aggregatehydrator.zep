@@ -13,8 +13,8 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
- * Aggregate hydrator that composes multiple hydrators via events
- */
+* Aggregate hydrator that composes multiple hydrators via events
+*/
 class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
 {
     const DEFAULT_PRIORITY = 1;
@@ -30,7 +30,7 @@ class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
      * @param \Zend\Stdlib\Hydrator\HydratorInterface $hydrator
      * @param int                                     $priority
      */
-    public function add(<HydratorInterface> hydrator, int priority = self::DEFAULT_PRIORITY)
+    public function add(<HydratorInterface> hydrator, int priority = self::DEFAULT_PRIORITY) -> <AggregateHydrator>
     {
         var eventManager, hydratorListener;
 
@@ -38,12 +38,14 @@ class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
         let hydratorListener = new HydratorListener(hydrator);
 
         eventManager->attachAggregate(hydratorListener, priority);
+
+        return this;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function extract(object $object) -> array
+    public function extract(object! $object) -> array
     {
         var event, eventManager;
         array data;
@@ -61,7 +63,7 @@ class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
     /**
      * {@inheritDoc}
      */
-    public function hydrate(array! data, object $object) -> object
+    public function hydrate(array! data, object! $object) -> object
     {
         var event, eventManager, hydratedObject;
 
@@ -78,7 +80,7 @@ class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
     /**
      * {@inheritDoc}
      */
-    public function setEventManager(<EventManagerInterface> eventManager)
+    public function setEventManager(<EventManagerInterface> eventManager) -> <AggregateHydrator>
     {
         string className;
         array identifiers;
@@ -89,6 +91,8 @@ class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
         eventManager->setIdentifiers(identifiers);
 
         let this->eventManager = eventManager;
+
+        return this;
     }
 
     /**

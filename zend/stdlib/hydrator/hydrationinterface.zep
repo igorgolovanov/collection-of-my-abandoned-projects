@@ -16,6 +16,6 @@ interface HydrationInterface
      * @param  object $object
      * @return object
      */
-    public function hydrate(array! data, object $object) -> object;
+    public function hydrate(array! data, object! $object) -> object;
 
 }

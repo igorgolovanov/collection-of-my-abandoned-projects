@@ -29,11 +29,9 @@ class ArraySerializable extends AbstractHydrator
 
         let callback = [$object, 'getArrayCopy'];
 
-        if !is_callable() {
-            let exceptionMsg = "%s expects the provided object to implement getArrayCopy()";
-            let exceptionMsg = sprintf(exceptionMsg, __METHOD__);
-
-             throw new Exception\BadMethodCallException(exceptionMsg);
+        if unlikely !is_callable(callback) {
+            let exceptionMsg = __METHOD__ . " expects the provided object to implement getArrayCopy()";
+            throw new Exception\BadMethodCallException(exceptionMsg);
         }
 
         let data = $object->getArrayCopy();
@@ -84,14 +82,11 @@ class ArraySerializable extends AbstractHydrator
             $object->exchangeArray(replacement);
         } else {
             let callback = [$object, 'populate'];
-            if is_callable(callback) { 
-                $object->populate(replacement);
-            } else {
-                let exceptionMsg = "%s expects the provided object to implement exchangeArray() or populate()";
-                let exceptionMsg = sprintf(exceptionMsg, __METHOD__);
-
-                throw new Exception\BadMethodCallException(exceptionMsg);
+            if unlikely !is_callable(callback) { 
+                let exceptionMsg = __METHOD__ . "expects the provided object to implement exchangeArray() or populate()";
+                throw new Exception\BadMethodCallException(exceptionMsg); 
             }
+            $object->populate(replacement);
         }
 
         return $object;
