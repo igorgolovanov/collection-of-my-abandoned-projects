@@ -55,7 +55,7 @@ class PrototypeClassFactory
      * @param PrototypeInterface $prototype
      * @throws Exception\InvalidArgumentException
      */
-    public function addPrototype(<PrototypeInterface> prototype) -> self
+    public function addPrototype(<PrototypeInterface> prototype) -> <PrototypeInterface>
     {
         string normilized, name;
 
@@ -74,8 +74,9 @@ class PrototypeClassFactory
     /**
      * @param PrototypeGenericInterface $prototype
      * @throws Exception\InvalidArgumentException
+     * @return PrototypeClassFactory
      */
-    public function setGenericPrototype(<PrototypeGenericInterface> prototype) -> self
+    public function setGenericPrototype(<PrototypeGenericInterface> prototype) -> <PrototypeClassFactory>
     {
         if unlikely !empty this->genericPrototype {
             throw new Exception\InvalidArgumentException("A default prototype is already set");

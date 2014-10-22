@@ -43,7 +43,7 @@ class ReturnTag extends AbstractTypeableTag implements TagInterface
      * @return ReturnTag
      * @deprecated Deprecated in 2.3. Use setTypes() instead
      */
-    public function setDatatype(string datatype) -> self
+    public function setDatatype(string datatype) -> <ReturnTag>
     {
         return this->setTypes(datatype);
     }

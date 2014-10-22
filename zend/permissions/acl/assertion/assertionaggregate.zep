@@ -35,14 +35,14 @@ class AssertionAggregate implements AssertionInterface
      * @param AssertionInterface|string $assertion
      *            if string, must match a AssertionManager declared service (checked later)
      *
-     * @return self
+     * @return AssertionAggregate
      */
-    public function addAssertion(var assertion) -> self
+    public function addAssertion(var assertion) -> <AssertionAggregate>
     {
         let this->assertions[] = assertion;
     }
 
-    public function addAssertions(array! assertions) -> self
+    public function addAssertions(array! assertions) -> <AssertionAggregate>
     {
         var assertion;
 
@@ -55,7 +55,7 @@ class AssertionAggregate implements AssertionInterface
     /**
      * Empties assertions stack
      *
-     * @return self
+     * @return AssertionAggregate
      */
     public function clearAssertions() -> <AssertionAggregate>
     {
@@ -67,9 +67,9 @@ class AssertionAggregate implements AssertionInterface
      *
      * @param AssertionManager $manager
      *
-     * @return self
+     * @return AssertionAggregate
      */
-    public function setAssertionManager(<AssertionManager> manager) -> self
+    public function setAssertionManager(<AssertionManager> manager) -> <AssertionAggregate>
     {
         let this->assertionManager = manager;
 
@@ -93,9 +93,9 @@ class AssertionAggregate implements AssertionInterface
      *            indicates how assertion chain result should interpreted (either 'all' or 'at_least_one')
      * @throws InvalidArgumentException
      *
-     * @return self
+     * @return AssertionAggregate
      */
-    public function setMode(string mode) -> self
+    public function setMode(string mode) -> <AssertionAggregate>
     {
         if mode != self::MODE_ALL && mode != self::MODE_AT_LEAST_ONE {
             throw new InvalidArgumentException("invalid assertion aggregate mode");

@@ -57,7 +57,7 @@ class Callback
      * @param  array $options
      * @return \Zend\Server\Method\Callback
      */
-    public function setOptions(array! options) -> self
+    public function setOptions(array! options) -> <Callback>
     {
         var key, value;
         string methodName;
@@ -80,7 +80,7 @@ class Callback
      * @param  string $class
      * @return \Zend\Server\Method\Callback
      */
-    public function setClass(var $class) -> self
+    public function setClass(var $class) -> <Callback>
     {
         if typeof $class == "object" {
             let $class = get_class($class);
@@ -106,7 +106,7 @@ class Callback
      * @param  string $function
      * @return \Zend\Server\Method\Callback
      */
-    public function setFunction(string $function) -> self
+    public function setFunction(string $function) -> <Callback>
     {
         let this->$function = $function;
         this->setType("function");
@@ -130,7 +130,7 @@ class Callback
      * @param  string $method
      * @return \Zend\Server\Method\Callback
      */
-    public function setMethod(string method) -> self
+    public function setMethod(string method) -> <Callback>
     {
         let this->method = method;
 
@@ -154,7 +154,7 @@ class Callback
      * @return Callback
      * @throws Server\Exception\InvalidArgumentException
      */
-    public function setType(string type) -> self
+    public function setType(string type) -> <Callback>
     {
         string exceptionMsg;
 

@@ -39,7 +39,7 @@ interface TranslatorAwareInterface
      *
      * @param  bool $enabled [optional] whether translator should be used.
      *                  Default is true.
-     * @return self
+     * @return TranslatorAwareInterface
      */
     public function setTranslatorEnabled(boolean enabled = true) -> <TranslatorAwareInterface>;
 
@@ -56,7 +56,7 @@ interface TranslatorAwareInterface
      * @param  string $textDomain
      * @return TranslatorAwareInterface
      */
-    public function setTranslatorTextDomain(string textDomain = "default") -> self;
+    public function setTranslatorTextDomain(string textDomain = "default") -> <TranslatorAwareInterface>;
 
     /**
      * Return the translation text domain

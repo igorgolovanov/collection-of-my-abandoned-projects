@@ -84,7 +84,7 @@ class Acl implements AclInterface
      * @throws Exception\InvalidArgumentException
      * @return Acl Provides a fluent interface
      */
-    public function addRole(var role, var parents = null) -> self
+    public function addRole(var role, var parents = null) -> <Acl>
     {
         var registry;
 
@@ -171,7 +171,7 @@ class Acl implements AclInterface
      * @param  Role\RoleInterface|string $role
      * @return Acl Provides a fluent interface
      */
-    public function removeRole(var role) -> self
+    public function removeRole(var role) -> <Acl>
     {
         var registry, roleIdCurrent, rules, byRoleId, byResourceId,
             resourceIdCurrent, visitor;
@@ -215,7 +215,7 @@ class Acl implements AclInterface
      *
      * @return Acl Provides a fluent interface
      */
-    public function removeRoleAll() -> self
+    public function removeRoleAll() -> <Acl>
     {
         var registry, roleIdCurrent, rules, resourceIdCurrent, visitor,
             byRoleId, byResourceId;
@@ -254,7 +254,7 @@ class Acl implements AclInterface
      * @throws Exception\InvalidArgumentException
      * @return Acl Provides a fluent interface
      */
-    public function addResource(var $resource, var parent = null) -> self
+    public function addResource(var $resource, var parent = null) -> <Acl>
     {
 
     }
@@ -336,7 +336,7 @@ class Acl implements AclInterface
      * @throws Exception\InvalidArgumentException
      * @return Acl Provides a fluent interface
      */
-    public function removeResource(var $resource) -> self
+    public function removeResource(var $resource) -> <Acl>
     {
 
     }
@@ -346,7 +346,7 @@ class Acl implements AclInterface
      *
      * @return Acl Provides a fluent interface
      */
-    public function removeResourceAll() -> self
+    public function removeResourceAll() -> <Acl>
     {
         var resourceId, val, resourceIdCurrent, rules, byResourceId;
 
@@ -374,7 +374,7 @@ class Acl implements AclInterface
      * @param  Assertion\AssertionInterface             $assert
      * @return Acl Provides a fluent interface
      */
-    public function allow(var roles = null, var resources = null, var privileges = null, <Assertion\AssertionInterface> assert = null) -> self
+    public function allow(var roles = null, var resources = null, var privileges = null, <Assertion\AssertionInterface> assert = null) -> <Acl>
     {
         return this->setRule(self::OP_ADD, self::TYPE_ALLOW, roles, resources, privileges, assert);
     }
@@ -388,7 +388,7 @@ class Acl implements AclInterface
      * @param  Assertion\AssertionInterface             $assert
      * @return Acl Provides a fluent interface
      */
-    public function deny(var roles = null, var resources = null, var privileges = null, <Assertion\AssertionInterface> assert = null) -> self
+    public function deny(var roles = null, var resources = null, var privileges = null, <Assertion\AssertionInterface> assert = null) -> <Acl>
     {
         return this->setRule(self::OP_ADD, self::TYPE_DENY, roles, resources, privileges, assert);
     }
@@ -401,7 +401,7 @@ class Acl implements AclInterface
      * @param  string|array                             $privileges
      * @return Acl Provides a fluent interface
      */
-    public function removeAllow(var roles = null, var resources = null, var privileges = null) -> self
+    public function removeAllow(var roles = null, var resources = null, var privileges = null) -> <Acl>
     {
         return this->setRule(self::OP_REMOVE, self::TYPE_ALLOW, roles, $esources, privileges);
     }
@@ -414,7 +414,7 @@ class Acl implements AclInterface
      * @param  string|array                            $privileges
      * @return Acl Provides a fluent interface
      */
-    public function removeDeny(var roles = null, var resources = null, var privileges = null) -> self
+    public function removeDeny(var roles = null, var resources = null, var privileges = null) -> <Acl>
     {
         return this->setRule(self::OP_REMOVE, self::TYPE_DENY, roles, resources, privileges);
     }
@@ -469,7 +469,7 @@ class Acl implements AclInterface
      * @throws Exception\InvalidArgumentException
      * @return Acl Provides a fluent interface
      */
-    public function setRule(string operation, string type, var roles = null, var resources = null, var privileges = null, <Assertion\AssertionInterface> assert = null) -> self
+    public function setRule(string operation, string type, var roles = null, var resources = null, var privileges = null, <Assertion\AssertionInterface> assert = null) -> <Acl>
     {
 
     }

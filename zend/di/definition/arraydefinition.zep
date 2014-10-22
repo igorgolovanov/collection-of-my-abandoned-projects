@@ -33,7 +33,7 @@ class ArrayDefinition implements DefinitionInterface
             if fetch methods, definition["methods"] {
                 if typeof methods == "array" {
                     for requirement, type in methods {
-                        if typeof requirement != "int"  {
+                        if typeof requirement != "integer"  {
                             let definition["methods"][type] = InjectionMethod::detectMethodRequirement(requirement);
                         }
                     }

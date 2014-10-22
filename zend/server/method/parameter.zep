@@ -65,7 +65,7 @@ class Parameter
      * @param  array $options
      * @return \Zend\Server\Method\Parameter
      */
-    public function setOptions(array! options) -> self
+    public function setOptions(array! options) -> <Parameter>
     {
         var key, value;
         string methodName;
@@ -88,7 +88,7 @@ class Parameter
      * @param  mixed $defaultValue
      * @return \Zend\Server\Method\Parameter
      */
-    public function setDefaultValue(var defaultValue) -> self
+    public function setDefaultValue(var defaultValue) -> <Parameter>
     {
         let this->defaultValue = defaultValue;
         
@@ -111,7 +111,7 @@ class Parameter
      * @param  string $description
      * @return \Zend\Server\Method\Parameter
      */
-    public function setDescription(string description) -> self
+    public function setDescription(string description) -> <Parameter>
     {
         let this->description = description;
         
@@ -134,7 +134,7 @@ class Parameter
      * @param  string $name
      * @return \Zend\Server\Method\Parameter
      */
-    public function setName(string name) -> self
+    public function setName(string name) -> <Parameter>
     {
         let this->name = name;
         
@@ -157,7 +157,7 @@ class Parameter
      * @param  bool $flag
      * @return \Zend\Server\Method\Parameter
      */
-    public function setOptional(boolean flag) -> self
+    public function setOptional(boolean flag) -> <Parameter>
     {
         let this->optional = flag;
         
@@ -180,7 +180,7 @@ class Parameter
      * @param  string $type
      * @return \Zend\Server\Method\Parameter
      */
-    public function setType(string type) -> self
+    public function setType(string type) -> <Parameter>
     {
         let this->type = type;
 

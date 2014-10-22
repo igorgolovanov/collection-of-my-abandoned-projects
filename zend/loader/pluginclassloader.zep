@@ -125,7 +125,7 @@ class PluginClassLoader implements PluginClassLocator, \Traversable, \IteratorAg
         }
 
         for className, name in map {
-            if typeof name == "int" || is_numeric(name) {
+            if typeof name == "integer" || is_numeric(name) {
                 if typeof className != "object" && class_exists(className) {
                     let className = new {className}();
                 }

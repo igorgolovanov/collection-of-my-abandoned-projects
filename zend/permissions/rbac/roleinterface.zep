@@ -22,7 +22,7 @@ interface RoleInterface extends \RecursiveIterator, \Traversable, \Iterator
      * @param $name
      * @return RoleInterface
      */
-    public function addPermission(string name) -> self;
+    public function addPermission(string name) -> <RoleInterface>;
 
     /**
      * Checks if a permission exists for this role or any child roles.
@@ -44,7 +44,7 @@ interface RoleInterface extends \RecursiveIterator, \Traversable, \Iterator
      * @param  RoleInterface $parent
      * @return RoleInterface
      */
-    public function setParent(<RoleInterface> parent) -> self;
+    public function setParent(<RoleInterface> parent) -> <RoleInterface>;
 
     /**
      * @return null|RoleInterface

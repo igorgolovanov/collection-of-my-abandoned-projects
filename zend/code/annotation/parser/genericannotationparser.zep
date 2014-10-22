@@ -84,7 +84,7 @@ class GenericAnnotationParser implements ParserInterface
      * @return GenericAnnotationParser
      * @throws Exception\InvalidArgumentException
      */
-    public function registerAnnotation(var annotation) -> self
+    public function registerAnnotation(var annotation) -> <GenericAnnotationParser>
     {
         var className = false;
         string exceptionMsg, type;
@@ -126,7 +126,7 @@ class GenericAnnotationParser implements ParserInterface
      * @throws Exception\InvalidArgumentException
      * @return GenericAnnotationParser
      */
-    public function registerAnnotations(var annotations) -> self
+    public function registerAnnotations(var annotations) -> <GenericAnnotationParser>
     {
         string exceptionMsg;
         var annotation;
@@ -171,7 +171,7 @@ class GenericAnnotationParser implements ParserInterface
      * @throws Exception\InvalidArgumentException
      * @return GenericAnnotationParser
      */
-    public function setAlias(string alias, string $class) -> self
+    public function setAlias(string alias, string $class) -> <GenericAnnotationParser>
     {
         string normilized, exceptionMsg;
 

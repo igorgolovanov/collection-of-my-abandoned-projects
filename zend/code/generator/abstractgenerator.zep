@@ -42,7 +42,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      * @param  bool $isSourceDirty
      * @return AbstractGenerator
      */
-    public function setSourceDirty(boolean isSourceDirty = true) -> self
+    public function setSourceDirty(boolean isSourceDirty = true) -> <AbstractGenerator>
     {
         let this->isSourceDirty = isSourceDirty;
 
@@ -61,7 +61,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      * @param  string $indentation
      * @return AbstractGenerator
      */
-    public function setIndentation(string indentation) -> self
+    public function setIndentation(string indentation) -> <AbstractGenerator>
     {
         let this->indentation = indentation;
         return this;
@@ -79,7 +79,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      * @param  string $sourceContent
      * @return AbstractGenerator
      */
-    public function setSourceContent(string sourceContent) -> self
+    public function setSourceContent(string sourceContent) -> <AbstractGenerator>
     {
         let this->sourceContent = sourceContent;
 
@@ -99,7 +99,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      * @throws Exception\InvalidArgumentException
      * @return AbstractGenerator
      */
-    public function setOptions(var options) -> self
+    public function setOptions(var options) -> <AbstractGenerator>
     {
         string type, exceptionMsg, methodName;
         var name, value;

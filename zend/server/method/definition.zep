@@ -62,7 +62,7 @@ class Definition
      * @param  array $options
      * @return \Zend\Server\Method\Definition
      */
-    public function setOptions(array! options) -> self
+    public function setOptions(array! options) -> <Definition>
     {
         var key, value;
         string methodName;
@@ -85,7 +85,7 @@ class Definition
      * @param  string $name
      * @return \Zend\Server\Method\Definition
      */
-    public function setName(string name) -> self
+    public function setName(string name) -> <Definition>
     {
         let this->name = name;
 
@@ -109,7 +109,7 @@ class Definition
      * @throws Server\Exception\InvalidArgumentException
      * @return \Zend\Server\Method\Definition
      */
-    public function setCallback(var callback) -> self
+    public function setCallback(var callback) -> <Definition>
     {
         if typeof callback == "array" {
             let callback = new Callback(callback);
@@ -140,7 +140,7 @@ class Definition
      * @throws Server\Exception\InvalidArgumentException
      * @return \Zend\Server\Method\Definition
      */
-    public function addPrototype(var prototype) -> self
+    public function addPrototype(var prototype) -> <Definition>
     {
         if typeof prototype == "array" {
             let prototype = new Prototype(callback);
@@ -160,7 +160,7 @@ class Definition
      * @param  array $prototypes Array of \Zend\Server\Method\Prototype objects or arrays
      * @return \Zend\Server\Method\Definition
      */
-    public function addPrototypes(array! prototypes) -> self
+    public function addPrototypes(array! prototypes) -> <Definition>
     {
         var prototype;
         for prototype in prototypes {
@@ -176,7 +176,7 @@ class Definition
      * @param  array $prototypes Array of \Zend\Server\Method\Prototype objects or arrays
      * @return \Zend\Server\Method\Definition
      */
-    public function setPrototypes(array! prototypes) -> self
+    public function setPrototypes(array! prototypes) -> <Definition>
     {
         let this->prototypes = [];
         this->addPrototypes(prototypes);
@@ -224,7 +224,7 @@ class Definition
      * @throws Server\Exception\InvalidArgumentException
      * @return \Zend\Server\Method\Definition
      */
-    public function setObject(object $object) -> self
+    public function setObject(object $object) -> <Definition>
     {
         string exceptionMsg;
 
@@ -253,7 +253,7 @@ class Definition
      * @param  array $invokeArguments
      * @return \Zend\Server\Method\Definition
      */
-    public function setInvokeArguments(array! invokeArguments) -> self
+    public function setInvokeArguments(array! invokeArguments) -> <Definition>
     {
         let this->invokeArguments = invokeArguments;
 

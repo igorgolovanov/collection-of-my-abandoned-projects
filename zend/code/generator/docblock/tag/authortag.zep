@@ -66,7 +66,7 @@ class AuthorTag extends AbstractGenerator implements TagInterface
      * @param string $authorEmail
      * @return AuthorTag
      */
-    public function setAuthorEmail(string authorEmail) -> self
+    public function setAuthorEmail(string authorEmail) -> <AuthorTag>
     {
         let this->authorEmail = authorEmail;
 
@@ -85,7 +85,7 @@ class AuthorTag extends AbstractGenerator implements TagInterface
      * @param string $authorName
      * @return AuthorTag
      */
-    public function setAuthorName(string authorName) -> self
+    public function setAuthorName(string authorName) -> <AuthorTag>
     {
         let this->authorName = authorName;
 

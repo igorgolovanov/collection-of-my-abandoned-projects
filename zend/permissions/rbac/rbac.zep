@@ -41,10 +41,10 @@ class Rbac extends AbstractIterator
      *
      * @param  string|RoleInterface               $child
      * @param  array|RoleInterface|null           $parents
-     * @return self
+     * @return Rbac
      * @throws Exception\InvalidArgumentException
      */
-    public function addRole(var child, var parents = null) -> self
+    public function addRole(var child, var parents = null) -> <Rbac>
     {
         var parent, role;
 

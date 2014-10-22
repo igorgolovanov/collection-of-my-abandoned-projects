@@ -219,7 +219,7 @@ class Registry
      * @throws Exception\InvalidArgumentException
      * @return Registry Provides a fluent interface
      */
-    public function remove(var role) -> self
+    public function remove(var role) -> <Registry>
     {
         string roleId, exceptionMsg;
         var e, child, childId;
@@ -255,7 +255,7 @@ class Registry
      *
      * @return Registry Provides a fluent interface
      */
-    public function removeAll() -> self
+    public function removeAll() -> <Registry>
     {
         let this->roles = [];
 

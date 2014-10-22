@@ -192,7 +192,7 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      * @param  array $messages
      * @return AbstractValidator
      */
-    public function setMessages(array! messages) -> self
+    public function setMessages(array! messages) -> <AbstractValidator>
     {
         var key, message;
 
@@ -280,7 +280,7 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      * @param  bool $flag
      * @return AbstractValidator
      */
-    public function setValueObscured(boolean flag) -> self
+    public function setValueObscured(boolean flag) -> <AbstractValidator>
     {
         let this->abstractOptions["valueObscured"] = flag;
 
@@ -313,7 +313,7 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      * @return AbstractValidator
      * @throws Exception\InvalidArgumentException
      */
-    public function setTranslator(<Translator\TranslatorInterface> translator = null, string textDomain = null) -> self
+    public function setTranslator(<Translator\TranslatorInterface> translator = null, string textDomain = null) -> <AbstractValidator>
     {
         let this->abstractOptions["translator"] = translator;
         if !empty textDomain {
@@ -459,7 +459,7 @@ abstract class AbstractValidator implements Translator\TranslatorAwareInterface,
      * @param  bool $flag
      * @return AbstractValidator
      */
-    public function setTranslatorEnabled(boolean flag = true) -> self
+    public function setTranslatorEnabled(boolean flag = true) -> <AbstractValidator>
     {
         let this->abstractOptions["translatorEnabled"] = flag;
         

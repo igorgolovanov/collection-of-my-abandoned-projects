@@ -43,7 +43,7 @@ class Definition implements Countable, Iterator
      * @param mixed $flag
      * @return \Zend\Server\Definition
      */
-    public function setOverwriteExistingMethods(boolean flag) -> self
+    public function setOverwriteExistingMethods(boolean flag) -> <Definition>
     {
         let this->overwriteExistingMethods = flag;
 
@@ -58,7 +58,7 @@ class Definition implements Countable, Iterator
      * @return \Zend\Server\Definition
      * @throws \Zend\Server\Exception\InvalidArgumentException if duplicate or invalid method provided
      */
-    public function addMethod(var method, var name = null) -> self
+    public function addMethod(var method, var name = null) -> <Definition>
     {
         string exceptionMsg;
 
@@ -70,7 +70,7 @@ class Definition implements Countable, Iterator
             }
         }
 
-        if typeof name = "int" || typeof name = "float"{
+        if typeof name = "integer" || typeof name = "double" {
             let name = null;
         }
 
@@ -100,7 +100,7 @@ class Definition implements Countable, Iterator
      * @param  array $methods Array of \Zend\Server\Method\Definition objects or arrays
      * @return \Zend\Server\Definition
      */
-    public function addMethods(array! methods) -> self
+    public function addMethods(array! methods) -> <Definition>
     {
         var key, method;
 
@@ -117,7 +117,7 @@ class Definition implements Countable, Iterator
      * @param  array $methods Array of \Zend\Server\Method\Definition objects or arrays
      * @return \Zend\Server\Definition
      */
-    public function setMethods(array! methods) -> self
+    public function setMethods(array! methods) -> <Definition>
     {
         this->clearMethods();
         this->addMethods(methods);
@@ -166,7 +166,7 @@ class Definition implements Countable, Iterator
      * @param  string $method
      * @return \Zend\Server\Definition
      */
-    public function removeMethod(string method) -> self
+    public function removeMethod(string method) -> <Definition>
     {
         if this->hasMethod(method) {
             unset this->methods[method];
@@ -179,7 +179,7 @@ class Definition implements Countable, Iterator
      *
      * @return \Zend\Server\Definition
      */
-    public function clearMethods() -> self
+    public function clearMethods() -> <Definition>
     {
         let this->methods = [];
         return this;

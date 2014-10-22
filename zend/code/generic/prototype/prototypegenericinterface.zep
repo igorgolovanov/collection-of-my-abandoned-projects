@@ -12,6 +12,6 @@ interface PrototypeGenericInterface extends PrototypeInterface
     /**
      * @param string $name
      */
-    public function setName(string name) -> self;
+    public function setName(string name) -> <PrototypeGenericInterface>;
 
 }

@@ -60,7 +60,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
      * @param string $variableName
      * @return ParamTag
      */
-    public function setVariableName(string variableName) -> self
+    public function setVariableName(string variableName) -> <ParamTag>
     {
         string name;
 
@@ -83,7 +83,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
      * @return ReturnTag
      * @deprecated Deprecated in 2.3. Use setTypes() instead
      */
-    public function setDatatype(string datatype) -> self
+    public function setDatatype(string datatype) -> <ParamTag>
     {
         let this->datatype = datatype;
 
@@ -104,7 +104,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
      * @return ParamTag
      * @deprecated Deprecated in 2.3. Use setVariableName() instead
      */
-    public function setParamName(string paramName) -> self
+    public function setParamName(string paramName) -> <ParamTag>
     {
         let this->paramName = paramName;
 

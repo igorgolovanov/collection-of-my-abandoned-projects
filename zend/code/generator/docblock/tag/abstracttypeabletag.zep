@@ -44,9 +44,9 @@ abstract class AbstractTypeableTag extends AbstractGenerator
 
     /**
      * @param string $description
-     * @return ReturnTag
+     * @return AbstractTypeableTag
      */
-    public function setDescription(string description) -> self
+    public function setDescription(string description) -> <AbstractTypeableTag>
     {
         let this->description = description;
 
@@ -66,9 +66,9 @@ abstract class AbstractTypeableTag extends AbstractGenerator
      * e.g. array('int', 'null') or "int|null"
      *
      * @param array|string $types
-     * @return ReturnTag
+     * @return AbstractTypeableTag
      */
-    public function setTypes(var types) -> self
+    public function setTypes(var types) -> <AbstractTypeableTag>
     {
         if typeof types == "string" {
             let types = explode("|", types);

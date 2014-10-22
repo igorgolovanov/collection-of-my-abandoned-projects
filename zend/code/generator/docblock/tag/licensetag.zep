@@ -66,7 +66,7 @@ class LicenseTag extends AbstractGenerator implements TagInterface
      * @param string $url
      * @return LicenseTag
      */
-    public function setUrl(string url) -> self
+    public function setUrl(string url) -> <LicenseTag>
     {
         let this->url = url;
         return this;
@@ -84,7 +84,7 @@ class LicenseTag extends AbstractGenerator implements TagInterface
      * @param  string $name
      * @return LicenseTag
      */
-    public function setLicenseName(string name) -> self
+    public function setLicenseName(string name) -> <LicenseTag>
     {
         let this->licenseName = name;
 

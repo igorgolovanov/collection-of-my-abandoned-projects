@@ -38,7 +38,7 @@ class AnnotationManager implements EventManagerAwareInterface
      * @param  EventManagerInterface $events
      * @return AnnotationManager
      */
-    public function setEventManager(<EventManagerInterface> events) -> self
+    public function setEventManager(<EventManagerInterface> events) -> <AnnotationManager>
     {
         array identifiers;
 
@@ -71,7 +71,7 @@ class AnnotationManager implements EventManagerAwareInterface
      * @param  ParserInterface $parser
      * @return AnnotationManager
      */
-    public function attach(<ParserInterface> parser) -> self
+    public function attach(<ParserInterface> parser) -> <AnnotationManager>
     {
         var events;
         array callback;

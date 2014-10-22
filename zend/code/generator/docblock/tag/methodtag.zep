@@ -48,7 +48,7 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
      * @param boolean $isStatic
      * @return MethodTag
      */
-    public function setIsStatic(boolean isStatic) -> self
+    public function setIsStatic(boolean isStatic) -> <MethodTag>
     {
         let this->isStatic = isStatic;
 
@@ -67,7 +67,7 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
      * @param string $methodName
      * @return MethodTag
      */
-    public function setMethodName(string methodName) -> self
+    public function setMethodName(string methodName) -> <MethodTag>
     {
         let this->methodName = methodName;
 

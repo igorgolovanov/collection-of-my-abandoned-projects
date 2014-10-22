@@ -26,9 +26,9 @@ class InjectionMethod
 
     /**
      * @param  string|null $name
-     * @return self
+     * @return InjectionMethod
      */
-    public function setName(string name) -> self
+    public function setName(string name) -> <InjectionMethod>
     {
         let this->name = name;
         return this;
@@ -49,7 +49,7 @@ class InjectionMethod
      * @param  mixed|null      $default
      * @return InjectionMethod
      */
-    public function addParameter(string name, var $class = null, var isRequired = null, var $default = null) -> self
+    public function addParameter(string name, var $class = null, var isRequired = null, var $default = null) -> <InjectionMethod>
     {
         array param = [];
 
@@ -95,7 +95,7 @@ class InjectionMethod
             return Di::METHOD_IS_REQUIRED;
         }
 
-        if type == "int" {
+        if type == "integer" {
             return requirement;
         }
 

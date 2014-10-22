@@ -81,7 +81,7 @@ class NameInformation
         var key, value;
 
         for key, value in uses {
-            if typeof key == "int" {
+            if typeof key == "integer" {
                 this->addUse(value);
                 continue;
             }

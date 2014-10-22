@@ -208,12 +208,12 @@ abstract class ArrayUtils
 
         if strict {
             let type = typeof needle;
-            if type == "int" || type == "float" {
+            if type == "integer" || type == "double" {
                 let needle = strval(needle);
             }
             if type == "string" {
                 for h, i in haystack {
-                    if typeof h == "int" || typeof h == "float" {
+                    if typeof h == "integer" || typeof h == "double" {
                         let haystack[i] = strval(h);
                     }
                 }
@@ -293,7 +293,7 @@ abstract class ArrayUtils
 
         for value, key in b {
             if isset a[key] {
-                if typeof value == "int" && !preserveNumericKeys {
+                if typeof value == "integer" && !preserveNumericKeys {
                     let a[] = value;
                     continue;
                 } 

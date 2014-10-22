@@ -62,7 +62,7 @@ class ValidatorChain implements Countable, ValidatorInterface
      * @param  ValidatorPluginManager $plugins Plugin manager
      * @return ValidatorChain
      */
-    public function setPluginManager(<ValidatorPluginManager> plugins) -> self
+    public function setPluginManager(<ValidatorPluginManager> plugins) -> <ValidatorChain>
     {
         let this->plugins = plugins;
 
@@ -96,7 +96,7 @@ class ValidatorChain implements Countable, ValidatorInterface
      * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
-    public function attach(<ValidatorInterface> validator, boolean breakChainOnFailure = false) -> self
+    public function attach(<ValidatorInterface> validator, boolean breakChainOnFailure = false) -> <ValidatorChain>
     {
         array info;
 
@@ -118,7 +118,7 @@ class ValidatorChain implements Countable, ValidatorInterface
      * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
-    public function addValidator(<ValidatorInterface> validator, boolean breakChainOnFailure = false) -> self
+    public function addValidator(<ValidatorInterface> validator, boolean breakChainOnFailure = false) -> <ValidatorChain>
     {
         this->attach(validator, breakChainOnFailure);
 
@@ -184,7 +184,7 @@ class ValidatorChain implements Countable, ValidatorInterface
      * @param  bool   $breakChainOnFailure
      * @return ValidatorChain
      */
-    public function addByName(string name, array options = [], boolean breakChainOnFailure = false) -> self
+    public function addByName(string name, array options = [], boolean breakChainOnFailure = false) -> <ValidatorChain>
     {
         this->attachByName(name, options, breakChainOnFailure);
         return this;
@@ -198,7 +198,7 @@ class ValidatorChain implements Countable, ValidatorInterface
      * @param  bool   $breakChainOnFailure
      * @return ValidatorChain
      */
-    public function prependByName(string name, var options = [], boolean breakChainOnFailure = false) -> self
+    public function prependByName(string name, var options = [], boolean breakChainOnFailure = false) -> <ValidatorChain>
     {
         var validator;
 
@@ -247,7 +247,7 @@ class ValidatorChain implements Countable, ValidatorInterface
      * @param ValidatorChain $validatorChain
      * @return ValidatorChain
      */
-    public function merge(<ValidatorChain> validatorChain) -> self
+    public function merge(<ValidatorChain> validatorChain) -> <ValidatorChain>
     {
         var validator;
         array validators;

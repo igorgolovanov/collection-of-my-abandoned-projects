@@ -45,7 +45,7 @@ class Prototype
      * @param  string $returnType
      * @return \Zend\Server\Method\Prototype
      */
-    public function setReturnType(string returnType) -> self
+    public function setReturnType(string returnType) -> <Prototype>
     {
         let this->returnType = returnType;
 
@@ -68,7 +68,7 @@ class Prototype
      * @param  string $parameter
      * @return \Zend\Server\Method\Prototype
      */
-    public function addParameter(var parameter) -> self
+    public function addParameter(var parameter) -> <Prototype>
     {
         var name, data;
         string type;
@@ -96,7 +96,7 @@ class Prototype
      * @param  array $parameters
      * @return \Zend\Server\Method\Prototype
      */
-    public function addParameters(array! parameters) -> self
+    public function addParameters(array! parameters) -> <Prototype>
     {
         var parameter;
 
@@ -113,7 +113,7 @@ class Prototype
      * @param  array $parameters
      * @return \Zend\Server\Method\Prototype
      */
-    public function setParameters(array! parameters) -> self
+    public function setParameters(array! parameters) -> <Prototype>
     {
         let this->parameters = [];
         let this->parameterNameMap = [];
@@ -160,7 +160,7 @@ class Prototype
     {
         var index2;
 
-        if typeof index != "string" && typeof != "int" {
+        if typeof index != "string" && typeof != "integer" {
             return null;
         }
         if fetch index2, this->parameterNameMap[index] {
@@ -178,7 +178,7 @@ class Prototype
      * @param  array $options
      * @return \Zend\Server\Method\Prototype
      */
-    public function setOptions(array! options) -> self
+    public function setOptions(array! options) -> <Prototype>
     {
         var key, value;
         string methodName;

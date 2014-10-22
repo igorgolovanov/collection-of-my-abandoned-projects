@@ -42,7 +42,7 @@ abstract class AbstractRole extends AbstractIterator implements RoleInterface
      * @param string $name
      * @return RoleInterface
      */
-    public function addPermission(string name) -> self
+    public function addPermission(string name) -> <RoleInterface>
     {
         let this->permissions[name] = true;
 
@@ -77,9 +77,9 @@ abstract class AbstractRole extends AbstractIterator implements RoleInterface
      * Add a child.
      *
      * @param  RoleInterface|string $child
-     * @return Role
+     * @return RoleInterface
      */
-    public function addChild(var child) -> self
+    public function addChild(var child) -> <RoleInterface>
     {
         if typeof child == "string" {
             let child = new Role(child);
@@ -101,7 +101,7 @@ abstract class AbstractRole extends AbstractIterator implements RoleInterface
      * @param  RoleInterface $parent
      * @return RoleInterface
      */
-    public function setParent(<RoleInterface> parent) -> self
+    public function setParent(<RoleInterface> parent) -> <RoleInterface>
     {
         let this->parent = parent;
 

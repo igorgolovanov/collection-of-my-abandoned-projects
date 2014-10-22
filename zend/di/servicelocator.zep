@@ -43,7 +43,7 @@ class ServiceLocator implements ServiceLocatorInterface
     /**
      * {@inheritDoc}
      */
-    public function set(string name, var service) -> self
+    public function set(string name, var service) -> <ServiceLocator>
     {
         let this->services[name] = service;
 
