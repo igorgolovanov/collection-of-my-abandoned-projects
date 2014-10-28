@@ -38,7 +38,7 @@
         "check-invalid-reads": false
     },
     "namespace": "zendframework",
-    "name": "Zend Framework 2",
+    "name": "ZendFramework",
     "description": "Zend Framework 2 delivered as a C-extension (Zephir)",
     "author": "Igor Golovanov",
     "version": "2.3.3",

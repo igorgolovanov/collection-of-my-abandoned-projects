@@ -6,11 +6,11 @@
 
 #include "kernel/globals.h"
 
-#define PHP_ZENDFRAMEWORK_NAME        "Zend Framework 2"
+#define PHP_ZENDFRAMEWORK_NAME        "ZendFramework"
 #define PHP_ZENDFRAMEWORK_VERSION     "2.3.3"
 #define PHP_ZENDFRAMEWORK_EXTNAME     "zendframework"
 #define PHP_ZENDFRAMEWORK_AUTHOR      "Igor Golovanov"
-#define PHP_ZENDFRAMEWORK_ZEPVERSION  "0.5.4a"
+#define PHP_ZENDFRAMEWORK_ZEPVERSION  "0.5.7a"
 #define PHP_ZENDFRAMEWORK_DESCRIPTION "Zend Framework 2 delivered as a C-extension (Zephir)"
 
 
