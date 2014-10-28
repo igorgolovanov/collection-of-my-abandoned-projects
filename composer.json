@@ -1,9 +1,14 @@
 {
     "name": "golovanov/php-ext-zendframework",
     "description": "Zend Framework 2 delivered as a C-extension (Zephir)",
-    "keywords": ["zend", "zendframework", "zf2", "C-extension", "zephir"],
+    "keywords": ["zendframework", "zf2", "extension", "zend", "zephir"],
+    "homepage": "https://github.com/golovanov/php-ext-zendframework/",
     "license": "MIT",
+    "support": {
+        "issues": "https://github.com/golovanov/php-ext-zendframework/issues?state=open"
+    },
     "require": {
+        "phalcon/zephir": "*",
         "zendframework/zendframework": "2.3.3"
     },
     "require-dev": {
@@ -24,12 +29,6 @@
         }
     ],
     "replace": {
-        "zendframework/zend-di": "self.version",
-        "zendframework/zend-eventmanager": "self.version",
-        "zendframework/zend-loader": "self.version",
-        "zendframework/zend-servicemanager": "self.version",
-        "zendframework/zend-stdlib": "self.version",
-        "zendframework/zend-permissions-acl": "self.version",
-        "zendframework/zend-permissions-rbac": "self.version"
+        "zendframework/zend-stdlib": "self.version"
     }
 }

@@ -37,7 +37,7 @@
         "call-gatherer-pass": true,
         "check-invalid-reads": false
     },
-    "namespace": "zend",
+    "namespace": "zendframework",
     "name": "Zend Framework 2",
     "description": "Zend Framework 2 delivered as a C-extension (Zephir)",
     "author": "Igor Golovanov",

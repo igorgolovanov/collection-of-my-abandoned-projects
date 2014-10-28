@@ -1517,7 +1517,7 @@ static zval **zephir_std_get_static_property(zend_class_entry *ce, const char *p
 		}
 
 		#ifndef ZEPHIR_RELEASE
-		if (UNEXPECTED(!zend_verify_property_access(temp_property_info, ce TSRMLS_CC))) {
+		/*if (UNEXPECTED(!zend_verify_property_access(temp_property_info, ce TSRMLS_CC))) {
 			if (!silent) {
 				zend_error_noreturn(E_ERROR, "Cannot access %s property %s::$%s", zend_visibility_string(temp_property_info->flags), ce->name, property_name);
 			}
@@ -1529,7 +1529,7 @@ static zval **zephir_std_get_static_property(zend_class_entry *ce, const char *p
 				zend_error_noreturn(E_ERROR, "Access to undeclared static property: %s::$%s", ce->name, property_name);
 			}
 			return NULL;
-		}
+		}*/
 		#endif
 
 		zend_update_class_constants(ce TSRMLS_CC);
@@ -1919,6 +1919,7 @@ int zephir_create_instance(zval *return_value, const zval *class_name TSRMLS_DC)
 
 	ce = zend_fetch_class(Z_STRVAL_P(class_name), Z_STRLEN_P(class_name), ZEND_FETCH_CLASS_DEFAULT TSRMLS_CC);
 	if (!ce) {
+		ZVAL_NULL(return_value);
 		return FAILURE;
 	}
 
@@ -1950,6 +1951,7 @@ int zephir_create_instance_params(zval *return_value, const zval *class_name, zv
 
 	ce = zend_fetch_class(Z_STRVAL_P(class_name), Z_STRLEN_P(class_name), ZEND_FETCH_CLASS_DEFAULT TSRMLS_CC);
 	if (!ce) {
+		ZVAL_NULL(return_value);
 		return FAILURE;
 	}
 
@@ -1969,21 +1971,19 @@ int zephir_create_instance_params(zval *return_value, const zval *class_name, zv
 
 			if (likely(param_count) <= 10) {
 				params_ptr = static_params;
-			}
-			else {
+			} else {
 				params_arr = emalloc(param_count * sizeof(zval*));
 				params_ptr = &params;
 			}
 
 			for (
 				zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(params), &pos);
-				zend_hash_get_current_data_ex(Z_ARRVAL_P(params), (void**)&item, &pos) == SUCCESS;
+				zend_hash_get_current_data_ex(Z_ARRVAL_P(params), (void**) &item, &pos) == SUCCESS;
 				zend_hash_move_forward_ex(Z_ARRVAL_P(params), &pos), ++i
 			) {
 				params_ptr[i] = *item;
 			}
-		}
-		else {
+		} else {
 			params_ptr = NULL;
 		}
 
