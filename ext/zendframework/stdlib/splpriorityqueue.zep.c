@@ -21,9 +21,6 @@
 #include "kernel/hash.h"
 #include "kernel/operators.h"
 
-//hello
-
-
 
 /*
 
@@ -112,7 +109,7 @@ PHP_METHOD(ZendFramework_Stdlib_SplPriorityQueue, toArray) {
 		_0->funcs->get_current_data(_0, &tmp TSRMLS_CC);
 		item = *tmp;
 		}
-		zephir_array_append(&data, item, PH_SEPARATE, "zendframework/stdlib/splpriorityqueue.zep", 62);
+		zephir_array_append(&data, item, PH_SEPARATE, "zendframework/stdlib/splpriorityqueue.zep", 59);
 	}
 	_0->funcs->dtor(_0 TSRMLS_CC);
 	RETURN_CCTOR(data);
@@ -164,7 +161,7 @@ PHP_METHOD(ZendFramework_Stdlib_SplPriorityQueue, unserialize) {
 
 	ZEPHIR_CALL_FUNCTION(&unserialized, "unserialize", &_0, data);
 	zephir_check_call_status();
-	zephir_is_iterable(unserialized, &_2, &_1, 0, 0, "zendframework/stdlib/splpriorityqueue.zep", 101);
+	zephir_is_iterable(unserialized, &_2, &_1, 0, 0, "zendframework/stdlib/splpriorityqueue.zep", 98);
 	for (
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
