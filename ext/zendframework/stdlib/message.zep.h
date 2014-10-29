@@ -17,7 +17,7 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_stdlib_message_getmetadata, 0, 0, 0)
 	ZEND_ARG_INFO(0, key)
-	ZEND_ARG_INFO(0, default)
+	ZEND_ARG_INFO(0, defaultVal)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_stdlib_message_setcontent, 0, 0, 1)

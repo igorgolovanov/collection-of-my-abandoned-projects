@@ -89,7 +89,7 @@ class CallbackHandler
         let className = get_called_class();
 
         %{
-            zephir_read_static_property(&value, Z_STRVAL_P(className), Z_STRLEN_P(className), SL("isPhp54") TSRMLS_CC);
+            zephir_read_static_property(&isPhp54, Z_STRVAL_P(className), Z_STRLEN_P(className), SL("isPhp54") TSRMLS_CC);
         }%
 
         // Minor performance tweak, if the callback gets called more than once
@@ -97,7 +97,7 @@ class CallbackHandler
             let isPhp54 = version_compare(PHP_VERSION, "5.4.0rc1", ">=");
 
             %{
-                zephir_update_static_property(Z_STRVAL_P(className), Z_STRLEN_P(className), SL("isPhp54"), &value TSRMLS_CC);
+                zephir_update_static_property(Z_STRVAL_P(className), Z_STRLEN_P(className), SL("isPhp54"), &isPhp54 TSRMLS_CC);
             }%
         }
 

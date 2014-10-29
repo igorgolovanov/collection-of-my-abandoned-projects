@@ -128,16 +128,16 @@ PHP_METHOD(ZendFramework_Stdlib_Message, getMetadata) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
 	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL;
-	zval *key = NULL, *default = NULL, *v, *_0 = NULL, *_2;
+	zval *key = NULL, *defaultVal = NULL, *v, *_0 = NULL, *_2;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 2, &key, &default);
+	zephir_fetch_params(1, 0, 2, &key, &defaultVal);
 
 	if (!key) {
 		key = ZEPHIR_GLOBAL(global_null);
 	}
-	if (!default) {
-		default = ZEPHIR_GLOBAL(global_null);
+	if (!defaultVal) {
+		defaultVal = ZEPHIR_GLOBAL(global_null);
 	}
 
 
@@ -154,7 +154,7 @@ PHP_METHOD(ZendFramework_Stdlib_Message, getMetadata) {
 	if (zephir_array_isset_fetch(&v, _2, key, 1 TSRMLS_CC)) {
 		RETURN_CTOR(v);
 	}
-	RETVAL_ZVAL(default, 1, 0);
+	RETVAL_ZVAL(defaultVal, 1, 0);
 	RETURN_MM();
 
 }

@@ -175,7 +175,7 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, call) {
 	ZEPHIR_INIT_VAR(className);
 	zephir_get_called_class(className TSRMLS_CC);
 	
-            zephir_read_static_property(&value, Z_STRVAL_P(className), Z_STRLEN_P(className), SL("isPhp54") TSRMLS_CC);
+            zephir_read_static_property(&isPhp54, Z_STRVAL_P(className), Z_STRLEN_P(className), SL("isPhp54") TSRMLS_CC);
         
 	if (Z_TYPE_P(isPhp54) == IS_NULL) {
 		ZEPHIR_INIT_VAR(_0);
@@ -187,7 +187,7 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, call) {
 		ZEPHIR_CALL_FUNCTION(&isPhp54, "version_compare", &_3, _0, &_1, &_2);
 		zephir_check_call_status();
 		
-                zephir_update_static_property(Z_STRVAL_P(className), Z_STRLEN_P(className), SL("isPhp54"), &value TSRMLS_CC);
+                zephir_update_static_property(Z_STRVAL_P(className), Z_STRLEN_P(className), SL("isPhp54"), &isPhp54 TSRMLS_CC);
             
 	}
 	argCount = zephir_fast_count_int(args TSRMLS_CC);

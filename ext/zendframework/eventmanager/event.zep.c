@@ -193,28 +193,36 @@ PHP_METHOD(ZendFramework_EventManager_Event, getParams) {
  */
 PHP_METHOD(ZendFramework_EventManager_Event, getParam) {
 
-	zend_bool _1;
-	zval *name, *default = NULL, *params = NULL, *item, *_0, *_2;
+	int ZEPHIR_LAST_CALL_STATUS;
+	zval *name, *defaultVal = NULL, *params = NULL, *item, *_0, *_1 = NULL, *_2;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &name, &default);
+	zephir_fetch_params(1, 1, 1, &name, &defaultVal);
 
-	if (!default) {
-		default = ZEPHIR_GLOBAL(global_null);
+	if (!defaultVal) {
+		defaultVal = ZEPHIR_GLOBAL(global_null);
 	}
 
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("params"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(params, _0);
-	_1 = Z_TYPE_P(params) == IS_ARRAY;
-	if (!(_1)) {
-		_1 = zephir_is_instance_of(params, SL("ArrayAccess") TSRMLS_CC);
-	}
-	if (_1) {
-		if (zephir_array_isset_fetch(&item, params, name, 1 TSRMLS_CC)) {
-			RETURN_CTOR(item);
+	if (Z_TYPE_P(params) == IS_ARRAY) {
+		ZEPHIR_OBS_VAR(item);
+		if (zephir_array_isset_fetch(&item, params, name, 0 TSRMLS_CC)) {
+			RETURN_CCTOR(item);
 		}
-		RETVAL_ZVAL(default, 1, 0);
+		RETVAL_ZVAL(defaultVal, 1, 0);
+		RETURN_MM();
+	}
+	if (zephir_is_instance_of(params, SL("ArrayAccess") TSRMLS_CC)) {
+		ZEPHIR_CALL_METHOD(&_1, params, "offsetexists", NULL, name);
+		zephir_check_call_status();
+		if (zephir_is_true(_1)) {
+			ZEPHIR_RETURN_CALL_METHOD(params, "offsetget", NULL, name);
+			zephir_check_call_status();
+			RETURN_MM();
+		}
+		RETVAL_ZVAL(defaultVal, 1, 0);
 		RETURN_MM();
 	}
 	if (zephir_isset_property_zval(params, name TSRMLS_CC)) {
@@ -222,7 +230,7 @@ PHP_METHOD(ZendFramework_EventManager_Event, getParam) {
 		zephir_read_property_zval(&_2, params, name, PH_NOISY_CC);
 		RETURN_CCTOR(_2);
 	}
-	RETVAL_ZVAL(default, 1, 0);
+	RETVAL_ZVAL(defaultVal, 1, 0);
 	RETURN_MM();
 
 }

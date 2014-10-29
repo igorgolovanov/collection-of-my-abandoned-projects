@@ -12,6 +12,7 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
+#include "ext/spl/spl_dllist.h"
 #include "kernel/iterator.h"
 #include "kernel/array.h"
 #include "kernel/memory.h"
@@ -33,7 +34,7 @@ file that was distributed with this source code.
  */
 ZEPHIR_INIT_CLASS(ZendFramework_Stdlib_SplQueue) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Zend\\Stdlib, SplQueue, zendframework, stdlib_splqueue, spl_ce_Queue, zendframework_stdlib_splqueue_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Zend\\Stdlib, SplQueue, zendframework, stdlib_splqueue, spl_ce_SplQueue, zendframework_stdlib_splqueue_method_entry, 0);
 
 	zend_class_implements(zendframework_stdlib_splqueue_ce TSRMLS_CC, 1, zend_ce_serializable);
 	return SUCCESS;

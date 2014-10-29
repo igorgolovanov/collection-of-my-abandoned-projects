@@ -123,21 +123,27 @@ class Event implements EventInterface
      * @param  mixed $default
      * @return mixed
      */
-    public function getParam(var name, var $default = null)
+    public function getParam(var name, var defaultVal = null)
     {
         var params, item;
         let params = this->params;
 
-        if typeof params == "array" || params instanceof \ArrayAccess {
+        if typeof params == "array" {
             if fetch item, params[name] {
                 return item;        
             } 
-            return $default;
+            return defaultVal;
+        }
+        if params instanceof \ArrayAccess {
+            if params->offsetExists(name) {
+                return params->offsetGet(name);
+            }
+            return defaultVal;
         }
         if isset params->{name} {
             return params->{name};
         }
-        return $default;
+        return defaultVal;
     }
 
     /**

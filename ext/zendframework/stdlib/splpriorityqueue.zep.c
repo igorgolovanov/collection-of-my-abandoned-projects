@@ -12,6 +12,7 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
+#include "ext/spl/spl_heap.h"
 #include "kernel/object.h"
 #include "kernel/memory.h"
 #include "kernel/array.h"
@@ -19,6 +20,9 @@
 #include "kernel/iterator.h"
 #include "kernel/hash.h"
 #include "kernel/operators.h"
+
+//hello
+
 
 
 /*
@@ -37,7 +41,7 @@ file that was distributed with this source code.
  */
 ZEPHIR_INIT_CLASS(ZendFramework_Stdlib_SplPriorityQueue) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Zend\\Stdlib, SplPriorityQueue, zendframework, stdlib_splpriorityqueue, spl_ce_PriorityQueue, zendframework_stdlib_splpriorityqueue_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Zend\\Stdlib, SplPriorityQueue, zendframework, stdlib_splpriorityqueue, spl_ce_SplPriorityQueue, zendframework_stdlib_splpriorityqueue_method_entry, 0);
 
 	/**
 	 * @var int Seed used to ensure queue order for items of the same priority
@@ -108,7 +112,7 @@ PHP_METHOD(ZendFramework_Stdlib_SplPriorityQueue, toArray) {
 		_0->funcs->get_current_data(_0, &tmp TSRMLS_CC);
 		item = *tmp;
 		}
-		zephir_array_append(&data, item, PH_SEPARATE, "zendframework/stdlib/splpriorityqueue.zep", 59);
+		zephir_array_append(&data, item, PH_SEPARATE, "zendframework/stdlib/splpriorityqueue.zep", 62);
 	}
 	_0->funcs->dtor(_0 TSRMLS_CC);
 	RETURN_CCTOR(data);
@@ -160,7 +164,7 @@ PHP_METHOD(ZendFramework_Stdlib_SplPriorityQueue, unserialize) {
 
 	ZEPHIR_CALL_FUNCTION(&unserialized, "unserialize", &_0, data);
 	zephir_check_call_status();
-	zephir_is_iterable(unserialized, &_2, &_1, 0, 0, "zendframework/stdlib/splpriorityqueue.zep", 98);
+	zephir_is_iterable(unserialized, &_2, &_1, 0, 0, "zendframework/stdlib/splpriorityqueue.zep", 101);
 	for (
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)

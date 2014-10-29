@@ -71,7 +71,7 @@ class Message implements MessageInterface
      * @throws Exception\InvalidArgumentException
      * @return mixed
      */
-    public function getMetadata(var key = null, var $default = null)
+    public function getMetadata(var key = null, var defaultVal = null)
     {
         var v;
 
@@ -86,7 +86,7 @@ class Message implements MessageInterface
         if fetch v, this->metadata[key] {
             return v;
         }
-        return $default;
+        return defaultVal;
     }
 
     /**
