@@ -103,14 +103,15 @@ class CallbackHandler
 
         let argCount = count(args);
 
-        if isPhp54 && typeof callback == "string" {
-            let result = this->validateStringCallbackFor54(callback);
-
-            if result !== true && argCount <= 3 {
-                let callback = result;
-                // Minor performance tweak, if the callback gets called more
-                // than once
-                let this->callback = result;
+        if isPhp54 {
+            if typeof callback == "string" {
+                let result = this->validateStringCallbackFor54(callback);
+                if result !== true && argCount <= 3 {
+                    let callback = result;
+                    // Minor performance tweak, if the callback gets called more
+                    // than once
+                    let this->callback = result;
+                }
             }
         }
 

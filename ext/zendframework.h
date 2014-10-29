@@ -4,6 +4,19 @@
 #ifndef ZEPHIR_CLASS_ENTRIES_H
 #define ZEPHIR_CLASS_ENTRIES_H
 
+#include "zendframework/di/dependencyinjectioninterface.zep.h"
+#include "zendframework/di/exception/circulardependencyexception.zep.h"
+#include "zendframework/di/exception/classnotfoundexception.zep.h"
+#include "zendframework/di/exception/exceptioninterface.zep.h"
+#include "zendframework/di/exception/invalidargumentexception.zep.h"
+#include "zendframework/di/exception/invalidcallbackexception.zep.h"
+#include "zendframework/di/exception/invalidparamnameexception.zep.h"
+#include "zendframework/di/exception/invalidpositionexception.zep.h"
+#include "zendframework/di/exception/missingpropertyexception.zep.h"
+#include "zendframework/di/exception/runtimeexception.zep.h"
+#include "zendframework/di/exception/undefinedreferenceexception.zep.h"
+#include "zendframework/di/locatorinterface.zep.h"
+#include "zendframework/di/servicelocatorinterface.zep.h"
 #include "zendframework/eventmanager/event.zep.h"
 #include "zendframework/eventmanager/eventinterface.zep.h"
 #include "zendframework/eventmanager/eventmanagerawareinterface.zep.h"
