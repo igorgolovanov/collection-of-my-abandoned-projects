@@ -4,6 +4,8 @@
 #ifndef ZEPHIR_CLASS_ENTRIES_H
 #define ZEPHIR_CLASS_ENTRIES_H
 
+#include "zendframework/stdlib/arrayserializableinterface.zep.h"
+#include "zendframework/stdlib/dispatchableinterface.zep.h"
 #include "zendframework/stdlib/exception/badmethodcallexception.zep.h"
 #include "zendframework/stdlib/exception/domainexception.zep.h"
 #include "zendframework/stdlib/exception/exceptioninterface.zep.h"
@@ -12,7 +14,16 @@
 #include "zendframework/stdlib/exception/invalidcallbackexception.zep.h"
 #include "zendframework/stdlib/exception/logicexception.zep.h"
 #include "zendframework/stdlib/exception/runtimeexception.zep.h"
+#include "zendframework/stdlib/extractor/extractioninterface.zep.h"
+#include "zendframework/stdlib/initializableinterface.zep.h"
 #include "zendframework/stdlib/message.zep.h"
 #include "zendframework/stdlib/messageinterface.zep.h"
+#include "zendframework/stdlib/parameterobjectinterface.zep.h"
+#include "zendframework/stdlib/parametersinterface.zep.h"
+#include "zendframework/stdlib/requestinterface.zep.h"
+#include "zendframework/stdlib/responseinterface.zep.h"
+#include "zendframework/stdlib/splpriorityqueue.zep.h"
+#include "zendframework/stdlib/splqueue.zep.h"
+#include "zendframework/stdlib/splstack.zep.h"
 
 #endif

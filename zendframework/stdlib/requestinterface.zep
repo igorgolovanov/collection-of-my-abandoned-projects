@@ -7,11 +7,8 @@ file that was distributed with this source code.
 
 */
 
-namespace Zend\Stdlib\Exception;
+namespace Zend\Stdlib;
 
-/**
- * Invalid Argument Exception
- */
-class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
+interface RequestInterface extends MessageInterface
 {
 }

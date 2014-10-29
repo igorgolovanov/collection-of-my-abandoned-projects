@@ -94,7 +94,7 @@ PHP_METHOD(ZendFramework_Stdlib_Message, setMetadata) {
 		object_init_ex(_4, zendframework_stdlib_exception_invalidargumentexception_ce);
 		ZEPHIR_CALL_METHOD(NULL, _4, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_4, "zendframework/stdlib/message.zep", 45 TSRMLS_CC);
+		zephir_throw_exception_debug(_4, "zendframework/stdlib/message.zep", 53 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -103,7 +103,7 @@ PHP_METHOD(ZendFramework_Stdlib_Message, setMetadata) {
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(spec, _5);
 	}
-	zephir_is_iterable(spec, &_7, &_6, 0, 0, "zendframework/stdlib/message.zep", 55);
+	zephir_is_iterable(spec, &_7, &_6, 0, 0, "zendframework/stdlib/message.zep", 63);
 	for (
 	  ; zephir_hash_get_current_data_ex(_7, (void**) &_8, &_6) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_7, &_6)
@@ -147,7 +147,7 @@ PHP_METHOD(ZendFramework_Stdlib_Message, getMetadata) {
 	ZEPHIR_CALL_FUNCTION(&_0, "is_scalar", &_1, key);
 	zephir_check_call_status();
 	if (unlikely(!zephir_is_true(_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_stdlib_exception_invalidargumentexception_ce, "Non-scalar argument provided for key", "zendframework/stdlib/message.zep", 75);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_stdlib_exception_invalidargumentexception_ce, "Non-scalar argument provided for key", "zendframework/stdlib/message.zep", 83);
 		return;
 	}
 	_2 = zephir_fetch_nproperty_this(this_ptr, SL("metadata"), PH_NOISY_CC);
@@ -208,7 +208,7 @@ PHP_METHOD(ZendFramework_Stdlib_Message, toString) {
 
 	ZEPHIR_CALL_METHOD(&metadata, this_ptr, "getmetadata",  NULL);
 	zephir_check_call_status();
-	zephir_is_iterable(metadata, &_1, &_0, 0, 0, "zendframework/stdlib/message.zep", 119);
+	zephir_is_iterable(metadata, &_1, &_0, 0, 0, "zendframework/stdlib/message.zep", 127);
 	for (
 	  ; zephir_hash_get_current_data_ex(_1, (void**) &_2, &_0) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_1, &_0)

@@ -28,6 +28,14 @@
 
 zend_class_entry *zendframework_stdlib_exception_exceptioninterface_ce;
 zend_class_entry *zendframework_stdlib_messageinterface_ce;
+zend_class_entry *zendframework_stdlib_arrayserializableinterface_ce;
+zend_class_entry *zendframework_stdlib_dispatchableinterface_ce;
+zend_class_entry *zendframework_stdlib_extractor_extractioninterface_ce;
+zend_class_entry *zendframework_stdlib_initializableinterface_ce;
+zend_class_entry *zendframework_stdlib_parameterobjectinterface_ce;
+zend_class_entry *zendframework_stdlib_parametersinterface_ce;
+zend_class_entry *zendframework_stdlib_requestinterface_ce;
+zend_class_entry *zendframework_stdlib_responseinterface_ce;
 zend_class_entry *zendframework_stdlib_exception_domainexception_ce;
 zend_class_entry *zendframework_stdlib_exception_runtimeexception_ce;
 zend_class_entry *zendframework_stdlib_exception_badmethodcallexception_ce;
@@ -36,6 +44,9 @@ zend_class_entry *zendframework_stdlib_exception_invalidargumentexception_ce;
 zend_class_entry *zendframework_stdlib_exception_invalidcallbackexception_ce;
 zend_class_entry *zendframework_stdlib_exception_logicexception_ce;
 zend_class_entry *zendframework_stdlib_message_ce;
+zend_class_entry *zendframework_stdlib_splpriorityqueue_ce;
+zend_class_entry *zendframework_stdlib_splqueue_ce;
+zend_class_entry *zendframework_stdlib_splstack_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(zendframework)
 
@@ -201,6 +212,14 @@ static PHP_MINIT_FUNCTION(zendframework)
 
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_ExceptionInterface);
 	ZEPHIR_INIT(ZendFramework_Stdlib_MessageInterface);
+	ZEPHIR_INIT(ZendFramework_Stdlib_ArraySerializableInterface);
+	ZEPHIR_INIT(ZendFramework_Stdlib_DispatchableInterface);
+	ZEPHIR_INIT(ZendFramework_Stdlib_Extractor_ExtractionInterface);
+	ZEPHIR_INIT(ZendFramework_Stdlib_InitializableInterface);
+	ZEPHIR_INIT(ZendFramework_Stdlib_ParameterObjectInterface);
+	ZEPHIR_INIT(ZendFramework_Stdlib_ParametersInterface);
+	ZEPHIR_INIT(ZendFramework_Stdlib_RequestInterface);
+	ZEPHIR_INIT(ZendFramework_Stdlib_ResponseInterface);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_DomainException);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_RuntimeException);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_BadMethodCallException);
@@ -209,6 +228,9 @@ static PHP_MINIT_FUNCTION(zendframework)
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_InvalidCallbackException);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_LogicException);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Message);
+	ZEPHIR_INIT(ZendFramework_Stdlib_SplPriorityQueue);
+	ZEPHIR_INIT(ZendFramework_Stdlib_SplQueue);
+	ZEPHIR_INIT(ZendFramework_Stdlib_SplStack);
 
 #if PHP_VERSION_ID < 50500
 	setlocale(LC_ALL, old_lc_all);
