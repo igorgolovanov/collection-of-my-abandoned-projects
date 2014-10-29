@@ -27,7 +27,9 @@
 
 
 zend_class_entry *zendframework_stdlib_exception_exceptioninterface_ce;
+zend_class_entry *zendframework_validator_exception_exceptioninterface_ce;
 zend_class_entry *zendframework_stdlib_messageinterface_ce;
+zend_class_entry *zendframework_filter_filterinterface_ce;
 zend_class_entry *zendframework_stdlib_arrayserializableinterface_ce;
 zend_class_entry *zendframework_stdlib_dispatchableinterface_ce;
 zend_class_entry *zendframework_stdlib_extractor_extractioninterface_ce;
@@ -36,8 +38,11 @@ zend_class_entry *zendframework_stdlib_parameterobjectinterface_ce;
 zend_class_entry *zendframework_stdlib_parametersinterface_ce;
 zend_class_entry *zendframework_stdlib_requestinterface_ce;
 zend_class_entry *zendframework_stdlib_responseinterface_ce;
+zend_class_entry *zendframework_validator_validatorinterface_ce;
 zend_class_entry *zendframework_stdlib_exception_domainexception_ce;
 zend_class_entry *zendframework_stdlib_exception_runtimeexception_ce;
+zend_class_entry *zendframework_validator_exception_invalidargumentexception_ce;
+zend_class_entry *zendframework_validator_exception_runtimeexception_ce;
 zend_class_entry *zendframework_stdlib_exception_badmethodcallexception_ce;
 zend_class_entry *zendframework_stdlib_exception_extensionnotloadedexception_ce;
 zend_class_entry *zendframework_stdlib_exception_invalidargumentexception_ce;
@@ -47,6 +52,9 @@ zend_class_entry *zendframework_stdlib_message_ce;
 zend_class_entry *zendframework_stdlib_splpriorityqueue_ce;
 zend_class_entry *zendframework_stdlib_splqueue_ce;
 zend_class_entry *zendframework_stdlib_splstack_ce;
+zend_class_entry *zendframework_validator_exception_badmethodcallexception_ce;
+zend_class_entry *zendframework_validator_exception_extensionnotloadedexception_ce;
+zend_class_entry *zendframework_validator_exception_invalidmagicmimefileexception_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(zendframework)
 
@@ -211,7 +219,9 @@ static PHP_MINIT_FUNCTION(zendframework)
 #endif
 
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_ExceptionInterface);
+	ZEPHIR_INIT(ZendFramework_Validator_Exception_ExceptionInterface);
 	ZEPHIR_INIT(ZendFramework_Stdlib_MessageInterface);
+	ZEPHIR_INIT(ZendFramework_Filter_FilterInterface);
 	ZEPHIR_INIT(ZendFramework_Stdlib_ArraySerializableInterface);
 	ZEPHIR_INIT(ZendFramework_Stdlib_DispatchableInterface);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Extractor_ExtractionInterface);
@@ -220,8 +230,11 @@ static PHP_MINIT_FUNCTION(zendframework)
 	ZEPHIR_INIT(ZendFramework_Stdlib_ParametersInterface);
 	ZEPHIR_INIT(ZendFramework_Stdlib_RequestInterface);
 	ZEPHIR_INIT(ZendFramework_Stdlib_ResponseInterface);
+	ZEPHIR_INIT(ZendFramework_Validator_ValidatorInterface);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_DomainException);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_RuntimeException);
+	ZEPHIR_INIT(ZendFramework_Validator_Exception_InvalidArgumentException);
+	ZEPHIR_INIT(ZendFramework_Validator_Exception_RuntimeException);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_BadMethodCallException);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_ExtensionNotLoadedException);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_InvalidArgumentException);
@@ -231,6 +244,9 @@ static PHP_MINIT_FUNCTION(zendframework)
 	ZEPHIR_INIT(ZendFramework_Stdlib_SplPriorityQueue);
 	ZEPHIR_INIT(ZendFramework_Stdlib_SplQueue);
 	ZEPHIR_INIT(ZendFramework_Stdlib_SplStack);
+	ZEPHIR_INIT(ZendFramework_Validator_Exception_BadMethodCallException);
+	ZEPHIR_INIT(ZendFramework_Validator_Exception_ExtensionNotLoadedException);
+	ZEPHIR_INIT(ZendFramework_Validator_Exception_InvalidMagicMimeFileException);
 
 #if PHP_VERSION_ID < 50500
 	setlocale(LC_ALL, old_lc_all);

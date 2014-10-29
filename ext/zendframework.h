@@ -4,6 +4,7 @@
 #ifndef ZEPHIR_CLASS_ENTRIES_H
 #define ZEPHIR_CLASS_ENTRIES_H
 
+#include "zendframework/filter/filterinterface.zep.h"
 #include "zendframework/stdlib/arrayserializableinterface.zep.h"
 #include "zendframework/stdlib/dispatchableinterface.zep.h"
 #include "zendframework/stdlib/exception/badmethodcallexception.zep.h"
@@ -25,5 +26,12 @@
 #include "zendframework/stdlib/splpriorityqueue.zep.h"
 #include "zendframework/stdlib/splqueue.zep.h"
 #include "zendframework/stdlib/splstack.zep.h"
+#include "zendframework/validator/exception/badmethodcallexception.zep.h"
+#include "zendframework/validator/exception/exceptioninterface.zep.h"
+#include "zendframework/validator/exception/extensionnotloadedexception.zep.h"
+#include "zendframework/validator/exception/invalidargumentexception.zep.h"
+#include "zendframework/validator/exception/invalidmagicmimefileexception.zep.h"
+#include "zendframework/validator/exception/runtimeexception.zep.h"
+#include "zendframework/validator/validatorinterface.zep.h"
 
 #endif
