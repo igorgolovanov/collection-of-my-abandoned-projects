@@ -26,7 +26,16 @@
 
 
 
-zend_class_entry *zendframework_stdlib_request_ce;
+zend_class_entry *zendframework_stdlib_exception_exceptioninterface_ce;
+zend_class_entry *zendframework_stdlib_messageinterface_ce;
+zend_class_entry *zendframework_stdlib_exception_domainexception_ce;
+zend_class_entry *zendframework_stdlib_exception_runtimeexception_ce;
+zend_class_entry *zendframework_stdlib_exception_badmethodcallexception_ce;
+zend_class_entry *zendframework_stdlib_exception_extensionnotloadedexception_ce;
+zend_class_entry *zendframework_stdlib_exception_invalidargumentexception_ce;
+zend_class_entry *zendframework_stdlib_exception_invalidcallbackexception_ce;
+zend_class_entry *zendframework_stdlib_exception_logicexception_ce;
+zend_class_entry *zendframework_stdlib_message_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(zendframework)
 
@@ -86,12 +95,9 @@ void zephir_initialize_memory(zend_zephir_globals_def *zephir_globals_ptr TSRMLS
 	zephir_globals_ptr->initialized = 1;
 }
 
-/**
- * Cleans the function/method cache up
- */
 int zephir_cleanup_fcache(void *pDest TSRMLS_DC, int num_args, va_list args, zend_hash_key *hash_key)
 {
-	zephir_fcall_cache_entry **entry = (zephir_fcall_cache_entry**) pDest;
+	zephir_fcall_cache_entry **entry = (zephir_fcall_cache_entry**)pDest;
 	zend_class_entry *scope;
 	uint len = hash_key->nKeyLength;
 
@@ -101,7 +107,7 @@ int zephir_cleanup_fcache(void *pDest TSRMLS_DC, int num_args, va_list args, zen
 	memcpy(&scope, &hash_key->arKey[len - 2 * sizeof(zend_class_entry**)], sizeof(zend_class_entry*));
 
 /*
-#ifndef PHALCON_RELEASE
+#ifndef ZEPHIR_RELEASE
 	{
 		zend_class_entry *cls;
 		memcpy(&cls, &hash_key->arKey[len - sizeof(zend_class_entry**)], sizeof(zend_class_entry*));
@@ -193,7 +199,16 @@ static PHP_MINIT_FUNCTION(zendframework)
 	setlocale(LC_ALL, "C");
 #endif
 
-	ZEPHIR_INIT(ZendFramework_Stdlib_Request);
+	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_ExceptionInterface);
+	ZEPHIR_INIT(ZendFramework_Stdlib_MessageInterface);
+	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_DomainException);
+	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_RuntimeException);
+	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_BadMethodCallException);
+	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_ExtensionNotLoadedException);
+	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_InvalidArgumentException);
+	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_InvalidCallbackException);
+	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_LogicException);
+	ZEPHIR_INIT(ZendFramework_Stdlib_Message);
 
 #if PHP_VERSION_ID < 50500
 	setlocale(LC_ALL, old_lc_all);

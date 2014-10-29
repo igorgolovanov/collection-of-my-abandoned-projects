@@ -71,6 +71,31 @@ class Bootstrap extends \Zephir\Bootstrap
              * Register built-in commands
              * @var $item \DirectoryIterator
              */
+            foreach (new \DirectoryIterator(ZEPHIRPATH . '/Library/Commands') as $item) {
+                if (!$item->isDir()) {
+
+                    $className = 'Zephir\\Commands\\' . str_replace('.php', '', $item->getBaseName());
+                    $class = new \ReflectionClass($className);
+
+                    if (!$class->isAbstract() && !$class->isInterface()) {
+                        /**
+                         * @var $command CommandAbstract
+                         */
+                        $command = new $className();
+
+                        if (!($command instanceof CommandAbstract)) {
+                            throw new \Exception('Class ' . $class->name . ' must be instance of CommandAbstract');
+                        }
+
+                        static::$commands[$command->getCommand()] = $command;
+                    }
+                }
+            }
+
+            /**
+             * Register built-in commands
+             * @var $item \DirectoryIterator
+             */
             foreach (new \DirectoryIterator(__DIR__ . '/Commands') as $item) {
                 if (!$item->isDir()) {
 

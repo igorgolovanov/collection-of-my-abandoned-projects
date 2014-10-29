@@ -10,7 +10,7 @@
 #define PHP_ZENDFRAMEWORK_VERSION     "2.3.3"
 #define PHP_ZENDFRAMEWORK_EXTNAME     "zendframework"
 #define PHP_ZENDFRAMEWORK_AUTHOR      "Igor Golovanov"
-#define PHP_ZENDFRAMEWORK_ZEPVERSION  "0.5.7a"
+#define PHP_ZENDFRAMEWORK_ZEPVERSION  "0.5.5a"
 #define PHP_ZENDFRAMEWORK_DESCRIPTION "Zend Framework 2 delivered as a C-extension (Zephir)"
 
 

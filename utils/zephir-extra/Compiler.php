@@ -30,6 +30,6 @@ class Compiler extends \Zephir\Compiler
 
     protected function checkDirectory()
     {
-        return 'zend';
+        return 'zendframework';
     }
 } 

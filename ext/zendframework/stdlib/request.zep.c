@@ -16,7 +16,7 @@
 
 ZEPHIR_INIT_CLASS(ZendFramework_Stdlib_Request) {
 
-	ZEPHIR_REGISTER_CLASS(ZendFramework\\Stdlib, Request, zendframework, stdlib_request, NULL, 0);
+	ZEPHIR_REGISTER_CLASS(Zend\\Stdlib, Request, zendframework, stdlib_request, NULL, 0);
 
 	return SUCCESS;
 
