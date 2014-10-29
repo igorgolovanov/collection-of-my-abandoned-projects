@@ -22,6 +22,11 @@
         "satooshi/php-coveralls": "dev-master",
         "phpunit/phpcov": "*"
     },
+    "autoload": {
+        "psr-4": {
+            "ZephirExtra\\": "utils/zephir-extra"
+        }
+    },
     "authors": [
         {
             "name": "Igor Golovanov",
