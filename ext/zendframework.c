@@ -30,6 +30,8 @@ zend_class_entry *zendframework_stdlib_exception_exceptioninterface_ce;
 zend_class_entry *zendframework_validator_exception_exceptioninterface_ce;
 zend_class_entry *zendframework_stdlib_messageinterface_ce;
 zend_class_entry *zendframework_filter_filterinterface_ce;
+zend_class_entry *zendframework_log_loggerawareinterface_ce;
+zend_class_entry *zendframework_log_loggerinterface_ce;
 zend_class_entry *zendframework_stdlib_arrayserializableinterface_ce;
 zend_class_entry *zendframework_stdlib_dispatchableinterface_ce;
 zend_class_entry *zendframework_stdlib_extractor_extractioninterface_ce;
@@ -222,6 +224,8 @@ static PHP_MINIT_FUNCTION(zendframework)
 	ZEPHIR_INIT(ZendFramework_Validator_Exception_ExceptionInterface);
 	ZEPHIR_INIT(ZendFramework_Stdlib_MessageInterface);
 	ZEPHIR_INIT(ZendFramework_Filter_FilterInterface);
+	ZEPHIR_INIT(ZendFramework_Log_LoggerAwareInterface);
+	ZEPHIR_INIT(ZendFramework_Log_LoggerInterface);
 	ZEPHIR_INIT(ZendFramework_Stdlib_ArraySerializableInterface);
 	ZEPHIR_INIT(ZendFramework_Stdlib_DispatchableInterface);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Extractor_ExtractionInterface);

@@ -5,6 +5,8 @@
 #define ZEPHIR_CLASS_ENTRIES_H
 
 #include "zendframework/filter/filterinterface.zep.h"
+#include "zendframework/log/loggerawareinterface.zep.h"
+#include "zendframework/log/loggerinterface.zep.h"
 #include "zendframework/stdlib/arrayserializableinterface.zep.h"
 #include "zendframework/stdlib/dispatchableinterface.zep.h"
 #include "zendframework/stdlib/exception/badmethodcallexception.zep.h"
