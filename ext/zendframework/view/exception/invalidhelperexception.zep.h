@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_view_exception_invalidhelperexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_View_Exception_InvalidHelperException);
+

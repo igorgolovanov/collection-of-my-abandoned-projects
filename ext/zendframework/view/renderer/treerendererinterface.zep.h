@@ -1,0 +1,9 @@
+
+extern zend_class_entry *zendframework_view_renderer_treerendererinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_View_Renderer_TreeRendererInterface);
+
+ZEPHIR_INIT_FUNCS(zendframework_view_renderer_treerendererinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_View_Renderer_TreeRendererInterface, canRenderTrees, NULL)
+  PHP_FE_END
+};
