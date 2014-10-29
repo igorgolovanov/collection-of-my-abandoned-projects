@@ -24,10 +24,12 @@
 
 
 /*
-* This file is part of the php-ext-zf2 package.
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
+
+This file is part of the php-ext-zendframework package.
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
 */
 /**
  * CallbackHandler
@@ -118,7 +120,7 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, registerCallback) {
 
 
 	if (unlikely(!zephir_is_callable(callback TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(zendframework_stdlib_exception_invalidcallbackexception_ce, "Invalid callback provided; not callable", "zendframework/stdlib/callbackhandler.zep", 61);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(zendframework_stdlib_exception_invalidcallbackexception_ce, "Invalid callback provided; not callable", "zendframework/stdlib/callbackhandler.zep", 63);
 		return;
 	}
 	zephir_update_property_this(this_ptr, SL("callback"), callback TSRMLS_CC);
@@ -370,9 +372,9 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, validateStringCallbackFor54) {
 	ZEPHIR_INIT_VAR(parts);
 	zephir_fast_explode_str(parts, SL("::"), callback, 2  TSRMLS_CC);
 	ZEPHIR_OBS_VAR(className);
-	zephir_array_fetch_long(&className, parts, 0, PH_NOISY, "zendframework/stdlib/callbackhandler.zep", 225 TSRMLS_CC);
+	zephir_array_fetch_long(&className, parts, 0, PH_NOISY, "zendframework/stdlib/callbackhandler.zep", 227 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(method);
-	zephir_array_fetch_long(&method, parts, 1, PH_NOISY, "zendframework/stdlib/callbackhandler.zep", 226 TSRMLS_CC);
+	zephir_array_fetch_long(&method, parts, 1, PH_NOISY, "zendframework/stdlib/callbackhandler.zep", 228 TSRMLS_CC);
 	if (unlikely(!zephir_class_exists(className, 1 TSRMLS_CC))) {
 		ZEPHIR_INIT_VAR(exceptionMsg);
 		ZEPHIR_CONCAT_SVS(exceptionMsg, "Static method call \"", callback, "\" refers to a class that does not exist");
@@ -380,7 +382,7 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, validateStringCallbackFor54) {
 		object_init_ex(_3, zendframework_stdlib_exception_invalidcallbackexception_ce);
 		ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_3, "zendframework/stdlib/callbackhandler.zep", 230 TSRMLS_CC);
+		zephir_throw_exception_debug(_3, "zendframework/stdlib/callbackhandler.zep", 232 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -398,7 +400,7 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, validateStringCallbackFor54) {
 		object_init_ex(_3, zendframework_stdlib_exception_invalidcallbackexception_ce);
 		ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_3, "zendframework/stdlib/callbackhandler.zep", 237 TSRMLS_CC);
+		zephir_throw_exception_debug(_3, "zendframework/stdlib/callbackhandler.zep", 239 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -414,7 +416,7 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, validateStringCallbackFor54) {
 		object_init_ex(_3, zendframework_stdlib_exception_invalidcallbackexception_ce);
 		ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_3, "zendframework/stdlib/callbackhandler.zep", 244 TSRMLS_CC);
+		zephir_throw_exception_debug(_3, "zendframework/stdlib/callbackhandler.zep", 246 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}

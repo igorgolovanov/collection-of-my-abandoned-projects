@@ -64,6 +64,7 @@
 #include "zendframework/servicemanager/servicelocatorawareinterface.zep.h"
 #include "zendframework/servicemanager/servicelocatorinterface.zep.h"
 #include "zendframework/stdlib/arrayserializableinterface.zep.h"
+#include "zendframework/stdlib/arraystack.zep.h"
 #include "zendframework/stdlib/callbackhandler.zep.h"
 #include "zendframework/stdlib/dispatchableinterface.zep.h"
 #include "zendframework/stdlib/exception/badmethodcallexception.zep.h"
