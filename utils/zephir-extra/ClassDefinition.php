@@ -32,14 +32,17 @@ class ClassDefinition extends ZephirClassDefinition
     public function getClassEntryByClassName($className, $compilationContext, $check = false)
     {
         switch (strtolower($className)) {
-            case 'splqueue':
-                $classEntry = 'spl_ce_Queue';
-                break;
-            case 'splpriorityqueue':
-                $classEntry = 'spl_ce_PriorityQueue';
-                break;
             case 'splstack':
-                $classEntry = 'spl_ce_Stack';
+                $compilationContext->headersManager->add('ext/spl/spl_dllist');
+                $classEntry = 'spl_ce_SplStack';
+                break;
+            case 'splqueue':
+                $compilationContext->headersManager->add('ext/spl/spl_dllist');
+                $classEntry = 'spl_ce_SplQueue';
+                break;
+            case 'spldoublylinkedlist':
+                $compilationContext->headersManager->add('ext/spl/spl_dllist');
+                $classEntry = 'spl_ce_SplDoublyLinkedList';
                 break;
             default:
                 $classEntry = parent::getClassEntryByClassName($className, $compilationContext, $check);
