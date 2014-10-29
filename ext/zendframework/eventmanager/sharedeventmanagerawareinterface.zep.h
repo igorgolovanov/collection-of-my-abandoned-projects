@@ -1,0 +1,15 @@
+
+extern zend_class_entry *zendframework_eventmanager_sharedeventmanagerawareinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_EventManager_SharedEventManagerAwareInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_eventmanager_sharedeventmanagerawareinterface_setsharedmanager, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, sharedEventManager, ZendFramework\\EventManager\\SharedEventManagerInterface, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_eventmanager_sharedeventmanagerawareinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_EventManager_SharedEventManagerAwareInterface, setSharedManager, arginfo_zendframework_eventmanager_sharedeventmanagerawareinterface_setsharedmanager)
+	PHP_ABSTRACT_ME(ZendFramework_EventManager_SharedEventManagerAwareInterface, getSharedManager, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_EventManager_SharedEventManagerAwareInterface, unsetSharedManager, NULL)
+  PHP_FE_END
+};
