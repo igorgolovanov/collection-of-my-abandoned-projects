@@ -1,0 +1,16 @@
+
+extern zend_class_entry *zendframework_servicemanager_delegatorfactoryinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_ServiceManager_DelegatorFactoryInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_servicemanager_delegatorfactoryinterface_createdelegatorwithname, 0, 0, 4)
+	ZEND_ARG_OBJ_INFO(0, serviceLocator, ZendFramework\\ServiceManager\\ServiceLocatorInterface, 0)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, requestedName)
+	ZEND_ARG_INFO(0, callback)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_servicemanager_delegatorfactoryinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_ServiceManager_DelegatorFactoryInterface, createDelegatorWithName, arginfo_zendframework_servicemanager_delegatorfactoryinterface_createdelegatorwithname)
+  PHP_FE_END
+};

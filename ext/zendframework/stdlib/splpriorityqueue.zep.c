@@ -12,7 +12,6 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "ext/spl/spl_heap.h"
 #include "kernel/object.h"
 #include "kernel/memory.h"
 #include "kernel/array.h"
@@ -38,7 +37,7 @@ file that was distributed with this source code.
  */
 ZEPHIR_INIT_CLASS(ZendFramework_Stdlib_SplPriorityQueue) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Zend\\Stdlib, SplPriorityQueue, zendframework, stdlib_splpriorityqueue, spl_ce_SplPriorityQueue, zendframework_stdlib_splpriorityqueue_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Zend\\Stdlib, SplPriorityQueue, zendframework, stdlib_splpriorityqueue, spl_ce_PriorityQueue, zendframework_stdlib_splpriorityqueue_method_entry, 0);
 
 	/**
 	 * @var int Seed used to ensure queue order for items of the same priority

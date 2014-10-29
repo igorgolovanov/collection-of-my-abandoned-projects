@@ -1,0 +1,14 @@
+
+extern zend_class_entry *zendframework_servicemanager_servicelocatorawareinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_ServiceManager_ServiceLocatorAwareInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_servicemanager_servicelocatorawareinterface_setservicelocator, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, serviceLocator, ZendFramework\\ServiceManager\\ServiceLocatorInterface, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_servicemanager_servicelocatorawareinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_ServiceManager_ServiceLocatorAwareInterface, setServiceLocator, arginfo_zendframework_servicemanager_servicelocatorawareinterface_setservicelocator)
+	PHP_ABSTRACT_ME(ZendFramework_ServiceManager_ServiceLocatorAwareInterface, getServiceLocator, NULL)
+  PHP_FE_END
+};

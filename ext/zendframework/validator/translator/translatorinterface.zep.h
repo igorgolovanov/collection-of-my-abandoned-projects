@@ -1,0 +1,15 @@
+
+extern zend_class_entry *zendframework_validator_translator_translatorinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Validator_Translator_TranslatorInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_validator_translator_translatorinterface_translate, 0, 0, 1)
+	ZEND_ARG_INFO(0, message)
+	ZEND_ARG_INFO(0, textDomain)
+	ZEND_ARG_INFO(0, locale)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_validator_translator_translatorinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Validator_Translator_TranslatorInterface, translate, arginfo_zendframework_validator_translator_translatorinterface_translate)
+  PHP_FE_END
+};

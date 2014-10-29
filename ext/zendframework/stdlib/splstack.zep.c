@@ -33,7 +33,7 @@ file that was distributed with this source code.
  */
 ZEPHIR_INIT_CLASS(ZendFramework_Stdlib_SplStack) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Zend\\Stdlib, SplStack, zendframework, stdlib_splstack, spl_ce_SplStack, zendframework_stdlib_splstack_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Zend\\Stdlib, SplStack, zendframework, stdlib_splstack, spl_ce_Stack, zendframework_stdlib_splstack_method_entry, 0);
 
 	zend_class_implements(zendframework_stdlib_splstack_ce TSRMLS_CC, 1, zend_ce_serializable);
 	return SUCCESS;
