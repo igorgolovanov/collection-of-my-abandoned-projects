@@ -16,6 +16,8 @@ $dirTo = realpath(__DIR__ . '/../../');
 $skipClasses = include __DIR__ . '/skip-classes.php';
 $skipFiles = include __DIR__ . '/skip-files.php';
 $skipNamespaces = include __DIR__ . '/skip-namespaces.php';
+$onlyInterfaces = true;
+$onlyExceptions = false;
 
 $allowClasses = include __DIR__ . '/allow-classes.php';
 $allowNamespaces = include __DIR__ . '/allow-namespaces.php';
@@ -40,8 +42,18 @@ foreach ($iterator as $k => $file) {
     $namespace = str_replace('/', '\\', $path);
     $classShortName = substr($file->getFilename(), 0, strlen($file->getFilename()) - 4);
     $path = strtolower($path);
+
+    if(0 === stripos($path, 'zend\\')) {
+        $path = 'zendframework\\' . substr($path, 5);
+    }
+
     $file = $dirTo . '/' . $path . '/' . strtolower($classShortName) . '.zep';
     $className = $namespace . '\\' . $classShortName;
+
+    // file exists, skip!
+    if (file_exists($file)) {
+        continue;
+    }
 
     if (!in_array($className, $allowClasses)) {
         $isAllowed = false;
@@ -86,11 +98,24 @@ foreach ($iterator as $k => $file) {
         continue; // not supported
     }
 
+    if($onlyInterfaces && !$ref->isInterface()) {
+        printf("Class %s not interface!\n", $className);
+        continue;
+    }
+
+    if($onlyExceptions && !$ref->isSubclassOf('Exception')) {
+        printf("Class %s not exception!\n", $className);
+        continue;
+    }
+
+
     $content = "/*
-* This file is part of the php-ext-zf2 package.
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
+
+This file is part of the php-ext-zendframework package.
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
 */
 \nnamespace $namespace;\n\n";
 
