@@ -18,6 +18,7 @@ $skipFiles = include __DIR__ . '/skip-files.php';
 $skipNamespaces = include __DIR__ . '/skip-namespaces.php';
 $onlyInterfaces = true;
 $onlyExceptions = false;
+$onlyNotExists = true;
 
 $allowClasses = include __DIR__ . '/allow-classes.php';
 $allowNamespaces = include __DIR__ . '/allow-namespaces.php';
@@ -43,17 +44,12 @@ foreach ($iterator as $k => $file) {
     $classShortName = substr($file->getFilename(), 0, strlen($file->getFilename()) - 4);
     $path = strtolower($path);
 
-    if(0 === stripos($path, 'zend\\')) {
-        $path = 'zendframework\\' . substr($path, 5);
+    if(0 === stripos($path, 'zend/')) {
+        $path = 'zendframework/' . substr($path, 5);
     }
 
     $file = $dirTo . '/' . $path . '/' . strtolower($classShortName) . '.zep';
     $className = $namespace . '\\' . $classShortName;
-
-    // file exists, skip!
-    if (file_exists($file)) {
-        continue;
-    }
 
     if (!in_array($className, $allowClasses)) {
         $isAllowed = false;
@@ -64,7 +60,7 @@ foreach ($iterator as $k => $file) {
             }
         }
         if (!$isAllowed) {
-            printf("Class %s not allowed!\n", $className);
+            //printf("Class %s not allowed!\n", $className);
             continue;
         }
     }
@@ -77,7 +73,7 @@ foreach ($iterator as $k => $file) {
         continue;
     }
     if(in_array($className, $skipClasses)) {
-        printf("Class %s skipped!\n", $className);
+        //printf("Class %s skipped!\n", $className);
         continue;
     } else {
         $isSkipped = false;
@@ -88,7 +84,7 @@ foreach ($iterator as $k => $file) {
             }
         }
         if ($isSkipped) {
-            printf("Class %s skipped!\n", $className);
+            //printf("Class %s skipped!\n", $className);
             continue;
         }
     }
@@ -99,12 +95,18 @@ foreach ($iterator as $k => $file) {
     }
 
     if($onlyInterfaces && !$ref->isInterface()) {
-        printf("Class %s not interface!\n", $className);
+        //printf("Class %s not interface!\n", $className);
         continue;
     }
 
     if($onlyExceptions && !$ref->isSubclassOf('Exception')) {
-        printf("Class %s not exception!\n", $className);
+        //printf("Class %s not exception!\n", $className);
+        continue;
+    }
+
+    // file exists, skip!
+    if ($onlyNotExists && file_exists($file)) {
+        printf("Class %s already exists!\n", $className);
         continue;
     }
 
@@ -223,6 +225,7 @@ file that was distributed with this source code.
         mkdir($dirTo . '/' . $path, 0755, true);
     }
     file_put_contents($file, $content);
+    printf("Class %s generated!\n", $className);
 }
 
 
