@@ -1,0 +1,14 @@
+
+extern zend_class_entry *zendframework_i18n_translator_loader_fileloaderinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_I18n_Translator_Loader_FileLoaderInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_i18n_translator_loader_fileloaderinterface_load, 0, 0, 2)
+	ZEND_ARG_INFO(0, locale)
+	ZEND_ARG_INFO(0, filename)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_i18n_translator_loader_fileloaderinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_I18n_Translator_Loader_FileLoaderInterface, load, arginfo_zendframework_i18n_translator_loader_fileloaderinterface_load)
+  PHP_FE_END
+};

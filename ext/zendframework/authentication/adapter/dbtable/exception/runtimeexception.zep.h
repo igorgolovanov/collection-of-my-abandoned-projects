@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_authentication_adapter_dbtable_exception_runtimeexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Authentication_Adapter_DbTable_Exception_RuntimeException);
+

@@ -1,0 +1,13 @@
+
+extern zend_class_entry *zendframework_progressbar_upload_uploadhandlerinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_ProgressBar_Upload_UploadHandlerInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_progressbar_upload_uploadhandlerinterface_getprogress, 0, 0, 1)
+	ZEND_ARG_INFO(0, id)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_progressbar_upload_uploadhandlerinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_ProgressBar_Upload_UploadHandlerInterface, getProgress, arginfo_zendframework_progressbar_upload_uploadhandlerinterface_getprogress)
+  PHP_FE_END
+};

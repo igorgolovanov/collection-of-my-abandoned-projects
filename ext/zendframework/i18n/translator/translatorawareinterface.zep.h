@@ -1,0 +1,28 @@
+
+extern zend_class_entry *zendframework_i18n_translator_translatorawareinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_I18n_Translator_TranslatorAwareInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_i18n_translator_translatorawareinterface_settranslator, 0, 0, 0)
+	ZEND_ARG_OBJ_INFO(0, translator, ZendFramework\\I18n\\Translator\\TranslatorInterface, 1)
+	ZEND_ARG_INFO(0, textDomain)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_i18n_translator_translatorawareinterface_settranslatorenabled, 0, 0, 0)
+	ZEND_ARG_INFO(0, enabled)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_i18n_translator_translatorawareinterface_settranslatortextdomain, 0, 0, 0)
+	ZEND_ARG_INFO(0, textDomain)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_i18n_translator_translatorawareinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_I18n_Translator_TranslatorAwareInterface, setTranslator, arginfo_zendframework_i18n_translator_translatorawareinterface_settranslator)
+	PHP_ABSTRACT_ME(ZendFramework_I18n_Translator_TranslatorAwareInterface, getTranslator, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_I18n_Translator_TranslatorAwareInterface, hasTranslator, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_I18n_Translator_TranslatorAwareInterface, setTranslatorEnabled, arginfo_zendframework_i18n_translator_translatorawareinterface_settranslatorenabled)
+	PHP_ABSTRACT_ME(ZendFramework_I18n_Translator_TranslatorAwareInterface, isTranslatorEnabled, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_I18n_Translator_TranslatorAwareInterface, setTranslatorTextDomain, arginfo_zendframework_i18n_translator_translatorawareinterface_settranslatortextdomain)
+	PHP_ABSTRACT_ME(ZendFramework_I18n_Translator_TranslatorAwareInterface, getTranslatorTextDomain, NULL)
+  PHP_FE_END
+};

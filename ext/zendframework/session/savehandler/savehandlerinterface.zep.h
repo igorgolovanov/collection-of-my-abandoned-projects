@@ -1,0 +1,36 @@
+
+extern zend_class_entry *zendframework_session_savehandler_savehandlerinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Session_SaveHandler_SaveHandlerInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_session_savehandler_savehandlerinterface_open, 0, 0, 2)
+	ZEND_ARG_INFO(0, savePath)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_session_savehandler_savehandlerinterface_read, 0, 0, 1)
+	ZEND_ARG_INFO(0, id)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_session_savehandler_savehandlerinterface_write, 0, 0, 2)
+	ZEND_ARG_INFO(0, id)
+	ZEND_ARG_INFO(0, data)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_session_savehandler_savehandlerinterface_destroy, 0, 0, 1)
+	ZEND_ARG_INFO(0, id)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_session_savehandler_savehandlerinterface_gc, 0, 0, 1)
+	ZEND_ARG_INFO(0, maxlifetime)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_session_savehandler_savehandlerinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Session_SaveHandler_SaveHandlerInterface, open, arginfo_zendframework_session_savehandler_savehandlerinterface_open)
+	PHP_ABSTRACT_ME(ZendFramework_Session_SaveHandler_SaveHandlerInterface, close, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Session_SaveHandler_SaveHandlerInterface, read, arginfo_zendframework_session_savehandler_savehandlerinterface_read)
+	PHP_ABSTRACT_ME(ZendFramework_Session_SaveHandler_SaveHandlerInterface, write, arginfo_zendframework_session_savehandler_savehandlerinterface_write)
+	PHP_ABSTRACT_ME(ZendFramework_Session_SaveHandler_SaveHandlerInterface, destroy, arginfo_zendframework_session_savehandler_savehandlerinterface_destroy)
+	PHP_ABSTRACT_ME(ZendFramework_Session_SaveHandler_SaveHandlerInterface, gc, arginfo_zendframework_session_savehandler_savehandlerinterface_gc)
+  PHP_FE_END
+};

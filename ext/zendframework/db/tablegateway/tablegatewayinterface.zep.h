@@ -1,0 +1,30 @@
+
+extern zend_class_entry *zendframework_db_tablegateway_tablegatewayinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Db_TableGateway_TableGatewayInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_db_tablegateway_tablegatewayinterface_select, 0, 0, 0)
+	ZEND_ARG_INFO(0, where)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_db_tablegateway_tablegatewayinterface_insert, 0, 0, 1)
+	ZEND_ARG_INFO(0, set)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_db_tablegateway_tablegatewayinterface_update, 0, 0, 1)
+	ZEND_ARG_INFO(0, set)
+	ZEND_ARG_INFO(0, where)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_db_tablegateway_tablegatewayinterface_delete, 0, 0, 1)
+	ZEND_ARG_INFO(0, where)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_db_tablegateway_tablegatewayinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Db_TableGateway_TableGatewayInterface, getTable, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Db_TableGateway_TableGatewayInterface, select, arginfo_zendframework_db_tablegateway_tablegatewayinterface_select)
+	PHP_ABSTRACT_ME(ZendFramework_Db_TableGateway_TableGatewayInterface, insert, arginfo_zendframework_db_tablegateway_tablegatewayinterface_insert)
+	PHP_ABSTRACT_ME(ZendFramework_Db_TableGateway_TableGatewayInterface, update, arginfo_zendframework_db_tablegateway_tablegatewayinterface_update)
+	PHP_ABSTRACT_ME(ZendFramework_Db_TableGateway_TableGatewayInterface, delete, arginfo_zendframework_db_tablegateway_tablegatewayinterface_delete)
+  PHP_FE_END
+};

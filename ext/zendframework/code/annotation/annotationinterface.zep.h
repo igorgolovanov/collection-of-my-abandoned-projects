@@ -1,0 +1,13 @@
+
+extern zend_class_entry *zendframework_code_annotation_annotationinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Code_Annotation_AnnotationInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_code_annotation_annotationinterface_initialize, 0, 0, 1)
+	ZEND_ARG_INFO(0, content)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_code_annotation_annotationinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Code_Annotation_AnnotationInterface, initialize, arginfo_zendframework_code_annotation_annotationinterface_initialize)
+  PHP_FE_END
+};

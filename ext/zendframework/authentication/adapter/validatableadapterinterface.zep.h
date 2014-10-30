@@ -1,0 +1,20 @@
+
+extern zend_class_entry *zendframework_authentication_adapter_validatableadapterinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Authentication_Adapter_ValidatableAdapterInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_authentication_adapter_validatableadapterinterface_setidentity, 0, 0, 1)
+	ZEND_ARG_INFO(0, identity)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_authentication_adapter_validatableadapterinterface_setcredential, 0, 0, 1)
+	ZEND_ARG_INFO(0, credential)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_authentication_adapter_validatableadapterinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Authentication_Adapter_ValidatableAdapterInterface, getIdentity, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Authentication_Adapter_ValidatableAdapterInterface, setIdentity, arginfo_zendframework_authentication_adapter_validatableadapterinterface_setidentity)
+	PHP_ABSTRACT_ME(ZendFramework_Authentication_Adapter_ValidatableAdapterInterface, getCredential, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Authentication_Adapter_ValidatableAdapterInterface, setCredential, arginfo_zendframework_authentication_adapter_validatableadapterinterface_setcredential)
+  PHP_FE_END
+};

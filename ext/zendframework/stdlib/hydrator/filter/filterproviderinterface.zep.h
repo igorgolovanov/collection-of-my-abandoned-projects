@@ -1,0 +1,9 @@
+
+extern zend_class_entry *zendframework_stdlib_hydrator_filter_filterproviderinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Stdlib_Hydrator_Filter_FilterProviderInterface);
+
+ZEPHIR_INIT_FUNCS(zendframework_stdlib_hydrator_filter_filterproviderinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Stdlib_Hydrator_Filter_FilterProviderInterface, getFilter, NULL)
+  PHP_FE_END
+};

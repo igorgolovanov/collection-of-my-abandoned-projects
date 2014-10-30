@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_uri_exception_invalidargumentexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Uri_Exception_InvalidArgumentException);
+

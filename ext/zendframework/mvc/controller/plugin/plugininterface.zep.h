@@ -1,0 +1,14 @@
+
+extern zend_class_entry *zendframework_mvc_controller_plugin_plugininterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Mvc_Controller_Plugin_PluginInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_mvc_controller_plugin_plugininterface_setcontroller, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, controller, ZendFramework\\Stdlib\\DispatchableInterface, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_mvc_controller_plugin_plugininterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Mvc_Controller_Plugin_PluginInterface, setController, arginfo_zendframework_mvc_controller_plugin_plugininterface_setcontroller)
+	PHP_ABSTRACT_ME(ZendFramework_Mvc_Controller_Plugin_PluginInterface, getController, NULL)
+  PHP_FE_END
+};

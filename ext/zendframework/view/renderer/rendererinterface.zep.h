@@ -4,7 +4,7 @@ extern zend_class_entry *zendframework_view_renderer_rendererinterface_ce;
 ZEPHIR_INIT_CLASS(ZendFramework_View_Renderer_RendererInterface);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_view_renderer_rendererinterface_setresolver, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, resolver, Zend\\View\\Resolver\\ResolverInterface, 0)
+	ZEND_ARG_OBJ_INFO(0, resolver, ZendFramework\\View\\Resolver\\ResolverInterface, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_view_renderer_rendererinterface_render, 0, 0, 1)

@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_db_rowgateway_exception_invalidargumentexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Db_RowGateway_Exception_InvalidArgumentException);
+

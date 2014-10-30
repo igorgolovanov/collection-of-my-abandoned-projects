@@ -1,0 +1,47 @@
+
+extern zend_class_entry *zendframework_crypt_symmetric_symmetricinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Crypt_Symmetric_SymmetricInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_crypt_symmetric_symmetricinterface_encrypt, 0, 0, 1)
+	ZEND_ARG_INFO(0, data)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_crypt_symmetric_symmetricinterface_decrypt, 0, 0, 1)
+	ZEND_ARG_INFO(0, data)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_crypt_symmetric_symmetricinterface_setkey, 0, 0, 1)
+	ZEND_ARG_INFO(0, key)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_crypt_symmetric_symmetricinterface_setalgorithm, 0, 0, 1)
+	ZEND_ARG_INFO(0, algo)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_crypt_symmetric_symmetricinterface_setsalt, 0, 0, 1)
+	ZEND_ARG_INFO(0, salt)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_crypt_symmetric_symmetricinterface_setmode, 0, 0, 1)
+	ZEND_ARG_INFO(0, mode)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_crypt_symmetric_symmetricinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, encrypt, arginfo_zendframework_crypt_symmetric_symmetricinterface_encrypt)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, decrypt, arginfo_zendframework_crypt_symmetric_symmetricinterface_decrypt)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, setKey, arginfo_zendframework_crypt_symmetric_symmetricinterface_setkey)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, getKey, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, getKeySize, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, getAlgorithm, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, setAlgorithm, arginfo_zendframework_crypt_symmetric_symmetricinterface_setalgorithm)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, getSupportedAlgorithms, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, setSalt, arginfo_zendframework_crypt_symmetric_symmetricinterface_setsalt)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, getSalt, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, getSaltSize, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, getBlockSize, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, setMode, arginfo_zendframework_crypt_symmetric_symmetricinterface_setmode)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, getMode, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Crypt_Symmetric_SymmetricInterface, getSupportedModes, NULL)
+  PHP_FE_END
+};

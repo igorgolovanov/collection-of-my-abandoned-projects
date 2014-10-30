@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_mvc_router_exception_runtimeexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Mvc_Router_Exception_RuntimeException);
+

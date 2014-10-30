@@ -1,0 +1,13 @@
+
+extern zend_class_entry *zendframework_memory_container_containerinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Memory_Container_ContainerInterface);
+
+ZEPHIR_INIT_FUNCS(zendframework_memory_container_containerinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Memory_Container_ContainerInterface, getRef, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Memory_Container_ContainerInterface, touch, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Memory_Container_ContainerInterface, lock, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Memory_Container_ContainerInterface, unlock, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Memory_Container_ContainerInterface, isLocked, NULL)
+  PHP_FE_END
+};

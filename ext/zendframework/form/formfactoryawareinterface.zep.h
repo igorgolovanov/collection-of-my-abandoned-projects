@@ -1,0 +1,13 @@
+
+extern zend_class_entry *zendframework_form_formfactoryawareinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Form_FormFactoryAwareInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_form_formfactoryawareinterface_setformfactory, 0, 0, 1)
+	ZEND_ARG_INFO(0, factory)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_form_formfactoryawareinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Form_FormFactoryAwareInterface, setFormFactory, arginfo_zendframework_form_formfactoryawareinterface_setformfactory)
+  PHP_FE_END
+};

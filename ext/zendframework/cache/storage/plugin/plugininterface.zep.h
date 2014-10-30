@@ -1,0 +1,14 @@
+
+extern zend_class_entry *zendframework_cache_storage_plugin_plugininterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Cache_Storage_Plugin_PluginInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_cache_storage_plugin_plugininterface_setoptions, 0, 0, 1)
+	ZEND_ARG_INFO(0, options)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_cache_storage_plugin_plugininterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Cache_Storage_Plugin_PluginInterface, setOptions, arginfo_zendframework_cache_storage_plugin_plugininterface_setoptions)
+	PHP_ABSTRACT_ME(ZendFramework_Cache_Storage_Plugin_PluginInterface, getOptions, NULL)
+  PHP_FE_END
+};

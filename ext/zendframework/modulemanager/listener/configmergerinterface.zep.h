@@ -1,0 +1,18 @@
+
+extern zend_class_entry *zendframework_modulemanager_listener_configmergerinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_ModuleManager_Listener_ConfigMergerInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_modulemanager_listener_configmergerinterface_getmergedconfig, 0, 0, 0)
+	ZEND_ARG_INFO(0, returnConfigAsObject)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_modulemanager_listener_configmergerinterface_setmergedconfig, 0, 0, 1)
+	ZEND_ARG_ARRAY_INFO(0, config, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_modulemanager_listener_configmergerinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_ModuleManager_Listener_ConfigMergerInterface, getMergedConfig, arginfo_zendframework_modulemanager_listener_configmergerinterface_getmergedconfig)
+	PHP_ABSTRACT_ME(ZendFramework_ModuleManager_Listener_ConfigMergerInterface, setMergedConfig, arginfo_zendframework_modulemanager_listener_configmergerinterface_setmergedconfig)
+  PHP_FE_END
+};

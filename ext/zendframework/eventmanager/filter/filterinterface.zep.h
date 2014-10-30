@@ -13,7 +13,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_eventmanager_filter_filterinterface
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_eventmanager_filter_filterinterface_detach, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, filter, Zend\\Stdlib\\CallbackHandler, 0)
+	ZEND_ARG_OBJ_INFO(0, filter, ZendFramework\\Stdlib\\CallbackHandler, 0)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(zendframework_eventmanager_filter_filterinterface_method_entry) {

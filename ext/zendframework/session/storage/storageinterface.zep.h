@@ -1,0 +1,53 @@
+
+extern zend_class_entry *zendframework_session_storage_storageinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Session_Storage_StorageInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_session_storage_storageinterface_lock, 0, 0, 0)
+	ZEND_ARG_INFO(0, key)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_session_storage_storageinterface_islocked, 0, 0, 0)
+	ZEND_ARG_INFO(0, key)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_session_storage_storageinterface_unlock, 0, 0, 0)
+	ZEND_ARG_INFO(0, key)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_session_storage_storageinterface_setmetadata, 0, 0, 2)
+	ZEND_ARG_INFO(0, key)
+	ZEND_ARG_INFO(0, value)
+	ZEND_ARG_INFO(0, overwriteArray)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_session_storage_storageinterface_getmetadata, 0, 0, 0)
+	ZEND_ARG_INFO(0, key)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_session_storage_storageinterface_clear, 0, 0, 0)
+	ZEND_ARG_INFO(0, key)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_session_storage_storageinterface_fromarray, 0, 0, 1)
+	ZEND_ARG_ARRAY_INFO(0, array, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_session_storage_storageinterface_toarray, 0, 0, 0)
+	ZEND_ARG_INFO(0, metaData)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_session_storage_storageinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Session_Storage_StorageInterface, getRequestAccessTime, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Session_Storage_StorageInterface, lock, arginfo_zendframework_session_storage_storageinterface_lock)
+	PHP_ABSTRACT_ME(ZendFramework_Session_Storage_StorageInterface, isLocked, arginfo_zendframework_session_storage_storageinterface_islocked)
+	PHP_ABSTRACT_ME(ZendFramework_Session_Storage_StorageInterface, unlock, arginfo_zendframework_session_storage_storageinterface_unlock)
+	PHP_ABSTRACT_ME(ZendFramework_Session_Storage_StorageInterface, markImmutable, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Session_Storage_StorageInterface, isImmutable, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Session_Storage_StorageInterface, setMetadata, arginfo_zendframework_session_storage_storageinterface_setmetadata)
+	PHP_ABSTRACT_ME(ZendFramework_Session_Storage_StorageInterface, getMetadata, arginfo_zendframework_session_storage_storageinterface_getmetadata)
+	PHP_ABSTRACT_ME(ZendFramework_Session_Storage_StorageInterface, clear, arginfo_zendframework_session_storage_storageinterface_clear)
+	PHP_ABSTRACT_ME(ZendFramework_Session_Storage_StorageInterface, fromArray, arginfo_zendframework_session_storage_storageinterface_fromarray)
+	PHP_ABSTRACT_ME(ZendFramework_Session_Storage_StorageInterface, toArray, arginfo_zendframework_session_storage_storageinterface_toarray)
+  PHP_FE_END
+};

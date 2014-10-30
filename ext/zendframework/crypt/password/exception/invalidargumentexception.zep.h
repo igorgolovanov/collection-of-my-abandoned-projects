@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_crypt_password_exception_invalidargumentexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Crypt_Password_Exception_InvalidArgumentException);
+

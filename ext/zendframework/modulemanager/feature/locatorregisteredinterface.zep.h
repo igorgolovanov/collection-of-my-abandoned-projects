@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_modulemanager_feature_locatorregisteredinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_ModuleManager_Feature_LocatorRegisteredInterface);
+

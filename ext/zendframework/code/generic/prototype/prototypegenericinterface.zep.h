@@ -1,0 +1,13 @@
+
+extern zend_class_entry *zendframework_code_generic_prototype_prototypegenericinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Code_Generic_Prototype_PrototypeGenericInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_code_generic_prototype_prototypegenericinterface_setname, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_code_generic_prototype_prototypegenericinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Code_Generic_Prototype_PrototypeGenericInterface, setName, arginfo_zendframework_code_generic_prototype_prototypegenericinterface_setname)
+  PHP_FE_END
+};

@@ -1,0 +1,15 @@
+
+extern zend_class_entry *zendframework_cache_storage_iteratorinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Cache_Storage_IteratorInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_cache_storage_iteratorinterface_setmode, 0, 0, 1)
+	ZEND_ARG_INFO(0, mode)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_cache_storage_iteratorinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Cache_Storage_IteratorInterface, getStorage, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Cache_Storage_IteratorInterface, getMode, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Cache_Storage_IteratorInterface, setMode, arginfo_zendframework_cache_storage_iteratorinterface_setmode)
+  PHP_FE_END
+};

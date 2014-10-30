@@ -9,7 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Permissions\Rbac;
 
-interface RoleInterface extends \RecursiveIterator, \Traversable, \Iterator
+interface RoleInterface extends \RecursiveIterator
 {
     /**
      * Get the name of the role.

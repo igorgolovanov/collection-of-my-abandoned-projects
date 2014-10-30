@@ -1,0 +1,9 @@
+
+extern zend_class_entry *zendframework_form_fieldsetprepareawareinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Form_FieldsetPrepareAwareInterface);
+
+ZEPHIR_INIT_FUNCS(zendframework_form_fieldsetprepareawareinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Form_FieldsetPrepareAwareInterface, prepareFieldset, NULL)
+  PHP_FE_END
+};

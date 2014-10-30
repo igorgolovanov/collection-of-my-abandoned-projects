@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_modulemanager_listener_exception_invalidargumentexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_ModuleManager_Listener_Exception_InvalidArgumentException);
+

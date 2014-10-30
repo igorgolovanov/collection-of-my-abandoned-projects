@@ -1,0 +1,14 @@
+
+extern zend_class_entry *zendframework_validator_validatorpluginmanagerawareinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Validator_ValidatorPluginManagerAwareInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_validator_validatorpluginmanagerawareinterface_setvalidatorpluginmanager, 0, 0, 1)
+	ZEND_ARG_INFO(0, pluginManager)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_validator_validatorpluginmanagerawareinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Validator_ValidatorPluginManagerAwareInterface, setValidatorPluginManager, arginfo_zendframework_validator_validatorpluginmanagerawareinterface_setvalidatorpluginmanager)
+	PHP_ABSTRACT_ME(ZendFramework_Validator_ValidatorPluginManagerAwareInterface, getValidatorPluginManager, NULL)
+  PHP_FE_END
+};

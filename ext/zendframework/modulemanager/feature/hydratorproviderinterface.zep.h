@@ -1,0 +1,9 @@
+
+extern zend_class_entry *zendframework_modulemanager_feature_hydratorproviderinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_ModuleManager_Feature_HydratorProviderInterface);
+
+ZEPHIR_INIT_FUNCS(zendframework_modulemanager_feature_hydratorproviderinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_ModuleManager_Feature_HydratorProviderInterface, getHydratorConfig, NULL)
+  PHP_FE_END
+};

@@ -1,0 +1,19 @@
+
+extern zend_class_entry *zendframework_mail_storage_folder_folderinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Mail_Storage_Folder_FolderInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_mail_storage_folder_folderinterface_getfolders, 0, 0, 0)
+	ZEND_ARG_INFO(0, rootFolder)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_mail_storage_folder_folderinterface_selectfolder, 0, 0, 1)
+	ZEND_ARG_INFO(0, globalName)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_mail_storage_folder_folderinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Mail_Storage_Folder_FolderInterface, getFolders, arginfo_zendframework_mail_storage_folder_folderinterface_getfolders)
+	PHP_ABSTRACT_ME(ZendFramework_Mail_Storage_Folder_FolderInterface, selectFolder, arginfo_zendframework_mail_storage_folder_folderinterface_selectfolder)
+	PHP_ABSTRACT_ME(ZendFramework_Mail_Storage_Folder_FolderInterface, getCurrentFolder, NULL)
+  PHP_FE_END
+};

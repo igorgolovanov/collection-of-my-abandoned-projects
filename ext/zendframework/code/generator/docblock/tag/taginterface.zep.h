@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_code_generator_docblock_tag_taginterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Code_Generator_DocBlock_Tag_TagInterface);
+

@@ -1,0 +1,19 @@
+
+extern zend_class_entry *zendframework_form_elementattributeremovalinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Form_ElementAttributeRemovalInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_form_elementattributeremovalinterface_removeattribute, 0, 0, 1)
+	ZEND_ARG_INFO(0, key)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_form_elementattributeremovalinterface_removeattributes, 0, 0, 1)
+	ZEND_ARG_ARRAY_INFO(0, keys, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_form_elementattributeremovalinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Form_ElementAttributeRemovalInterface, removeAttribute, arginfo_zendframework_form_elementattributeremovalinterface_removeattribute)
+	PHP_ABSTRACT_ME(ZendFramework_Form_ElementAttributeRemovalInterface, removeAttributes, arginfo_zendframework_form_elementattributeremovalinterface_removeattributes)
+	PHP_ABSTRACT_ME(ZendFramework_Form_ElementAttributeRemovalInterface, clearAttributes, NULL)
+  PHP_FE_END
+};

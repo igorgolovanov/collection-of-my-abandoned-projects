@@ -1,0 +1,19 @@
+
+extern zend_class_entry *zendframework_text_table_decorator_decoratorinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Text_Table_Decorator_DecoratorInterface);
+
+ZEPHIR_INIT_FUNCS(zendframework_text_table_decorator_decoratorinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Text_Table_Decorator_DecoratorInterface, getTopLeft, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Text_Table_Decorator_DecoratorInterface, getTopRight, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Text_Table_Decorator_DecoratorInterface, getBottomLeft, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Text_Table_Decorator_DecoratorInterface, getBottomRight, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Text_Table_Decorator_DecoratorInterface, getVertical, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Text_Table_Decorator_DecoratorInterface, getHorizontal, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Text_Table_Decorator_DecoratorInterface, getCross, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Text_Table_Decorator_DecoratorInterface, getVerticalRight, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Text_Table_Decorator_DecoratorInterface, getVerticalLeft, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Text_Table_Decorator_DecoratorInterface, getHorizontalDown, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Text_Table_Decorator_DecoratorInterface, getHorizontalUp, NULL)
+  PHP_FE_END
+};

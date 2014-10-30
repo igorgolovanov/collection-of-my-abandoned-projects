@@ -1,0 +1,21 @@
+
+extern zend_class_entry *zendframework_modulemanager_listener_servicelistenerinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_ModuleManager_Listener_ServiceListenerInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_modulemanager_listener_servicelistenerinterface_addservicemanager, 0, 0, 4)
+	ZEND_ARG_INFO(0, serviceManager)
+	ZEND_ARG_INFO(0, key)
+	ZEND_ARG_INFO(0, moduleInterface)
+	ZEND_ARG_INFO(0, method)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_modulemanager_listener_servicelistenerinterface_setdefaultserviceconfig, 0, 0, 1)
+	ZEND_ARG_ARRAY_INFO(0, configuration, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_modulemanager_listener_servicelistenerinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_ModuleManager_Listener_ServiceListenerInterface, addServiceManager, arginfo_zendframework_modulemanager_listener_servicelistenerinterface_addservicemanager)
+	PHP_ABSTRACT_ME(ZendFramework_ModuleManager_Listener_ServiceListenerInterface, setDefaultServiceConfig, arginfo_zendframework_modulemanager_listener_servicelistenerinterface_setdefaultserviceconfig)
+  PHP_FE_END
+};

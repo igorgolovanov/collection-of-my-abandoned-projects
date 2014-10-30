@@ -17,7 +17,7 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_eventmanager_sharedeventmanagerinterface_detach, 0, 0, 2)
 	ZEND_ARG_INFO(0, id)
-	ZEND_ARG_OBJ_INFO(0, listener, Zend\\Stdlib\\CallbackHandler, 0)
+	ZEND_ARG_OBJ_INFO(0, listener, ZendFramework\\Stdlib\\CallbackHandler, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_eventmanager_sharedeventmanagerinterface_getevents, 0, 0, 1)

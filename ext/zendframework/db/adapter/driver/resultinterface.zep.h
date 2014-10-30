@@ -1,0 +1,15 @@
+
+extern zend_class_entry *zendframework_db_adapter_driver_resultinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Db_Adapter_Driver_ResultInterface);
+
+ZEPHIR_INIT_FUNCS(zendframework_db_adapter_driver_resultinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_Driver_ResultInterface, buffer, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_Driver_ResultInterface, isBuffered, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_Driver_ResultInterface, isQueryResult, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_Driver_ResultInterface, getAffectedRows, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_Driver_ResultInterface, getGeneratedValue, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_Driver_ResultInterface, getResource, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_Driver_ResultInterface, getFieldCount, NULL)
+  PHP_FE_END
+};

@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_server_exception_exceptioninterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Server_Exception_ExceptionInterface);
+

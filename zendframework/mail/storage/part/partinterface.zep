@@ -9,7 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Mail\Storage\Part;
 
-interface PartInterface extends \RecursiveIterator, \Traversable, \Iterator
+interface PartInterface extends \RecursiveIterator
 {
     /**
      * Check if part is a multipart message

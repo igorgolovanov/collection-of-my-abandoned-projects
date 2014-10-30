@@ -1,0 +1,16 @@
+
+extern zend_class_entry *zendframework_authentication_storage_storageinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Authentication_Storage_StorageInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_authentication_storage_storageinterface_write, 0, 0, 1)
+	ZEND_ARG_INFO(0, contents)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_authentication_storage_storageinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Authentication_Storage_StorageInterface, isEmpty, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Authentication_Storage_StorageInterface, read, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Authentication_Storage_StorageInterface, write, arginfo_zendframework_authentication_storage_storageinterface_write)
+	PHP_ABSTRACT_ME(ZendFramework_Authentication_Storage_StorageInterface, clear, NULL)
+  PHP_FE_END
+};

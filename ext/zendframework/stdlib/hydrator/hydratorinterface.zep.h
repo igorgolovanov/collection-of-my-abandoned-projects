@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_stdlib_hydrator_hydratorinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Stdlib_Hydrator_HydratorInterface);
+

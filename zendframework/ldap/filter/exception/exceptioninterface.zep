@@ -9,7 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Ldap\Filter\Exception;
 
-use Zend\Ldap\Exception\ExceptionInterface;
+use Zend\Ldap\Exception\ExceptionInterface as LdapExceptionInterface;
 
 interface ExceptionInterface extends LdapExceptionInterface
 {

@@ -1,0 +1,30 @@
+
+extern zend_class_entry *zendframework_permissions_rbac_roleinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Permissions_Rbac_RoleInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_permissions_rbac_roleinterface_addpermission, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_permissions_rbac_roleinterface_haspermission, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_permissions_rbac_roleinterface_addchild, 0, 0, 1)
+	ZEND_ARG_INFO(0, child)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_permissions_rbac_roleinterface_setparent, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, parent, ZendFramework\\Permissions\\Rbac\\RoleInterface, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_permissions_rbac_roleinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Permissions_Rbac_RoleInterface, getName, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Permissions_Rbac_RoleInterface, addPermission, arginfo_zendframework_permissions_rbac_roleinterface_addpermission)
+	PHP_ABSTRACT_ME(ZendFramework_Permissions_Rbac_RoleInterface, hasPermission, arginfo_zendframework_permissions_rbac_roleinterface_haspermission)
+	PHP_ABSTRACT_ME(ZendFramework_Permissions_Rbac_RoleInterface, addChild, arginfo_zendframework_permissions_rbac_roleinterface_addchild)
+	PHP_ABSTRACT_ME(ZendFramework_Permissions_Rbac_RoleInterface, setParent, arginfo_zendframework_permissions_rbac_roleinterface_setparent)
+	PHP_ABSTRACT_ME(ZendFramework_Permissions_Rbac_RoleInterface, getParent, NULL)
+  PHP_FE_END
+};

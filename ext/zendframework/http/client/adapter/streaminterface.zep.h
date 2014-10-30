@@ -1,0 +1,13 @@
+
+extern zend_class_entry *zendframework_http_client_adapter_streaminterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Http_Client_Adapter_StreamInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_http_client_adapter_streaminterface_setoutputstream, 0, 0, 1)
+	ZEND_ARG_INFO(0, stream)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_http_client_adapter_streaminterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Http_Client_Adapter_StreamInterface, setOutputStream, arginfo_zendframework_http_client_adapter_streaminterface_setoutputstream)
+  PHP_FE_END
+};

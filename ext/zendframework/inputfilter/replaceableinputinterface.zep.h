@@ -1,0 +1,14 @@
+
+extern zend_class_entry *zendframework_inputfilter_replaceableinputinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_InputFilter_ReplaceableInputInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_inputfilter_replaceableinputinterface_replace, 0, 0, 2)
+	ZEND_ARG_INFO(0, input)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_inputfilter_replaceableinputinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_ReplaceableInputInterface, replace, arginfo_zendframework_inputfilter_replaceableinputinterface_replace)
+  PHP_FE_END
+};

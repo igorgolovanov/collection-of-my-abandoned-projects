@@ -1,0 +1,14 @@
+
+extern zend_class_entry *zendframework_ldap_node_schema_attributetype_attributetypeinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Ldap_Node_Schema_AttributeType_AttributeTypeInterface);
+
+ZEPHIR_INIT_FUNCS(zendframework_ldap_node_schema_attributetype_attributetypeinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Ldap_Node_Schema_AttributeType_AttributeTypeInterface, getName, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Ldap_Node_Schema_AttributeType_AttributeTypeInterface, getOid, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Ldap_Node_Schema_AttributeType_AttributeTypeInterface, getSyntax, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Ldap_Node_Schema_AttributeType_AttributeTypeInterface, getMaxLength, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Ldap_Node_Schema_AttributeType_AttributeTypeInterface, isSingleValued, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Ldap_Node_Schema_AttributeType_AttributeTypeInterface, getDescription, NULL)
+  PHP_FE_END
+};

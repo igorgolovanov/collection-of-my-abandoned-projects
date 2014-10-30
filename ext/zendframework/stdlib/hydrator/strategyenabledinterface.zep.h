@@ -1,0 +1,29 @@
+
+extern zend_class_entry *zendframework_stdlib_hydrator_strategyenabledinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Stdlib_Hydrator_StrategyEnabledInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_stdlib_hydrator_strategyenabledinterface_addstrategy, 0, 0, 2)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_OBJ_INFO(0, strategy, ZendFramework\\Stdlib\\Hydrator\\Strategy\\StrategyInterface, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_stdlib_hydrator_strategyenabledinterface_getstrategy, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_stdlib_hydrator_strategyenabledinterface_hasstrategy, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_stdlib_hydrator_strategyenabledinterface_removestrategy, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_stdlib_hydrator_strategyenabledinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Stdlib_Hydrator_StrategyEnabledInterface, addStrategy, arginfo_zendframework_stdlib_hydrator_strategyenabledinterface_addstrategy)
+	PHP_ABSTRACT_ME(ZendFramework_Stdlib_Hydrator_StrategyEnabledInterface, getStrategy, arginfo_zendframework_stdlib_hydrator_strategyenabledinterface_getstrategy)
+	PHP_ABSTRACT_ME(ZendFramework_Stdlib_Hydrator_StrategyEnabledInterface, hasStrategy, arginfo_zendframework_stdlib_hydrator_strategyenabledinterface_hasstrategy)
+	PHP_ABSTRACT_ME(ZendFramework_Stdlib_Hydrator_StrategyEnabledInterface, removeStrategy, arginfo_zendframework_stdlib_hydrator_strategyenabledinterface_removestrategy)
+  PHP_FE_END
+};

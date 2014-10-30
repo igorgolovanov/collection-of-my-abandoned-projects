@@ -1,0 +1,20 @@
+
+extern zend_class_entry *zendframework_db_adapter_driver_feature_driverfeatureinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Db_Adapter_Driver_Feature_DriverFeatureInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_db_adapter_driver_feature_driverfeatureinterface_addfeature, 0, 0, 2)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, feature)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_db_adapter_driver_feature_driverfeatureinterface_getfeature, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_db_adapter_driver_feature_driverfeatureinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_Driver_Feature_DriverFeatureInterface, setupDefaultFeatures, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_Driver_Feature_DriverFeatureInterface, addFeature, arginfo_zendframework_db_adapter_driver_feature_driverfeatureinterface_addfeature)
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_Driver_Feature_DriverFeatureInterface, getFeature, arginfo_zendframework_db_adapter_driver_feature_driverfeatureinterface_getfeature)
+  PHP_FE_END
+};

@@ -1,0 +1,55 @@
+
+extern zend_class_entry *zendframework_inputfilter_inputfilterinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_InputFilter_InputFilterInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_inputfilter_inputfilterinterface_add, 0, 0, 1)
+	ZEND_ARG_INFO(0, input)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_inputfilter_inputfilterinterface_get, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_inputfilter_inputfilterinterface_has, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_inputfilter_inputfilterinterface_remove, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_inputfilter_inputfilterinterface_setdata, 0, 0, 1)
+	ZEND_ARG_INFO(0, data)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_inputfilter_inputfilterinterface_setvalidationgroup, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_inputfilter_inputfilterinterface_getvalue, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_inputfilter_inputfilterinterface_getrawvalue, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_inputfilter_inputfilterinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, add, arginfo_zendframework_inputfilter_inputfilterinterface_add)
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, get, arginfo_zendframework_inputfilter_inputfilterinterface_get)
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, has, arginfo_zendframework_inputfilter_inputfilterinterface_has)
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, remove, arginfo_zendframework_inputfilter_inputfilterinterface_remove)
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, setData, arginfo_zendframework_inputfilter_inputfilterinterface_setdata)
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, isValid, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, setValidationGroup, arginfo_zendframework_inputfilter_inputfilterinterface_setvalidationgroup)
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, getInvalidInput, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, getValidInput, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, getValue, arginfo_zendframework_inputfilter_inputfilterinterface_getvalue)
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, getValues, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, getRawValue, arginfo_zendframework_inputfilter_inputfilterinterface_getrawvalue)
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, getRawValues, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputFilterInterface, getMessages, NULL)
+  PHP_FE_END
+};

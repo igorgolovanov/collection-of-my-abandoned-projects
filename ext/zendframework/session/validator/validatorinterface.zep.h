@@ -1,0 +1,11 @@
+
+extern zend_class_entry *zendframework_session_validator_validatorinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Session_Validator_ValidatorInterface);
+
+ZEPHIR_INIT_FUNCS(zendframework_session_validator_validatorinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Session_Validator_ValidatorInterface, isValid, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Session_Validator_ValidatorInterface, getData, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Session_Validator_ValidatorInterface, getName, NULL)
+  PHP_FE_END
+};

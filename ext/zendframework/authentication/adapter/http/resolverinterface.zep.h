@@ -1,0 +1,15 @@
+
+extern zend_class_entry *zendframework_authentication_adapter_http_resolverinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Authentication_Adapter_Http_ResolverInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_authentication_adapter_http_resolverinterface_resolve, 0, 0, 2)
+	ZEND_ARG_INFO(0, username)
+	ZEND_ARG_INFO(0, realm)
+	ZEND_ARG_INFO(0, password)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_authentication_adapter_http_resolverinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Authentication_Adapter_Http_ResolverInterface, resolve, arginfo_zendframework_authentication_adapter_http_resolverinterface_resolve)
+  PHP_FE_END
+};

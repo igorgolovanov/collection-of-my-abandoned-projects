@@ -1,0 +1,20 @@
+
+extern zend_class_entry *zendframework_db_adapter_statementcontainerinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Db_Adapter_StatementContainerInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_db_adapter_statementcontainerinterface_setsql, 0, 0, 1)
+	ZEND_ARG_INFO(0, sql)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_db_adapter_statementcontainerinterface_setparametercontainer, 0, 0, 1)
+	ZEND_ARG_INFO(0, parameterContainer)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_db_adapter_statementcontainerinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_StatementContainerInterface, setSql, arginfo_zendframework_db_adapter_statementcontainerinterface_setsql)
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_StatementContainerInterface, getSql, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_StatementContainerInterface, setParameterContainer, arginfo_zendframework_db_adapter_statementcontainerinterface_setparametercontainer)
+	PHP_ABSTRACT_ME(ZendFramework_Db_Adapter_StatementContainerInterface, getParameterContainer, NULL)
+  PHP_FE_END
+};

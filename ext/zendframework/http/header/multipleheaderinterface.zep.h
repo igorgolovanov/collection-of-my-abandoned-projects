@@ -1,0 +1,13 @@
+
+extern zend_class_entry *zendframework_http_header_multipleheaderinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Http_Header_MultipleHeaderInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_http_header_multipleheaderinterface_tostringmultipleheaders, 0, 0, 1)
+	ZEND_ARG_ARRAY_INFO(0, headers, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_http_header_multipleheaderinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Http_Header_MultipleHeaderInterface, toStringMultipleHeaders, arginfo_zendframework_http_header_multipleheaderinterface_tostringmultipleheaders)
+  PHP_FE_END
+};

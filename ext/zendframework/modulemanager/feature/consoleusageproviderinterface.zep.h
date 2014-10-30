@@ -1,0 +1,13 @@
+
+extern zend_class_entry *zendframework_modulemanager_feature_consoleusageproviderinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_ModuleManager_Feature_ConsoleUsageProviderInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_modulemanager_feature_consoleusageproviderinterface_getconsoleusage, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, console, ZendFramework\\Console\\Adapter\\AdapterInterface, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_modulemanager_feature_consoleusageproviderinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_ModuleManager_Feature_ConsoleUsageProviderInterface, getConsoleUsage, arginfo_zendframework_modulemanager_feature_consoleusageproviderinterface_getconsoleusage)
+  PHP_FE_END
+};

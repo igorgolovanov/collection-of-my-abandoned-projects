@@ -1,0 +1,9 @@
+
+extern zend_class_entry *zendframework_code_generic_prototype_prototypeinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Code_Generic_Prototype_PrototypeInterface);
+
+ZEPHIR_INIT_FUNCS(zendframework_code_generic_prototype_prototypeinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Code_Generic_Prototype_PrototypeInterface, getName, NULL)
+  PHP_FE_END
+};

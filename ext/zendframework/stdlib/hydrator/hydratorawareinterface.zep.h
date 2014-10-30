@@ -1,0 +1,14 @@
+
+extern zend_class_entry *zendframework_stdlib_hydrator_hydratorawareinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Stdlib_Hydrator_HydratorAwareInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_stdlib_hydrator_hydratorawareinterface_sethydrator, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, hydrator, ZendFramework\\Stdlib\\Hydrator\\HydratorInterface, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_stdlib_hydrator_hydratorawareinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Stdlib_Hydrator_HydratorAwareInterface, setHydrator, arginfo_zendframework_stdlib_hydrator_hydratorawareinterface_sethydrator)
+	PHP_ABSTRACT_ME(ZendFramework_Stdlib_Hydrator_HydratorAwareInterface, getHydrator, NULL)
+  PHP_FE_END
+};
