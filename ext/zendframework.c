@@ -591,6 +591,7 @@ zend_class_entry *zendframework_soap_exception_runtimeexception_ce;
 zend_class_entry *zendframework_soap_exception_unexpectedvalueexception_ce;
 zend_class_entry *zendframework_stdlib_arraystack_ce;
 zend_class_entry *zendframework_stdlib_callbackhandler_ce;
+zend_class_entry *zendframework_stdlib_errorhandler_ce;
 zend_class_entry *zendframework_stdlib_exception_badmethodcallexception_ce;
 zend_class_entry *zendframework_stdlib_exception_extensionnotloadedexception_ce;
 zend_class_entry *zendframework_stdlib_exception_invalidargumentexception_ce;
@@ -1361,6 +1362,7 @@ static PHP_MINIT_FUNCTION(zendframework)
 	ZEPHIR_INIT(ZendFramework_Soap_Exception_UnexpectedValueException);
 	ZEPHIR_INIT(ZendFramework_Stdlib_ArrayStack);
 	ZEPHIR_INIT(ZendFramework_Stdlib_CallbackHandler);
+	ZEPHIR_INIT(ZendFramework_Stdlib_ErrorHandler);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_BadMethodCallException);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_ExtensionNotLoadedException);
 	ZEPHIR_INIT(ZendFramework_Stdlib_Exception_InvalidArgumentException);

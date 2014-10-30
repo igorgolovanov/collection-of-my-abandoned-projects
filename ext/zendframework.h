@@ -502,6 +502,7 @@
 #include "zendframework/stdlib/arraystack.zep.h"
 #include "zendframework/stdlib/callbackhandler.zep.h"
 #include "zendframework/stdlib/dispatchableinterface.zep.h"
+#include "zendframework/stdlib/errorhandler.zep.h"
 #include "zendframework/stdlib/exception/badmethodcallexception.zep.h"
 #include "zendframework/stdlib/exception/domainexception.zep.h"
 #include "zendframework/stdlib/exception/exceptioninterface.zep.h"
