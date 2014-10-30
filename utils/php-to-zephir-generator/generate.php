@@ -16,8 +16,10 @@ $dirTo = realpath(__DIR__ . '/../../');
 $skipClasses = include __DIR__ . '/skip-classes.php';
 $skipFiles = include __DIR__ . '/skip-files.php';
 $skipNamespaces = include __DIR__ . '/skip-namespaces.php';
-$onlyInterfaces = true;
-$onlyExceptions = false;
+
+$generateInterfaces = false;
+$generateExceptions = false;
+$generateClasses = true;
 $onlyNotExists = true;
 
 $allowClasses = include __DIR__ . '/allow-classes.php';
@@ -94,13 +96,17 @@ foreach ($iterator as $k => $file) {
         continue; // not supported
     }
 
-    if($onlyInterfaces && !$ref->isInterface()) {
+    if(!$generateInterfaces && !$ref->isInterface()) {
         //printf("Class %s not interface!\n", $className);
         continue;
     }
 
-    if($onlyExceptions && !$ref->isSubclassOf('Exception')) {
+    if(!$generateExceptions && !$ref->isSubclassOf('Exception')) {
         //printf("Class %s not exception!\n", $className);
+        continue;
+    }
+
+    if(!$generateClasses && (!$ref->isInterface() && !$ref->isSubclassOf('Exception'))) {
         continue;
     }
 
