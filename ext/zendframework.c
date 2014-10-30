@@ -604,6 +604,7 @@ zend_class_entry *zendframework_stdlib_priorityqueue_ce;
 zend_class_entry *zendframework_stdlib_splpriorityqueue_ce;
 zend_class_entry *zendframework_stdlib_splqueue_ce;
 zend_class_entry *zendframework_stdlib_splstack_ce;
+zend_class_entry *zendframework_stdlib_stringutils_ce;
 zend_class_entry *zendframework_tag_cloud_decorator_exception_invalidargumentexception_ce;
 zend_class_entry *zendframework_tag_exception_invalidattributenameexception_ce;
 zend_class_entry *zendframework_tag_exception_invalidelementnameexception_ce;
@@ -1375,6 +1376,7 @@ static PHP_MINIT_FUNCTION(zendframework)
 	ZEPHIR_INIT(ZendFramework_Stdlib_SplPriorityQueue);
 	ZEPHIR_INIT(ZendFramework_Stdlib_SplQueue);
 	ZEPHIR_INIT(ZendFramework_Stdlib_SplStack);
+	ZEPHIR_INIT(ZendFramework_Stdlib_StringUtils);
 	ZEPHIR_INIT(ZendFramework_Tag_Cloud_Decorator_Exception_InvalidArgumentException);
 	ZEPHIR_INIT(ZendFramework_Tag_Exception_InvalidAttributeNameException);
 	ZEPHIR_INIT(ZendFramework_Tag_Exception_InvalidElementNameException);

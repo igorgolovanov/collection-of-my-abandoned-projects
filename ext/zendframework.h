@@ -538,6 +538,7 @@
 #include "zendframework/stdlib/splpriorityqueue.zep.h"
 #include "zendframework/stdlib/splqueue.zep.h"
 #include "zendframework/stdlib/splstack.zep.h"
+#include "zendframework/stdlib/stringutils.zep.h"
 #include "zendframework/stdlib/stringwrapper/stringwrapperinterface.zep.h"
 #include "zendframework/tag/cloud/decorator/decoratorinterface.zep.h"
 #include "zendframework/tag/cloud/decorator/exception/exceptioninterface.zep.h"
