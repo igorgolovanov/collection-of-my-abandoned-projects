@@ -32,4 +32,4 @@ composer.phar
 autoload.php
 /vendor/
 .idea/
-.log
+*.log
