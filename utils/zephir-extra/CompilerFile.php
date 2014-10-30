@@ -10,14 +10,50 @@ class CompilerFile extends \Zephir\CompilerFile
     {
         $ir = parent::genIR($compiler);
 
-        foreach($ir as $k => $i) {
-            if(!empty($i['type']) && $i['type'] == 'namespace') {
-                if(0 === stripos($i['name'], 'Zend\\')) {
-                    $ir[$k]['name'] = 'ZendFramework\\' . substr($i['name'], 5);
+        foreach ($ir as &$entry) {
+            if (empty($entry['type'])) {
+                continue;
+            }
+            // update namespace
+            if($entry['type'] == 'namespace') {
+                if(0 === stripos($entry['name'], 'Zend\\')) {
+                    $entry['name'] = 'ZendFramework\\' . substr($entry['name'], 5);
+                }
+            }
+            // update use
+            if ($entry['type'] == 'use' && !empty($entry['aliases'])) {
+                foreach($entry['aliases'] as &$alias) {
+                    if(0 === stripos($alias['name'], 'Zend\\')) {
+                        $alias['name'] = 'ZendFramework\\' . substr($alias['name'], 5);
+                    }
+                }
+            }
+            // update classes
+            if ($entry['type'] == 'class') {
+                if (!empty( $entry['extends'])) {
+                    if (0 === stripos($entry['extends'], '\\Zend\\')) {
+                        $entry['extends'] = '\\ZendFramework\\' . substr($entry['extends'], 6);
+                    }
+                }
+                if (!empty($entry['implements'])) {
+                    foreach ($entry['implements'] as &$interface) {
+                        if(0 === stripos($interface['value'], '\\Zend\\')) {
+                            $interface['value'] = '\\ZendFramework\\' . substr($interface['value'], 6);
+                        }
+                    }
+                }
+            }
+            // update interfaces
+            if ($entry['type'] == 'interface') {
+                if (!empty($entry['extends'])) {
+                    foreach ($entry['extends'] as &$interface) {
+                        if(0 === stripos($interface['value'], '\\Zend\\')) {
+                            $interface['value'] = '\\ZendFramework\\' . substr($interface['value'], 6);
+                        }
+                    }
                 }
             }
         }
-
         return $ir;
     }
 
