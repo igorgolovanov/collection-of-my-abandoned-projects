@@ -15,7 +15,7 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_http_client_adapter_adapterinterface_write, 0, 0, 2)
 	ZEND_ARG_INFO(0, method)
-	ZEND_ARG_OBJ_INFO(0, url, \\Zend\\Uri\\UriInterface, 0)
+	ZEND_ARG_INFO(0, url)
 	ZEND_ARG_INFO(0, httpVer)
 	ZEND_ARG_ARRAY_INFO(0, headers, 1)
 	ZEND_ARG_INFO(0, body)

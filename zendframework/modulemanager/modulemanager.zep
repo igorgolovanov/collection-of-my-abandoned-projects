@@ -12,6 +12,7 @@ namespace Zend\ModuleManager;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventInterface;
+use Zend\EventManager\ResponseCollection;
 
 /**
  * Module manager
@@ -199,8 +200,7 @@ class ModuleManager implements ModuleManagerInterface
 
         let events = <EventManagerInterface> this->getEventManager();
         let result = events->trigger(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, this, event, "is_object");
-        // todo: add response collection
-        let module = result->last();
+        let module = <ResponseCollection> result->last();
 
         if unlikely typeof module != "object" {
             let moduleName = event->getModuleName();

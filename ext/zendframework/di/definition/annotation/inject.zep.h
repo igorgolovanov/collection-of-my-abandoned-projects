@@ -1,0 +1,15 @@
+
+extern zend_class_entry *zendframework_di_definition_annotation_inject_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Di_Definition_Annotation_Inject);
+
+PHP_METHOD(ZendFramework_Di_Definition_Annotation_Inject, initialize);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_di_definition_annotation_inject_initialize, 0, 0, 1)
+	ZEND_ARG_INFO(0, content)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_di_definition_annotation_inject_method_entry) {
+	PHP_ME(ZendFramework_Di_Definition_Annotation_Inject, initialize, arginfo_zendframework_di_definition_annotation_inject_initialize, ZEND_ACC_PUBLIC)
+  PHP_FE_END
+};

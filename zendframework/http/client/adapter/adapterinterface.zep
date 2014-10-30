@@ -9,7 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Http\Client\Adapter;
 
-use \Zend\Uri\UriInterface;
+//use Zend\Uri\UriInterface;
 
 /**
  * An interface description for Zend\Http\Client\Adapter classes.
@@ -45,7 +45,8 @@ interface AdapterInterface
      * @param string        $body
      * @return string Request as text
      */
-    public function write(string method, <UriInterface> url, string httpVer = "1.1", array headers = [], string body = "") -> string;
+    public function write(string method, var url, string httpVer = "1.1", array headers = [], string body = "") -> string;
+    // todo: <UriInterface>
 
     /**
      * Read response from server

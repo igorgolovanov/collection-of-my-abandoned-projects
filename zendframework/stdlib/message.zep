@@ -54,12 +54,16 @@ class Message implements MessageInterface
         }
 
         if typeof spec == "object" {
-            let spec = iterator(spec);
+            for key, val in iterator(spec) {
+                let this->metadata[key] = val;
+            }
+        } else {
+            for key, val in spec {
+                let this->metadata[key] = val;
+            }
         }
 
-        for key, val in spec {
-            let this->metadata[key] = val;
-        }
+
         return this;
     }
 

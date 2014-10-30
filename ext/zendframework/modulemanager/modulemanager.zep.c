@@ -130,7 +130,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, onLoadModules) {
 	}
 	ZEPHIR_CALL_METHOD(&modules, this_ptr, "getmodules",  NULL);
 	zephir_check_call_status();
-	zephir_is_iterable(modules, &_2, &_1, 0, 0, "zendframework/modulemanager/modulemanager.zep", 96);
+	zephir_is_iterable(modules, &_2, &_1, 0, 0, "zendframework/modulemanager/modulemanager.zep", 97);
 	for (
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
@@ -148,7 +148,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, onLoadModules) {
 				object_init_ex(_5, zendframework_modulemanager_exception_runtimeexception_ce);
 				ZEPHIR_CALL_METHOD(NULL, _5, "__construct", &_6, exceptionMsg);
 				zephir_check_call_status();
-				zephir_throw_exception_debug(_5, "zendframework/modulemanager/modulemanager.zep", 90 TSRMLS_CC);
+				zephir_throw_exception_debug(_5, "zendframework/modulemanager/modulemanager.zep", 91 TSRMLS_CC);
 				ZEPHIR_MM_RESTORE();
 				return;
 			}
@@ -315,8 +315,9 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, loadModuleByName) {
 	zephir_check_temp_parameter(_1);
 	zephir_check_temp_parameter(_2);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&module, result, "last",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, result, "last",  NULL);
 	zephir_check_call_status();
+	ZEPHIR_CPY_WRT(module, _0);
 	if (unlikely(Z_TYPE_P(module) != IS_OBJECT)) {
 		ZEPHIR_CALL_METHOD(&moduleName, event, "getmodulename",  NULL);
 		zephir_check_call_status();

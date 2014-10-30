@@ -18,6 +18,7 @@
 #include "kernel/object.h"
 #include "kernel/concat.h"
 #include "kernel/exception.h"
+#include "kernel/iterator.h"
 #include "kernel/hash.h"
 #include "kernel/array.h"
 
@@ -55,16 +56,16 @@ PHP_METHOD(ZendFramework_Stdlib_Message, setMetadata) {
 
 	HashTable *_7;
 	HashPosition _6;
+	zend_object_iterator *_5;
 	zend_bool _2;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL;
 	zval *type = NULL, *exceptionMsg = NULL;
-	zval *spec = NULL, *value = NULL, *key = NULL, *val = NULL, *_0 = NULL, *_3, *_4, *_5 = NULL, **_8;
+	zval *spec, *value = NULL, *key = NULL, *val = NULL, *_0 = NULL, *_3, *_4, **_8;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 1, &spec, &value);
 
-	ZEPHIR_SEPARATE_PARAM(spec);
 	if (!value) {
 		value = ZEPHIR_GLOBAL(global_null);
 	}
@@ -99,18 +100,27 @@ PHP_METHOD(ZendFramework_Stdlib_Message, setMetadata) {
 		return;
 	}
 	if (Z_TYPE_P(spec) == IS_OBJECT) {
-		ZEPHIR_CALL_FUNCTION(&_5, "iterator", NULL, spec);
-		zephir_check_call_status();
-		ZEPHIR_CPY_WRT(spec, _5);
-	}
-	zephir_is_iterable(spec, &_7, &_6, 0, 0, "zendframework/stdlib/message.zep", 63);
-	for (
-	  ; zephir_hash_get_current_data_ex(_7, (void**) &_8, &_6) == SUCCESS
-	  ; zephir_hash_move_forward_ex(_7, &_6)
-	) {
-		ZEPHIR_GET_HMKEY(key, _7, _6);
-		ZEPHIR_GET_HVALUE(val, _8);
-		zephir_update_property_array(this_ptr, SL("metadata"), key, val TSRMLS_CC);
+		_5 = zephir_get_iterator(spec TSRMLS_CC);
+		_5->funcs->rewind(_5 TSRMLS_CC);
+		for (;_5->funcs->valid(_5 TSRMLS_CC) == SUCCESS && !EG(exception); _5->funcs->move_forward(_5 TSRMLS_CC)) {
+			ZEPHIR_GET_IMKEY(key, _5);
+			{ zval **tmp; 
+			_5->funcs->get_current_data(_5, &tmp TSRMLS_CC);
+			val = *tmp;
+			}
+			zephir_update_property_array(this_ptr, SL("metadata"), key, val TSRMLS_CC);
+		}
+		_5->funcs->dtor(_5 TSRMLS_CC);
+	} else {
+		zephir_is_iterable(spec, &_7, &_6, 0, 0, "zendframework/stdlib/message.zep", 64);
+		for (
+		  ; zephir_hash_get_current_data_ex(_7, (void**) &_8, &_6) == SUCCESS
+		  ; zephir_hash_move_forward_ex(_7, &_6)
+		) {
+			ZEPHIR_GET_HMKEY(key, _7, _6);
+			ZEPHIR_GET_HVALUE(val, _8);
+			zephir_update_property_array(this_ptr, SL("metadata"), key, val TSRMLS_CC);
+		}
 	}
 	RETURN_THIS();
 
@@ -147,7 +157,7 @@ PHP_METHOD(ZendFramework_Stdlib_Message, getMetadata) {
 	ZEPHIR_CALL_FUNCTION(&_0, "is_scalar", &_1, key);
 	zephir_check_call_status();
 	if (unlikely(!zephir_is_true(_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_stdlib_exception_invalidargumentexception_ce, "Non-scalar argument provided for key", "zendframework/stdlib/message.zep", 83);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_stdlib_exception_invalidargumentexception_ce, "Non-scalar argument provided for key", "zendframework/stdlib/message.zep", 87);
 		return;
 	}
 	_2 = zephir_fetch_nproperty_this(this_ptr, SL("metadata"), PH_NOISY_CC);
@@ -208,7 +218,7 @@ PHP_METHOD(ZendFramework_Stdlib_Message, toString) {
 
 	ZEPHIR_CALL_METHOD(&metadata, this_ptr, "getmetadata",  NULL);
 	zephir_check_call_status();
-	zephir_is_iterable(metadata, &_1, &_0, 0, 0, "zendframework/stdlib/message.zep", 127);
+	zephir_is_iterable(metadata, &_1, &_0, 0, 0, "zendframework/stdlib/message.zep", 131);
 	for (
 	  ; zephir_hash_get_current_data_ex(_1, (void**) &_2, &_0) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_1, &_0)
