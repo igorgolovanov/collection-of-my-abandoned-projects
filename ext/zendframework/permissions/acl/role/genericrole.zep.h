@@ -1,0 +1,19 @@
+
+extern zend_class_entry *zendframework_permissions_acl_role_genericrole_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Permissions_Acl_Role_GenericRole);
+
+PHP_METHOD(ZendFramework_Permissions_Acl_Role_GenericRole, __construct);
+PHP_METHOD(ZendFramework_Permissions_Acl_Role_GenericRole, getRoleId);
+PHP_METHOD(ZendFramework_Permissions_Acl_Role_GenericRole, __toString);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_permissions_acl_role_genericrole___construct, 0, 0, 1)
+	ZEND_ARG_INFO(0, roleId)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_permissions_acl_role_genericrole_method_entry) {
+	PHP_ME(ZendFramework_Permissions_Acl_Role_GenericRole, __construct, arginfo_zendframework_permissions_acl_role_genericrole___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
+	PHP_ME(ZendFramework_Permissions_Acl_Role_GenericRole, getRoleId, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(ZendFramework_Permissions_Acl_Role_GenericRole, __toString, NULL, ZEND_ACC_PUBLIC)
+  PHP_FE_END
+};
