@@ -36,6 +36,7 @@
         }
     ],
     "replace": {
-        "zendframework/zend-eventmanager": "self.version"
+        "zendframework/zend-eventmanager": "self.version",
+        "zendframework/zend-permissions-rbac": "self.version"
     }
 }
