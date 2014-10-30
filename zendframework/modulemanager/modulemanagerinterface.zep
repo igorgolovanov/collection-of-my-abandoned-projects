@@ -10,12 +10,11 @@ file that was distributed with this source code.
 namespace Zend\ModuleManager;
 
 use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventsCapableInterface;
 
 /**
  * Module manager interface
  */
-interface ModuleManagerInterface extends EventManagerAwareInterface, EventsCapableInterface
+interface ModuleManagerInterface extends EventManagerAwareInterface
 {
     /**
      * Load the provided modules.

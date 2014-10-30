@@ -14,8 +14,4 @@ namespace Zend\Mail\Header;
  */
 interface UnstructuredInterface extends HeaderInterface
 {
-    const FORMAT_ENCODED = true;
-
-    const FORMAT_RAW = false;
-
 }

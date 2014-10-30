@@ -24,12 +24,6 @@ ZEPHIR_INIT_CLASS(ZendFramework_Db_Sql_Ddl_Constraint_ConstraintInterface) {
 
 	ZEPHIR_REGISTER_INTERFACE(Zend\\Db\\Sql\\Ddl\\Constraint, ConstraintInterface, zendframework, db_sql_ddl_constraint_constraintinterface, zendframework_db_sql_ddl_constraint_constraintinterface_method_entry);
 
-	zend_declare_class_constant_string(zendframework_db_sql_ddl_constraint_constraintinterface_ce, SL("TYPE_IDENTIFIER"), "identifier" TSRMLS_CC);
-
-	zend_declare_class_constant_string(zendframework_db_sql_ddl_constraint_constraintinterface_ce, SL("TYPE_VALUE"), "value" TSRMLS_CC);
-
-	zend_declare_class_constant_string(zendframework_db_sql_ddl_constraint_constraintinterface_ce, SL("TYPE_LITERAL"), "literal" TSRMLS_CC);
-
 	zend_class_implements(zendframework_db_sql_ddl_constraint_constraintinterface_ce TSRMLS_CC, 1, zendframework_db_sql_expressioninterface_ce);
 	return SUCCESS;
 

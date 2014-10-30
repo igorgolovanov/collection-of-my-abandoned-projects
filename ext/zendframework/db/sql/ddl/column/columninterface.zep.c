@@ -24,12 +24,6 @@ ZEPHIR_INIT_CLASS(ZendFramework_Db_Sql_Ddl_Column_ColumnInterface) {
 
 	ZEPHIR_REGISTER_INTERFACE(Zend\\Db\\Sql\\Ddl\\Column, ColumnInterface, zendframework, db_sql_ddl_column_columninterface, zendframework_db_sql_ddl_column_columninterface_method_entry);
 
-	zend_declare_class_constant_string(zendframework_db_sql_ddl_column_columninterface_ce, SL("TYPE_IDENTIFIER"), "identifier" TSRMLS_CC);
-
-	zend_declare_class_constant_string(zendframework_db_sql_ddl_column_columninterface_ce, SL("TYPE_VALUE"), "value" TSRMLS_CC);
-
-	zend_declare_class_constant_string(zendframework_db_sql_ddl_column_columninterface_ce, SL("TYPE_LITERAL"), "literal" TSRMLS_CC);
-
 	zend_class_implements(zendframework_db_sql_ddl_column_columninterface_ce TSRMLS_CC, 1, zendframework_db_sql_expressioninterface_ce);
 	return SUCCESS;
 

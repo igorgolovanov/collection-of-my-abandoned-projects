@@ -11,7 +11,7 @@ namespace Zend\Form;
 
 use Zend\InputFilter\InputFilterInterface;
 
-interface FormInterface extends FieldsetInterface, FormFactoryAwareInterface, ElementPrepareAwareInterface, ElementInterface, \IteratorAggregate, \Countable
+interface FormInterface extends FieldsetInterface
 {
     const BIND_ON_VALIDATE = 0;
 

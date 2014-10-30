@@ -12,7 +12,6 @@ namespace Zend\Mail\Header;
 interface HeaderInterface
 {
     const FORMAT_ENCODED = true;
-
     const FORMAT_RAW = false;
 
     /**

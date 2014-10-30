@@ -28,7 +28,6 @@ ZEPHIR_INIT_CLASS(ZendFramework_ModuleManager_ModuleManagerInterface) {
 	ZEPHIR_REGISTER_INTERFACE(Zend\\ModuleManager, ModuleManagerInterface, zendframework, modulemanager_modulemanagerinterface, zendframework_modulemanager_modulemanagerinterface_method_entry);
 
 	zend_class_implements(zendframework_modulemanager_modulemanagerinterface_ce TSRMLS_CC, 1, zendframework_eventmanager_eventmanagerawareinterface_ce);
-	zend_class_implements(zendframework_modulemanager_modulemanagerinterface_ce TSRMLS_CC, 1, zendframework_eventmanager_eventscapableinterface_ce);
 	return SUCCESS;
 
 }

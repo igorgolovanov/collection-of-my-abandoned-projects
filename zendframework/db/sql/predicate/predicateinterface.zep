@@ -13,10 +13,4 @@ use Zend\Db\Sql\ExpressionInterface;
 
 interface PredicateInterface extends ExpressionInterface
 {
-    const TYPE_IDENTIFIER = "identifier";
-
-    const TYPE_VALUE = "value";
-
-    const TYPE_LITERAL = "literal";
-
 }

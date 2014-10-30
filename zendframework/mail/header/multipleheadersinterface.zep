@@ -11,10 +11,6 @@ namespace Zend\Mail\Header;
 
 interface MultipleHeadersInterface extends HeaderInterface
 {
-    const FORMAT_ENCODED = true;
-
-    const FORMAT_RAW = false;
-
     public function toStringMultipleHeaders(array! headers) -> string;
 
 }

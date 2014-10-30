@@ -13,12 +13,5 @@ use Zend\Db\Sql\ExpressionInterface;
 
 interface ConstraintInterface extends ExpressionInterface
 {
-    const TYPE_IDENTIFIER = "identifier";
-
-    const TYPE_VALUE = "value";
-
-    const TYPE_LITERAL = "literal";
-
     public function getColumns() -> array;
-
 }

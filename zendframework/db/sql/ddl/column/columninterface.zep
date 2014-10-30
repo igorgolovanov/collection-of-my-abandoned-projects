@@ -13,12 +13,6 @@ use Zend\Db\Sql\ExpressionInterface;
 
 interface ColumnInterface extends ExpressionInterface
 {
-    const TYPE_IDENTIFIER = "identifier";
-
-    const TYPE_VALUE = "value";
-
-    const TYPE_LITERAL = "literal";
-
     public function getName() -> string;
 
     public function isNullable() -> boolean;

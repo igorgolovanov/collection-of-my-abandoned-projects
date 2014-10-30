@@ -11,10 +11,6 @@ namespace Zend\Mail\Header;
 
 interface StructuredInterface extends HeaderInterface
 {
-    const FORMAT_ENCODED = true;
-
-    const FORMAT_RAW = false;
-
     /**
      * Return the delimiter at which a header line should be wrapped
      *

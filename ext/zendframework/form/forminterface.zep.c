@@ -37,11 +37,6 @@ ZEPHIR_INIT_CLASS(ZendFramework_Form_FormInterface) {
 	zend_declare_class_constant_long(zendframework_form_forminterface_ce, SL("VALUES_AS_ARRAY"), 19 TSRMLS_CC);
 
 	zend_class_implements(zendframework_form_forminterface_ce TSRMLS_CC, 1, zendframework_form_fieldsetinterface_ce);
-	zend_class_implements(zendframework_form_forminterface_ce TSRMLS_CC, 1, zendframework_form_formfactoryawareinterface_ce);
-	zend_class_implements(zendframework_form_forminterface_ce TSRMLS_CC, 1, zendframework_form_elementprepareawareinterface_ce);
-	zend_class_implements(zendframework_form_forminterface_ce TSRMLS_CC, 1, zendframework_form_elementinterface_ce);
-	zend_class_implements(zendframework_form_forminterface_ce TSRMLS_CC, 1, zend_ce_aggregate);
-	zend_class_implements(zendframework_form_forminterface_ce TSRMLS_CC, 1, spl_ce_Countable);
 	return SUCCESS;
 
 }
