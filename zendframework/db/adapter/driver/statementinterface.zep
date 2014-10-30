@@ -9,7 +9,9 @@ file that was distributed with this source code.
 
 namespace Zend\Db\Adapter\Driver;
 
-interface StatementInterface // TODO: extends \Zend\Db\Adapter\StatementContainerInterface
+use Zend\Db\Adapter\StatementContainerInterface;
+
+interface StatementInterface extends StatementContainerInterface
 {
     /**
      * Get resource
