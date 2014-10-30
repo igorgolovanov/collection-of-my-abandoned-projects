@@ -24,9 +24,11 @@
     },
     "autoload": {
         "psr-4": {
-            "ZephirExtra\\": "php-src/ZephirExtra"
+            "ZephirExtra\\": "php-src/ZephirExtra",
+            "Zend\\": "php-src/Zend"
         }
     },
+
     "authors": [
         {
             "name": "Igor Golovanov",
