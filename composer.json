@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ZephirExtra\\": "utils/zephir-extra"
+            "ZephirExtra\\": "php-src/ZephirExtra"
         }
     },
     "authors": [
