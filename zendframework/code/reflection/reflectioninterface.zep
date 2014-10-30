@@ -9,7 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Code\Reflection;
 
-interface ReflectionInterface extends \Reflector
+interface ReflectionInterface // todo: extends \Reflector
 {
     /**
      * @return string

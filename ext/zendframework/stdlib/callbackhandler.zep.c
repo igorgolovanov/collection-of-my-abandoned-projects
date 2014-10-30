@@ -21,7 +21,6 @@
 #include "kernel/array.h"
 #include "kernel/string.h"
 #include "kernel/concat.h"
-#include "ext/reflection/php_reflection.h"
 
 
 /*
@@ -351,9 +350,10 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, getMetadatum) {
  */
 PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, validateStringCallbackFor54) {
 
+	zend_class_entry *_4;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
-	zval *callback_param = NULL, *parts, *ref, *m = NULL, *className, *method, _0, *_1 = NULL, *_3 = NULL, *_4 = NULL, *_5 = NULL;
+	zval *callback_param = NULL, *parts, *ref, *m = NULL, *className, *method, _0, *_1 = NULL, *_3 = NULL, *_5 = NULL, *_6 = NULL;
 	zval *callback = NULL, *exceptionMsg = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -387,12 +387,13 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, validateStringCallbackFor54) {
 		return;
 	}
 	ZEPHIR_INIT_VAR(ref);
-	object_init_ex(ref, reflection_class_ptr);
+	_4 = zend_fetch_class(SL("ReflectionClass"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+	object_init_ex(ref, _4);
 	ZEPHIR_CALL_METHOD(NULL, ref, "__construct", NULL, className);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_4, ref, "hasmethod", NULL, method);
+	ZEPHIR_CALL_METHOD(&_5, ref, "hasmethod", NULL, method);
 	zephir_check_call_status();
-	if (unlikely(!zephir_is_true(_4))) {
+	if (unlikely(!zephir_is_true(_5))) {
 		ZEPHIR_INIT_NVAR(exceptionMsg);
 		ZEPHIR_CONCAT_SVS(exceptionMsg, "Static method call \"", callback, "\" refers to a class that does not exist");
 		ZEPHIR_INIT_LNVAR(_3);
@@ -403,12 +404,12 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, validateStringCallbackFor54) {
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&_5, ref, "getmethod", NULL, method);
+	ZEPHIR_CALL_METHOD(&_6, ref, "getmethod", NULL, method);
 	zephir_check_call_status();
-	ZEPHIR_CPY_WRT(m, _5);
-	ZEPHIR_CALL_METHOD(&_5, m, "isstatic",  NULL);
+	ZEPHIR_CPY_WRT(m, _6);
+	ZEPHIR_CALL_METHOD(&_6, m, "isstatic",  NULL);
 	zephir_check_call_status();
-	if (unlikely(!zephir_is_true(_5))) {
+	if (unlikely(!zephir_is_true(_6))) {
 		ZEPHIR_INIT_NVAR(exceptionMsg);
 		ZEPHIR_CONCAT_SVS(exceptionMsg, "Static method call \"", callback, "\" refers to a class that does not exist");
 		ZEPHIR_INIT_LNVAR(_3);

@@ -24,7 +24,6 @@ ZEPHIR_INIT_CLASS(ZendFramework_Code_Reflection_ReflectionInterface) {
 
 	ZEPHIR_REGISTER_INTERFACE(Zend\\Code\\Reflection, ReflectionInterface, zendframework, code_reflection_reflectioninterface, zendframework_code_reflection_reflectioninterface_method_entry);
 
-	zend_class_implements(zendframework_code_reflection_reflectioninterface_ce TSRMLS_CC, 1, reflector_ptr);
 	return SUCCESS;
 
 }
