@@ -542,7 +542,6 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, setEventManager) {
 PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, getEventManager) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_1;
 	zval *events = NULL, *_0;
 
 	ZEPHIR_MM_GROW();
@@ -551,12 +550,9 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, getEventManager) {
 	ZEPHIR_CPY_WRT(events, _0);
 	if (!(zephir_instance_of_ev(events, zendframework_eventmanager_eventmanagerinterface_ce TSRMLS_CC))) {
 		ZEPHIR_INIT_VAR(events);
-		_1 = zend_fetch_class(SL("ZendFramework\\EventManager\\EventManager"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		object_init_ex(events, _1);
-		if (zephir_has_constructor(events TSRMLS_CC)) {
-			ZEPHIR_CALL_METHOD(NULL, events, "__construct", NULL);
-			zephir_check_call_status();
-		}
+		object_init_ex(events, zendframework_eventmanager_eventmanager_ce);
+		ZEPHIR_CALL_METHOD(NULL, events, "__construct", NULL);
+		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, this_ptr, "seteventmanager", NULL, events);
 		zephir_check_call_status();
 	}

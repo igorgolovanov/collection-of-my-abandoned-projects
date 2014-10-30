@@ -1,0 +1,25 @@
+
+extern zend_class_entry *zendframework_eventmanager_staticeventmanager_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_EventManager_StaticEventManager);
+
+PHP_METHOD(ZendFramework_EventManager_StaticEventManager, __construct);
+PHP_METHOD(ZendFramework_EventManager_StaticEventManager, __clone);
+PHP_METHOD(ZendFramework_EventManager_StaticEventManager, getInstance);
+PHP_METHOD(ZendFramework_EventManager_StaticEventManager, setInstance);
+PHP_METHOD(ZendFramework_EventManager_StaticEventManager, hasInstance);
+PHP_METHOD(ZendFramework_EventManager_StaticEventManager, resetInstance);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_eventmanager_staticeventmanager_setinstance, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, instance, ZendFramework\\EventManager\\SharedEventManagerInterface, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_eventmanager_staticeventmanager_method_entry) {
+	PHP_ME(ZendFramework_EventManager_StaticEventManager, __construct, NULL, ZEND_ACC_FINAL|ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
+	PHP_ME(ZendFramework_EventManager_StaticEventManager, __clone, NULL, ZEND_ACC_PRIVATE)
+	PHP_ME(ZendFramework_EventManager_StaticEventManager, getInstance, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(ZendFramework_EventManager_StaticEventManager, setInstance, arginfo_zendframework_eventmanager_staticeventmanager_setinstance, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(ZendFramework_EventManager_StaticEventManager, hasInstance, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(ZendFramework_EventManager_StaticEventManager, resetInstance, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+  PHP_FE_END
+};

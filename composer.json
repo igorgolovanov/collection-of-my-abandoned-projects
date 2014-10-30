@@ -36,6 +36,6 @@
         }
     ],
     "replace": {
-        "zendframework/zend-stdlib": "self.version"
+        "zendframework/zend-eventmanager": "self.version"
     }
 }
