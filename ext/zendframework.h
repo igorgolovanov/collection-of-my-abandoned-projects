@@ -315,6 +315,7 @@
 #include "zendframework/loader/exception/pluginloaderexception.zep.h"
 #include "zendframework/loader/exception/runtimeexception.zep.h"
 #include "zendframework/loader/exception/securityexception.zep.h"
+#include "zendframework/loader/moduleautoloader.zep.h"
 #include "zendframework/loader/pluginclasslocator.zep.h"
 #include "zendframework/loader/shortnamelocator.zep.h"
 #include "zendframework/loader/splautoloader.zep.h"
