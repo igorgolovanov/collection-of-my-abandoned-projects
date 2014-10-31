@@ -237,8 +237,8 @@ PHP_METHOD(ZendFramework_Loader_ModuleAutoloader, autoload) {
 	HashTable *_7, *_19, *_29;
 	HashPosition _6, _18, _28;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL, *_16 = NULL, *_24 = NULL, *_25 = NULL;
-	zval *class_param = NULL, *str = NULL, *classLoaded = NULL, *className = NULL, *pos = NULL, *basePath = NULL, *entry = NULL, *glob = NULL, *moduleClassFile = NULL, *moduleName = NULL, *ns = NULL, *path = NULL, *moduleNameBuffer = NULL, *moduleClassPath, *pharSuffixPattern = NULL, *namespacedPaths = NULL, *exts = NULL, _0 = zval_used_for_init, *_2, _3 = zval_used_for_init, *_4, *_5, **_8, *_9 = NULL, *_10 = NULL, _13, *_14, _15 = zval_used_for_init, *_17 = NULL, **_20, _21 = zval_used_for_init, *_26 = NULL, **_30, *_31 = NULL, *_32 = NULL, *_33 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL, *_16 = NULL, *_24 = NULL, *_25 = NULL, *_33 = NULL;
+	zval *class_param = NULL, *str = NULL, *classLoaded = NULL, *className = NULL, *pos = NULL, *basePath = NULL, *entry = NULL, *glob = NULL, *moduleClassFile = NULL, *moduleName = NULL, *ns = NULL, *path = NULL, *moduleNameBuffer = NULL, *moduleClassPath, *pharSuffixPattern = NULL, *namespacedPaths = NULL, *exts = NULL, _0 = zval_used_for_init, *_2, _3 = zval_used_for_init, *_4, *_5, **_8, *_9 = NULL, *_10 = NULL, _13, *_14, _15 = zval_used_for_init, *_17 = NULL, **_20, _21 = zval_used_for_init, *_26 = NULL, **_30, *_31 = NULL, *_32 = NULL, *_34 = NULL;
 	zval *class = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -410,14 +410,14 @@ PHP_METHOD(ZendFramework_Loader_ModuleAutoloader, autoload) {
 				}
 				ZEPHIR_CALL_METHOD(&_31, entry, "getpathname",  NULL);
 				zephir_check_call_status();
-				ZEPHIR_CALL_FUNCTION(&_32, "preg_math", NULL, pharSuffixPattern, _31);
+				ZEPHIR_CALL_FUNCTION(&_32, "preg_match", &_33, pharSuffixPattern, _31);
 				zephir_check_call_status();
 				if (!(zephir_is_true(_32))) {
 					continue;
 				}
-				ZEPHIR_CALL_METHOD(&_33, entry, "getpathname",  NULL);
+				ZEPHIR_CALL_METHOD(&_34, entry, "getpathname",  NULL);
 				zephir_check_call_status();
-				ZEPHIR_CALL_METHOD(&classLoaded, this_ptr, "loadmodulefromphar", &_12, _33, className);
+				ZEPHIR_CALL_METHOD(&classLoaded, this_ptr, "loadmodulefromphar", &_12, _34, className);
 				zephir_check_call_status();
 				if (zephir_is_true(classLoaded)) {
 					RETURN_CCTOR(classLoaded);

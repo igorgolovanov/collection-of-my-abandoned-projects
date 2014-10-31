@@ -203,7 +203,7 @@ class ModuleAutoloader implements SplAutoloader
                         continue;
                     }
 
-                    if !preg_math(pharSuffixPattern, entry->getPathname()) {
+                    if !preg_match(pharSuffixPattern, entry->getPathname()) {
                         continue;
                     }
 
