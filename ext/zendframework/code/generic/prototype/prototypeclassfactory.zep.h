@@ -1,0 +1,46 @@
+
+extern zend_class_entry *zendframework_code_generic_prototype_prototypeclassfactory_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory);
+
+PHP_METHOD(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, __construct);
+PHP_METHOD(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, addPrototype);
+PHP_METHOD(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, setGenericPrototype);
+PHP_METHOD(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, normalizeName);
+PHP_METHOD(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, hasPrototype);
+PHP_METHOD(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, getClonedPrototype);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_code_generic_prototype_prototypeclassfactory___construct, 0, 0, 0)
+	ZEND_ARG_INFO(0, prototypes)
+	ZEND_ARG_OBJ_INFO(0, genericPrototype, ZendFramework\\Code\\Generic\\Prototype\\PrototypeGenericInterface, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_code_generic_prototype_prototypeclassfactory_addprototype, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, prototype, ZendFramework\\Code\\Generic\\Prototype\\PrototypeInterface, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_code_generic_prototype_prototypeclassfactory_setgenericprototype, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, prototype, ZendFramework\\Code\\Generic\\Prototype\\PrototypeGenericInterface, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_code_generic_prototype_prototypeclassfactory_normalizename, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_code_generic_prototype_prototypeclassfactory_hasprototype, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_code_generic_prototype_prototypeclassfactory_getclonedprototype, 0, 0, 1)
+	ZEND_ARG_INFO(0, prototypeName)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_code_generic_prototype_prototypeclassfactory_method_entry) {
+	PHP_ME(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, __construct, arginfo_zendframework_code_generic_prototype_prototypeclassfactory___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
+	PHP_ME(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, addPrototype, arginfo_zendframework_code_generic_prototype_prototypeclassfactory_addprototype, ZEND_ACC_PUBLIC)
+	PHP_ME(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, setGenericPrototype, arginfo_zendframework_code_generic_prototype_prototypeclassfactory_setgenericprototype, ZEND_ACC_PUBLIC)
+	PHP_ME(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, normalizeName, arginfo_zendframework_code_generic_prototype_prototypeclassfactory_normalizename, ZEND_ACC_PROTECTED)
+	PHP_ME(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, hasPrototype, arginfo_zendframework_code_generic_prototype_prototypeclassfactory_hasprototype, ZEND_ACC_PUBLIC)
+	PHP_ME(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, getClonedPrototype, arginfo_zendframework_code_generic_prototype_prototypeclassfactory_getclonedprototype, ZEND_ACC_PUBLIC)
+  PHP_FE_END
+};

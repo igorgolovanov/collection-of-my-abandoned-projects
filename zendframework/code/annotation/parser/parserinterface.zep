@@ -9,15 +9,17 @@ file that was distributed with this source code.
 
 namespace Zend\Code\Annotation\Parser;
 
+use Zend\EventManager\EventInterface;
+
 interface ParserInterface
 {
     /**
      * Respond to the "createAnnotation" event
      *
      * @param  EventInterface  $e
-     * @return false|\stdClass
+     * @return false|object
      */
-    public function onCreateAnnotation(e) -> <\stdClass>;
+    public function onCreateAnnotation(<EventInterface> e) -> object|boolean;
 
     /**
      * Register an annotation this parser will accept

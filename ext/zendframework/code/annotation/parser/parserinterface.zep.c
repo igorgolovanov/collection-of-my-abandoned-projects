@@ -32,7 +32,7 @@ ZEPHIR_INIT_CLASS(ZendFramework_Code_Annotation_Parser_ParserInterface) {
  * Respond to the "createAnnotation" event
  *
  * @param  EventInterface  $e
- * @return false|\stdClass
+ * @return false|object
  */
 ZEPHIR_DOC_METHOD(ZendFramework_Code_Annotation_Parser_ParserInterface, onCreateAnnotation);
 

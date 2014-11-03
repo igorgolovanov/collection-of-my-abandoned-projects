@@ -4,7 +4,7 @@ extern zend_class_entry *zendframework_code_annotation_parser_parserinterface_ce
 ZEPHIR_INIT_CLASS(ZendFramework_Code_Annotation_Parser_ParserInterface);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_code_annotation_parser_parserinterface_oncreateannotation, 0, 0, 1)
-	ZEND_ARG_INFO(0, e)
+	ZEND_ARG_OBJ_INFO(0, e, ZendFramework\\EventManager\\EventInterface, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_code_annotation_parser_parserinterface_registerannotation, 0, 0, 1)
