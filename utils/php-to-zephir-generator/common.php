@@ -42,7 +42,7 @@ function zephir_is_keyword($word)
  * @param array $arr
  * @return string
  */
-function zephir_print_array(array $arr)
+function zephir_print_array(array $arr, $level = 0)
 {
     $isSimple = (bool) count(array_filter(array_keys($arr), 'is_int'));
 
@@ -52,6 +52,11 @@ function zephir_print_array(array $arr)
         if(!$first) {
             $content .= ", ";
         }
+        $content .= "\n\t\t";
+        for ($i=0;$i<$level; $i++) {
+            $content .= "\t";
+        }
+
         if (!$isSimple) {
             $content .= is_int($k) ? $k : "\"$k\"";
             $content .= ": ";
@@ -65,11 +70,17 @@ function zephir_print_array(array $arr)
         } elseif(is_string($v)) {
             $content .= "\"$v\"";
         } elseif (is_array($v)) {
-            $content .= zephir_print_array($v);
+            $content .= zephir_print_array($v, $level + 1);
         } else {
             $content .= "\"\"";
         }
         $first = false;
+    }
+    if (!$first) {
+        $content .= "\n\t";
+        for ($i=0;$i<$level; $i++) {
+            $content .= "\t";
+        }
     }
     $content .= ']';
     return $content;
@@ -147,6 +158,8 @@ function zephir_get_method_return_types(ReflectionMethod $method)
             case 'float':
             case 'double': // @todo: check
             case 'resource':
+            case 'null':
+            case 'callable':
                 $returnTypes[] = strtolower($type);
                 break;
             case 'self':
@@ -232,6 +245,9 @@ function zephir_get_method_parameter_types(ReflectionMethod $methodRef, $paramet
                 case 'bool':
                 case 'boolean':
                     $parameterTypes[] = 'boolean';
+                    break;
+                case 'callable':
+                    $parameterTypes[] = 'callable';
                     break;
                 case 'array':
                 case 'string':
@@ -364,6 +380,7 @@ function zephir_convert_type($type)
         case 'resource':
         case 'object':
         case 'array':
+        case 'callable':
             return $type;
     }
     return false;
@@ -465,4 +482,31 @@ function zephir_generate_method(ReflectionMethod $method)
 function zephir_generate_constant($name, $value)
 {
     return "    const $name = " . zephir_print_value($value) . ';';
+}
+
+function zephir_is_interface_in_parent($currentClassOrInterface, $interface)
+{
+    $ref = ($currentClassOrInterface instanceof \ReflectionClass) ? $currentClassOrInterface : new \ReflectionClass($currentClassOrInterface);
+
+    foreach ($ref->getInterfaces() as $i) {
+        if ($i->isSubclassOf($interface)) {
+            return true;
+        }
+    }
+    if (!$ref->isInterface() && $refParent = $ref->getParentClass()) {
+        return $refParent->isSubclassOf($interface);
+    }
+    return false;
+}
+
+function zephir_get_implements_interfaces($currentClassOrInterface)
+{
+    $ref = ($currentClassOrInterface instanceof \ReflectionClass) ? $currentClassOrInterface : new \ReflectionClass($currentClassOrInterface);
+    $interfaces = [];
+    foreach($ref->getInterfaces() as $i) {
+        if (!zephir_is_interface_in_parent($ref->getName(), $i->getName())) {
+            $interfaces[] = $i;
+        }
+    }
+    return $interfaces;
 }

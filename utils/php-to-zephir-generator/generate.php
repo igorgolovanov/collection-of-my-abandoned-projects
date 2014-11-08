@@ -20,7 +20,7 @@ $skipNamespaces = include __DIR__ . '/skip-namespaces.php';
 $generateInterfaces = false;
 $generateExceptions = false;
 $generateClasses = true;
-$onlyNotExists = true;
+$onlyNotExists = false;
 
 $allowClasses = include __DIR__ . '/allow-classes.php';
 $allowNamespaces = include __DIR__ . '/allow-namespaces.php';
@@ -75,7 +75,7 @@ foreach ($iterator as $k => $file) {
         continue;
     }
     if(in_array($className, $skipClasses)) {
-        //printf("Class %s skipped!\n", $className);
+        printf("Class %s skipped!\n", $className);
         continue;
     } else {
         $isSkipped = false;
@@ -86,7 +86,7 @@ foreach ($iterator as $k => $file) {
             }
         }
         if ($isSkipped) {
-            //printf("Class %s skipped!\n", $className);
+            printf("Class %s skipped!\n", $className);
             continue;
         }
     }
@@ -96,13 +96,13 @@ foreach ($iterator as $k => $file) {
         continue; // not supported
     }
 
-    if(!$generateInterfaces && !$ref->isInterface()) {
-        //printf("Class %s not interface!\n", $className);
+    if($generateInterfaces && !$ref->isInterface()) {
+        printf("Class %s not interface!\n", $className);
         continue;
     }
 
-    if(!$generateExceptions && !$ref->isSubclassOf('Exception')) {
-        //printf("Class %s not exception!\n", $className);
+    if($generateExceptions && !$ref->isSubclassOf('Exception')) {
+        printf("Class %s not exception!\n", $className);
         continue;
     }
 
@@ -133,12 +133,12 @@ file that was distributed with this source code.
     if ($ref->isInterface()) {
         $content .= "interface {$ref->getShortName()}";
 
-        $interfaces = $ref->getInterfaces();
+        $interfaces = zephir_get_implements_interfaces($ref);
         if(count($interfaces)) {
             $content .= ' extends ';
         }
         $fi = true;
-        foreach ($ref->getInterfaces() as $interface) {
+        foreach ($interfaces as $interface) {
             if (!$fi) {
                 $content .= ', ';
             }
@@ -178,12 +178,12 @@ file that was distributed with this source code.
             }
         }
 
-        $interfaces = $ref->getInterfaces();
+        $interfaces = zephir_get_implements_interfaces($ref);
         if(count($interfaces)) {
             $content .= ' implements ';
         }
         $fi = true;
-        foreach ($ref->getInterfaces() as $interface) {
+        foreach ($interfaces as $interface) {
             if (!$fi) {
                 $content .= ', ';
             }
