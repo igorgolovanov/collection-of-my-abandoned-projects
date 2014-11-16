@@ -3,6 +3,11 @@
 #define ZEPHIR_SCONCAT_SS(result, op1, op2) \
 	 zephir_concat_ss(&result, op1, sizeof(op1)-1, op2, sizeof(op2)-1, 1 TSRMLS_CC);
 
+#define ZEPHIR_CONCAT_SSS(result, op1, op2, op3) \
+	 zephir_concat_sss(&result, op1, sizeof(op1)-1, op2, sizeof(op2)-1, op3, sizeof(op3)-1, 0 TSRMLS_CC);
+#define ZEPHIR_SCONCAT_SSS(result, op1, op2, op3) \
+	 zephir_concat_sss(&result, op1, sizeof(op1)-1, op2, sizeof(op2)-1, op3, sizeof(op3)-1, 1 TSRMLS_CC);
+
 #define ZEPHIR_CONCAT_SSSSS(result, op1, op2, op3, op4, op5) \
 	 zephir_concat_sssss(&result, op1, sizeof(op1)-1, op2, sizeof(op2)-1, op3, sizeof(op3)-1, op4, sizeof(op4)-1, op5, sizeof(op5)-1, 0 TSRMLS_CC);
 #define ZEPHIR_SCONCAT_SSSSS(result, op1, op2, op3, op4, op5) \
@@ -80,6 +85,7 @@
 
 
 void zephir_concat_ss(zval **result, const char *op1, zend_uint op1_len, const char *op2, zend_uint op2_len, int self_var TSRMLS_DC);
+void zephir_concat_sss(zval **result, const char *op1, zend_uint op1_len, const char *op2, zend_uint op2_len, const char *op3, zend_uint op3_len, int self_var TSRMLS_DC);
 void zephir_concat_sssss(zval **result, const char *op1, zend_uint op1_len, const char *op2, zend_uint op2_len, const char *op3, zend_uint op3_len, const char *op4, zend_uint op4_len, const char *op5, zend_uint op5_len, int self_var TSRMLS_DC);
 void zephir_concat_ssssss(zval **result, const char *op1, zend_uint op1_len, const char *op2, zend_uint op2_len, const char *op3, zend_uint op3_len, const char *op4, zend_uint op4_len, const char *op5, zend_uint op5_len, const char *op6, zend_uint op6_len, int self_var TSRMLS_DC);
 void zephir_concat_ssssvs(zval **result, const char *op1, zend_uint op1_len, const char *op2, zend_uint op2_len, const char *op3, zend_uint op3_len, const char *op4, zend_uint op4_len, zval *op5, const char *op6, zend_uint op6_len, int self_var TSRMLS_DC);
