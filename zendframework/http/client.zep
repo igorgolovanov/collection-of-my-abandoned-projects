@@ -158,7 +158,7 @@ class Client implements Stdlib\DispatchableInterface
         }
 
         for k, v in options {
-            var key = str_replace(wildcards, "", strtolower(k));
+            let key = str_replace(wildcards, "", strtolower(k));
             let this->config[key] = v; // replace w/ normalized
         }
 
@@ -182,7 +182,8 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setAdapter(var adapter) -> <Client>
     {
-        string exceptionMsg, config;
+        string exceptionMsg;
+        var config;
 
         if typeof adapter == "string" {
             if unlikely !class_exists(adapter) {
@@ -204,7 +205,6 @@ class Client implements Stdlib\DispatchableInterface
         adapter->setOptions(config);
 
         return this;
-
     }
 
     /**
@@ -247,7 +247,7 @@ class Client implements Stdlib\DispatchableInterface
         let request = this->request;
         if empty request {
             let request = new Request();
-            let this->response = response;
+            let this->request = request;
         }
         return request;
     }
@@ -322,6 +322,7 @@ class Client implements Stdlib\DispatchableInterface
         if !empty uri {
 
         }
+        return this;
     }
 
     /**
@@ -342,7 +343,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setMethod(string method) -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -352,7 +353,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function getMethod() -> string
     {
-
+        return ""; // todo:
     }
 
     /**
@@ -363,7 +364,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setArgSeparator(string argSeparator) -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -385,7 +386,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setEncType(string encType, string boundary = null) -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -406,7 +407,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setRawBody(string body) -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -417,7 +418,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setParameterPost(array! post) -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -428,7 +429,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setParameterGet(array! query) -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -440,7 +441,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function resetParameters(boolean clearCookies = false) -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -450,7 +451,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function getCookies() -> array
     {
-
+        return []; // todo
     }
 
     /**
@@ -461,7 +462,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     protected function getCookieId(var cookie) -> string|boolean
     {
-
+        return ""; // todo:
     }
 
     /**
@@ -481,7 +482,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function addCookie(var cookie, string value = null, string expire = null, string path = null, string domain = null, boolean secure = false, boolean httponly = true, string maxAge = null, string version = null) -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -493,7 +494,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setCookies(array cookies) -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -513,7 +514,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setHeaders(var headers) -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -524,7 +525,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function hasHeader(string name) -> boolean
     {
-
+        return true; // todo
     }
 
     /**
@@ -535,7 +536,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function getHeader(string name) -> string|boolean
     {
-
+        return ""; // todo
     }
 
     /**
@@ -546,7 +547,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setStream(var streamfile = true) -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -555,7 +556,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function getStream() -> boolean|string
     {
-
+        return ""; //todo
     }
 
     /**
@@ -564,9 +565,9 @@ class Client implements Stdlib\DispatchableInterface
      * @throws Exception\RuntimeException
      * @return resource
      */
-    protected function openTempStream() -> resource
+    protected function openTempStream() //-> resource
     {
-
+        // todo
     }
 
     /**
@@ -579,9 +580,9 @@ class Client implements Stdlib\DispatchableInterface
      * @throws Exception\InvalidArgumentException
      * @return Client
      */
-    public function setAuth(string user, string password, string type = self::AUTH_BASIC) -> <Client>
+    public function setAuth(string user, string password, var type = self::AUTH_BASIC) -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -604,9 +605,9 @@ class Client implements Stdlib\DispatchableInterface
      * @throws Exception\InvalidArgumentException
      * @return string|bool
      */
-    protected function calcAuthDigest(string user, string password, string type = self::AUTH_BASIC, array digest = [], string entityBody = null) -> string|boolean
+    protected function calcAuthDigest(string user, string password, var type = self::AUTH_BASIC, array digest = [], string entityBody = null) -> string|boolean
     {
-
+        return ""; //todo
     }
 
     /**
@@ -618,7 +619,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function dispatch(request, response = null)
     {
-
+        // todo
     }
 
     /**
@@ -629,9 +630,9 @@ class Client implements Stdlib\DispatchableInterface
      * @throws Exception\RuntimeException
      * @throws Client\Exception\RuntimeException
      */
-    public function send(<Request> request = null) -> <Response>
+    public function send(<Request> request = null) // -> <Response>
     {
-
+        // todo
     }
 
     /**
@@ -641,7 +642,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function reset() -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -666,7 +667,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setFileUpload(string filename, string formname, string data = null, string ctype = null) -> <Client>
     {
-
+        return this;// todo:
     }
 
     /**
@@ -677,7 +678,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function removeFileUpload(string filename) -> boolean
     {
-
+        return true; // todo
     }
 
     /**
@@ -690,7 +691,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     protected function prepareCookies(string domain, string path, boolean secure) -> <Header\Cookie>|boolean
     {
-
+        return true; // todo
     }
 
     /**
@@ -703,7 +704,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     protected function prepareHeaders(var body, uri) -> array
     {
-
+        return []; // todo
     }
 
     /**
@@ -714,7 +715,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     protected function prepareBody() -> string
     {
-
+        return ""; // todo
     }
 
     /**
@@ -733,7 +734,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     protected function detectFileMimeType(string file) -> string
     {
-
+        return ""; // todo
     }
 
     /**
@@ -748,7 +749,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function encodeFormData(string boundary, string name, value, string filename = null, array headers = []) -> string
     {
-
+        return ""; // todo
     }
 
     /**
@@ -767,7 +768,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     protected function flattenParametersArray(array parray, string prefix = null) -> array
     {
-
+        return []; // todo
     }
 
     /**
@@ -784,7 +785,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     protected function doRequest(uri, string method, boolean secure = false, array headers = [], string body = "") -> string
     {
-
+        return ""; // todo
     }
 
     /**
@@ -798,9 +799,9 @@ class Client implements Stdlib\DispatchableInterface
      * @return string
      * @throws Client\Exception\InvalidArgumentException
      */
-    public static function encodeAuthHeader(string user, string password, string type = self::AUTH_BASIC) -> string
+    public static function encodeAuthHeader(string user, string password, var type = self::AUTH_BASIC) -> string
     {
-
+        return ""; // todo
     }
 
 }

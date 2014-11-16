@@ -35,7 +35,7 @@ class Request extends AbstractMessage implements RequestInterface
     const METHOD_CONNECT = "CONNECT";
     const METHOD_PATCH = "PATCH";
     const METHOD_PROPFIND = "PROPFIND";
-    /**#@-*/
+
 
     /**
      * @var string
@@ -168,11 +168,12 @@ class Request extends AbstractMessage implements RequestInterface
     public function setUri(var uri) -> <Request>
     {
         string exceptionMsg, uriStr;
+        var e;
 
         if typeof uri == "string" {
             try {
                 let uri = new HttpUri(uri);
-            } catch UriException\InvalidUriPartException {
+            } catch UriException\InvalidUriPartException, e {
                 let uriStr = (string) uri;
                 let exceptionMsg = "Invalid URI passed as string (" . uriStr . ")";
 
@@ -387,7 +388,7 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function getHeader(string name, var defaultVal = false) -> <Headers>|boolean|<Header\HeaderInterface>|<\ArrayIterator>
     {
-        return this->getHeaders(name, defaultVal)
+        return this->getHeaders(name, defaultVal);
     }
 
     /**
@@ -499,7 +500,7 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function isXmlHttpRequest() -> boolean
     {
-        var headers, header;
+        var headers, header, fieldValue;
 
         let headers = <Headers> this->getHeaders();
         let header = <Header\HeaderInterface> headers->get("X_REQUESTED_WITH");
@@ -520,7 +521,7 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function isFlashRequest() -> boolean
     {
-        var headers, header;
+        var headers, header, fieldValue;
 
         let headers = <Headers> this->getHeaders();
         let header = <Header\HeaderInterface> headers->get("USER_AGENT");
@@ -559,7 +560,8 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function toString() -> string
     {
-        string str, line, headers, headersStr, content;
+        string str;
+        var line, headers, headersStr, content;
 
         let line = this->renderRequestLine();
         let headers = <Headers> this->getHeaders();

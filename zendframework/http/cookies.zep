@@ -103,12 +103,13 @@ class Cookies extends Headers
         var domain, path, name;
 
         if typeof cookie == "string" {
-            let cookie = SetCookie::fromString(cookie, refUri);
+//            let cookie = SetCookie::fromString(cookie, refUri);
         }
 
-        if unlikely !(cookie instanceof SetCookie) {
-            throw new Exception\InvalidArgumentException("Supplient argument is not a valid cookie string or object");
-        }
+// todo:
+//        if unlikely !(cookie instanceof SetCookie) {
+//            throw new Exception\InvalidArgumentException("Supplient argument is not a valid cookie string or object");
+//        }
 
         let domain = cookie->getDomain();
         let path = cookie->getPath();
@@ -156,7 +157,7 @@ class Cookies extends Headers
      * @param int $retAs Whether to return cookies as objects of \Zend\Http\Header\SetCookie or as strings
      * @return array|string
      */
-    public function getAllCookies(int retAs = self::COOKIE_OBJECT) -> array|string
+    public function getAllCookies(int retAs = 0) -> array|string
     {
         var cookies;
 
@@ -178,14 +179,15 @@ class Cookies extends Headers
      * @throws Exception\InvalidArgumentException if invalid URI specified
      * @return array|string
      */
-    public function getMatchingCookies(var uri, boolean matchSessionCookies = true, int retAs = self::COOKIE_OBJECT, int now = null) -> array|string
+    public function getMatchingCookies(var uri, boolean matchSessionCookies = true, int retAs = 0, int now = null) -> array|string
     {
         var host, path, cookies, result = [], cookie;
 
+        // todo:
         if typeof uri == "string" {
-            let uri = Uri\UriFactory::factory(uri, "http");
-        } elseif unlikely !(uri instanceof Uri\UriInterface) {
-            throw new Exception\InvalidArgumentException("Invalid URI string or object passed");
+           // let uri = Uri\UriFactory::factory(uri, "http");
+//        } elseif unlikely !(uri instanceof Uri\UriInterface) {
+//            throw new Exception\InvalidArgumentException("Invalid URI string or object passed");
         }
 
         let host = uri->getHost();
@@ -219,14 +221,16 @@ class Cookies extends Headers
      * @throws Exception\InvalidArgumentException if invalid URI specified or invalid $retAs value
      * @return SetCookie|string
      */
-    public function getCookie(string uri, string cookieName, int retAs = self::COOKIE_OBJECT) -> string|<SetCookie>|boolean
+    public function getCookie(var uri, string cookieName, int retAs = 0) -> string|<SetCookie>|boolean
     {
         var host, path, result, cookie;
+        string exceptionMsg;
 
+// todo:
         if typeof uri == "string" {
-            let uri = Uri\UriFactory::factory(uri, "http");
-        } elseif unlikely !(uri instanceof Uri\UriInterface) {
-            throw new Exception\InvalidArgumentException("Invalid URI specified");
+           // let uri = Uri\UriFactory::factory(uri, "http");
+    //    } elseif unlikely !(uri instanceof Uri\UriInterface) {
+       //     throw new Exception\InvalidArgumentException("Invalid URI specified");
         }
 
         let host = uri->getHost();
@@ -271,7 +275,7 @@ class Cookies extends Headers
      * @param int $retAs What value to return
      * @return array|string
      */
-    protected function _flattenCookiesArray(var ptr, int retAs = self::COOKIE_OBJECT) -> array|string|null
+    protected function _flattenCookiesArray(var ptr, int retAs = 0) -> array|string|null
     {
         var result, item, cookies;
 
@@ -318,9 +322,10 @@ class Cookies extends Headers
 
         let cookiesKeys = array_keys(this->cookies);
         for cdom in cookiesKeys {
-            if SetCookie::matchCookieDomain(cdom, domain) {
-                let result[cdom] = this->cookies[cdom];
-            }
+        // todo:
+         //   if SetCookie::matchCookieDomain(cdom, domain) {
+         //       let result[cdom] = this->cookies[cdom];
+         //   }
         }
 
         return result;
@@ -340,12 +345,12 @@ class Cookies extends Headers
         for dom, pathsArray in domains {
             let pathsArrayKeys = array_keys(pathsArray);
             for cpath in pathsArrayKeys {
-                if SetCookie::matchCookiePath(cpath, path) {
+             //   if SetCookie::matchCookiePath(cpath, path) { // todo:
                     if !isset result[dom] {
                         let result[dom] = [];
                     }
                     let result[dom][cpath] = pathsArray[cpath];
-                }
+             //   }
             }
         }
 
@@ -382,10 +387,10 @@ class Cookies extends Headers
      */
     public function isEmpty() -> boolean
     {
-        int count;
+        var count;
         let count = this->count();
 
-        return count == 0
+        return count == 0;
     }
 
     /**

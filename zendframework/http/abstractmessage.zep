@@ -23,12 +23,12 @@ abstract class AbstractMessage extends Message
      */
     const VERSION_10 = "1.0";
     const VERSION_11 = "1.1";
-    /**#@-*/
+    //**#@-*/
 
     /**
      * @var string
      */
-    protected version = "1.1"; // self::VERSION_11
+    protected version = "1.1";
 
     /**
      * @var Headers|null

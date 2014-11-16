@@ -295,7 +295,7 @@ class Headers implements Countable, Iterator
         }
 
 
-        let current = this->headers[index];
+        let current = this->headers[name]; // todo:  check index name
         let className = this->getPluginClassLoader()->load(key);
         if !className {
             let className = "Zend\\Http\\Header\\GenericHeader";
@@ -469,7 +469,7 @@ class Headers implements Countable, Iterator
 
                 if matches {
                     let name = matches["name"];
-                    let value = matches["value"]
+                    let value = matches["value"];
                     let headers[name] = value;
                 }
             }
@@ -502,7 +502,7 @@ class Headers implements Countable, Iterator
         var current, className, headers, header;
 
         let current = this->headers[index];
-        let className = this->getPluginClassLoader()->load(key);
+        let className = this->getPluginClassLoader()->load(index); //todo: check code
         if !className {
             let className = "Zend\\Http\\Header\\GenericHeader";
         }
@@ -512,7 +512,7 @@ class Headers implements Countable, Iterator
             let this->headers[index] = current;
 
             for header in headers {
-                let this->headersKeys[] = key;
+                let this->headersKeys[] = index; // todo: check code
                 let this->headers[] = header;
             }
             return current;

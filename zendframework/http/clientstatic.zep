@@ -61,10 +61,10 @@ class ClientStatic
         request->setUri(url);
         request->setMethod(Request::METHOD_GET);
 
-        if !empty query && typeof query == "array" {
+        if count(query) > 0 {
             request->getQuery()->fromArray(query);
         }
-        if !empty headers && typeof headers == "array" {
+        if count(headers) > 0 {
             request->getHeaders()->addHeaders(headers);
         }
         if !empty body {
@@ -87,7 +87,7 @@ class ClientStatic
      * @throws Exception\InvalidArgumentException
      * @return Response|bool
      */
-    public static function post(string url, array params, array headers = [], var body = null) -> <Response>|boolean
+    public static function post(string url, var params, array headers = [], var body = null) -> <Response>|boolean
     {
         var request, response, client;
 
@@ -100,15 +100,15 @@ class ClientStatic
         request->setUri(url);
         request->setMethod(Request::METHOD_POST);
 
-        if unlikely empty query && typeof query != "array" {
+        if unlikely empty params && typeof params != "array" {
             throw new Exception\InvalidArgumentException("The array of post parameters is empty");
         }
-        request->getPost()->fromArray(query);
+        request->getPost()->fromArray(params);
 
         if !isset headers["Content-Type"] {
             let headers["Content-Type"] = Client::ENC_URLENCODED;
         }
-        if !empty headers {
+        if count(headers) {
             request->getHeaders()->addHeaders(headers);
         }
         if !empty body {
