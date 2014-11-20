@@ -179,7 +179,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleEvent, setConfigListener) {
 
 
 	if (!(zephir_instance_of_ev(configListener, zendframework_modulemanager_listener_configmergerinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'configListener' must be an instance of 'ZendFramework\\\\ModuleManager\\\\Listener\\\\ConfigMergerInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'configListener' must be an instance of 'ZendFramework\\ModuleManager\\Listener\\ConfigMergerInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_INIT_VAR(_0);

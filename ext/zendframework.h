@@ -659,5 +659,6 @@
 #include "zendframework/xmlrpc/server/exception/exceptioninterface.zep.h"
 #include "zendframework/xmlrpc/server/exception/invalidargumentexception.zep.h"
 #include "zendframework/xmlrpc/server/exception/runtimeexception.zep.h"
+#include "zendframework/0__closure.zep.h"
 
 #endif

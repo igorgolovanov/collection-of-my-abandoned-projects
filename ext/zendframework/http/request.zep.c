@@ -101,12 +101,12 @@ ZEPHIR_INIT_CLASS(ZendFramework_Http_Request) {
  */
 PHP_METHOD(ZendFramework_Http_Request, fromString) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_4 = NULL, *_6 = NULL;
-	zval *_1;
+	zephir_nts_static zephir_fcall_cache_entry *_5 = NULL, *_7 = NULL;
+	zval *_2;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_0;
+	zend_class_entry *_1;
 	zend_bool isHeader = 1;
-	zval *string_param = NULL, *className, *request, *lines, *matches = NULL, *methods, *firstLine = NULL, *version, *headers, *rawBody, *nextLine = NULL, *_2 = NULL, *_3, *_5 = NULL, *_7, *_8, *_9;
+	zval *string_param = NULL, *className, *request, *lines, *matches = NULL, *methods, *firstLine = NULL, *version, *headers, *rawBody, *nextLine = NULL, *_0 = NULL, *_3 = NULL, *_4, *_6 = NULL, *_8, *_9, *_10;
 	zval *string = NULL, *regex = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -124,8 +124,9 @@ PHP_METHOD(ZendFramework_Http_Request, fromString) {
 	ZEPHIR_INIT_VAR(className);
 	zephir_get_called_class(className TSRMLS_CC);
 	ZEPHIR_INIT_VAR(request);
-	_0 = zend_fetch_class(Z_STRVAL_P(className), Z_STRLEN_P(className), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	object_init_ex(request, _0);
+	zephir_fetch_safe_class(_0, className);
+	_1 = zend_fetch_class(Z_STRVAL_P(_0), Z_STRLEN_P(_0), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+	object_init_ex(request, _1);
 	if (zephir_has_constructor(request TSRMLS_CC)) {
 		ZEPHIR_CALL_METHOD(NULL, request, "__construct", NULL);
 		zephir_check_call_status();
@@ -133,56 +134,56 @@ PHP_METHOD(ZendFramework_Http_Request, fromString) {
 	ZEPHIR_INIT_VAR(lines);
 	zephir_fast_explode_str(lines, SL("\r\n"), string, LONG_MAX TSRMLS_CC);
 	ZEPHIR_INIT_VAR(methods);
-	ZEPHIR_INIT_VAR(_1);
-	array_init_size(_1, 12);
 	ZEPHIR_INIT_VAR(_2);
-	ZVAL_STRING(_2, "OPTIONS", 1);
-	zephir_array_fast_append(_1, _2);
-	ZEPHIR_INIT_BNVAR(_2);
-	ZVAL_STRING(_2, "GET", 1);
-	zephir_array_fast_append(_1, _2);
-	ZEPHIR_INIT_BNVAR(_2);
-	ZVAL_STRING(_2, "HEAD", 1);
-	zephir_array_fast_append(_1, _2);
-	ZEPHIR_INIT_BNVAR(_2);
-	ZVAL_STRING(_2, "POST", 1);
-	zephir_array_fast_append(_1, _2);
-	ZEPHIR_INIT_BNVAR(_2);
-	ZVAL_STRING(_2, "PUT", 1);
-	zephir_array_fast_append(_1, _2);
-	ZEPHIR_INIT_BNVAR(_2);
-	ZVAL_STRING(_2, "DELETE", 1);
-	zephir_array_fast_append(_1, _2);
-	ZEPHIR_INIT_BNVAR(_2);
-	ZVAL_STRING(_2, "TRACE", 1);
-	zephir_array_fast_append(_1, _2);
-	ZEPHIR_INIT_BNVAR(_2);
-	ZVAL_STRING(_2, "CONNECT", 1);
-	zephir_array_fast_append(_1, _2);
-	ZEPHIR_INIT_BNVAR(_2);
-	ZVAL_STRING(_2, "PATCH", 1);
-	zephir_array_fast_append(_1, _2);
-	zephir_fast_join_str(methods, SL("|"), _1 TSRMLS_CC);
+	array_init_size(_2, 12);
 	ZEPHIR_INIT_VAR(_3);
-	ZEPHIR_CONCAT_SVS(_3, "#^(?P<method>", methods, ")\s(?P<uri>[^ ]*)(?:\sHTTP\/(?P<version>\d+\.\d+)){0,1}#");
-	zephir_get_strval(regex, _3);
+	ZVAL_STRING(_3, "OPTIONS", 1);
+	zephir_array_fast_append(_2, _3);
+	ZEPHIR_INIT_NVAR(_3);
+	ZVAL_STRING(_3, "GET", 1);
+	zephir_array_fast_append(_2, _3);
+	ZEPHIR_INIT_NVAR(_3);
+	ZVAL_STRING(_3, "HEAD", 1);
+	zephir_array_fast_append(_2, _3);
+	ZEPHIR_INIT_NVAR(_3);
+	ZVAL_STRING(_3, "POST", 1);
+	zephir_array_fast_append(_2, _3);
+	ZEPHIR_INIT_NVAR(_3);
+	ZVAL_STRING(_3, "PUT", 1);
+	zephir_array_fast_append(_2, _3);
+	ZEPHIR_INIT_NVAR(_3);
+	ZVAL_STRING(_3, "DELETE", 1);
+	zephir_array_fast_append(_2, _3);
+	ZEPHIR_INIT_NVAR(_3);
+	ZVAL_STRING(_3, "TRACE", 1);
+	zephir_array_fast_append(_2, _3);
+	ZEPHIR_INIT_NVAR(_3);
+	ZVAL_STRING(_3, "CONNECT", 1);
+	zephir_array_fast_append(_2, _3);
+	ZEPHIR_INIT_NVAR(_3);
+	ZVAL_STRING(_3, "PATCH", 1);
+	zephir_array_fast_append(_2, _3);
+	zephir_fast_join_str(methods, SL("|"), _2 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(_4);
+	ZEPHIR_CONCAT_SVS(_4, "#^(?P<method>", methods, ")\s(?P<uri>[^ ]*)(?:\sHTTP\/(?P<version>\d+\.\d+)){0,1}#");
+	zephir_get_strval(regex, _4);
 	Z_SET_ISREF_P(lines);
-	ZEPHIR_CALL_FUNCTION(&firstLine, "array_shift", &_4, lines);
+	ZEPHIR_CALL_FUNCTION(&firstLine, "array_shift", &_5, lines);
 	Z_UNSET_ISREF_P(lines);
 	zephir_check_call_status();
 	Z_SET_ISREF_P(matches);
-	ZEPHIR_CALL_FUNCTION(&_5, "preg_match", &_6, regex, firstLine, matches);
+	ZEPHIR_CALL_FUNCTION(&_6, "preg_match", &_7, regex, firstLine, matches);
 	Z_UNSET_ISREF_P(matches);
 	zephir_check_call_status();
-	if (unlikely(!zephir_is_true(_5))) {
+	if (unlikely(!zephir_is_true(_6))) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_http_exception_invalidargumentexception_ce, "A valid request line was not found in the provided string", "zendframework/http/request.zep", 93);
 		return;
 	}
-	zephir_array_fetch_string(&_7, matches, SL("method"), PH_NOISY | PH_READONLY, "zendframework/http/request.zep", 96 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(NULL, request, "setmethod", NULL, _7);
+	zephir_array_fetch_string(&_8, matches, SL("method"), PH_NOISY | PH_READONLY, "zendframework/http/request.zep", 96 TSRMLS_CC);
+	ZEPHIR_CALL_METHOD(NULL, request, "setmethod", NULL, _8);
 	zephir_check_call_status();
-	zephir_array_fetch_string(&_8, matches, SL("uri"), PH_NOISY | PH_READONLY, "zendframework/http/request.zep", 97 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(NULL, request, "seturi", NULL, _8);
+	zephir_array_fetch_string(&_9, matches, SL("uri"), PH_NOISY | PH_READONLY, "zendframework/http/request.zep", 97 TSRMLS_CC);
+	ZEPHIR_CALL_METHOD(NULL, request, "seturi", NULL, _9);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(version);
 	if (zephir_array_isset_string_fetch(&version, matches, SS("version"), 0 TSRMLS_CC)) {
@@ -197,7 +198,7 @@ PHP_METHOD(ZendFramework_Http_Request, fromString) {
 			break;
 		}
 		Z_SET_ISREF_P(lines);
-		ZEPHIR_CALL_FUNCTION(&nextLine, "array_shift", &_4, lines);
+		ZEPHIR_CALL_FUNCTION(&nextLine, "array_shift", &_5, lines);
 		Z_UNSET_ISREF_P(lines);
 		zephir_check_call_status();
 		if (ZEPHIR_IS_STRING(nextLine, "")) {
@@ -211,14 +212,14 @@ PHP_METHOD(ZendFramework_Http_Request, fromString) {
 		}
 	}
 	if (zephir_is_true(headers)) {
-		ZEPHIR_INIT_BNVAR(_2);
-		zephir_fast_join_str(_2, SL("\r\n"), headers TSRMLS_CC);
-		zephir_update_property_zval(request, SL("headers"), _2 TSRMLS_CC);
+		ZEPHIR_INIT_NVAR(_3);
+		zephir_fast_join_str(_3, SL("\r\n"), headers TSRMLS_CC);
+		zephir_update_property_zval(request, SL("headers"), _3 TSRMLS_CC);
 	}
 	if (zephir_is_true(rawBody)) {
-		ZEPHIR_INIT_VAR(_9);
-		zephir_fast_join_str(_9, SL("\r\n"), rawBody TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(NULL, request, "setcontent", NULL, _9);
+		ZEPHIR_INIT_VAR(_10);
+		zephir_fast_join_str(_10, SL("\r\n"), rawBody TSRMLS_CC);
+		ZEPHIR_CALL_METHOD(NULL, request, "setcontent", NULL, _10);
 		zephir_check_call_status();
 	}
 	RETURN_CCTOR(request);
@@ -283,7 +284,7 @@ PHP_METHOD(ZendFramework_Http_Request, getMethod) {
 PHP_METHOD(ZendFramework_Http_Request, setUri) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_0;
+	zephir_nts_static zend_class_entry *_0 = NULL;
 	zval *exceptionMsg = NULL, *uriStr = NULL, *_1 = NULL;
 	zval *uri = NULL, *e = NULL, *_2, *_3 = NULL;
 
@@ -298,7 +299,9 @@ PHP_METHOD(ZendFramework_Http_Request, setUri) {
 		/* try_start_1: */
 
 			ZEPHIR_INIT_NVAR(uri);
-			_0 = zend_fetch_class(SL("ZendFramework\\Uri\\Http"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+			if (!_0) {
+				_0 = zend_fetch_class(SL("ZendFramework\\Uri\\Http"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+			}
 			object_init_ex(uri, _0);
 			if (zephir_has_constructor(uri TSRMLS_CC)) {
 				ZEPHIR_CALL_METHOD(NULL, uri, "__construct", NULL, uri);
@@ -309,7 +312,7 @@ PHP_METHOD(ZendFramework_Http_Request, setUri) {
 
 		if (EG(exception)) {
 			ZEPHIR_CPY_WRT(e, EG(exception));
-			if (zephir_is_instance_of(e, SL("UriException\\InvalidUriPartException") TSRMLS_CC)) {
+			if (zephir_instance_of_ev(e, zendframework_uri_exception_invaliduripartexception_ce TSRMLS_CC)) {
 				zend_clear_exception(TSRMLS_C);
 				zephir_get_strval(_1, uri);
 				ZEPHIR_CPY_WRT(uriStr, _1);
@@ -317,7 +320,7 @@ PHP_METHOD(ZendFramework_Http_Request, setUri) {
 				ZEPHIR_CONCAT_SVS(exceptionMsg, "Invalid URI passed as string (", uriStr, ")");
 				ZEPHIR_INIT_VAR(_2);
 				object_init_ex(_2, zendframework_http_exception_invalidargumentexception_ce);
-				ZEPHIR_CALL_METHOD(&_3, e, "getcode",  NULL);
+				ZEPHIR_CALL_METHOD(&_3, e, "getcode", NULL);
 				zephir_check_call_status();
 				ZEPHIR_CALL_METHOD(NULL, _2, "__construct", NULL, exceptionMsg, _3, e);
 				zephir_check_call_status();
@@ -327,7 +330,7 @@ PHP_METHOD(ZendFramework_Http_Request, setUri) {
 			}
 		}
 	} else if (unlikely(!(zephir_is_instance_of(uri, SL("ZendFramework\\Uri\\Http") TSRMLS_CC)))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_http_exception_invalidargumentexception_ce, "URI must be an instance of Zend\\\\Uri\\\\Http or a string", "zendframework/http/request.zep", 184);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_http_exception_invalidargumentexception_ce, "URI must be an instance of Zend\\Uri\\Http or a string", "zendframework/http/request.zep", 184);
 		return;
 	}
 	zephir_update_property_this(this_ptr, SL("uri"), uri TSRMLS_CC);
@@ -343,7 +346,7 @@ PHP_METHOD(ZendFramework_Http_Request, setUri) {
 PHP_METHOD(ZendFramework_Http_Request, getUri) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_2;
+	zephir_nts_static zend_class_entry *_2 = NULL;
 	zend_bool _1;
 	zval *uri = NULL, *_0;
 
@@ -356,8 +359,10 @@ PHP_METHOD(ZendFramework_Http_Request, getUri) {
 		_1 = Z_TYPE_P(uri) == IS_STRING;
 	}
 	if (_1) {
-		ZEPHIR_INIT_VAR(uri);
-		_2 = zend_fetch_class(SL("ZendFramework\\Uri\\Http"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+		ZEPHIR_INIT_NVAR(uri);
+		if (!_2) {
+			_2 = zend_fetch_class(SL("ZendFramework\\Uri\\Http"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+		}
 		object_init_ex(uri, _2);
 		if (zephir_has_constructor(uri TSRMLS_CC)) {
 			ZEPHIR_CALL_METHOD(NULL, uri, "__construct", NULL, uri);
@@ -408,7 +413,7 @@ PHP_METHOD(ZendFramework_Http_Request, setQuery) {
 
 
 	if (!(zephir_instance_of_ev(query, zendframework_stdlib_parametersinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'query' must be an instance of 'ZendFramework\\\\Stdlib\\\\ParametersInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'query' must be an instance of 'ZendFramework\\Stdlib\\ParametersInterface'", "", 0);
 		return;
 	}
 	zephir_update_property_this(this_ptr, SL("queryParams"), query TSRMLS_CC);
@@ -446,7 +451,7 @@ PHP_METHOD(ZendFramework_Http_Request, getQuery) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("queryParams"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(queryParams, _0);
 	if (Z_TYPE_P(queryParams) == IS_NULL) {
-		ZEPHIR_INIT_VAR(queryParams);
+		ZEPHIR_INIT_NVAR(queryParams);
 		object_init_ex(queryParams, zendframework_stdlib_parameters_ce);
 		ZEPHIR_CALL_METHOD(NULL, queryParams, "__construct", NULL);
 		zephir_check_call_status();
@@ -477,7 +482,7 @@ PHP_METHOD(ZendFramework_Http_Request, setPost) {
 
 
 	if (!(zephir_instance_of_ev(post, zendframework_stdlib_parametersinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'post' must be an instance of 'ZendFramework\\\\Stdlib\\\\ParametersInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'post' must be an instance of 'ZendFramework\\Stdlib\\ParametersInterface'", "", 0);
 		return;
 	}
 	zephir_update_property_this(this_ptr, SL("postParams"), post TSRMLS_CC);
@@ -515,7 +520,7 @@ PHP_METHOD(ZendFramework_Http_Request, getPost) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("postParams"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(postParams, _0);
 	if (Z_TYPE_P(postParams) == IS_NULL) {
-		ZEPHIR_INIT_VAR(postParams);
+		ZEPHIR_INIT_NVAR(postParams);
 		object_init_ex(postParams, zendframework_stdlib_parameters_ce);
 		ZEPHIR_CALL_METHOD(NULL, postParams, "__construct", NULL);
 		zephir_check_call_status();
@@ -543,7 +548,7 @@ PHP_METHOD(ZendFramework_Http_Request, getCookie) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getheaders",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getheaders", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(headers, _0);
 	ZEPHIR_INIT_VAR(_1);
@@ -571,7 +576,7 @@ PHP_METHOD(ZendFramework_Http_Request, setFiles) {
 
 
 	if (!(zephir_instance_of_ev(files, zendframework_stdlib_parametersinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'files' must be an instance of 'ZendFramework\\\\Stdlib\\\\ParametersInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'files' must be an instance of 'ZendFramework\\Stdlib\\ParametersInterface'", "", 0);
 		return;
 	}
 	zephir_update_property_this(this_ptr, SL("fileParams"), files TSRMLS_CC);
@@ -609,7 +614,7 @@ PHP_METHOD(ZendFramework_Http_Request, getFiles) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("fileParams"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(fileParams, _0);
 	if (Z_TYPE_P(fileParams) == IS_NULL) {
-		ZEPHIR_INIT_VAR(fileParams);
+		ZEPHIR_INIT_NVAR(fileParams);
 		object_init_ex(fileParams, zendframework_stdlib_parameters_ce);
 		ZEPHIR_CALL_METHOD(NULL, fileParams, "__construct", NULL);
 		zephir_check_call_status();
@@ -656,7 +661,7 @@ PHP_METHOD(ZendFramework_Http_Request, getHeaders) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("headers"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(headers, _0);
 	if (Z_TYPE_P(headers) == IS_NULL) {
-		ZEPHIR_INIT_VAR(headers);
+		ZEPHIR_INIT_NVAR(headers);
 		object_init_ex(headers, zendframework_http_headers_ce);
 		ZEPHIR_CALL_METHOD(NULL, headers, "__construct", NULL);
 		zephir_check_call_status();
@@ -875,7 +880,7 @@ PHP_METHOD(ZendFramework_Http_Request, isXmlHttpRequest) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getheaders",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getheaders", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(headers, _0);
 	ZEPHIR_INIT_VAR(_1);
@@ -885,7 +890,7 @@ PHP_METHOD(ZendFramework_Http_Request, isXmlHttpRequest) {
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(header, _0);
 	if (!ZEPHIR_IS_FALSE_IDENTICAL(header)) {
-		ZEPHIR_CALL_METHOD(&fieldValue, header, "getfieldvalue",  NULL);
+		ZEPHIR_CALL_METHOD(&fieldValue, header, "getfieldvalue", NULL);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(ZEPHIR_IS_STRING(fieldValue, "XMLHttpRequest"));
 	}
@@ -906,7 +911,7 @@ PHP_METHOD(ZendFramework_Http_Request, isFlashRequest) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getheaders",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getheaders", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(headers, _0);
 	ZEPHIR_INIT_VAR(_1);
@@ -916,7 +921,7 @@ PHP_METHOD(ZendFramework_Http_Request, isFlashRequest) {
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(header, _0);
 	if (!ZEPHIR_IS_FALSE_IDENTICAL(header)) {
-		ZEPHIR_CALL_METHOD(&fieldValue, header, "getfieldvalue",  NULL);
+		ZEPHIR_CALL_METHOD(&fieldValue, header, "getfieldvalue", NULL);
 		zephir_check_call_status();
 		ZEPHIR_SINIT_VAR(_2);
 		ZVAL_STRING(&_2, " flash", 0);
@@ -947,7 +952,7 @@ PHP_METHOD(ZendFramework_Http_Request, renderRequestLine) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("version"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(version, _0);
 	if (Z_TYPE_P(uri) == IS_OBJECT) {
-		ZEPHIR_CALL_METHOD(&uri, uri, "__tostring",  NULL);
+		ZEPHIR_CALL_METHOD(&uri, uri, "__tostring", NULL);
 		zephir_check_call_status();
 	}
 	ZEPHIR_CONCAT_VSVSV(return_value, method, " ", uri, "HTTP/", version);
@@ -966,14 +971,14 @@ PHP_METHOD(ZendFramework_Http_Request, toString) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&line, this_ptr, "renderrequestline",  NULL);
+	ZEPHIR_CALL_METHOD(&line, this_ptr, "renderrequestline", NULL);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getheaders",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getheaders", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(headers, _0);
-	ZEPHIR_CALL_METHOD(&headersStr, headers, "tostring",  NULL);
+	ZEPHIR_CALL_METHOD(&headersStr, headers, "tostring", NULL);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&content, this_ptr, "getcontent",  NULL);
+	ZEPHIR_CALL_METHOD(&content, this_ptr, "getcontent", NULL);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_1);
 	ZEPHIR_CONCAT_VSVSV(_1, line, "\r\n", headersStr, "\r\n", content);

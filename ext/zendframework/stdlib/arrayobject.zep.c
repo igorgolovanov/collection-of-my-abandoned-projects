@@ -124,7 +124,7 @@ PHP_METHOD(ZendFramework_Stdlib_ArrayObject, __construct) {
 	zephir_update_property_this(this_ptr, SL("storage"), input TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setiteratorclass", NULL, iteratorClass);
 	zephir_check_call_status();
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZEPHIR_CALL_FUNCTION(&_1, "get_object_vars", &_2, this_ptr);
 	zephir_check_call_status();
 	zephir_array_keys(_0, _1 TSRMLS_CC);
@@ -390,7 +390,7 @@ PHP_METHOD(ZendFramework_Stdlib_ArrayObject, exchangeArray) {
 		_2 = _3;
 	}
 	if (_2) {
-		ZEPHIR_CALL_METHOD(&data, data, "getarraycopy",  NULL);
+		ZEPHIR_CALL_METHOD(&data, data, "getarraycopy", NULL);
 		zephir_check_call_status();
 	}
 	_4 = zephir_fetch_nproperty_this(this_ptr, SL("storage"), PH_NOISY_CC);
@@ -432,8 +432,8 @@ PHP_METHOD(ZendFramework_Stdlib_ArrayObject, getFlags) {
 PHP_METHOD(ZendFramework_Stdlib_ArrayObject, getIterator) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_1;
-	zval *className, *iterator, *storage = NULL, *_0;
+	zend_class_entry *_2;
+	zval *className, *iterator, *storage = NULL, *_0, *_1 = NULL;
 
 	ZEPHIR_MM_GROW();
 
@@ -441,8 +441,9 @@ PHP_METHOD(ZendFramework_Stdlib_ArrayObject, getIterator) {
 	ZEPHIR_CPY_WRT(storage, _0);
 	className = zephir_fetch_nproperty_this(this_ptr, SL("iteratorClass"), PH_NOISY_CC);
 	ZEPHIR_INIT_VAR(iterator);
-	_1 = zend_fetch_class(Z_STRVAL_P(className), Z_STRLEN_P(className), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	object_init_ex(iterator, _1);
+	zephir_fetch_safe_class(_1, className);
+	_2 = zend_fetch_class(Z_STRVAL_P(_1), Z_STRLEN_P(_1), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+	object_init_ex(iterator, _2);
 	if (zephir_has_constructor(iterator TSRMLS_CC)) {
 		ZEPHIR_CALL_METHOD(NULL, iterator, "__construct", NULL, storage);
 		zephir_check_call_status();

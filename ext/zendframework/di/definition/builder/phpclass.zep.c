@@ -159,7 +159,7 @@ PHP_METHOD(ZendFramework_Di_Definition_Builder_PhpClass, addInjectionMethod) {
 
 
 	if (!(zephir_instance_of_ev(injectionMethod, zendframework_di_definition_builder_injectionmethod_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'injectionMethod' must be an instance of 'ZendFramework\\\\Di\\\\Definition\\\\Builder\\\\InjectionMethod'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'injectionMethod' must be an instance of 'ZendFramework\\Di\\Definition\\Builder\\InjectionMethod'", "", 0);
 		return;
 	}
 	zephir_update_property_array_append(this_ptr, SL("injectionMethods"), injectionMethod TSRMLS_CC);
@@ -182,8 +182,8 @@ PHP_METHOD(ZendFramework_Di_Definition_Builder_PhpClass, addInjectionMethod) {
 PHP_METHOD(ZendFramework_Di_Definition_Builder_PhpClass, createInjectionMethod) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_2;
-	zval *name_param = NULL, *method, *_0;
+	zend_class_entry *_3;
+	zval *name_param = NULL, *method, *_0, *_2 = NULL;
 	zval *name = NULL, *builder = NULL, *_1 = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -202,8 +202,9 @@ PHP_METHOD(ZendFramework_Di_Definition_Builder_PhpClass, createInjectionMethod) 
 	zephir_get_strval(_1, _0);
 	ZEPHIR_CPY_WRT(builder, _1);
 	ZEPHIR_INIT_VAR(method);
-	_2 = zend_fetch_class(Z_STRVAL_P(builder), Z_STRLEN_P(builder), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	object_init_ex(method, _2);
+	zephir_fetch_safe_class(_2, builder);
+	_3 = zend_fetch_class(Z_STRVAL_P(_2), Z_STRLEN_P(_2), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+	object_init_ex(method, _3);
 	if (zephir_has_constructor(method TSRMLS_CC)) {
 		ZEPHIR_CALL_METHOD(NULL, method, "__construct", NULL);
 		zephir_check_call_status();

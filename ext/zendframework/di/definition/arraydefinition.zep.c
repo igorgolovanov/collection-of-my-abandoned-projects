@@ -68,7 +68,7 @@ PHP_METHOD(ZendFramework_Di_Definition_ArrayDefinition, __construct) {
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
 	) {
-		ZEPHIR_GET_HMKEY(className, _2, _1);
+		ZEPHIR_GET_HKEY(className, _2, _1);
 		ZEPHIR_GET_HVALUE(definition, _3);
 		ZEPHIR_SINIT_NVAR(_4);
 		ZVAL_LONG(&_4, 0);

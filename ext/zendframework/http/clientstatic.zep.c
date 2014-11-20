@@ -49,8 +49,8 @@ ZEPHIR_INIT_CLASS(ZendFramework_Http_ClientStatic) {
 PHP_METHOD(ZendFramework_Http_ClientStatic, getStaticClient) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_0;
-	zval *className, *client = NULL;
+	zend_class_entry *_1;
+	zval *className, *client = NULL, *_0 = NULL;
 
 	ZEPHIR_MM_GROW();
 	ZEPHIR_INIT_VAR(client);
@@ -63,8 +63,9 @@ PHP_METHOD(ZendFramework_Http_ClientStatic, getStaticClient) {
         
 	if (Z_TYPE_P(client) == IS_NULL) {
 		ZEPHIR_INIT_NVAR(client);
-		_0 = zend_fetch_class(Z_STRVAL_P(className), Z_STRLEN_P(className), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		object_init_ex(client, _0);
+		zephir_fetch_safe_class(_0, className);
+		_1 = zend_fetch_class(Z_STRVAL_P(_0), Z_STRLEN_P(_0), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+		object_init_ex(client, _1);
 		if (zephir_has_constructor(client TSRMLS_CC)) {
 			ZEPHIR_CALL_METHOD(NULL, client, "__construct", NULL);
 			zephir_check_call_status();
@@ -131,13 +132,13 @@ PHP_METHOD(ZendFramework_Http_ClientStatic, get) {
 	zephir_check_temp_parameter(_0);
 	zephir_check_call_status();
 	if (zephir_fast_count_int(query TSRMLS_CC) > 0) {
-		ZEPHIR_CALL_METHOD(&_1, request, "getquery",  NULL);
+		ZEPHIR_CALL_METHOD(&_1, request, "getquery", NULL);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, _1, "fromarray", NULL, query);
 		zephir_check_call_status();
 	}
 	if (zephir_fast_count_int(headers TSRMLS_CC) > 0) {
-		ZEPHIR_CALL_METHOD(&_1, request, "getheaders",  NULL);
+		ZEPHIR_CALL_METHOD(&_1, request, "getheaders", NULL);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, _1, "addheaders", NULL, headers);
 		zephir_check_call_status();
@@ -212,17 +213,17 @@ PHP_METHOD(ZendFramework_Http_ClientStatic, post) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_http_exception_invalidargumentexception_ce, "The array of post parameters is empty", "zendframework/http/clientstatic.zep", 104);
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&_2, request, "getpost",  NULL);
+	ZEPHIR_CALL_METHOD(&_2, request, "getpost", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, _2, "fromarray", NULL, params);
 	zephir_check_call_status();
 	if (!(zephir_array_isset_string(headers, SS("Content-Type")))) {
-		ZEPHIR_INIT_BNVAR(_0);
+		ZEPHIR_INIT_NVAR(_0);
 		ZVAL_STRING(_0, "application/x-www-form-urlencoded", 1);
 		zephir_array_update_string(&headers, SL("Content-Type"), &_0, PH_COPY | PH_SEPARATE);
 	}
 	if (zephir_fast_count_int(headers TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(&_3, request, "getheaders",  NULL);
+		ZEPHIR_CALL_METHOD(&_3, request, "getheaders", NULL);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, _3, "addheaders", NULL, headers);
 		zephir_check_call_status();

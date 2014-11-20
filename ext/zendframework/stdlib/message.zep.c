@@ -117,7 +117,7 @@ PHP_METHOD(ZendFramework_Stdlib_Message, setMetadata) {
 		  ; zephir_hash_get_current_data_ex(_7, (void**) &_8, &_6) == SUCCESS
 		  ; zephir_hash_move_forward_ex(_7, &_6)
 		) {
-			ZEPHIR_GET_HMKEY(key, _7, _6);
+			ZEPHIR_GET_HKEY(key, _7, _6);
 			ZEPHIR_GET_HVALUE(val, _8);
 			zephir_update_property_array(this_ptr, SL("metadata"), key, val TSRMLS_CC);
 		}
@@ -216,7 +216,7 @@ PHP_METHOD(ZendFramework_Stdlib_Message, toString) {
 	ZEPHIR_INIT_VAR(request);
 	ZVAL_STRING(request, "", 1);
 
-	ZEPHIR_CALL_METHOD(&metadata, this_ptr, "getmetadata",  NULL);
+	ZEPHIR_CALL_METHOD(&metadata, this_ptr, "getmetadata", NULL);
 	zephir_check_call_status();
 	zephir_is_iterable(metadata, &_1, &_0, 0, 0, "zendframework/stdlib/message.zep", 131);
 	for (
@@ -233,7 +233,7 @@ PHP_METHOD(ZendFramework_Stdlib_Message, toString) {
 		ZEPHIR_CONCAT_VV(_6, request, _4);
 		zephir_get_strval(request, _6);
 	}
-	ZEPHIR_CALL_METHOD(&_4, this_ptr, "getcontent",  NULL);
+	ZEPHIR_CALL_METHOD(&_4, this_ptr, "getcontent", NULL);
 	zephir_check_call_status();
 	zephir_get_strval(_7, _4);
 	ZEPHIR_CPY_WRT(content, _7);

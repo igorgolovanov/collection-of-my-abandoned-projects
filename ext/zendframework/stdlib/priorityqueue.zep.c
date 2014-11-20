@@ -31,7 +31,7 @@ ZEPHIR_INIT_CLASS(ZendFramework_Stdlib_PriorityQueue) {
 	 * Inner queue class to use for iteration
 	 * @var string
 	 */
-	zend_declare_property_string(zendframework_stdlib_priorityqueue_ce, SL("queueClass"), "Zend\\\\Stdlib\\\\SplPriorityQueue", ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_string(zendframework_stdlib_priorityqueue_ce, SL("queueClass"), "Zend\\Stdlib\\SplPriorityQueue", ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
 	 * Actual items aggregated in the priority queue. Each item is an array
@@ -91,10 +91,10 @@ PHP_METHOD(ZendFramework_Stdlib_PriorityQueue, insert) {
 	ZVAL_LONG(_0, priority);
 	zephir_array_update_string(&datum, SL("priority"), &_0, PH_COPY | PH_SEPARATE);
 	zephir_update_property_array_append(this_ptr, SL("items"), data TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getqueue",  NULL);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getqueue", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(queue, _1);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_LONG(_0, priority);
 	ZEPHIR_CALL_METHOD(NULL, queue, "insert", NULL, datum, _0);
 	zephir_check_call_status();
@@ -138,7 +138,7 @@ PHP_METHOD(ZendFramework_Stdlib_PriorityQueue, remove) {
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
 	) {
-		ZEPHIR_GET_HMKEY(key, _2, _1);
+		ZEPHIR_GET_HKEY(key, _2, _1);
 		ZEPHIR_GET_HVALUE(item, _3);
 		zephir_array_fetch_string(&_4, item, SL("data"), PH_NOISY | PH_READONLY, "zendframework/stdlib/priorityqueue.zep", 97 TSRMLS_CC);
 		if (ZEPHIR_IS_IDENTICAL(_4, datum)) {
@@ -150,10 +150,10 @@ PHP_METHOD(ZendFramework_Stdlib_PriorityQueue, remove) {
 		_5 = zephir_fetch_nproperty_this(this_ptr, SL("items"), PH_NOISY_CC);
 		zephir_array_unset(&_5, key, PH_SEPARATE);
 		zephir_update_property_this(this_ptr, SL("queue"), ZEPHIR_GLOBAL(global_null) TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(&_6, this_ptr, "isempty",  NULL);
+		ZEPHIR_CALL_METHOD(&_6, this_ptr, "isempty", NULL);
 		zephir_check_call_status();
 		if (!(zephir_is_true(_6))) {
-			ZEPHIR_CALL_METHOD(&_7, this_ptr, "getqueue",  NULL);
+			ZEPHIR_CALL_METHOD(&_7, this_ptr, "getqueue", NULL);
 			zephir_check_call_status();
 			ZEPHIR_CPY_WRT(queue, _7);
 			_8 = zephir_fetch_nproperty_this(this_ptr, SL("items"), PH_NOISY_CC);
@@ -189,7 +189,7 @@ PHP_METHOD(ZendFramework_Stdlib_PriorityQueue, isEmpty) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "count",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "count", NULL);
 	zephir_check_call_status();
 	RETURN_MM_BOOL(ZEPHIR_IS_LONG_IDENTICAL(_0, 0));
 
@@ -222,10 +222,10 @@ PHP_METHOD(ZendFramework_Stdlib_PriorityQueue, top) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getiterator",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getiterator", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(iterator, _0);
-	ZEPHIR_CALL_METHOD(&item, iterator, "top",  NULL);
+	ZEPHIR_CALL_METHOD(&item, iterator, "top", NULL);
 	zephir_check_call_status();
 	RETURN_CCTOR(item);
 
@@ -243,10 +243,10 @@ PHP_METHOD(ZendFramework_Stdlib_PriorityQueue, extract) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getqueue",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getqueue", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(queue, _0);
-	ZEPHIR_CALL_METHOD(&item, queue, "extract",  NULL);
+	ZEPHIR_CALL_METHOD(&item, queue, "extract", NULL);
 	zephir_check_call_status();
 	RETURN_CCTOR(item);
 
@@ -271,7 +271,7 @@ PHP_METHOD(ZendFramework_Stdlib_PriorityQueue, getIterator) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getqueue",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getqueue", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(queue, _0);
 	if (zephir_clone(return_value, queue TSRMLS_CC) == FAILURE) {
@@ -548,8 +548,8 @@ PHP_METHOD(ZendFramework_Stdlib_PriorityQueue, hasPriority) {
 PHP_METHOD(ZendFramework_Stdlib_PriorityQueue, getQueue) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_2;
-	zval *queue = NULL, *queueClass = NULL, *_0, *_1, *_3, *_4;
+	zend_class_entry *_3;
+	zval *queue = NULL, *queueClass = NULL, *_0, *_1, *_2 = NULL, *_4, *_5;
 	zval *exceptionMsg = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -560,22 +560,23 @@ PHP_METHOD(ZendFramework_Stdlib_PriorityQueue, getQueue) {
 	if (Z_TYPE_P(_0) == IS_NULL) {
 		_1 = zephir_fetch_nproperty_this(this_ptr, SL("queueClass"), PH_NOISY_CC);
 		ZEPHIR_CPY_WRT(queueClass, _1);
-		ZEPHIR_INIT_VAR(queue);
-		_2 = zend_fetch_class(Z_STRVAL_P(queueClass), Z_STRLEN_P(queueClass), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		object_init_ex(queue, _2);
+		ZEPHIR_INIT_NVAR(queue);
+		zephir_fetch_safe_class(_2, queueClass);
+		_3 = zend_fetch_class(Z_STRVAL_P(_2), Z_STRLEN_P(_2), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+		object_init_ex(queue, _3);
 		if (zephir_has_constructor(queue TSRMLS_CC)) {
 			ZEPHIR_CALL_METHOD(NULL, queue, "__construct", NULL);
 			zephir_check_call_status();
 		}
 		if (unlikely(!(zephir_instance_of_ev(queue, spl_ce_SplPriorityQueue TSRMLS_CC)))) {
-			ZEPHIR_INIT_VAR(_3);
-			ZEPHIR_CONCAT_SVS(_3, "PriorityQueue expects an internal queue of type SplPriorityQueue; received \"", queueClass, "\"");
-			zephir_get_strval(exceptionMsg, _3);
 			ZEPHIR_INIT_VAR(_4);
-			object_init_ex(_4, zendframework_stdlib_exception_domainexception_ce);
-			ZEPHIR_CALL_METHOD(NULL, _4, "__construct", NULL, exceptionMsg);
+			ZEPHIR_CONCAT_SVS(_4, "PriorityQueue expects an internal queue of type SplPriorityQueue; received \"", queueClass, "\"");
+			zephir_get_strval(exceptionMsg, _4);
+			ZEPHIR_INIT_VAR(_5);
+			object_init_ex(_5, zendframework_stdlib_exception_domainexception_ce);
+			ZEPHIR_CALL_METHOD(NULL, _5, "__construct", NULL, exceptionMsg);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(_4, "zendframework/stdlib/priorityqueue.zep", 344 TSRMLS_CC);
+			zephir_throw_exception_debug(_5, "zendframework/stdlib/priorityqueue.zep", 344 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}

@@ -71,7 +71,7 @@ PHP_METHOD(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, __constru
 		_0 = !zephir_instance_of_ev(genericPrototype, zendframework_code_generic_prototype_prototypegenericinterface_ce TSRMLS_CC);
 	}
 	if (_0) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'genericPrototype' must be an instance of 'ZendFramework\\\\Code\\\\Generic\\\\Prototype\\\\PrototypeGenericInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'genericPrototype' must be an instance of 'ZendFramework\\Code\\Generic\\Prototype\\PrototypeGenericInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_INIT_VAR(_1);
@@ -114,10 +114,10 @@ PHP_METHOD(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, addProtot
 
 
 	if (!(zephir_instance_of_ev(prototype, zendframework_code_generic_prototype_prototypeinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'prototype' must be an instance of 'ZendFramework\\\\Code\\\\Generic\\\\Prototype\\\\PrototypeInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'prototype' must be an instance of 'ZendFramework\\Code\\Generic\\Prototype\\PrototypeInterface'", "", 0);
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&name, prototype, "getname",  NULL);
+	ZEPHIR_CALL_METHOD(&name, prototype, "getname", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&normalized, this_ptr, "normalizename", NULL, name);
 	zephir_check_call_status();
@@ -145,7 +145,7 @@ PHP_METHOD(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, setGeneri
 
 
 	if (!(zephir_instance_of_ev(prototype, zendframework_code_generic_prototype_prototypegenericinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'prototype' must be an instance of 'ZendFramework\\\\Code\\\\Generic\\\\Prototype\\\\PrototypeGenericInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'prototype' must be an instance of 'ZendFramework\\Code\\Generic\\Prototype\\PrototypeGenericInterface'", "", 0);
 		return;
 	}
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("genericPrototype"), PH_NOISY_CC);
@@ -179,7 +179,7 @@ PHP_METHOD(ZendFramework_Code_Generic_Prototype_PrototypeClassFactory, normalize
 	ZEPHIR_INIT_VAR(normalized);
 	ZEPHIR_SINIT_VAR(_0);
 	ZVAL_STRING(&_0, "", 0);
-	zephir_fast_str_replace(normalized, chars, &_0, name);
+	zephir_fast_str_replace(normalized, chars, &_0, name TSRMLS_CC);
 	RETURN_CCTOR(normalized);
 
 }

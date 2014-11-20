@@ -71,7 +71,7 @@ PHP_METHOD(ZendFramework_Code_Annotation_Parser_GenericAnnotationParser, onCreat
 
 
 	if (!(zephir_instance_of_ev(e, zendframework_eventmanager_eventinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'e' must be an instance of 'ZendFramework\\\\EventManager\\\\EventInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'e' must be an instance of 'ZendFramework\\EventManager\\EventInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_INIT_VAR(_0);
@@ -90,15 +90,15 @@ PHP_METHOD(ZendFramework_Code_Annotation_Parser_GenericAnnotationParser, onCreat
 	if (_2) {
 		RETURN_MM_BOOL(0);
 	}
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "content", ZEPHIR_TEMP_PARAM_COPY);
-	ZEPHIR_INIT_BNVAR(_1);
+	ZEPHIR_INIT_NVAR(_1);
 	ZVAL_STRING(_1, "", ZEPHIR_TEMP_PARAM_COPY);
 	ZEPHIR_CALL_METHOD(&content, e, "getparam", NULL, _0, _1);
 	zephir_check_temp_parameter(_0);
 	zephir_check_temp_parameter(_1);
 	zephir_check_call_status();
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZEPHIR_SINIT_VAR(_4);
 	ZVAL_STRING(&_4, "()", 0);
 	zephir_fast_trim(_0, content, &_4, ZEPHIR_TRIM_BOTH TSRMLS_CC);
@@ -139,10 +139,10 @@ PHP_METHOD(ZendFramework_Code_Annotation_Parser_GenericAnnotationParser, onCreat
 PHP_METHOD(ZendFramework_Code_Annotation_Parser_GenericAnnotationParser, registerAnnotation) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_1;
+	zend_class_entry *_2;
 	zend_bool _0;
 	zval *exceptionMsg = NULL, *type = NULL;
-	zval *annotation = NULL, *className = NULL, *_2, *_3 = NULL, *_4, *_5;
+	zval *annotation = NULL, *className = NULL, *_1 = NULL, *_3 = NULL, *_4, *_5, *_6;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &annotation);
@@ -159,28 +159,29 @@ PHP_METHOD(ZendFramework_Code_Annotation_Parser_GenericAnnotationParser, registe
 	if (_0) {
 		ZEPHIR_CPY_WRT(className, annotation);
 		ZEPHIR_INIT_NVAR(annotation);
-		_1 = zend_fetch_class(Z_STRVAL_P(annotation), Z_STRLEN_P(annotation), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		object_init_ex(annotation, _1);
+		zephir_fetch_safe_class(_1, annotation);
+		_2 = zend_fetch_class(Z_STRVAL_P(_1), Z_STRLEN_P(_1), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+		object_init_ex(annotation, _2);
 		if (zephir_has_constructor(annotation TSRMLS_CC)) {
 			ZEPHIR_CALL_METHOD(NULL, annotation, "__construct", NULL);
 			zephir_check_call_status();
 		}
 	}
 	if (unlikely(!(zephir_instance_of_ev(annotation, zendframework_code_annotation_annotationinterface_ce TSRMLS_CC)))) {
-		ZEPHIR_INIT_VAR(_2);
-		zephir_gettype(_2, annotation TSRMLS_CC);
-		zephir_get_strval(type, _2);
+		ZEPHIR_INIT_VAR(_3);
+		zephir_gettype(_3, annotation TSRMLS_CC);
+		zephir_get_strval(type, _3);
 		if (ZEPHIR_IS_STRING(type, "object")) {
 			ZEPHIR_INIT_VAR(type);
 			zephir_get_class(type, annotation, 0 TSRMLS_CC);
 		}
 		ZEPHIR_INIT_VAR(exceptionMsg);
 		ZEPHIR_CONCAT_SSSSVS(exceptionMsg, "GenericAnnotationParser:registerAnnotation", ": expects an instance of ", "ZendFramework_Code_Annotation_Parser", "\\AnnotationInterface; received \"", type, "\"");
-		ZEPHIR_INIT_VAR(_3);
-		object_init_ex(_3, zendframework_code_exception_invalidargumentexception_ce);
-		ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, exceptionMsg);
+		ZEPHIR_INIT_VAR(_4);
+		object_init_ex(_4, zendframework_code_exception_invalidargumentexception_ce);
+		ZEPHIR_CALL_METHOD(NULL, _4, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_3, "zendframework/code/annotation/parser/genericannotationparser.zep", 105 TSRMLS_CC);
+		zephir_throw_exception_debug(_4, "zendframework/code/annotation/parser/genericannotationparser.zep", 105 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -188,16 +189,16 @@ PHP_METHOD(ZendFramework_Code_Annotation_Parser_GenericAnnotationParser, registe
 		ZEPHIR_INIT_NVAR(className);
 		zephir_get_class(className, annotation, 0 TSRMLS_CC);
 	}
-	_4 = zephir_fetch_nproperty_this(this_ptr, SL("annotationNames"), PH_NOISY_CC);
-	if (unlikely(zephir_fast_in_array(className, _4 TSRMLS_CC))) {
-		ZEPHIR_INIT_LNVAR(_3);
-		ZEPHIR_CONCAT_SVS(_3, "An annotation for this class ", className, " already exists");
-		zephir_get_strval(exceptionMsg, _3);
-		ZEPHIR_INIT_VAR(_5);
-		object_init_ex(_5, zendframework_code_exception_invalidargumentexception_ce);
-		ZEPHIR_CALL_METHOD(NULL, _5, "__construct", NULL, exceptionMsg);
+	_5 = zephir_fetch_nproperty_this(this_ptr, SL("annotationNames"), PH_NOISY_CC);
+	if (unlikely(zephir_fast_in_array(className, _5 TSRMLS_CC))) {
+		ZEPHIR_INIT_VAR(_6);
+		ZEPHIR_CONCAT_SVS(_6, "An annotation for this class ", className, " already exists");
+		zephir_get_strval(exceptionMsg, _6);
+		ZEPHIR_INIT_NVAR(_3);
+		object_init_ex(_3, zendframework_code_exception_invalidargumentexception_ce);
+		ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_5, "zendframework/code/annotation/parser/genericannotationparser.zep", 114 TSRMLS_CC);
+		zephir_throw_exception_debug(_3, "zendframework/code/annotation/parser/genericannotationparser.zep", 114 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -363,7 +364,7 @@ PHP_METHOD(ZendFramework_Code_Annotation_Parser_GenericAnnotationParser, normali
 	ZEPHIR_INIT_VAR(replaced);
 	ZEPHIR_SINIT_VAR(_0);
 	ZVAL_STRING(&_0, "", 0);
-	zephir_fast_str_replace(replaced, chars, &_0, alias);
+	zephir_fast_str_replace(replaced, chars, &_0, alias TSRMLS_CC);
 	ZEPHIR_RETURN_CALL_METHOD(replaced, "lower", NULL);
 	zephir_check_call_status();
 	RETURN_MM();

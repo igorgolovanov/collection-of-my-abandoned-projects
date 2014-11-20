@@ -172,7 +172,7 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, call) {
 	ZVAL_NULL(isPhp54);
 
 
-	ZEPHIR_CALL_METHOD(&callback, this_ptr, "getcallback",  NULL);
+	ZEPHIR_CALL_METHOD(&callback, this_ptr, "getcallback", NULL);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(className);
 	zephir_get_called_class(className TSRMLS_CC);
@@ -213,61 +213,62 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, call) {
 				ZEPHIR_CALL_ZVAL_FUNCTION(&result, callback, NULL);
 				zephir_check_call_status();
 			} else {
-				ZEPHIR_CALL_FUNCTION(&result, "call_user_func", &_5, callback);
+				ZEPHIR_INIT_NVAR(result);
+				ZEPHIR_CALL_USER_FUNC(result, callback);
 				zephir_check_call_status();
 			}
 			break;
 		}
 		if (argCount == 1) {
 			Z_SET_ISREF_P(args);
-			ZEPHIR_CALL_FUNCTION(&arg1, "array_shift", &_6, args);
+			ZEPHIR_CALL_FUNCTION(&arg1, "array_shift", &_5, args);
 			Z_UNSET_ISREF_P(args);
 			zephir_check_call_status();
 			if (zephir_is_true(isPhp54)) {
 				ZEPHIR_CALL_ZVAL_FUNCTION(&result, callback, NULL, arg1);
 				zephir_check_call_status();
 			} else {
-				ZEPHIR_CALL_FUNCTION(&result, "call_user_func", &_5, callback, arg1);
+				ZEPHIR_CALL_FUNCTION(&result, "call_user_func", &_6, callback, arg1);
 				zephir_check_call_status();
 			}
 			break;
 		}
 		if (argCount == 2) {
 			Z_SET_ISREF_P(args);
-			ZEPHIR_CALL_FUNCTION(&arg1, "array_shift", &_6, args);
+			ZEPHIR_CALL_FUNCTION(&arg1, "array_shift", &_5, args);
 			Z_UNSET_ISREF_P(args);
 			zephir_check_call_status();
 			Z_SET_ISREF_P(args);
-			ZEPHIR_CALL_FUNCTION(&arg2, "array_shift", &_6, args);
+			ZEPHIR_CALL_FUNCTION(&arg2, "array_shift", &_5, args);
 			Z_UNSET_ISREF_P(args);
 			zephir_check_call_status();
 			if (zephir_is_true(isPhp54)) {
 				ZEPHIR_CALL_ZVAL_FUNCTION(&result, callback, NULL, arg1, arg2);
 				zephir_check_call_status();
 			} else {
-				ZEPHIR_CALL_FUNCTION(&result, "call_user_func", &_5, callback, arg1, arg2);
+				ZEPHIR_CALL_FUNCTION(&result, "call_user_func", &_6, callback, arg1, arg2);
 				zephir_check_call_status();
 			}
 			break;
 		}
 		if (argCount == 3) {
 			Z_SET_ISREF_P(args);
-			ZEPHIR_CALL_FUNCTION(&arg1, "array_shift", &_6, args);
+			ZEPHIR_CALL_FUNCTION(&arg1, "array_shift", &_5, args);
 			Z_UNSET_ISREF_P(args);
 			zephir_check_call_status();
 			Z_SET_ISREF_P(args);
-			ZEPHIR_CALL_FUNCTION(&arg2, "array_shift", &_6, args);
+			ZEPHIR_CALL_FUNCTION(&arg2, "array_shift", &_5, args);
 			Z_UNSET_ISREF_P(args);
 			zephir_check_call_status();
 			Z_SET_ISREF_P(args);
-			ZEPHIR_CALL_FUNCTION(&arg3, "array_shift", &_6, args);
+			ZEPHIR_CALL_FUNCTION(&arg3, "array_shift", &_5, args);
 			Z_UNSET_ISREF_P(args);
 			zephir_check_call_status();
 			if (zephir_is_true(isPhp54)) {
 				ZEPHIR_CALL_ZVAL_FUNCTION(&result, callback, NULL, arg1, arg2, arg3);
 				zephir_check_call_status();
 			} else {
-				ZEPHIR_CALL_FUNCTION(&result, "call_user_func", &_5, callback, arg1, arg2, arg3);
+				ZEPHIR_CALL_FUNCTION(&result, "call_user_func", &_6, callback, arg1, arg2, arg3);
 				zephir_check_call_status();
 			}
 			break;
@@ -350,10 +351,9 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, getMetadatum) {
  */
 PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, validateStringCallbackFor54) {
 
-	zend_class_entry *_4;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
-	zval *callback_param = NULL, *parts, *ref, *m = NULL, *className, *method, _0, *_1 = NULL, *_3 = NULL, *_5 = NULL, *_6 = NULL;
+	zval *callback_param = NULL, *parts, *ref, *m = NULL, *className, *method, _0, *_1 = NULL, *_3 = NULL, *_4 = NULL, *_5 = NULL;
 	zval *callback = NULL, *exceptionMsg = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -387,16 +387,15 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, validateStringCallbackFor54) {
 		return;
 	}
 	ZEPHIR_INIT_VAR(ref);
-	_4 = zend_fetch_class(SL("ReflectionClass"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	object_init_ex(ref, _4);
+	object_init_ex(ref, zephir_get_internal_ce(SS("reflectionclass") TSRMLS_CC));
 	ZEPHIR_CALL_METHOD(NULL, ref, "__construct", NULL, className);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_5, ref, "hasmethod", NULL, method);
+	ZEPHIR_CALL_METHOD(&_4, ref, "hasmethod", NULL, method);
 	zephir_check_call_status();
-	if (unlikely(!zephir_is_true(_5))) {
+	if (unlikely(!zephir_is_true(_4))) {
 		ZEPHIR_INIT_NVAR(exceptionMsg);
 		ZEPHIR_CONCAT_SVS(exceptionMsg, "Static method call \"", callback, "\" refers to a class that does not exist");
-		ZEPHIR_INIT_LNVAR(_3);
+		ZEPHIR_INIT_NVAR(_3);
 		object_init_ex(_3, zendframework_stdlib_exception_invalidcallbackexception_ce);
 		ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();
@@ -404,15 +403,15 @@ PHP_METHOD(ZendFramework_Stdlib_CallbackHandler, validateStringCallbackFor54) {
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&_6, ref, "getmethod", NULL, method);
+	ZEPHIR_CALL_METHOD(&_5, ref, "getmethod", NULL, method);
 	zephir_check_call_status();
-	ZEPHIR_CPY_WRT(m, _6);
-	ZEPHIR_CALL_METHOD(&_6, m, "isstatic",  NULL);
+	ZEPHIR_CPY_WRT(m, _5);
+	ZEPHIR_CALL_METHOD(&_5, m, "isstatic", NULL);
 	zephir_check_call_status();
-	if (unlikely(!zephir_is_true(_6))) {
+	if (unlikely(!zephir_is_true(_5))) {
 		ZEPHIR_INIT_NVAR(exceptionMsg);
 		ZEPHIR_CONCAT_SVS(exceptionMsg, "Static method call \"", callback, "\" refers to a class that does not exist");
-		ZEPHIR_INIT_LNVAR(_3);
+		ZEPHIR_INIT_NVAR(_3);
 		object_init_ex(_3, zendframework_stdlib_exception_invalidcallbackexception_ce);
 		ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();

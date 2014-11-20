@@ -88,7 +88,7 @@ PHP_METHOD(ZendFramework_Permissions_Acl_Role_GenericRole, __toString) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&id, this_ptr, "getroleid",  NULL);
+	ZEPHIR_CALL_METHOD(&id, this_ptr, "getroleid", NULL);
 	zephir_check_call_status();
 	RETURN_CCTOR(id);
 

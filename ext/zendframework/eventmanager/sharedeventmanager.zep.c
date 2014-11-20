@@ -91,7 +91,7 @@ PHP_METHOD(ZendFramework_EventManager_SharedEventManager, attach) {
 	if (Z_TYPE_P(id) == IS_ARRAY) {
 		ZEPHIR_CPY_WRT(ids, id);
 	} else {
-		ZEPHIR_INIT_VAR(ids);
+		ZEPHIR_INIT_NVAR(ids);
 		array_init_size(ids, 2);
 		zephir_array_fast_append(ids, id);
 	}
@@ -152,7 +152,7 @@ PHP_METHOD(ZendFramework_EventManager_SharedEventManager, attachAggregate) {
 
 
 	if (!(zephir_instance_of_ev(aggregate, zendframework_eventmanager_sharedlisteneraggregateinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'aggregate' must be an instance of 'ZendFramework\\\\EventManager\\\\SharedListenerAggregateInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'aggregate' must be an instance of 'ZendFramework\\EventManager\\SharedListenerAggregateInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_INIT_VAR(_0);
@@ -181,7 +181,7 @@ PHP_METHOD(ZendFramework_EventManager_SharedEventManager, detach) {
 
 
 	if (!(zephir_instance_of_ev(listener, zendframework_stdlib_callbackhandler_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'listener' must be an instance of 'ZendFramework\\\\Stdlib\\\\CallbackHandler'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'listener' must be an instance of 'ZendFramework\\Stdlib\\CallbackHandler'", "", 0);
 		return;
 	}
 	ZEPHIR_OBS_VAR(eventManager);
@@ -215,7 +215,7 @@ PHP_METHOD(ZendFramework_EventManager_SharedEventManager, detachAggregate) {
 
 
 	if (!(zephir_instance_of_ev(aggregate, zendframework_eventmanager_sharedlisteneraggregateinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'aggregate' must be an instance of 'ZendFramework\\\\EventManager\\\\SharedListenerAggregateInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'aggregate' must be an instance of 'ZendFramework\\EventManager\\SharedListenerAggregateInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_RETURN_CALL_METHOD(aggregate, "detachshared", NULL, this_ptr);

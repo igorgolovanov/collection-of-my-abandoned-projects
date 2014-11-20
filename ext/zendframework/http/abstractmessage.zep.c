@@ -128,7 +128,7 @@ PHP_METHOD(ZendFramework_Http_AbstractMessage, setHeaders) {
 
 
 	if (!(zephir_instance_of_ev(headers, zendframework_http_headers_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'headers' must be an instance of 'ZendFramework\\\\Http\\\\Headers'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'headers' must be an instance of 'ZendFramework\\Http\\Headers'", "", 0);
 		return;
 	}
 	zephir_update_property_this(this_ptr, SL("headers"), headers TSRMLS_CC);
@@ -162,7 +162,7 @@ PHP_METHOD(ZendFramework_Http_AbstractMessage, getHeaders) {
 			zephir_check_call_status();
 			ZEPHIR_CPY_WRT(headers, _2);
 		} else {
-			ZEPHIR_INIT_VAR(headers);
+			ZEPHIR_INIT_NVAR(headers);
 			object_init_ex(headers, zendframework_http_headers_ce);
 			if (zephir_has_constructor(headers TSRMLS_CC)) {
 				ZEPHIR_CALL_METHOD(NULL, headers, "__construct", NULL);

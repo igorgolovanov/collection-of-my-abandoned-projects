@@ -119,7 +119,7 @@ PHP_METHOD(ZendFramework_Stdlib_PriorityList, insert) {
 PHP_METHOD(ZendFramework_Stdlib_PriorityList, setPriority) {
 
 	int priority, ZEPHIR_LAST_CALL_STATUS;
-	zval *name_param = NULL, *priority_param = NULL, *_0, *_1, *_2;
+	zval *name_param = NULL, *priority_param = NULL, *_0, *_1 = NULL;
 	zval *name = NULL, *exceptionMsg = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -141,9 +141,9 @@ PHP_METHOD(ZendFramework_Stdlib_PriorityList, setPriority) {
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	ZEPHIR_INIT_VAR(_2);
-	ZVAL_LONG(_2, priority);
-	zephir_update_property_array_multi(this_ptr, SL("items"), &_2 TSRMLS_CC, SL("zs"), 3, name, SL("priority"));
+	ZEPHIR_INIT_NVAR(_1);
+	ZVAL_LONG(_1, priority);
+	zephir_update_property_array_multi(this_ptr, SL("items"), &_1 TSRMLS_CC, SL("zs"), 3, name, SL("priority"));
 	zephir_update_property_this(this_ptr, SL("sorted"), (0) ? ZEPHIR_GLOBAL(global_true) : ZEPHIR_GLOBAL(global_false) TSRMLS_CC);
 	RETURN_THIS();
 
@@ -478,7 +478,7 @@ PHP_METHOD(ZendFramework_Stdlib_PriorityList, valid) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&current, this_ptr, "current",  NULL);
+	ZEPHIR_CALL_METHOD(&current, this_ptr, "current", NULL);
 	zephir_check_call_status();
 	RETURN_MM_BOOL(!ZEPHIR_IS_FALSE_IDENTICAL(current));
 

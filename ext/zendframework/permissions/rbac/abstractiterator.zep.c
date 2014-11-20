@@ -135,10 +135,10 @@ PHP_METHOD(ZendFramework_Permissions_Rbac_AbstractIterator, hasChildren) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "valid",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "valid", NULL);
 	zephir_check_call_status();
 	if (zephir_is_true(_0)) {
-		ZEPHIR_CALL_METHOD(&current, this_ptr, "current",  NULL);
+		ZEPHIR_CALL_METHOD(&current, this_ptr, "current", NULL);
 		zephir_check_call_status();
 		if (zephir_is_instance_of(current, SL("RecursiveIterator") TSRMLS_CC)) {
 			RETURN_MM_BOOL(1);

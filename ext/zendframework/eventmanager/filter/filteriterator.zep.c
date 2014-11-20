@@ -115,12 +115,12 @@ PHP_METHOD(ZendFramework_EventManager_Filter_FilterIterator, remove) {
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "rewind", NULL);
 	zephir_check_call_status();
 	while (1) {
-		ZEPHIR_CALL_METHOD(&_1, this_ptr, "isempty",  &_2);
+		ZEPHIR_CALL_METHOD(&_1, this_ptr, "isempty", &_2);
 		zephir_check_call_status();
 		if (!(!(zephir_is_true(_1)))) {
 			break;
 		}
-		ZEPHIR_CALL_METHOD(&item, this_ptr, "extract",  &_3);
+		ZEPHIR_CALL_METHOD(&item, this_ptr, "extract", &_3);
 		zephir_check_call_status();
 		ZEPHIR_OBS_NVAR(data);
 		if (zephir_array_isset_string_fetch(&data, item, SS("data"), 0 TSRMLS_CC)) {
@@ -149,7 +149,7 @@ PHP_METHOD(ZendFramework_EventManager_Filter_FilterIterator, remove) {
 			}
 		}
 	}
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_LONG(_0, 1);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setextractflags", NULL, _0);
 	zephir_check_call_status();
@@ -203,24 +203,24 @@ PHP_METHOD(ZendFramework_EventManager_Filter_FilterIterator, next) {
 		_0 = !zephir_instance_of_ev(chain, zendframework_eventmanager_filter_filteriterator_ce TSRMLS_CC);
 	}
 	if (_0) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'chain' must be an instance of 'ZendFramework\\\\EventManager\\\\Filter\\\\FilterIterator'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'chain' must be an instance of 'ZendFramework\\EventManager\\Filter\\FilterIterator'", "", 0);
 		return;
 	}
 	_1 = ZEPHIR_IS_EMPTY(context);
 	if (!(_1)) {
-		ZEPHIR_CALL_METHOD(&_2, chain, "isempty",  NULL);
+		ZEPHIR_CALL_METHOD(&_2, chain, "isempty", NULL);
 		zephir_check_call_status();
 		_1 = zephir_is_true(_2);
 	}
 	if (_1) {
 		RETURN_MM_NULL();
 	}
-	ZEPHIR_CALL_METHOD(&next, this_ptr, "extract",  NULL);
+	ZEPHIR_CALL_METHOD(&next, this_ptr, "extract", NULL);
 	zephir_check_call_status();
 	if (!(zephir_instance_of_ev(next, zendframework_stdlib_callbackhandler_ce TSRMLS_CC))) {
 		RETURN_MM_NULL();
 	}
-	ZEPHIR_CALL_METHOD(&callback, next, "getcallback",  NULL);
+	ZEPHIR_CALL_METHOD(&callback, next, "getcallback", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CALL_FUNCTION(&returns, "call_user_func", &_3, callback, context, params, chain);
 	zephir_check_call_status();

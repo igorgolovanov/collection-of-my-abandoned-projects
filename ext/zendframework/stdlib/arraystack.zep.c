@@ -46,21 +46,19 @@ ZEPHIR_INIT_CLASS(ZendFramework_Stdlib_ArrayStack) {
  */
 PHP_METHOD(ZendFramework_Stdlib_ArrayStack, getIterator) {
 
-	zend_class_entry *_2;
 	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *data = NULL, *iterator, *_0 = NULL;
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&data, this_ptr, "getarraycopy",  NULL);
+	ZEPHIR_CALL_METHOD(&data, this_ptr, "getarraycopy", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CALL_FUNCTION(&_0, "array_reverse", &_1, data);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(data, _0);
 	ZEPHIR_INIT_VAR(iterator);
-	_2 = zend_fetch_class(SL("ArrayIterator"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	object_init_ex(iterator, _2);
+	object_init_ex(iterator, zephir_get_internal_ce(SS("arrayiterator") TSRMLS_CC));
 	ZEPHIR_CALL_METHOD(NULL, iterator, "__construct", NULL, data);
 	zephir_check_call_status();
 	RETURN_CCTOR(iterator);

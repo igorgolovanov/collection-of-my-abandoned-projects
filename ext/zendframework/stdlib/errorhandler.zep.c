@@ -229,7 +229,7 @@ PHP_METHOD(ZendFramework_Stdlib_ErrorHandler, clean) {
 		ZEPHIR_CALL_FUNCTION(NULL, "restore_error_handler", &_0);
 		zephir_check_call_status();
 	}
-	ZEPHIR_INIT_BNVAR(stackData);
+	ZEPHIR_INIT_NVAR(stackData);
 	array_init(stackData);
 	
             zephir_update_static_property(Z_STRVAL_P(className), Z_STRLEN_P(className), SL("stack"), &stackData TSRMLS_CC);
@@ -249,9 +249,8 @@ PHP_METHOD(ZendFramework_Stdlib_ErrorHandler, clean) {
  */
 PHP_METHOD(ZendFramework_Stdlib_ErrorHandler, addError) {
 
-	zend_class_entry *_1;
 	zval *errstr = NULL, *errfile = NULL;
-	zval *errno_param = NULL, *errstr_param = NULL, *errfile_param = NULL, *errline_param = NULL, *stackData = NULL, *className, *stackIndex = NULL, *stackItem = NULL, *_0, *_2, *_3, *_4;
+	zval *errno_param = NULL, *errstr_param = NULL, *errfile_param = NULL, *errline_param = NULL, *stackData = NULL, *className, *stackIndex = NULL, *stackItem = NULL, *_0, *_1, *_2, *_3;
 	int errno, errline, ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
@@ -295,7 +294,7 @@ PHP_METHOD(ZendFramework_Stdlib_ErrorHandler, addError) {
 	ZEPHIR_SEPARATE(stackIndex);
 	zephir_decrement(stackIndex);
 	if (ZEPHIR_LT_LONG(stackIndex, 0)) {
-		ZEPHIR_INIT_BNVAR(stackIndex);
+		ZEPHIR_INIT_NVAR(stackIndex);
 		ZVAL_LONG(stackIndex, 0);
 	}
 	if (zephir_array_isset(stackData, stackIndex)) {
@@ -303,15 +302,14 @@ PHP_METHOD(ZendFramework_Stdlib_ErrorHandler, addError) {
 		zephir_array_fetch(&stackItem, stackData, stackIndex, PH_NOISY, "zendframework/stdlib/errorhandler.zep", 169 TSRMLS_CC);
 	}
 	ZEPHIR_INIT_VAR(_0);
-	_1 = zend_fetch_class(SL("ErrorException"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	object_init_ex(_0, _1);
+	object_init_ex(_0, zephir_get_internal_ce(SS("errorexception") TSRMLS_CC));
+	ZEPHIR_INIT_VAR(_1);
+	ZVAL_LONG(_1, 0);
 	ZEPHIR_INIT_VAR(_2);
-	ZVAL_LONG(_2, 0);
+	ZVAL_LONG(_2, errno);
 	ZEPHIR_INIT_VAR(_3);
-	ZVAL_LONG(_3, errno);
-	ZEPHIR_INIT_VAR(_4);
-	ZVAL_LONG(_4, errline);
-	ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, errstr, _2, _3, errfile, _4, stackItem);
+	ZVAL_LONG(_3, errline);
+	ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, errstr, _1, _2, errfile, _3, stackItem);
 	zephir_check_call_status();
 	zephir_array_update_zval(&stackData, stackIndex, &_0, PH_COPY | PH_SEPARATE);
 	

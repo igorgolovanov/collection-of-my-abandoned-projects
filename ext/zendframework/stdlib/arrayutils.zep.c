@@ -346,7 +346,7 @@ PHP_METHOD(ZendFramework_Stdlib_ArrayUtils, inArray) {
 			  ; zephir_hash_get_current_data_ex(_5, (void**) &_6, &_4) == SUCCESS
 			  ; zephir_hash_move_forward_ex(_5, &_4)
 			) {
-				ZEPHIR_GET_HMKEY(i, _5, _4);
+				ZEPHIR_GET_HKEY(i, _5, _4);
 				ZEPHIR_GET_HVALUE(h, _6);
 				_7 = Z_TYPE_P(h) == IS_LONG;
 				if (!(_7)) {
@@ -423,7 +423,7 @@ PHP_METHOD(ZendFramework_Stdlib_ArrayUtils, iteratorToArray) {
 		RETURN_MM();
 	}
 	if ((zephir_method_exists_ex(iterator, SS("toarray") TSRMLS_CC) == SUCCESS)) {
-		ZEPHIR_CALL_METHOD(&data, iterator, "toarray",  NULL);
+		ZEPHIR_CALL_METHOD(&data, iterator, "toarray", NULL);
 		zephir_check_call_status();
 		RETURN_CCTOR(data);
 	}
@@ -434,7 +434,7 @@ PHP_METHOD(ZendFramework_Stdlib_ArrayUtils, iteratorToArray) {
 	  ; zephir_hash_get_current_data_ex(_3, (void**) &_4, &_2) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_3, &_2)
 	) {
-		ZEPHIR_GET_HMKEY(key, _3, _2);
+		ZEPHIR_GET_HKEY(key, _3, _2);
 		ZEPHIR_GET_HVALUE(value, _4);
 		ZEPHIR_CALL_FUNCTION(&_5, "is_scalar", &_6, value);
 		zephir_check_call_status();
@@ -510,7 +510,7 @@ PHP_METHOD(ZendFramework_Stdlib_ArrayUtils, merge) {
 	  ; zephir_hash_get_current_data_ex(_1, (void**) &_2, &_0) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_1, &_0)
 	) {
-		ZEPHIR_GET_HMKEY(key, _1, _0);
+		ZEPHIR_GET_HKEY(key, _1, _0);
 		ZEPHIR_GET_HVALUE(value, _2);
 		if (zephir_array_isset(a, key)) {
 			_3 = Z_TYPE_P(value) == IS_LONG;

@@ -70,7 +70,7 @@ PHP_METHOD(ZendFramework_EventManager_GlobalEventManager, setEventCollection) {
 		_0 = !zephir_instance_of_ev(events, zendframework_eventmanager_eventmanagerinterface_ce TSRMLS_CC);
 	}
 	if (_0) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'events' must be an instance of 'ZendFramework\\\\EventManager\\\\EventManagerInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'events' must be an instance of 'ZendFramework\\EventManager\\EventManagerInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_INIT_VAR(className);
@@ -230,7 +230,7 @@ PHP_METHOD(ZendFramework_EventManager_GlobalEventManager, detach) {
 
 
 	if (!(zephir_instance_of_ev(listener, zendframework_stdlib_callbackhandler_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'listener' must be an instance of 'ZendFramework\\\\Stdlib\\\\CallbackHandler'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'listener' must be an instance of 'ZendFramework\\Stdlib\\CallbackHandler'", "", 0);
 		return;
 	}
 	ZEPHIR_CALL_STATIC(&_0, "geteventcollection", NULL);

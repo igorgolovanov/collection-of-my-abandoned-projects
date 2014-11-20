@@ -88,8 +88,8 @@ PHP_METHOD(ZendFramework_EventManager_StaticEventManager, __clone) {
 PHP_METHOD(ZendFramework_EventManager_StaticEventManager, getInstance) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_0;
-	zval *className, *instance = NULL;
+	zend_class_entry *_1;
+	zval *className, *instance = NULL, *_0 = NULL;
 
 	ZEPHIR_MM_GROW();
 	ZEPHIR_INIT_VAR(instance);
@@ -102,8 +102,9 @@ PHP_METHOD(ZendFramework_EventManager_StaticEventManager, getInstance) {
         
 	if (Z_TYPE_P(instance) == IS_NULL) {
 		ZEPHIR_INIT_NVAR(instance);
-		_0 = zend_fetch_class(Z_STRVAL_P(className), Z_STRLEN_P(className), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		object_init_ex(instance, _0);
+		zephir_fetch_safe_class(_0, className);
+		_1 = zend_fetch_class(Z_STRVAL_P(_0), Z_STRLEN_P(_0), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+		object_init_ex(instance, _1);
 		if (zephir_has_constructor(instance TSRMLS_CC)) {
 			ZEPHIR_CALL_METHOD(NULL, instance, "__construct", NULL);
 			zephir_check_call_status();
@@ -132,7 +133,7 @@ PHP_METHOD(ZendFramework_EventManager_StaticEventManager, setInstance) {
 
 
 	if (!(zephir_instance_of_ev(instance, zendframework_eventmanager_sharedeventmanagerinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'instance' must be an instance of 'ZendFramework\\\\EventManager\\\\SharedEventManagerInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'instance' must be an instance of 'ZendFramework\\EventManager\\SharedEventManagerInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_INIT_VAR(className);

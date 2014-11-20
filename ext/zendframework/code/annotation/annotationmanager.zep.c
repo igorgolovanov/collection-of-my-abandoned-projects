@@ -72,7 +72,7 @@ PHP_METHOD(ZendFramework_Code_Annotation_AnnotationManager, setEventManager) {
 
 
 	if (!(zephir_instance_of_ev(events, zendframework_eventmanager_eventmanagerinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'events' must be an instance of 'ZendFramework\\\\EventManager\\\\EventManagerInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'events' must be an instance of 'ZendFramework\\EventManager\\EventManagerInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_INIT_VAR(identifiers);
@@ -80,7 +80,7 @@ PHP_METHOD(ZendFramework_Code_Annotation_AnnotationManager, setEventManager) {
 	ZEPHIR_INIT_VAR(_0);
 	ZVAL_STRING(_0, "AnnotationManager", 1);
 	zephir_array_fast_append(identifiers, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	zephir_get_class(_0, this_ptr, 0 TSRMLS_CC);
 	zephir_array_fast_append(identifiers, _0);
 	ZEPHIR_CALL_METHOD(NULL, events, "setidentifiers", NULL, identifiers);
@@ -135,10 +135,10 @@ PHP_METHOD(ZendFramework_Code_Annotation_AnnotationManager, attach) {
 
 
 	if (!(zephir_instance_of_ev(parser, zendframework_code_annotation_parser_parserinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'parser' must be an instance of 'ZendFramework\\\\Code\\\\Annotation\\\\Parser\\\\ParserInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'parser' must be an instance of 'ZendFramework\\Code\\Annotation\\Parser\\ParserInterface'", "", 0);
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "geteventmanager",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "geteventmanager", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(events, _0);
 	ZEPHIR_INIT_VAR(callback);
@@ -147,7 +147,7 @@ PHP_METHOD(ZendFramework_Code_Annotation_AnnotationManager, attach) {
 	ZEPHIR_INIT_VAR(_1);
 	ZVAL_STRING(_1, "onCreateAnnotation", 1);
 	zephir_array_fast_append(callback, _1);
-	ZEPHIR_INIT_BNVAR(_1);
+	ZEPHIR_INIT_NVAR(_1);
 	ZVAL_STRING(_1, "createAnnotation", ZEPHIR_TEMP_PARAM_COPY);
 	ZEPHIR_CALL_METHOD(NULL, events, "attach", NULL, _1, callback);
 	zephir_check_temp_parameter(_1);
@@ -204,19 +204,19 @@ PHP_METHOD(ZendFramework_Code_Annotation_AnnotationManager, createAnnotation) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, event, "setparams", NULL, params);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_2, this_ptr, "geteventmanager",  NULL);
+	ZEPHIR_CALL_METHOD(&_2, this_ptr, "geteventmanager", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(events, _2);
 	ZEPHIR_INIT_VAR(_3);
 	array_init_size(_3, 3);
 	zephir_array_fast_append(_3, this_ptr);
-	ZEPHIR_INIT_BNVAR(_1);
+	ZEPHIR_INIT_NVAR(_1);
 	ZVAL_STRING(_1, "_eventCallaback", 1);
 	zephir_array_fast_append(_3, _1);
 	ZEPHIR_CALL_METHOD(&_2, events, "trigger", NULL, event, _3);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(results, _2);
-	ZEPHIR_CALL_METHOD(&annotation, results, "last",  NULL);
+	ZEPHIR_CALL_METHOD(&annotation, results, "last", NULL);
 	zephir_check_call_status();
 	if (Z_TYPE_P(annotation) == IS_OBJECT) {
 		RETURN_CCTOR(annotation);

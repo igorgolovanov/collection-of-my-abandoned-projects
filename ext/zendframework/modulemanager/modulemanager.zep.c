@@ -89,7 +89,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, __construct) {
 		_0 = !zephir_instance_of_ev(eventManager, zendframework_eventmanager_eventmanagerinterface_ce TSRMLS_CC);
 	}
 	if (_0) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'eventManager' must be an instance of 'ZendFramework\\\\EventManager\\\\EventManagerInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'eventManager' must be an instance of 'ZendFramework\\EventManager\\EventManagerInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_INIT_VAR(_1);
@@ -128,14 +128,14 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, onLoadModules) {
 	if (ZEPHIR_IS_TRUE_IDENTICAL(_0)) {
 		RETURN_MM_NULL();
 	}
-	ZEPHIR_CALL_METHOD(&modules, this_ptr, "getmodules",  NULL);
+	ZEPHIR_CALL_METHOD(&modules, this_ptr, "getmodules", NULL);
 	zephir_check_call_status();
 	zephir_is_iterable(modules, &_2, &_1, 0, 0, "zendframework/modulemanager/modulemanager.zep", 97);
 	for (
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
 	) {
-		ZEPHIR_GET_HMKEY(moduleName, _2, _1);
+		ZEPHIR_GET_HKEY(moduleName, _2, _1);
 		ZEPHIR_GET_HVALUE(module, _3);
 		if (Z_TYPE_P(module) == IS_OBJECT) {
 			if (unlikely(Z_TYPE_P(moduleName) != IS_STRING)) {
@@ -144,7 +144,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, onLoadModules) {
 				ZEPHIR_INIT_LNVAR(_4);
 				ZEPHIR_CONCAT_SVS(_4, "Module (", className, ") must have a key identifier.");
 				zephir_get_strval(exceptionMsg, _4);
-				ZEPHIR_INIT_LNVAR(_5);
+				ZEPHIR_INIT_NVAR(_5);
 				object_init_ex(_5, zendframework_modulemanager_exception_runtimeexception_ce);
 				ZEPHIR_CALL_METHOD(NULL, _5, "__construct", &_6, exceptionMsg);
 				zephir_check_call_status();
@@ -180,10 +180,10 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, loadModules) {
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("modulesAreLoaded"), PH_NOISY_CC);
 	if (!ZEPHIR_IS_TRUE_IDENTICAL(_0)) {
-		ZEPHIR_CALL_METHOD(&_1, this_ptr, "geteventmanager",  NULL);
+		ZEPHIR_CALL_METHOD(&_1, this_ptr, "geteventmanager", NULL);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(events, _1);
-		ZEPHIR_CALL_METHOD(&_1, this_ptr, "getevent",  NULL);
+		ZEPHIR_CALL_METHOD(&_1, this_ptr, "getevent", NULL);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(event, _1);
 		ZEPHIR_INIT_VAR(_2);
@@ -191,7 +191,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, loadModules) {
 		ZEPHIR_CALL_METHOD(NULL, events, "trigger", NULL, _2, this_ptr, event);
 		zephir_check_temp_parameter(_2);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(&_1, this_ptr, "getevent",  NULL);
+		ZEPHIR_CALL_METHOD(&_1, this_ptr, "getevent", NULL);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(event, _1);
 		ZEPHIR_INIT_NVAR(_2);
@@ -248,7 +248,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, loadModule) {
 		ZVAL_LONG(_4, 0);
 		zephir_update_property_this(this_ptr, SL("loadFinished"), _4 TSRMLS_CC);
 	}
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getevent",  NULL);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getevent", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(event, _1);
 	_4 = zephir_fetch_nproperty_this(this_ptr, SL("loadFinished"), PH_NOISY_CC);
@@ -269,7 +269,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, loadModule) {
 	ZEPHIR_CALL_METHOD(NULL, event, "setmodule", NULL, module);
 	zephir_check_call_status();
 	zephir_update_property_array(this_ptr, SL("loadedModules"), moduleName, module TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "geteventmanager",  NULL);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "geteventmanager", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(events, _1);
 	ZEPHIR_INIT_VAR(_6);
@@ -293,7 +293,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, loadModuleByName) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *exceptionMsg = NULL;
-	zval *event, *events = NULL, *result = NULL, *module = NULL, *moduleName = NULL, *_0 = NULL, *_1, *_2, *_3, *_4;
+	zval *event, *events = NULL, *result = NULL, *module = NULL, *moduleName = NULL, *_0 = NULL, *_1 = NULL, *_2, *_3;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &event);
@@ -301,10 +301,10 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, loadModuleByName) {
 
 
 	if (!(zephir_instance_of_ev(event, zendframework_eventmanager_eventinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'event' must be an instance of 'ZendFramework\\\\EventManager\\\\EventInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'event' must be an instance of 'ZendFramework\\EventManager\\EventInterface'", "", 0);
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "geteventmanager",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "geteventmanager", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(events, _0);
 	ZEPHIR_INIT_VAR(_1);
@@ -315,20 +315,20 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, loadModuleByName) {
 	zephir_check_temp_parameter(_1);
 	zephir_check_temp_parameter(_2);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_0, result, "last",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, result, "last", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(module, _0);
 	if (unlikely(Z_TYPE_P(module) != IS_OBJECT)) {
-		ZEPHIR_CALL_METHOD(&moduleName, event, "getmodulename",  NULL);
+		ZEPHIR_CALL_METHOD(&moduleName, event, "getmodulename", NULL);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(_3);
 		ZEPHIR_CONCAT_SVS(_3, "Module (", moduleName, ") could not be initialized.");
 		zephir_get_strval(exceptionMsg, _3);
-		ZEPHIR_INIT_VAR(_4);
-		object_init_ex(_4, zendframework_modulemanager_exception_runtimeexception_ce);
-		ZEPHIR_CALL_METHOD(NULL, _4, "__construct", NULL, exceptionMsg);
+		ZEPHIR_INIT_NVAR(_1);
+		object_init_ex(_1, zendframework_modulemanager_exception_runtimeexception_ce);
+		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_4, "zendframework/modulemanager/modulemanager.zep", 208 TSRMLS_CC);
+		zephir_throw_exception_debug(_1, "zendframework/modulemanager/modulemanager.zep", 208 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -457,7 +457,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, getEvent) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("event"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(event, _0);
 	if (!(zephir_instance_of_ev(event, zendframework_modulemanager_moduleevent_ce TSRMLS_CC))) {
-		ZEPHIR_INIT_VAR(event);
+		ZEPHIR_INIT_NVAR(event);
 		object_init_ex(event, zendframework_modulemanager_moduleevent_ce);
 		ZEPHIR_CALL_METHOD(NULL, event, "__construct", NULL);
 		zephir_check_call_status();
@@ -483,7 +483,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, setEvent) {
 
 
 	if (!(zephir_instance_of_ev(event, zendframework_modulemanager_moduleevent_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'event' must be an instance of 'ZendFramework\\\\ModuleManager\\\\ModuleEvent'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'event' must be an instance of 'ZendFramework\\ModuleManager\\ModuleEvent'", "", 0);
 		return;
 	}
 	zephir_update_property_this(this_ptr, SL("event"), event TSRMLS_CC);
@@ -509,7 +509,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, setEventManager) {
 
 
 	if (!(zephir_instance_of_ev(events, zendframework_eventmanager_eventmanagerinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'events' must be an instance of 'ZendFramework\\\\EventManager\\\\EventManagerInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'events' must be an instance of 'ZendFramework\\EventManager\\EventManagerInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_INIT_VAR(className);
@@ -520,7 +520,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, setEventManager) {
 	ZVAL_STRING(_1, "ModuleManager", 1);
 	zephir_array_fast_append(_0, _1);
 	zephir_array_fast_append(_0, className);
-	ZEPHIR_INIT_BNVAR(_1);
+	ZEPHIR_INIT_NVAR(_1);
 	ZVAL_STRING(_1, "module_manager", 1);
 	zephir_array_fast_append(_0, _1);
 	ZEPHIR_CALL_METHOD(NULL, events, "setidentifiers", NULL, _0);
@@ -549,7 +549,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, getEventManager) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("events"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(events, _0);
 	if (!(zephir_instance_of_ev(events, zendframework_eventmanager_eventmanagerinterface_ce TSRMLS_CC))) {
-		ZEPHIR_INIT_VAR(events);
+		ZEPHIR_INIT_NVAR(events);
 		object_init_ex(events, zendframework_eventmanager_eventmanager_ce);
 		ZEPHIR_CALL_METHOD(NULL, events, "__construct", NULL);
 		zephir_check_call_status();
@@ -573,7 +573,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, attachDefaultListeners) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "geteventmanager",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "geteventmanager", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(events, _0);
 	ZEPHIR_INIT_VAR(_1);
@@ -582,7 +582,7 @@ PHP_METHOD(ZendFramework_ModuleManager_ModuleManager, attachDefaultListeners) {
 	ZEPHIR_INIT_VAR(_2);
 	ZVAL_STRING(_2, "onLoadModules", 1);
 	zephir_array_fast_append(_1, _2);
-	ZEPHIR_INIT_BNVAR(_2);
+	ZEPHIR_INIT_NVAR(_2);
 	ZVAL_STRING(_2, "loadModules", ZEPHIR_TEMP_PARAM_COPY);
 	ZEPHIR_CALL_METHOD(NULL, events, "attach", NULL, _2, _1);
 	zephir_check_temp_parameter(_2);

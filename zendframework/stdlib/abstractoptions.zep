@@ -77,7 +77,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
                  string letter;
 
                  let letter = (string) array_shift(letters);
-                 return "_" + letter->lower();
+                 return "_" . letter->lower();
             }, key);
             let data[normalizedKey] = value;
         }

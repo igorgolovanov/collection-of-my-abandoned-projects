@@ -303,7 +303,7 @@ PHP_METHOD(ZendFramework_Loader_ModuleAutoloader, autoload) {
 			ZEPHIR_CONCAT_VS(_9, ns, "\\");
 			ZEPHIR_SINIT_NVAR(_0);
 			ZVAL_STRING(&_0, "", 0);
-			zephir_fast_str_replace(moduleNameBuffer, _9, &_0, moduleName);
+			zephir_fast_str_replace(moduleNameBuffer, _9, &_0, moduleName TSRMLS_CC);
 			ZEPHIR_INIT_LNVAR(_10);
 			ZEPHIR_CONCAT_VSVS(_10, path, "/", moduleNameBuffer, "/");
 			ZEPHIR_CPY_WRT(path, _10);
@@ -324,7 +324,7 @@ PHP_METHOD(ZendFramework_Loader_ModuleAutoloader, autoload) {
 	ZVAL_STRING(&_3, "\\", 0);
 	ZEPHIR_SINIT_VAR(_13);
 	ZVAL_STRING(&_13, "/", 0);
-	zephir_fast_str_replace(moduleClassPath, &_3, &_13, moduleName);
+	zephir_fast_str_replace(moduleClassPath, &_3, &_13, moduleName TSRMLS_CC);
 	_5 = zephir_fetch_nproperty_this(this_ptr, SL("pharExtensions"), PH_NOISY_CC);
 	if (!(ZEPHIR_IS_EMPTY(_5))) {
 		_14 = zephir_fetch_nproperty_this(this_ptr, SL("pharExtensions"), PH_NOISY_CC);
@@ -403,19 +403,19 @@ PHP_METHOD(ZendFramework_Loader_ModuleAutoloader, autoload) {
 			  ; zephir_hash_move_forward_ex(_29, &_28)
 			) {
 				ZEPHIR_GET_HVALUE(entry, _30);
-				ZEPHIR_CALL_METHOD(&_26, entry, "isdir",  NULL);
+				ZEPHIR_CALL_METHOD(&_26, entry, "isdir", NULL);
 				zephir_check_call_status();
 				if (zephir_is_true(_26)) {
 					continue;
 				}
-				ZEPHIR_CALL_METHOD(&_31, entry, "getpathname",  NULL);
+				ZEPHIR_CALL_METHOD(&_31, entry, "getpathname", NULL);
 				zephir_check_call_status();
 				ZEPHIR_CALL_FUNCTION(&_32, "preg_match", &_33, pharSuffixPattern, _31);
 				zephir_check_call_status();
 				if (!(zephir_is_true(_32))) {
 					continue;
 				}
-				ZEPHIR_CALL_METHOD(&_34, entry, "getpathname",  NULL);
+				ZEPHIR_CALL_METHOD(&_34, entry, "getpathname", NULL);
 				zephir_check_call_status();
 				ZEPHIR_CALL_METHOD(&classLoaded, this_ptr, "loadmodulefromphar", &_12, _34, className);
 				zephir_check_call_status();
@@ -459,16 +459,16 @@ PHP_METHOD(ZendFramework_Loader_ModuleAutoloader, loadModuleFromDir) {
 	object_init_ex(file, spl_ce_SplFileInfo);
 	ZEPHIR_CALL_METHOD(NULL, file, "__construct", NULL, filePath);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_1, file, "isreadable",  NULL);
+	ZEPHIR_CALL_METHOD(&_1, file, "isreadable", NULL);
 	zephir_check_call_status();
 	_2 = zephir_is_true(_1);
 	if (_2) {
-		ZEPHIR_CALL_METHOD(&_3, file, "isfile",  NULL);
+		ZEPHIR_CALL_METHOD(&_3, file, "isfile", NULL);
 		zephir_check_call_status();
 		_2 = zephir_is_true(_3);
 	}
 	if (_2) {
-		ZEPHIR_CALL_METHOD(&filePath, file, "getrealpath",  NULL);
+		ZEPHIR_CALL_METHOD(&filePath, file, "getrealpath", NULL);
 		zephir_check_call_status();
 		if (zephir_require_zval(filePath TSRMLS_CC) == FAILURE) {
 			RETURN_MM_NULL();
@@ -514,18 +514,18 @@ PHP_METHOD(ZendFramework_Loader_ModuleAutoloader, loadModuleFromPhar) {
 	object_init_ex(file, spl_ce_SplFileInfo);
 	ZEPHIR_CALL_METHOD(NULL, file, "__construct", NULL, pharPath);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_2, file, "isreadable",  NULL);
+	ZEPHIR_CALL_METHOD(&_2, file, "isreadable", NULL);
 	zephir_check_call_status();
 	_3 = !zephir_is_true(_2);
 	if (!(_3)) {
-		ZEPHIR_CALL_METHOD(&_4, file, "isfile",  NULL);
+		ZEPHIR_CALL_METHOD(&_4, file, "isfile", NULL);
 		zephir_check_call_status();
 		_3 = !zephir_is_true(_4);
 	}
 	if (_3) {
 		RETURN_MM_BOOL(0);
 	}
-	ZEPHIR_CALL_METHOD(&fileRealPath, file, "getrealpath",  NULL);
+	ZEPHIR_CALL_METHOD(&fileRealPath, file, "getrealpath", NULL);
 	zephir_check_call_status();
 	ZEPHIR_SINIT_VAR(_5);
 	ZVAL_STRING(&_5, ".phar", 0);
@@ -546,11 +546,11 @@ PHP_METHOD(ZendFramework_Loader_ModuleAutoloader, loadModuleFromPhar) {
 	object_init_ex(moduleFile, spl_ce_SplFileInfo);
 	ZEPHIR_CALL_METHOD(NULL, moduleFile, "__construct", NULL, moduleClassFile);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_6, moduleFile, "isreadable",  NULL);
+	ZEPHIR_CALL_METHOD(&_6, moduleFile, "isreadable", NULL);
 	zephir_check_call_status();
 	_7 = zephir_is_true(_6);
 	if (_7) {
-		ZEPHIR_CALL_METHOD(&_8, moduleFile, "isfile",  NULL);
+		ZEPHIR_CALL_METHOD(&_8, moduleFile, "isfile", NULL);
 		zephir_check_call_status();
 		_7 = zephir_is_true(_8);
 	}
@@ -565,17 +565,17 @@ PHP_METHOD(ZendFramework_Loader_ModuleAutoloader, loadModuleFromPhar) {
 	}
 	ZEPHIR_CALL_METHOD(&pharBaseName, this_ptr, "pharfiletomodulename", NULL, fileRealPath);
 	zephir_check_call_status();
-	ZEPHIR_INIT_BNVAR(moduleClassFile);
+	ZEPHIR_INIT_NVAR(moduleClassFile);
 	ZEPHIR_CONCAT_SVSVS(moduleClassFile, "phar://", fileRealPath, "/", pharBaseName, "/Module.php");
-	ZEPHIR_INIT_BNVAR(moduleFile);
+	ZEPHIR_INIT_NVAR(moduleFile);
 	object_init_ex(moduleFile, spl_ce_SplFileInfo);
 	ZEPHIR_CALL_METHOD(NULL, moduleFile, "__construct", NULL, moduleClassFile);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_9, moduleFile, "isreadable",  NULL);
+	ZEPHIR_CALL_METHOD(&_9, moduleFile, "isreadable", NULL);
 	zephir_check_call_status();
 	_10 = zephir_is_true(_9);
 	if (_10) {
-		ZEPHIR_CALL_METHOD(&_11, moduleFile, "isfile",  NULL);
+		ZEPHIR_CALL_METHOD(&_11, moduleFile, "isfile", NULL);
 		zephir_check_call_status();
 		_10 = zephir_is_true(_11);
 	}
@@ -668,7 +668,7 @@ PHP_METHOD(ZendFramework_Loader_ModuleAutoloader, registerPaths) {
 		_0 = !(zephir_is_instance_of(paths, SL("ZendFramework\\Loader\\Traversable") TSRMLS_CC));
 	}
 	if (unlikely(_0)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_loader_exception_invalidargumentexception_ce, "Parameter to \\\\Zend\\\\Loader\\\\ModuleAutoloader's registerPaths method must be an array or implement the Traversable interface", "zendframework/loader/moduleautoloader.zep", 353);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_loader_exception_invalidargumentexception_ce, "Parameter to \\Zend\\Loader\\ModuleAutoloader's registerPaths method must be an array or implement the Traversable interface", "zendframework/loader/moduleautoloader.zep", 353);
 		return;
 	}
 	zephir_is_iterable(paths, &_2, &_1, 0, 0, "zendframework/loader/moduleautoloader.zep", 364);

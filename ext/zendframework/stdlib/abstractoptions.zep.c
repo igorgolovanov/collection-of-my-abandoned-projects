@@ -98,7 +98,7 @@ PHP_METHOD(ZendFramework_Stdlib_AbstractOptions, setFromArray) {
 
 
 	if (zephir_instance_of_ev(options, zendframework_stdlib_abstractoptions_ce TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(&options, options, "toarray",  NULL);
+		ZEPHIR_CALL_METHOD(&options, options, "toarray", NULL);
 		zephir_check_call_status();
 	}
 	_0 = Z_TYPE_P(options) != IS_ARRAY;
@@ -158,11 +158,12 @@ PHP_METHOD(ZendFramework_Stdlib_AbstractOptions, toArray) {
 			continue;
 		}
 		ZEPHIR_INIT_NVAR(_3);
-		ZVAL_STRING(_3, "/([A-Z])/", ZEPHIR_TEMP_PARAM_COPY);
+		ZEPHIR_INIT_NVAR(_3);
+		zephir_create_closure_ex(_3, this_ptr, zendframework_0__closure_ce, SS("__invoke") TSRMLS_CC);
 		ZEPHIR_INIT_NVAR(_4);
-		ZVAL_NULL(_4);
-		ZEPHIR_CALL_FUNCTION(&normalizedKey, "preg_replace_callback", &_5, _3, _4, key);
-		zephir_check_temp_parameter(_3);
+		ZVAL_STRING(_4, "/([A-Z])/", ZEPHIR_TEMP_PARAM_COPY);
+		ZEPHIR_CALL_FUNCTION(&normalizedKey, "preg_replace_callback", &_5, _4, _3, key);
+		zephir_check_temp_parameter(_4);
 		zephir_check_call_status();
 		zephir_array_update_zval(&data, normalizedKey, &value, PH_COPY | PH_SEPARATE);
 	}
@@ -198,7 +199,7 @@ PHP_METHOD(ZendFramework_Stdlib_AbstractOptions, __set) {
 	ZVAL_STRING(&_0, "_", 0);
 	ZEPHIR_SINIT_VAR(_1);
 	ZVAL_STRING(&_1, "", 0);
-	zephir_fast_str_replace(setter, &_0, &_1, key);
+	zephir_fast_str_replace(setter, &_0, &_1, key TSRMLS_CC);
 	ZEPHIR_CALL_FUNCTION(&_2, "ucwords", &_3, setter);
 	zephir_check_call_status();
 	zephir_get_strval(setter, _2);
@@ -207,7 +208,7 @@ PHP_METHOD(ZendFramework_Stdlib_AbstractOptions, __set) {
 	ZVAL_STRING(&_5, " ", 0);
 	ZEPHIR_SINIT_VAR(_6);
 	ZVAL_STRING(&_6, "", 0);
-	zephir_fast_str_replace(_4, &_5, &_6, setter);
+	zephir_fast_str_replace(_4, &_5, &_6, setter TSRMLS_CC);
 	zephir_get_strval(setter, _4);
 	ZEPHIR_INIT_VAR(_7);
 	ZEPHIR_CONCAT_SV(_7, "set", setter);
@@ -268,7 +269,7 @@ PHP_METHOD(ZendFramework_Stdlib_AbstractOptions, __get) {
 	ZVAL_STRING(&_0, "_", 0);
 	ZEPHIR_SINIT_VAR(_1);
 	ZVAL_STRING(&_1, "", 0);
-	zephir_fast_str_replace(getter, &_0, &_1, key);
+	zephir_fast_str_replace(getter, &_0, &_1, key TSRMLS_CC);
 	ZEPHIR_CALL_FUNCTION(&_2, "ucwords", &_3, getter);
 	zephir_check_call_status();
 	zephir_get_strval(getter, _2);
@@ -277,7 +278,7 @@ PHP_METHOD(ZendFramework_Stdlib_AbstractOptions, __get) {
 	ZVAL_STRING(&_5, " ", 0);
 	ZEPHIR_SINIT_VAR(_6);
 	ZVAL_STRING(&_6, "", 0);
-	zephir_fast_str_replace(_4, &_5, &_6, getter);
+	zephir_fast_str_replace(_4, &_5, &_6, getter TSRMLS_CC);
 	zephir_get_strval(getter, _4);
 	ZEPHIR_INIT_VAR(_7);
 	ZEPHIR_CONCAT_SV(_7, "get", getter);
@@ -355,17 +356,17 @@ PHP_METHOD(ZendFramework_Stdlib_AbstractOptions, __unset) {
 
 	if (EG(exception)) {
 		ZEPHIR_CPY_WRT(e, EG(exception));
-		if (zephir_is_instance_of(e, SL("Exception\\BadMethodCallException") TSRMLS_CC)) {
+		if (zephir_instance_of_ev(e, zendframework_stdlib_exception_badmethodcallexception_ce TSRMLS_CC)) {
 			zend_clear_exception(TSRMLS_C);
 			ZEPHIR_INIT_VAR(exceptionMsg);
 			ZEPHIR_CONCAT_SVS(exceptionMsg, "The class property $", key, "cannot be unset as NULL is an invalid value for it");
-			ZEPHIR_INIT_VAR(_1);
-			object_init_ex(_1, zendframework_stdlib_exception_invalidargumentexception_ce);
 			ZEPHIR_INIT_NVAR(_0);
-			ZVAL_LONG(_0, 0);
-			ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, exceptionMsg, _0, e);
+			object_init_ex(_0, zendframework_stdlib_exception_invalidargumentexception_ce);
+			ZEPHIR_INIT_VAR(_1);
+			ZVAL_LONG(_1, 0);
+			ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, exceptionMsg, _1, e);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(_1, "zendframework/stdlib/abstractoptions.zep", 182 TSRMLS_CC);
+			zephir_throw_exception_debug(_0, "zendframework/stdlib/abstractoptions.zep", 182 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}

@@ -74,11 +74,11 @@ ZEPHIR_INIT_CLASS(ZendFramework_Config_Config) {
 PHP_METHOD(ZendFramework_Config_Config, __construct) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_4;
+	zend_class_entry *_5;
 	HashTable *_2;
 	HashPosition _1;
 	zend_bool allowModifications;
-	zval *array_param = NULL, *allowModifications_param = NULL, *_0, *k = NULL, *v = NULL, *className, **_3;
+	zval *array_param = NULL, *allowModifications_param = NULL, *_0, *k = NULL, *v = NULL, *className, **_3, *_4 = NULL;
 	zval *array = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -109,12 +109,13 @@ PHP_METHOD(ZendFramework_Config_Config, __construct) {
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
 	) {
-		ZEPHIR_GET_HMKEY(k, _2, _1);
+		ZEPHIR_GET_HKEY(k, _2, _1);
 		ZEPHIR_GET_HVALUE(v, _3);
 		if (Z_TYPE_P(v) == IS_ARRAY) {
 			ZEPHIR_INIT_NVAR(v);
-			_4 = zend_fetch_class(Z_STRVAL_P(className), Z_STRLEN_P(className), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-			object_init_ex(v, _4);
+			zephir_fetch_safe_class(_4, className);
+			_5 = zend_fetch_class(Z_STRVAL_P(_4), Z_STRLEN_P(_4), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+			object_init_ex(v, _5);
 			if (zephir_has_constructor(v TSRMLS_CC)) {
 				ZEPHIR_CALL_METHOD(NULL, v, "__construct", NULL, v, (allowModifications ? ZEPHIR_GLOBAL(global_true) : ZEPHIR_GLOBAL(global_false)));
 				zephir_check_call_status();
@@ -195,8 +196,8 @@ PHP_METHOD(ZendFramework_Config_Config, __get) {
 PHP_METHOD(ZendFramework_Config_Config, __set) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_1;
-	zval *name_param = NULL, *value = NULL, *className, *_0, *_2;
+	zend_class_entry *_2;
+	zval *name_param = NULL, *value = NULL, *className, *_0, *_1 = NULL, *_3;
 	zval *name = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -215,12 +216,13 @@ PHP_METHOD(ZendFramework_Config_Config, __set) {
 		ZEPHIR_INIT_VAR(className);
 		zephir_get_class(className, this_ptr, 0 TSRMLS_CC);
 		ZEPHIR_INIT_NVAR(value);
-		_1 = zend_fetch_class(Z_STRVAL_P(className), Z_STRLEN_P(className), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		object_init_ex(value, _1);
+		zephir_fetch_safe_class(_1, className);
+		_2 = zend_fetch_class(Z_STRVAL_P(_1), Z_STRLEN_P(_1), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+		object_init_ex(value, _2);
 		if (zephir_has_constructor(value TSRMLS_CC)) {
-			ZEPHIR_INIT_VAR(_2);
-			ZVAL_BOOL(_2, 1);
-			ZEPHIR_CALL_METHOD(NULL, value, "__construct", NULL, value, _2);
+			ZEPHIR_INIT_VAR(_3);
+			ZVAL_BOOL(_3, 1);
+			ZEPHIR_CALL_METHOD(NULL, value, "__construct", NULL, value, _3);
 			zephir_check_call_status();
 		}
 	}
@@ -255,7 +257,7 @@ PHP_METHOD(ZendFramework_Config_Config, __clone) {
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
 	) {
-		ZEPHIR_GET_HMKEY(k, _2, _1);
+		ZEPHIR_GET_HKEY(k, _2, _1);
 		ZEPHIR_GET_HVALUE(v, _3);
 		if (zephir_instance_of_ev(v, zendframework_config_config_ce TSRMLS_CC)) {
 			ZEPHIR_INIT_LNVAR(_4);
@@ -294,10 +296,10 @@ PHP_METHOD(ZendFramework_Config_Config, toArray) {
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
 	) {
-		ZEPHIR_GET_HMKEY(k, _2, _1);
+		ZEPHIR_GET_HKEY(k, _2, _1);
 		ZEPHIR_GET_HVALUE(v, _3);
 		if (zephir_instance_of_ev(v, zendframework_config_config_ce TSRMLS_CC)) {
-			ZEPHIR_CALL_METHOD(&_4, v, "toarray",  NULL);
+			ZEPHIR_CALL_METHOD(&_4, v, "toarray", NULL);
 			zephir_check_call_status();
 			zephir_array_update_zval(&data, k, &_4, PH_COPY | PH_SEPARATE);
 		} else {
@@ -489,7 +491,7 @@ PHP_METHOD(ZendFramework_Config_Config, valid) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&key, this_ptr, "key",  NULL);
+	ZEPHIR_CALL_METHOD(&key, this_ptr, "key", NULL);
 	zephir_check_call_status();
 	RETURN_MM_BOOL(Z_TYPE_P(key) != IS_NULL);
 
@@ -601,11 +603,11 @@ PHP_METHOD(ZendFramework_Config_Config, offsetUnset) {
  */
 PHP_METHOD(ZendFramework_Config_Config, merge) {
 
-	zend_class_entry *_3, *_4;
+	zend_class_entry *_4, *_6;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zend_bool _2;
 	zend_object_iterator *_1;
-	zval *merge, *k = NULL, *v = NULL, *v2 = NULL, *className, *data = NULL, *allowModifications = NULL, *_0;
+	zval *merge, *k = NULL, *v = NULL, *v2 = NULL, *className, *data = NULL, *allowModifications = NULL, *_0, *_3 = NULL, *_5 = NULL;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &merge);
@@ -613,7 +615,7 @@ PHP_METHOD(ZendFramework_Config_Config, merge) {
 
 
 	if (!(zephir_instance_of_ev(merge, zendframework_config_config_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'merge' must be an instance of 'ZendFramework\\\\Config\\\\Config'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'merge' must be an instance of 'ZendFramework\\Config\\Config'", "", 0);
 		return;
 	}
 	ZEPHIR_INIT_VAR(className);
@@ -631,24 +633,25 @@ PHP_METHOD(ZendFramework_Config_Config, merge) {
 		ZEPHIR_OBS_NVAR(v2);
 		_0 = zephir_fetch_nproperty_this(this_ptr, SL("data"), PH_NOISY_CC);
 		if (zephir_array_isset_fetch(&v2, _0, k, 0 TSRMLS_CC)) {
-			if (Z_TYPE_P(k) == IS_LONG) {
-				zephir_update_property_array_append(this_ptr, SL("data"), v TSRMLS_CC);
 			_2 = zephir_instance_of_ev(v, zendframework_config_config_ce TSRMLS_CC);
 			if (_2) {
 				_2 = zephir_instance_of_ev(v2, zendframework_config_config_ce TSRMLS_CC);
 			}
+			if (Z_TYPE_P(k) == IS_LONG) {
+				zephir_update_property_array_append(this_ptr, SL("data"), v TSRMLS_CC);
 			} else if (_2) {
 				ZEPHIR_CALL_METHOD(NULL, v2, "merge", NULL, v);
 				zephir_check_call_status();
 			} else {
-				ZEPHIR_CALL_METHOD(&data, v, "toarray",  NULL);
+				ZEPHIR_CALL_METHOD(&data, v, "toarray", NULL);
 				zephir_check_call_status();
 				if (zephir_instance_of_ev(v, zendframework_config_config_ce TSRMLS_CC)) {
-					ZEPHIR_CALL_METHOD(&data, v, "toarray",  NULL);
+					ZEPHIR_CALL_METHOD(&data, v, "toarray", NULL);
 					zephir_check_call_status();
 					ZEPHIR_INIT_NVAR(v);
-					_3 = zend_fetch_class(Z_STRVAL_P(className), Z_STRLEN_P(className), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-					object_init_ex(v, _3);
+					zephir_fetch_safe_class(_3, className);
+					_4 = zend_fetch_class(Z_STRVAL_P(_3), Z_STRLEN_P(_3), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+					object_init_ex(v, _4);
 					if (zephir_has_constructor(v TSRMLS_CC)) {
 						ZEPHIR_CALL_METHOD(NULL, v, "__construct", NULL, data, allowModifications);
 						zephir_check_call_status();
@@ -658,11 +661,12 @@ PHP_METHOD(ZendFramework_Config_Config, merge) {
 			}
 		} else {
 			if (zephir_instance_of_ev(v, zendframework_config_config_ce TSRMLS_CC)) {
-				ZEPHIR_CALL_METHOD(&data, v, "toarray",  NULL);
+				ZEPHIR_CALL_METHOD(&data, v, "toarray", NULL);
 				zephir_check_call_status();
 				ZEPHIR_INIT_NVAR(v);
-				_4 = zend_fetch_class(Z_STRVAL_P(className), Z_STRLEN_P(className), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-				object_init_ex(v, _4);
+				zephir_fetch_safe_class(_5, className);
+				_6 = zend_fetch_class(Z_STRVAL_P(_5), Z_STRLEN_P(_5), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+				object_init_ex(v, _6);
 				if (zephir_has_constructor(v TSRMLS_CC)) {
 					ZEPHIR_CALL_METHOD(NULL, v, "__construct", NULL, data, allowModifications);
 					zephir_check_call_status();

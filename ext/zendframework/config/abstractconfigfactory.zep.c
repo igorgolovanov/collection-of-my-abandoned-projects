@@ -66,7 +66,7 @@ PHP_METHOD(ZendFramework_Config_AbstractConfigFactory, canCreateServiceWithName)
 
 
 	if (!(zephir_instance_of_ev(serviceLocator, zendframework_servicemanager_servicelocatorinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'serviceLocator' must be an instance of 'ZendFramework\\\\ServiceManager\\\\ServiceLocatorInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'serviceLocator' must be an instance of 'ZendFramework\\ServiceManager\\ServiceLocatorInterface'", "", 0);
 		return;
 	}
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("configs"), PH_NOISY_CC);
@@ -86,7 +86,7 @@ PHP_METHOD(ZendFramework_Config_AbstractConfigFactory, canCreateServiceWithName)
 	if (Z_TYPE_P(key) == IS_NULL) {
 		RETURN_MM_BOOL(0);
 	}
-	ZEPHIR_INIT_BNVAR(_2);
+	ZEPHIR_INIT_NVAR(_2);
 	ZVAL_STRING(_2, "Config", ZEPHIR_TEMP_PARAM_COPY);
 	ZEPHIR_CALL_METHOD(&config, serviceLocator, "get", NULL, _2);
 	zephir_check_temp_parameter(_2);
@@ -117,7 +117,7 @@ PHP_METHOD(ZendFramework_Config_AbstractConfigFactory, createServiceWithName) {
 
 
 	if (!(zephir_instance_of_ev(serviceLocator, zendframework_servicemanager_servicelocatorinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'serviceLocator' must be an instance of 'ZendFramework\\\\ServiceManager\\\\ServiceLocatorInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'serviceLocator' must be an instance of 'ZendFramework\\ServiceManager\\ServiceLocatorInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_OBS_VAR(config);
@@ -164,7 +164,7 @@ PHP_METHOD(ZendFramework_Config_AbstractConfigFactory, addPattern) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_config_exception_invalidargumentexception_ce, "pattern must be string", "zendframework/config/abstractconfigfactory.zep", 108);
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&patterns, this_ptr, "getpatterns",  NULL);
+	ZEPHIR_CALL_METHOD(&patterns, this_ptr, "getpatterns", NULL);
 	zephir_check_call_status();
 	Z_SET_ISREF_P(patterns);
 	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", &_0, patterns, pattern);
@@ -288,7 +288,7 @@ PHP_METHOD(ZendFramework_Config_AbstractConfigFactory, match) {
 	array_init(matches);
 
 
-	ZEPHIR_CALL_METHOD(&patterns, this_ptr, "getpatterns",  NULL);
+	ZEPHIR_CALL_METHOD(&patterns, this_ptr, "getpatterns", NULL);
 	zephir_check_call_status();
 	zephir_is_iterable(patterns, &_1, &_0, 0, 0, "zendframework/config/abstractconfigfactory.zep", 187);
 	for (
@@ -321,11 +321,11 @@ PHP_METHOD(ZendFramework_Config_AbstractConfigFactory, __construct) {
 	ZEPHIR_INIT_VAR(_1);
 	ZVAL_STRING(_1, "#config[\._-](.*)$#i", 1);
 	zephir_array_fast_append(_0, _1);
-	ZEPHIR_INIT_BNVAR(_1);
+	ZEPHIR_INIT_NVAR(_1);
 	ZVAL_STRING(_1, "#^(.*)[\\\\\._-]config$#i", 1);
 	zephir_array_fast_append(_0, _1);
 	zephir_update_property_this(this_ptr, SL("defaultPatterns"), _0 TSRMLS_CC);
-	ZEPHIR_INIT_BNVAR(_1);
+	ZEPHIR_INIT_NVAR(_1);
 	array_init(_1);
 	zephir_update_property_this(this_ptr, SL("configs"), _1 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();

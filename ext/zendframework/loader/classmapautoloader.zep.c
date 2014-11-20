@@ -120,7 +120,7 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, registerAutoloadMap) {
 
 	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *map = NULL, *exceptionMsg = NULL, *location = NULL, *merged = NULL, *_0, *_1 = NULL, *_2;
+	zval *map = NULL, *exceptionMsg = NULL, *location = NULL, *merged = NULL, *_0 = NULL, *_1, *_2;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &map);
@@ -142,17 +142,17 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, registerAutoloadMap) {
 		if (ZEPHIR_IS_EMPTY(location)) {
 			ZEPHIR_INIT_VAR(_0);
 			zephir_gettype(_0, map TSRMLS_CC);
-			ZEPHIR_INIT_VAR(location);
+			ZEPHIR_INIT_NVAR(location);
 			ZEPHIR_CONCAT_SV(location, "unexpected type: ", _0);
 		}
 		ZEPHIR_INIT_VAR(_1);
 		ZEPHIR_CONCAT_VVS(_1, exceptionMsg, location, "\"");
 		ZEPHIR_CPY_WRT(exceptionMsg, _1);
-		ZEPHIR_INIT_LNVAR(_1);
-		object_init_ex(_1, zendframework_loader_exception_invalidargumentexception_ce);
-		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, exceptionMsg);
+		ZEPHIR_INIT_NVAR(_0);
+		object_init_ex(_0, zendframework_loader_exception_invalidargumentexception_ce);
+		ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_1, "zendframework/loader/classmapautoloader.zep", 90 TSRMLS_CC);
+		zephir_throw_exception_debug(_0, "zendframework/loader/classmapautoloader.zep", 90 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -285,9 +285,9 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, register) {
  */
 PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, loadMapFromFile) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *location_param = NULL, *path = NULL, *map = NULL, *_0, *_1, *_2 = NULL, *_4, *_5 = NULL;
+	zval *location_param = NULL, *path = NULL, *map = NULL, *_0 = NULL, *_1, *_3, *_4 = NULL;
 	zval *location = NULL, *exceptionMsg = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -297,40 +297,38 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, loadMapFromFile) {
 
 
 	if (unlikely(!(zephir_file_exists(location TSRMLS_CC) == SUCCESS))) {
-		ZEPHIR_INIT_VAR(_0);
-		zephir_gettype(_0, location TSRMLS_CC);
-		if (!ZEPHIR_IS_STRING(_0, "string")) {
+		if (1 != 1) {
+			ZEPHIR_INIT_VAR(_0);
+			zephir_gettype(_0, location TSRMLS_CC);
 			ZEPHIR_INIT_VAR(_1);
-			zephir_gettype(_1, location TSRMLS_CC);
-			ZEPHIR_INIT_VAR(_2);
-			ZEPHIR_CONCAT_SV(_2, "unexpected type: ", _1);
-			zephir_get_strval(location, _2);
+			ZEPHIR_CONCAT_SV(_1, "unexpected type: ", _0);
+			zephir_get_strval(location, _1);
 		}
 		ZEPHIR_INIT_VAR(exceptionMsg);
 		ZEPHIR_CONCAT_SVS(exceptionMsg, "Map file provided does not exist. Map file: \"", location, "\"");
-		ZEPHIR_INIT_LNVAR(_2);
-		object_init_ex(_2, zendframework_loader_exception_invalidargumentexception_ce);
-		ZEPHIR_CALL_METHOD(NULL, _2, "__construct", NULL, exceptionMsg);
+		ZEPHIR_INIT_NVAR(_0);
+		object_init_ex(_0, zendframework_loader_exception_invalidargumentexception_ce);
+		ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_2, "zendframework/loader/classmapautoloader.zep", 182 TSRMLS_CC);
+		zephir_throw_exception_debug(_0, "zendframework/loader/classmapautoloader.zep", 182 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
 	ZEPHIR_CALL_STATIC(&path, "realpharpath", NULL, location);
 	zephir_check_call_status();
 	if (!(zephir_is_true(path))) {
-		ZEPHIR_CALL_FUNCTION(&path, "realpath", &_3, location);
+		ZEPHIR_CALL_FUNCTION(&path, "realpath", &_2, location);
 		zephir_check_call_status();
 	}
-	_4 = zephir_fetch_nproperty_this(this_ptr, SL("mapsLoaded"), PH_NOISY_CC);
-	if (zephir_fast_in_array(path, _4 TSRMLS_CC)) {
+	_3 = zephir_fetch_nproperty_this(this_ptr, SL("mapsLoaded"), PH_NOISY_CC);
+	if (zephir_fast_in_array(path, _3 TSRMLS_CC)) {
 		RETURN_THIS();
 	}
-	ZEPHIR_OBSERVE_OR_NULLIFY_PPZV(&_5);
-	if (zephir_require_zval_ret(&_5, path TSRMLS_CC) == FAILURE) {
+	ZEPHIR_OBSERVE_OR_NULLIFY_PPZV(&_4);
+	if (zephir_require_zval_ret(&_4, path TSRMLS_CC) == FAILURE) {
 		RETURN_MM_NULL();
 	}
-	ZEPHIR_CPY_WRT(map, _5);
+	ZEPHIR_CPY_WRT(map, _4);
 	RETURN_CCTOR(map);
 
 }
@@ -376,13 +374,13 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, realPharPath) {
 	zephir_array_fetch_long(&_3, match, 1, PH_NOISY | PH_READONLY, "zendframework/loader/classmapautoloader.zep", 214 TSRMLS_CC);
 	prefixLength = (5 + zephir_fast_strlen_ev(_3));
 	ZEPHIR_INIT_VAR(parts);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZEPHIR_INIT_VAR(_4);
 	array_init_size(_4, 3);
 	ZEPHIR_INIT_VAR(_5);
 	ZVAL_STRING(_5, "/", 1);
 	zephir_array_fast_append(_4, _5);
-	ZEPHIR_INIT_BNVAR(_5);
+	ZEPHIR_INIT_NVAR(_5);
 	ZVAL_STRING(_5, "\\", 1);
 	zephir_array_fast_append(_4, _5);
 	ZEPHIR_SINIT_VAR(_6);
@@ -391,7 +389,7 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, realPharPath) {
 	zephir_check_call_status();
 	ZEPHIR_SINIT_NVAR(_6);
 	ZVAL_STRING(&_6, "/", 0);
-	zephir_fast_str_replace(_0, _4, &_6, _7);
+	zephir_fast_str_replace(_0, _4, &_6, _7 TSRMLS_CC);
 	zephir_fast_explode_str(parts, SL("/"), _0, LONG_MAX TSRMLS_CC);
 	zephir_is_iterable(parts, &_10, &_9, 0, 0, "zendframework/loader/classmapautoloader.zep", 221);
 	for (
@@ -414,7 +412,7 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, realPharPath) {
 	  ; zephir_hash_get_current_data_ex(_15, (void**) &_16, &_14) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_15, &_14)
 	) {
-		ZEPHIR_GET_HMKEY(key, _15, _14);
+		ZEPHIR_GET_HKEY(key, _15, _14);
 		ZEPHIR_GET_HVALUE(value, _16);
 		if (ZEPHIR_IS_STRING_IDENTICAL(value, "..")) {
 			zephir_array_unset(&parts, key, PH_SEPARATE);
@@ -432,7 +430,7 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, realPharPath) {
 	ZVAL_STRING(&_20, "/", 0);
 	ZEPHIR_CALL_FUNCTION(&_17, "str_pad", &_21, &_18, &_19, &_20);
 	zephir_check_call_status();
-	ZEPHIR_INIT_BNVAR(_5);
+	ZEPHIR_INIT_NVAR(_5);
 	zephir_fast_join_str(_5, SL("/"), parts TSRMLS_CC);
 	ZEPHIR_INIT_VAR(realPath);
 	ZEPHIR_CONCAT_VV(realPath, _17, _5);

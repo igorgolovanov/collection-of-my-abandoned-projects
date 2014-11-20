@@ -238,7 +238,7 @@ PHP_METHOD(ZendFramework_Http_Client, setOptions) {
 		zephir_fast_strtolower(_5, k);
 		ZEPHIR_SINIT_NVAR(_6);
 		ZVAL_STRING(&_6, "", 0);
-		zephir_fast_str_replace(key, wildcards, &_6, _5);
+		zephir_fast_str_replace(key, wildcards, &_6, _5 TSRMLS_CC);
 		zephir_update_property_array(this_ptr, SL("config"), key, v TSRMLS_CC);
 	}
 	ZEPHIR_OBS_VAR(_7);
@@ -264,10 +264,10 @@ PHP_METHOD(ZendFramework_Http_Client, setOptions) {
  */
 PHP_METHOD(ZendFramework_Http_Client, setAdapter) {
 
-	zend_class_entry *_2;
+	zend_class_entry *_3;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *exceptionMsg = NULL;
-	zval *adapter = NULL, *config = NULL, *_0 = NULL, *_1, *_3;
+	zval *adapter = NULL, *config = NULL, *_0, *_1 = NULL, *_2 = NULL, *_4;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &adapter);
@@ -289,8 +289,9 @@ PHP_METHOD(ZendFramework_Http_Client, setAdapter) {
 			return;
 		}
 		ZEPHIR_INIT_NVAR(adapter);
-		_2 = zend_fetch_class(Z_STRVAL_P(adapter), Z_STRLEN_P(adapter), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		object_init_ex(adapter, _2);
+		zephir_fetch_safe_class(_2, adapter);
+		_3 = zend_fetch_class(Z_STRVAL_P(_2), Z_STRLEN_P(_2), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+		object_init_ex(adapter, _3);
 		if (zephir_has_constructor(adapter TSRMLS_CC)) {
 			ZEPHIR_CALL_METHOD(NULL, adapter, "__construct", NULL);
 			zephir_check_call_status();
@@ -299,17 +300,17 @@ PHP_METHOD(ZendFramework_Http_Client, setAdapter) {
 	if (unlikely(!(zephir_instance_of_ev(adapter, zendframework_http_client_adapter_adapterinterface_ce TSRMLS_CC)))) {
 		ZEPHIR_INIT_VAR(exceptionMsg);
 		ZVAL_STRING(exceptionMsg, "Passed adapter is not a HTTP connection adapter", 1);
-		ZEPHIR_INIT_LNVAR(_0);
-		object_init_ex(_0, zendframework_http_client_exception_invalidargumentexception_ce);
-		ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, exceptionMsg);
+		ZEPHIR_INIT_NVAR(_1);
+		object_init_ex(_1, zendframework_http_client_exception_invalidargumentexception_ce);
+		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_0, "zendframework/http/client.zep", 198 TSRMLS_CC);
+		zephir_throw_exception_debug(_1, "zendframework/http/client.zep", 198 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
 	zephir_update_property_this(this_ptr, SL("adapter"), adapter TSRMLS_CC);
-	_3 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
-	ZEPHIR_CPY_WRT(config, _3);
+	_4 = zephir_fetch_nproperty_this(this_ptr, SL("config"), PH_NOISY_CC);
+	ZEPHIR_CPY_WRT(config, _4);
 	zephir_array_unset_string(&config, SS("adapter"), PH_SEPARATE);
 	ZEPHIR_CALL_METHOD(NULL, adapter, "setoptions", NULL, config);
 	zephir_check_call_status();
@@ -356,7 +357,7 @@ PHP_METHOD(ZendFramework_Http_Client, setRequest) {
 
 
 	if (!(zephir_instance_of_ev(request, zendframework_http_request_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'request' must be an instance of 'ZendFramework\\\\Http\\\\Request'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'request' must be an instance of 'ZendFramework\\Http\\Request'", "", 0);
 		return;
 	}
 	zephir_update_property_this(this_ptr, SL("request"), request TSRMLS_CC);
@@ -379,7 +380,7 @@ PHP_METHOD(ZendFramework_Http_Client, getRequest) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("request"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(request, _0);
 	if (ZEPHIR_IS_EMPTY(request)) {
-		ZEPHIR_INIT_VAR(request);
+		ZEPHIR_INIT_NVAR(request);
 		object_init_ex(request, zendframework_http_request_ce);
 		if (zephir_has_constructor(request TSRMLS_CC)) {
 			ZEPHIR_CALL_METHOD(NULL, request, "__construct", NULL);
@@ -406,7 +407,7 @@ PHP_METHOD(ZendFramework_Http_Client, setResponse) {
 
 
 	if (!(zephir_instance_of_ev(response, zendframework_http_response_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'response' must be an instance of 'ZendFramework\\\\Http\\\\Response'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'response' must be an instance of 'ZendFramework\\Http\\Response'", "", 0);
 		return;
 	}
 	zephir_update_property_this(this_ptr, SL("response"), response TSRMLS_CC);
@@ -429,7 +430,7 @@ PHP_METHOD(ZendFramework_Http_Client, getResponse) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("response"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(response, _0);
 	if (ZEPHIR_IS_EMPTY(response)) {
-		ZEPHIR_INIT_VAR(response);
+		ZEPHIR_INIT_NVAR(response);
 		object_init_ex(response, zendframework_http_response_ce);
 		if (zephir_has_constructor(response TSRMLS_CC)) {
 			ZEPHIR_CALL_METHOD(NULL, response, "__construct", NULL);
@@ -1086,7 +1087,7 @@ PHP_METHOD(ZendFramework_Http_Client, send) {
 		_0 = !zephir_instance_of_ev(request, zendframework_http_request_ce TSRMLS_CC);
 	}
 	if (_0) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'request' must be an instance of 'ZendFramework\\\\Http\\\\Request'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'request' must be an instance of 'ZendFramework\\Http\\Request'", "", 0);
 		return;
 	}
 

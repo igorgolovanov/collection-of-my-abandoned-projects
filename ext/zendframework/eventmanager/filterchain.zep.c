@@ -102,24 +102,24 @@ PHP_METHOD(ZendFramework_EventManager_FilterChain, run) {
 	}
 
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getfilters",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getfilters", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(filters, _0);
 	ZEPHIR_INIT_VAR(chain);
 	if (zephir_clone(chain, filters TSRMLS_CC) == FAILURE) {
 		RETURN_MM();
 	}
-	ZEPHIR_CALL_METHOD(&_0, chain, "isempty",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, chain, "isempty", NULL);
 	zephir_check_call_status();
 	if (zephir_is_true(_0)) {
 		RETURN_MM_NULL();
 	}
-	ZEPHIR_CALL_METHOD(&next, chain, "extract",  NULL);
+	ZEPHIR_CALL_METHOD(&next, chain, "extract", NULL);
 	zephir_check_call_status();
 	if (!(zephir_instance_of_ev(next, zendframework_stdlib_callbackhandler_ce TSRMLS_CC))) {
 		RETURN_MM_NULL();
 	}
-	ZEPHIR_CALL_METHOD(&callback, next, "getcallback",  NULL);
+	ZEPHIR_CALL_METHOD(&callback, next, "getcallback", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CALL_FUNCTION(&returns, "call_user_func", &_1, callback, context, argv, chain);
 	zephir_check_call_status();
@@ -163,7 +163,7 @@ PHP_METHOD(ZendFramework_EventManager_FilterChain, attach) {
 	object_init_ex(filter, zendframework_stdlib_callbackhandler_ce);
 	ZEPHIR_CALL_METHOD(NULL, filter, "__construct", NULL, callback, metadata);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getfilters",  NULL);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getfilters", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(filters, _1);
 	ZEPHIR_INIT_VAR(_2);
@@ -191,10 +191,10 @@ PHP_METHOD(ZendFramework_EventManager_FilterChain, detach) {
 
 
 	if (!(zephir_instance_of_ev(filter, zendframework_stdlib_callbackhandler_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'filter' must be an instance of 'ZendFramework\\\\Stdlib\\\\CallbackHandler'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'filter' must be an instance of 'ZendFramework\\Stdlib\\CallbackHandler'", "", 0);
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getfilters",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getfilters", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(filters, _0);
 	ZEPHIR_RETURN_CALL_METHOD(filters, "remove", NULL, filter);

@@ -76,10 +76,10 @@ PHP_METHOD(ZendFramework_Permissions_Acl_Role_Registry, add) {
 
 
 	if (!(zephir_instance_of_ev(role, zendframework_permissions_acl_role_roleinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'role' must be an instance of 'ZendFramework\\\\Permissions\\\\Acl\\\\Role\\\\RoleInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'role' must be an instance of 'ZendFramework\\Permissions\\Acl\\Role\\RoleInterface'", "", 0);
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&roleId, role, "getroleid",  NULL);
+	ZEPHIR_CALL_METHOD(&roleId, role, "getroleid", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "has", NULL, roleId);
 	zephir_check_call_status();
@@ -117,7 +117,7 @@ PHP_METHOD(ZendFramework_Permissions_Acl_Role_Registry, add) {
 			/* try_start_1: */
 
 				if (zephir_instance_of_ev(parent, zendframework_permissions_acl_role_roleinterface_ce TSRMLS_CC)) {
-					ZEPHIR_CALL_METHOD(&roleParentId, parent, "getroleid",  NULL);
+					ZEPHIR_CALL_METHOD(&roleParentId, parent, "getroleid", NULL);
 					zephir_check_call_status_or_jump(try_end_1);
 				} else {
 					ZEPHIR_CPY_WRT(roleParentId, parent);
@@ -130,12 +130,12 @@ PHP_METHOD(ZendFramework_Permissions_Acl_Role_Registry, add) {
 
 			if (EG(exception)) {
 				ZEPHIR_CPY_WRT(e, EG(exception));
-				if (zephir_is_instance_of(e, SL("Exception") TSRMLS_CC)) {
+				if (zephir_instance_of_ev(e, zend_exception_get_default(TSRMLS_C) TSRMLS_CC)) {
 					zend_clear_exception(TSRMLS_C);
 					ZEPHIR_INIT_LNVAR(_1);
 					ZEPHIR_CONCAT_SVS(_1, "Parent Role id \"", roleParentId, "\" does not exist");
 					zephir_get_strval(exceptionMsg, _1);
-					ZEPHIR_INIT_LNVAR(_2);
+					ZEPHIR_INIT_NVAR(_2);
 					object_init_ex(_2, zendframework_permissions_acl_exception_invalidargumentexception_ce);
 					ZEPHIR_INIT_NVAR(_9);
 					ZVAL_LONG(_9, 0);
@@ -154,9 +154,9 @@ PHP_METHOD(ZendFramework_Permissions_Acl_Role_Registry, add) {
 	array_init_size(roleInfo, 4);
 	zephir_array_update_string(&roleInfo, SL("instance"), &role, PH_COPY | PH_SEPARATE);
 	zephir_array_update_string(&roleInfo, SL("parents"), &roleParents, PH_COPY | PH_SEPARATE);
-	ZEPHIR_INIT_NVAR(_9);
-	array_init(_9);
-	zephir_array_update_string(&roleInfo, SL("children"), &_9, PH_COPY | PH_SEPARATE);
+	ZEPHIR_INIT_NVAR(_2);
+	array_init(_2);
+	zephir_array_update_string(&roleInfo, SL("children"), &_2, PH_COPY | PH_SEPARATE);
 	zephir_update_property_array(this_ptr, SL("roles"), roleId, roleInfo TSRMLS_CC);
 	RETURN_THIS();
 
@@ -183,7 +183,7 @@ PHP_METHOD(ZendFramework_Permissions_Acl_Role_Registry, get) {
 
 
 	if (zephir_instance_of_ev(role, zendframework_permissions_acl_role_roleinterface_ce TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(&roleId, role, "getroleid",  NULL);
+		ZEPHIR_CALL_METHOD(&roleId, role, "getroleid", NULL);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_CPY_WRT(roleId, role);
@@ -230,7 +230,7 @@ PHP_METHOD(ZendFramework_Permissions_Acl_Role_Registry, has) {
 
 
 	if (zephir_instance_of_ev(role, zendframework_permissions_acl_role_roleinterface_ce TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(&roleId, role, "getroleid",  NULL);
+		ZEPHIR_CALL_METHOD(&roleId, role, "getroleid", NULL);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_CPY_WRT(roleId, role);
@@ -266,7 +266,7 @@ PHP_METHOD(ZendFramework_Permissions_Acl_Role_Registry, getParents) {
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "get", NULL, role);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(instance, _0);
-	ZEPHIR_CALL_METHOD(&roleId, instance, "getroleid",  NULL);
+	ZEPHIR_CALL_METHOD(&roleId, instance, "getroleid", NULL);
 	zephir_check_call_status();
 	_1 = zephir_fetch_nproperty_this(this_ptr, SL("roles"), PH_NOISY_CC);
 	zephir_array_fetch(&info, _1, roleId, PH_NOISY | PH_READONLY, "zendframework/permissions/acl/role/registry.zep", 159 TSRMLS_CC);
@@ -320,20 +320,20 @@ PHP_METHOD(ZendFramework_Permissions_Acl_Role_Registry, inherits) {
 		ZEPHIR_CALL_METHOD(&_0, this_ptr, "get", NULL, inherit);
 		zephir_check_call_status_or_jump(try_end_1);
 		ZEPHIR_CPY_WRT(inherit, _0);
-		ZEPHIR_CALL_METHOD(&roleId, role, "getroleid",  NULL);
+		ZEPHIR_CALL_METHOD(&roleId, role, "getroleid", NULL);
 		zephir_check_call_status_or_jump(try_end_1);
-		ZEPHIR_CALL_METHOD(&inheritId, inherit, "getroleid",  NULL);
+		ZEPHIR_CALL_METHOD(&inheritId, inherit, "getroleid", NULL);
 		zephir_check_call_status_or_jump(try_end_1);
 
 	try_end_1:
 
 	if (EG(exception)) {
 		ZEPHIR_CPY_WRT(e, EG(exception));
-		if (zephir_is_instance_of(e, SL("Exception\\ExceptionInterface") TSRMLS_CC)) {
+		if (zephir_instance_of_ev(e, zendframework_permissions_acl_exception_exceptioninterface_ce TSRMLS_CC)) {
 			zend_clear_exception(TSRMLS_C);
-			ZEPHIR_CALL_METHOD(&exceptionMsg, e, "getmessage",  NULL);
+			ZEPHIR_CALL_METHOD(&exceptionMsg, e, "getmessage", NULL);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(&exceptionCode, e, "getcode",  NULL);
+			ZEPHIR_CALL_METHOD(&exceptionCode, e, "getcode", NULL);
 			zephir_check_call_status();
 			ZEPHIR_INIT_VAR(_1);
 			object_init_ex(_1, zendframework_permissions_acl_exception_invalidargumentexception_ce);
@@ -403,18 +403,18 @@ PHP_METHOD(ZendFramework_Permissions_Acl_Role_Registry, remove) {
 		ZEPHIR_CALL_METHOD(&_0, this_ptr, "get", NULL, role);
 		zephir_check_call_status_or_jump(try_end_1);
 		ZEPHIR_CPY_WRT(role, _0);
-		ZEPHIR_CALL_METHOD(&roleId, role, "getroleid",  NULL);
+		ZEPHIR_CALL_METHOD(&roleId, role, "getroleid", NULL);
 		zephir_check_call_status_or_jump(try_end_1);
 
 	try_end_1:
 
 	if (EG(exception)) {
 		ZEPHIR_CPY_WRT(e, EG(exception));
-		if (zephir_is_instance_of(e, SL("Exception\\ExceptionInterface") TSRMLS_CC)) {
+		if (zephir_instance_of_ev(e, zendframework_permissions_acl_exception_exceptioninterface_ce TSRMLS_CC)) {
 			zend_clear_exception(TSRMLS_C);
-			ZEPHIR_CALL_METHOD(&exceptionMsg, e, "getmessage",  NULL);
+			ZEPHIR_CALL_METHOD(&exceptionMsg, e, "getmessage", NULL);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(&exceptionCode, e, "getcode",  NULL);
+			ZEPHIR_CALL_METHOD(&exceptionCode, e, "getcode", NULL);
 			zephir_check_call_status();
 			ZEPHIR_INIT_VAR(_1);
 			object_init_ex(_1, zendframework_permissions_acl_exception_invalidargumentexception_ce);
@@ -433,7 +433,7 @@ PHP_METHOD(ZendFramework_Permissions_Acl_Role_Registry, remove) {
 	  ; zephir_hash_get_current_data_ex(_5, (void**) &_6, &_4) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_5, &_4)
 	) {
-		ZEPHIR_GET_HMKEY(childId, _5, _4);
+		ZEPHIR_GET_HKEY(childId, _5, _4);
 		ZEPHIR_GET_HVALUE(child, _6);
 		_7 = zephir_fetch_nproperty_this(this_ptr, SL("roles"), PH_NOISY_CC);
 		zephir_array_fetch(&_8, _7, childId, PH_NOISY | PH_READONLY, "zendframework/permissions/acl/role/registry.zep", 235 TSRMLS_CC);
@@ -446,7 +446,7 @@ PHP_METHOD(ZendFramework_Permissions_Acl_Role_Registry, remove) {
 	  ; zephir_hash_get_current_data_ex(_11, (void**) &_12, &_10) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_11, &_10)
 	) {
-		ZEPHIR_GET_HMKEY(childId, _11, _10);
+		ZEPHIR_GET_HKEY(childId, _11, _10);
 		ZEPHIR_GET_HVALUE(child, _12);
 		_7 = zephir_fetch_nproperty_this(this_ptr, SL("roles"), PH_NOISY_CC);
 		zephir_array_fetch(&_9, _7, childId, PH_NOISY | PH_READONLY, "zendframework/permissions/acl/role/registry.zep", 239 TSRMLS_CC);

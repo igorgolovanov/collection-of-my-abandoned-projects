@@ -193,7 +193,7 @@ PHP_METHOD(ZendFramework_Loader_PluginClassLoader, addStaticMap) {
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
 	) {
-		ZEPHIR_GET_HMKEY(key, _2, _1);
+		ZEPHIR_GET_HKEY(key, _2, _1);
 		ZEPHIR_GET_HVALUE(value, _3);
 		zephir_array_update_zval(&staticMap, key, &value, PH_COPY | PH_SEPARATE);
 	}
@@ -250,12 +250,12 @@ PHP_METHOD(ZendFramework_Loader_PluginClassLoader, registerPlugin) {
  */
 PHP_METHOD(ZendFramework_Loader_PluginClassLoader, registerPlugins) {
 
-	zephir_fcall_cache_entry *_6 = NULL, *_7 = NULL;
+	zephir_fcall_cache_entry *_7 = NULL, *_8 = NULL;
 	zend_bool _3, _4;
 	zend_object_iterator *_2;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_0, *_1, *_5;
-	zval *map = NULL, *name = NULL, *className = NULL;
+	zend_class_entry *_1, *_6;
+	zval *map = NULL, *name = NULL, *className = NULL, *_0 = NULL, *_5 = NULL;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &map);
@@ -269,16 +269,16 @@ PHP_METHOD(ZendFramework_Loader_PluginClassLoader, registerPlugins) {
 			return;
 		}
 		ZEPHIR_INIT_NVAR(map);
-		_0 = zend_fetch_class(Z_STRVAL_P(map), Z_STRLEN_P(map), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		object_init_ex(map, _0);
+		zephir_fetch_safe_class(_0, map);
+		_1 = zend_fetch_class(Z_STRVAL_P(_0), Z_STRLEN_P(_0), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+		object_init_ex(map, _1);
 		if (zephir_has_constructor(map TSRMLS_CC)) {
 			ZEPHIR_CALL_METHOD(NULL, map, "__construct", NULL);
 			zephir_check_call_status();
 		}
 	} else if (Z_TYPE_P(map) == IS_ARRAY) {
 		ZEPHIR_INIT_NVAR(map);
-		_1 = zend_fetch_class(SL("ArrayIterator"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		object_init_ex(map, _1);
+		object_init_ex(map, zephir_get_internal_ce(SS("arrayiterator") TSRMLS_CC));
 		ZEPHIR_CALL_METHOD(NULL, map, "__construct", NULL, map);
 		zephir_check_call_status();
 	}
@@ -305,20 +305,21 @@ PHP_METHOD(ZendFramework_Loader_PluginClassLoader, registerPlugins) {
 			}
 			if (_4) {
 				ZEPHIR_INIT_NVAR(className);
-				_5 = zend_fetch_class(Z_STRVAL_P(className), Z_STRLEN_P(className), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-				object_init_ex(className, _5);
+				zephir_fetch_safe_class(_5, className);
+				_6 = zend_fetch_class(Z_STRVAL_P(_5), Z_STRLEN_P(_5), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+				object_init_ex(className, _6);
 				if (zephir_has_constructor(className TSRMLS_CC)) {
 					ZEPHIR_CALL_METHOD(NULL, className, "__construct", NULL);
 					zephir_check_call_status();
 				}
 			}
 			if (zephir_is_instance_of(className, SL("Traversable") TSRMLS_CC)) {
-				ZEPHIR_CALL_METHOD(NULL, this_ptr, "registerplugins", &_6, className);
+				ZEPHIR_CALL_METHOD(NULL, this_ptr, "registerplugins", &_7, className);
 				zephir_check_call_status();
 				continue;
 			}
 		}
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "registerplugin", &_7, name, className);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "registerplugin", &_8, name, className);
 		zephir_check_call_status();
 	}
 	_2->funcs->dtor(_2 TSRMLS_CC);
@@ -459,7 +460,6 @@ PHP_METHOD(ZendFramework_Loader_PluginClassLoader, load) {
 PHP_METHOD(ZendFramework_Loader_PluginClassLoader, getIterator) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_1;
 	zval *plugins = NULL, *iterator, *_0;
 
 	ZEPHIR_MM_GROW();
@@ -467,8 +467,7 @@ PHP_METHOD(ZendFramework_Loader_PluginClassLoader, getIterator) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("plugins"), PH_NOISY_CC);
 	ZEPHIR_CPY_WRT(plugins, _0);
 	ZEPHIR_INIT_VAR(iterator);
-	_1 = zend_fetch_class(SL("ArrayIterator"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	object_init_ex(iterator, _1);
+	object_init_ex(iterator, zephir_get_internal_ce(SS("arrayiterator") TSRMLS_CC));
 	ZEPHIR_CALL_METHOD(NULL, iterator, "__construct", NULL, plugins);
 	zephir_check_call_status();
 	RETURN_CCTOR(iterator);

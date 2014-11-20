@@ -148,7 +148,7 @@ PHP_METHOD(ZendFramework_Permissions_Rbac_AbstractRole, addChild) {
 		zephir_check_call_status();
 	}
 	if (unlikely(!(zephir_instance_of_ev(child, zendframework_permissions_rbac_roleinterface_ce TSRMLS_CC)))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_permissions_rbac_exception_invalidargumentexception_ce, "Child must be a string or implement Zend\\\\Permissions\\\\Rbac\\\\RoleInterface", "zendframework/permissions/rbac/abstractrole.zep", 93);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_permissions_rbac_exception_invalidargumentexception_ce, "Child must be a string or implement Zend\\Permissions\\Rbac\\RoleInterface", "zendframework/permissions/rbac/abstractrole.zep", 93);
 		return;
 	}
 	ZEPHIR_CALL_METHOD(NULL, child, "setparent", NULL, this_ptr);
@@ -171,7 +171,7 @@ PHP_METHOD(ZendFramework_Permissions_Rbac_AbstractRole, setParent) {
 
 
 	if (!(zephir_instance_of_ev(parent, zendframework_permissions_rbac_roleinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'parent' must be an instance of 'ZendFramework\\\\Permissions\\\\Rbac\\\\RoleInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Parameter 'parent' must be an instance of 'ZendFramework\\Permissions\\Rbac\\RoleInterface'", "", 0);
 		return;
 	}
 	zephir_update_property_this(this_ptr, SL("parent"), parent TSRMLS_CC);

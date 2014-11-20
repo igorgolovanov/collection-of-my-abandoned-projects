@@ -126,11 +126,11 @@ PHP_METHOD(ZendFramework_Http_Cookies, addCookie) {
 
 	if (Z_TYPE_P(cookie) == IS_STRING) {
 	}
-	ZEPHIR_CALL_METHOD(&domain, cookie, "getdomain",  NULL);
+	ZEPHIR_CALL_METHOD(&domain, cookie, "getdomain", NULL);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&path, cookie, "getpath",  NULL);
+	ZEPHIR_CALL_METHOD(&path, cookie, "getpath", NULL);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&name, cookie, "getname",  NULL);
+	ZEPHIR_CALL_METHOD(&name, cookie, "getname", NULL);
 	zephir_check_call_status();
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("cookies"), PH_NOISY_CC);
 	if (!(zephir_array_isset(_0, domain))) {
@@ -174,10 +174,10 @@ PHP_METHOD(ZendFramework_Http_Cookies, addCookiesFromResponse) {
 
 
 	if (!(zephir_instance_of_ev(response, zendframework_http_response_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'response' must be an instance of 'ZendFramework\\\\Http\\\\Response'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'response' must be an instance of 'ZendFramework\\Http\\Response'", "", 0);
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&_0, response, "getheaders",  NULL);
+	ZEPHIR_CALL_METHOD(&_0, response, "getheaders", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(headers, _0);
 	ZEPHIR_INIT_VAR(_1);
@@ -187,10 +187,10 @@ PHP_METHOD(ZendFramework_Http_Cookies, addCookiesFromResponse) {
 	zephir_check_call_status();
 	_2 = Z_TYPE_P(cookieHdrs) == IS_ARRAY;
 	if (!(_2)) {
-		_2 = zephir_is_instance_of(cookieHdrs, SL("ArrayIterator") TSRMLS_CC);
+		_2 = zephir_instance_of_ev(cookieHdrs, zephir_get_internal_ce(SS("arrayiterator") TSRMLS_CC) TSRMLS_CC);
 	}
 	if (_2) {
-		if (zephir_is_instance_of(cookieHdrs, SL("ArrayIterator") TSRMLS_CC)) {
+		if (zephir_instance_of_ev(cookieHdrs, zephir_get_internal_ce(SS("arrayiterator") TSRMLS_CC) TSRMLS_CC)) {
 			ZEPHIR_CALL_FUNCTION(&_0, "iterator_to_array", NULL, cookieHdrs);
 			zephir_check_call_status();
 			ZEPHIR_CPY_WRT(cookieHdrs, _0);
@@ -288,9 +288,9 @@ PHP_METHOD(ZendFramework_Http_Cookies, getMatchingCookies) {
 
 	if (Z_TYPE_P(uri) == IS_STRING) {
 	}
-	ZEPHIR_CALL_METHOD(&host, uri, "gethost",  NULL);
+	ZEPHIR_CALL_METHOD(&host, uri, "gethost", NULL);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&path, uri, "getpath",  NULL);
+	ZEPHIR_CALL_METHOD(&path, uri, "getpath", NULL);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_EMPTY(host)) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_http_exception_invalidargumentexception_ce, "Invalid URI specified; does not contain a host", "zendframework/http/cookies.zep", 197);
@@ -320,7 +320,7 @@ PHP_METHOD(ZendFramework_Http_Cookies, getMatchingCookies) {
 			zephir_array_append(&result, cookie, PH_SEPARATE, "zendframework/http/cookies.zep", 208);
 		}
 	}
-	ZEPHIR_INIT_BNVAR(_1);
+	ZEPHIR_INIT_NVAR(_1);
 	ZVAL_LONG(_1, retAs);
 	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "_flattencookiesarray", NULL, result, _1);
 	zephir_check_call_status();
@@ -357,9 +357,9 @@ PHP_METHOD(ZendFramework_Http_Cookies, getCookie) {
 
 	if (Z_TYPE_P(uri) == IS_STRING) {
 	}
-	ZEPHIR_CALL_METHOD(&host, uri, "gethost",  NULL);
+	ZEPHIR_CALL_METHOD(&host, uri, "gethost", NULL);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&path, uri, "getpath",  NULL);
+	ZEPHIR_CALL_METHOD(&path, uri, "getpath", NULL);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_EMPTY(host)) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_http_exception_invalidargumentexception_ce, "Invalid URI specified; host missing", "zendframework/http/cookies.zep", 240);
@@ -375,7 +375,7 @@ PHP_METHOD(ZendFramework_Http_Cookies, getCookie) {
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(path, _3);
 	if (!(zephir_is_true(path))) {
-		ZEPHIR_INIT_BNVAR(path);
+		ZEPHIR_INIT_NVAR(path);
 		ZVAL_STRING(path, "/", 1);
 	}
 	ZEPHIR_OBS_VAR(cookie);
@@ -389,7 +389,7 @@ PHP_METHOD(ZendFramework_Http_Cookies, getCookie) {
 				break;
 			}
 			if (retAs == 2 || retAs == 1) {
-				ZEPHIR_CALL_METHOD(&result, cookie, "__tostring",  NULL);
+				ZEPHIR_CALL_METHOD(&result, cookie, "__tostring", NULL);
 				zephir_check_call_status();
 				break;
 			}
@@ -472,13 +472,13 @@ PHP_METHOD(ZendFramework_Http_Cookies, _flattenCookiesArray) {
 			if (retAs == 1) {
 				ZEPHIR_INIT_NVAR(result);
 				array_init_size(result, 2);
-				ZEPHIR_CALL_METHOD(&_6, ptr, "__tostring",  NULL);
+				ZEPHIR_CALL_METHOD(&_6, ptr, "__tostring", NULL);
 				zephir_check_call_status();
 				zephir_array_fast_append(result, _6);
 				break;
 			}
 			if (retAs == 2) {
-				ZEPHIR_CALL_METHOD(&result, ptr, "__tostring",  NULL);
+				ZEPHIR_CALL_METHOD(&result, ptr, "__tostring", NULL);
 				zephir_check_call_status();
 				break;
 			}
@@ -560,7 +560,7 @@ PHP_METHOD(ZendFramework_Http_Cookies, _matchPath) {
 	  ; zephir_hash_get_current_data_ex(_1, (void**) &_2, &_0) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_1, &_0)
 	) {
-		ZEPHIR_GET_HMKEY(dom, _1, _0);
+		ZEPHIR_GET_HKEY(dom, _1, _0);
 		ZEPHIR_GET_HVALUE(pathsArray, _2);
 		ZEPHIR_INIT_NVAR(pathsArrayKeys);
 		zephir_array_keys(pathsArrayKeys, pathsArray TSRMLS_CC);
@@ -597,9 +597,9 @@ PHP_METHOD(ZendFramework_Http_Cookies, _matchPath) {
 PHP_METHOD(ZendFramework_Http_Cookies, fromResponse) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_0;
+	zend_class_entry *_1;
 	zval *refUri = NULL;
-	zval *response, *refUri_param = NULL, *className, *jar;
+	zval *response, *refUri_param = NULL, *className, *jar, *_0 = NULL;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 0, &response, &refUri_param);
@@ -608,14 +608,15 @@ PHP_METHOD(ZendFramework_Http_Cookies, fromResponse) {
 
 
 	if (!(zephir_instance_of_ev(response, zendframework_http_response_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'response' must be an instance of 'ZendFramework\\\\Http\\\\Response'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'response' must be an instance of 'ZendFramework\\Http\\Response'", "", 0);
 		return;
 	}
 	ZEPHIR_INIT_VAR(className);
 	zephir_get_called_class(className TSRMLS_CC);
 	ZEPHIR_INIT_VAR(jar);
-	_0 = zend_fetch_class(Z_STRVAL_P(className), Z_STRLEN_P(className), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	object_init_ex(jar, _0);
+	zephir_fetch_safe_class(_0, className);
+	_1 = zend_fetch_class(Z_STRVAL_P(_0), Z_STRLEN_P(_0), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+	object_init_ex(jar, _1);
 	if (zephir_has_constructor(jar TSRMLS_CC)) {
 		ZEPHIR_CALL_METHOD(NULL, jar, "__construct", NULL);
 		zephir_check_call_status();
@@ -638,7 +639,7 @@ PHP_METHOD(ZendFramework_Http_Cookies, isEmpty) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&count, this_ptr, "count",  NULL);
+	ZEPHIR_CALL_METHOD(&count, this_ptr, "count", NULL);
 	zephir_check_call_status();
 	RETURN_MM_BOOL(ZEPHIR_IS_LONG(count, 0));
 

@@ -88,7 +88,7 @@ PHP_METHOD(ZendFramework_Permissions_Acl_Resource_GenericResource, __toString) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&id, this_ptr, "getresourceid",  NULL);
+	ZEPHIR_CALL_METHOD(&id, this_ptr, "getresourceid", NULL);
 	zephir_check_call_status();
 	RETURN_CCTOR(id);
 

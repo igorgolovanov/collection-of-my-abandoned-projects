@@ -4,13 +4,17 @@
 #ifndef PHP_ZENDFRAMEWORK_H
 #define PHP_ZENDFRAMEWORK_H 1
 
+#ifdef PHP_WIN32
+#define ZEPHIR_RELEASE 1
+#endif
+
 #include "kernel/globals.h"
 
 #define PHP_ZENDFRAMEWORK_NAME        "ZendFramework"
 #define PHP_ZENDFRAMEWORK_VERSION     "2.3.3"
 #define PHP_ZENDFRAMEWORK_EXTNAME     "zendframework"
 #define PHP_ZENDFRAMEWORK_AUTHOR      "Igor Golovanov"
-#define PHP_ZENDFRAMEWORK_ZEPVERSION  "0.5.5a"
+#define PHP_ZENDFRAMEWORK_ZEPVERSION  "0.5.9a"
 #define PHP_ZENDFRAMEWORK_DESCRIPTION "Zend Framework 2 delivered as a C-extension (Zephir)"
 
 
@@ -60,6 +64,8 @@ ZEND_EXTERN_MODULE_GLOBALS(zendframework)
 #else
 	#define ZEPHIR_VGLOBAL &(zendframework_globals)
 #endif
+
+#define ZEPHIR_API ZEND_API
 
 #define zephir_globals_def zendframework_globals
 #define zend_zephir_globals_def zend_zendframework_globals

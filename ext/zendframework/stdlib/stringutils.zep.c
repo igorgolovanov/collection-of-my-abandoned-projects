@@ -76,61 +76,61 @@ PHP_METHOD(ZendFramework_Stdlib_StringUtils, _singleByteEncodings) {
 	ZEPHIR_INIT_VAR(_0);
 	ZVAL_STRING(_0, "ASCII", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "7BIT", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "8BIT", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-1", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-2", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-3", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-4", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-5", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-6", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-7", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-8", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-9", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-10", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-11", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-13", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-14", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-15", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "ISO-8859-16", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "CP-1251", 1);
 	zephir_array_fast_append(return_value, _0);
-	ZEPHIR_INIT_BNVAR(_0);
+	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "CP-1252", 1);
 	zephir_array_fast_append(return_value, _0);
 	RETURN_MM();
@@ -166,7 +166,7 @@ PHP_METHOD(ZendFramework_Stdlib_StringUtils, getRegisteredWrappers) {
 		zephir_check_call_status();
 		if (zephir_is_true(_1)) {
 			ZEPHIR_INIT_VAR(_3);
-			ZVAL_STRING(_3, "Zend\\\\Stdlib\\\\StringWrapper\\\\Intl", 1);
+			ZVAL_STRING(_3, "Zend\\Stdlib\\StringWrapper\\Intl", 1);
 			zephir_array_append(&wrapperRegistry, _3, PH_SEPARATE, "zendframework/stdlib/stringutils.zep", 71);
 		}
 		ZEPHIR_SINIT_NVAR(_0);
@@ -175,7 +175,7 @@ PHP_METHOD(ZendFramework_Stdlib_StringUtils, getRegisteredWrappers) {
 		zephir_check_call_status();
 		if (zephir_is_true(_4)) {
 			ZEPHIR_INIT_NVAR(_3);
-			ZVAL_STRING(_3, "Zend\\\\Stdlib\\\\StringWrapper\\\\MbString", 1);
+			ZVAL_STRING(_3, "Zend\\Stdlib\\StringWrapper\\MbString", 1);
 			zephir_array_append(&wrapperRegistry, _3, PH_SEPARATE, "zendframework/stdlib/stringutils.zep", 74);
 		}
 		ZEPHIR_SINIT_NVAR(_0);
@@ -184,11 +184,11 @@ PHP_METHOD(ZendFramework_Stdlib_StringUtils, getRegisteredWrappers) {
 		zephir_check_call_status();
 		if (zephir_is_true(_5)) {
 			ZEPHIR_INIT_NVAR(_3);
-			ZVAL_STRING(_3, "Zend\\\\Stdlib\\\\StringWrapper\\\\Iconv", 1);
+			ZVAL_STRING(_3, "Zend\\Stdlib\\StringWrapper\\Iconv", 1);
 			zephir_array_append(&wrapperRegistry, _3, PH_SEPARATE, "zendframework/stdlib/stringutils.zep", 77);
 		}
 		ZEPHIR_INIT_NVAR(_3);
-		ZVAL_STRING(_3, "Zend\\\\Stdlib\\\\StringWrapper\\\\Native", 1);
+		ZVAL_STRING(_3, "Zend\\Stdlib\\StringWrapper\\Native", 1);
 		zephir_array_append(&wrapperRegistry, _3, PH_SEPARATE, "zendframework/stdlib/stringutils.zep", 80);
 	}
 	

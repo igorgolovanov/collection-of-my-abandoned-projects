@@ -36,7 +36,7 @@ ZEPHIR_INIT_CLASS(ZendFramework_EventManager_EventManager) {
 	/**
 	 * @var string Class representing the event being emitted
 	 */
-	zend_declare_property_string(zendframework_eventmanager_eventmanager_ce, SL("eventClass"), "Zend\\\\EventManager\\\\Event", ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_string(zendframework_eventmanager_eventmanager_ce, SL("eventClass"), "Zend\\EventManager\\Event", ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
 	 * Identifiers, used to pull shared signals from SharedEventManagerInterface instance
@@ -138,7 +138,7 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, setSharedManager) {
 
 
 	if (!(zephir_instance_of_ev(sharedEventManager, zendframework_eventmanager_sharedeventmanagerinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'sharedEventManager' must be an instance of 'ZendFramework\\\\EventManager\\\\SharedEventManagerInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'sharedEventManager' must be an instance of 'ZendFramework\\EventManager\\SharedEventManagerInterface'", "", 0);
 		return;
 	}
 	zephir_update_property_this(this_ptr, SL("sharedManager"), sharedEventManager TSRMLS_CC);
@@ -300,9 +300,9 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, addIdentifiers) {
  */
 PHP_METHOD(ZendFramework_EventManager_EventManager, trigger) {
 
-	zend_class_entry *_1;
+	zend_class_entry *_2;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *event = NULL, *target = NULL, *argv = NULL, *callback = NULL, *e = NULL, *eventClass = NULL, *_0, *_2;
+	zval *event = NULL, *target = NULL, *argv = NULL, *callback = NULL, *e = NULL, *eventClass = NULL, *_0, *_1 = NULL, *_3;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 3, &event, &target, &argv, &callback);
@@ -324,7 +324,7 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, trigger) {
 
 	if (zephir_instance_of_ev(event, zendframework_eventmanager_eventinterface_ce TSRMLS_CC)) {
 		ZEPHIR_CPY_WRT(e, event);
-		ZEPHIR_CALL_METHOD(&event, e, "getname",  NULL);
+		ZEPHIR_CALL_METHOD(&event, e, "getname", NULL);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(callback, target);
 	} else {
@@ -334,7 +334,7 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, trigger) {
 			ZEPHIR_CALL_METHOD(NULL, e, "setname", NULL, event);
 			zephir_check_call_status();
 		} else {
-			ZEPHIR_INIT_VAR(e);
+			ZEPHIR_INIT_NVAR(e);
 			if (zephir_instance_of_ev(argv, zendframework_eventmanager_eventinterface_ce TSRMLS_CC)) {
 				ZEPHIR_CPY_WRT(e, argv);
 				ZEPHIR_CALL_METHOD(NULL, e, "setname", NULL, event);
@@ -344,8 +344,9 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, trigger) {
 			} else {
 				_0 = zephir_fetch_nproperty_this(this_ptr, SL("eventClass"), PH_NOISY_CC);
 				ZEPHIR_CPY_WRT(eventClass, _0);
-				_1 = zend_fetch_class(Z_STRVAL_P(eventClass), Z_STRLEN_P(eventClass), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-				object_init_ex(e, _1);
+				zephir_fetch_safe_class(_1, eventClass);
+				_2 = zend_fetch_class(Z_STRVAL_P(_1), Z_STRLEN_P(_1), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+				object_init_ex(e, _2);
 				if (zephir_has_constructor(e TSRMLS_CC)) {
 					ZEPHIR_CALL_METHOD(NULL, e, "__construct", NULL);
 					zephir_check_call_status();
@@ -363,9 +364,9 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, trigger) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_eventmanager_exception_invalidcallbackexception_ce, "Invalid callback provided", "zendframework/eventmanager/eventmanager.zep", 220);
 		return;
 	}
-	ZEPHIR_INIT_VAR(_2);
-	ZVAL_BOOL(_2, 0);
-	ZEPHIR_CALL_METHOD(NULL, e, "stoppropagation", NULL, _2);
+	ZEPHIR_INIT_VAR(_3);
+	ZVAL_BOOL(_3, 0);
+	ZEPHIR_CALL_METHOD(NULL, e, "stoppropagation", NULL, _3);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "triggerlisteners", NULL, event, e, callback);
 	zephir_check_call_status();
@@ -389,9 +390,9 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, trigger) {
  */
 PHP_METHOD(ZendFramework_EventManager_EventManager, triggerUntil) {
 
-	zend_class_entry *_1;
+	zend_class_entry *_2;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *event = NULL, *target, *argv = NULL, *callback = NULL, *e = NULL, *eventClass = NULL, *_0, *_2;
+	zval *event = NULL, *target, *argv = NULL, *callback = NULL, *e = NULL, *eventClass = NULL, *_0, *_1 = NULL, *_3;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 2, &event, &target, &argv, &callback);
@@ -409,7 +410,7 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, triggerUntil) {
 
 	if (zephir_instance_of_ev(event, zendframework_eventmanager_eventinterface_ce TSRMLS_CC)) {
 		ZEPHIR_CPY_WRT(e, event);
-		ZEPHIR_CALL_METHOD(&event, e, "getname",  NULL);
+		ZEPHIR_CALL_METHOD(&event, e, "getname", NULL);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(callback, target);
 	} else {
@@ -419,7 +420,7 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, triggerUntil) {
 			ZEPHIR_CALL_METHOD(NULL, e, "setname", NULL, event);
 			zephir_check_call_status();
 		} else {
-			ZEPHIR_INIT_VAR(e);
+			ZEPHIR_INIT_NVAR(e);
 			if (zephir_instance_of_ev(argv, zendframework_eventmanager_eventinterface_ce TSRMLS_CC)) {
 				ZEPHIR_CPY_WRT(e, argv);
 				ZEPHIR_CALL_METHOD(NULL, e, "setname", NULL, event);
@@ -429,8 +430,9 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, triggerUntil) {
 			} else {
 				_0 = zephir_fetch_nproperty_this(this_ptr, SL("eventClass"), PH_NOISY_CC);
 				ZEPHIR_CPY_WRT(eventClass, _0);
-				_1 = zend_fetch_class(Z_STRVAL_P(eventClass), Z_STRLEN_P(eventClass), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-				object_init_ex(e, _1);
+				zephir_fetch_safe_class(_1, eventClass);
+				_2 = zend_fetch_class(Z_STRVAL_P(_1), Z_STRLEN_P(_1), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+				object_init_ex(e, _2);
 				if (zephir_has_constructor(e TSRMLS_CC)) {
 					ZEPHIR_CALL_METHOD(NULL, e, "__construct", NULL);
 					zephir_check_call_status();
@@ -448,9 +450,9 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, triggerUntil) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_eventmanager_exception_invalidcallbackexception_ce, "Invalid callback provided", "zendframework/eventmanager/eventmanager.zep", 272);
 		return;
 	}
-	ZEPHIR_INIT_VAR(_2);
-	ZVAL_BOOL(_2, 0);
-	ZEPHIR_CALL_METHOD(NULL, e, "stoppropagation", NULL, _2);
+	ZEPHIR_INIT_VAR(_3);
+	ZVAL_BOOL(_3, 0);
+	ZEPHIR_CALL_METHOD(NULL, e, "stoppropagation", NULL, _3);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "triggerlisteners", NULL, event, e, callback);
 	zephir_check_call_status();
@@ -486,7 +488,7 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, attach) {
 	zval *metadata;
 	zval *exceptionMsg = NULL;
 	int priority, ZEPHIR_LAST_CALL_STATUS;
-	zval *event, *callback = NULL, *priority_param = NULL, *listeners, *name = NULL, *listener, *_0 = NULL, **_3, *_4 = NULL, _5 = zval_used_for_init, *_7, *_8, *_9 = NULL, *_10, *_11;
+	zval *event, *callback = NULL, *priority_param = NULL, *listeners, *name = NULL, *listener, *_0 = NULL, **_3, *_4 = NULL, _5 = zval_used_for_init, *_7, *_8, *_9, *_10;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 2, &event, &callback, &priority_param);
@@ -537,7 +539,7 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, attach) {
 	_7 = zephir_fetch_nproperty_this(this_ptr, SL("events"), PH_NOISY_CC);
 	zephir_array_fetch(&_8, _7, event, PH_NOISY | PH_READONLY, "zendframework/eventmanager/eventmanager.zep", 329 TSRMLS_CC);
 	if (ZEPHIR_IS_EMPTY(_8)) {
-		ZEPHIR_INIT_LNVAR(_0);
+		ZEPHIR_INIT_NVAR(_0);
 		object_init_ex(_0, zendframework_stdlib_priorityqueue_ce);
 		if (zephir_has_constructor(_0 TSRMLS_CC)) {
 			ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL);
@@ -548,18 +550,18 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, attach) {
 	ZEPHIR_INIT_VAR(metadata);
 	array_init_size(metadata, 3);
 	zephir_array_update_string(&metadata, SL("event"), &event, PH_COPY | PH_SEPARATE);
-	ZEPHIR_INIT_VAR(_9);
-	ZVAL_LONG(_9, priority);
-	zephir_array_update_string(&metadata, SL("priority"), &_9, PH_COPY | PH_SEPARATE);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, priority);
+	zephir_array_update_string(&metadata, SL("priority"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_VAR(listener);
 	object_init_ex(listener, zendframework_stdlib_callbackhandler_ce);
 	ZEPHIR_CALL_METHOD(NULL, listener, "__construct", NULL, callback, metadata);
 	zephir_check_call_status();
-	_10 = zephir_fetch_nproperty_this(this_ptr, SL("events"), PH_NOISY_CC);
-	zephir_array_fetch(&_11, _10, event, PH_NOISY | PH_READONLY, "zendframework/eventmanager/eventmanager.zep", 337 TSRMLS_CC);
-	ZEPHIR_INIT_BNVAR(_9);
-	ZVAL_LONG(_9, priority);
-	ZEPHIR_CALL_METHOD(NULL, _11, "insert", NULL, listener, _9);
+	_9 = zephir_fetch_nproperty_this(this_ptr, SL("events"), PH_NOISY_CC);
+	zephir_array_fetch(&_10, _9, event, PH_NOISY | PH_READONLY, "zendframework/eventmanager/eventmanager.zep", 337 TSRMLS_CC);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, priority);
+	ZEPHIR_CALL_METHOD(NULL, _10, "insert", NULL, listener, _0);
 	zephir_check_call_status();
 	RETURN_CCTOR(listener);
 
@@ -592,7 +594,7 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, attachAggregate) {
 
 
 	if (!(zephir_instance_of_ev(aggregate, zendframework_eventmanager_listeneraggregateinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'aggregate' must be an instance of 'ZendFramework\\\\EventManager\\\\ListenerAggregateInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'aggregate' must be an instance of 'ZendFramework\\EventManager\\ListenerAggregateInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_INIT_VAR(_0);
@@ -612,10 +614,10 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, attachAggregate) {
  */
 PHP_METHOD(ZendFramework_EventManager_EventManager, detach) {
 
-	zend_bool _4;
+	zend_bool _3;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *exceptionMsg = NULL;
-	zval *listener, *event = NULL, *events = NULL, *returns = NULL, *expected = NULL, *_0 = NULL, *_1, *_2, *_3, *_5, *_6, *_7;
+	zval *listener, *event = NULL, *events = NULL, *returns = NULL, *expected = NULL, *_0 = NULL, *_1, *_2, *_4, *_5, *_6;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &listener);
@@ -623,7 +625,7 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, detach) {
 
 
 	if (!(zephir_instance_of_ev(listener, zendframework_eventmanager_listeneraggregateinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'listener' must be an instance of 'ZendFramework\\\\EventManager\\\\ListenerAggregateInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'listener' must be an instance of 'ZendFramework\\EventManager\\ListenerAggregateInterface'", "", 0);
 		return;
 	}
 	if (zephir_instance_of_ev(listener, zendframework_eventmanager_listeneraggregateinterface_ce TSRMLS_CC)) {
@@ -636,45 +638,45 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, detach) {
 		zephir_gettype(_0, listener TSRMLS_CC);
 		ZEPHIR_CPY_WRT(expected, _0);
 		if (ZEPHIR_IS_STRING(expected, "object")) {
-			ZEPHIR_INIT_VAR(expected);
+			ZEPHIR_INIT_NVAR(expected);
 			zephir_get_class(expected, listener, 0 TSRMLS_CC);
 		}
 		ZEPHIR_INIT_VAR(_1);
 		ZEPHIR_CONCAT_SSVS(_1, "EventManager:detach", ": expected a ListenerAggregateInterface or CallbackHandler; received \"", expected, "\"");
 		zephir_get_strval(exceptionMsg, _1);
-		ZEPHIR_INIT_VAR(_2);
-		object_init_ex(_2, zendframework_eventmanager_exception_invalidargumentexception_ce);
-		ZEPHIR_CALL_METHOD(NULL, _2, "__construct", NULL, exceptionMsg);
+		ZEPHIR_INIT_NVAR(_0);
+		object_init_ex(_0, zendframework_eventmanager_exception_invalidargumentexception_ce);
+		ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_2, "zendframework/eventmanager/eventmanager.zep", 380 TSRMLS_CC);
+		zephir_throw_exception_debug(_0, "zendframework/eventmanager/eventmanager.zep", 380 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	_3 = zephir_fetch_nproperty_this(this_ptr, SL("events"), PH_NOISY_CC);
-	ZEPHIR_CPY_WRT(events, _3);
+	_2 = zephir_fetch_nproperty_this(this_ptr, SL("events"), PH_NOISY_CC);
+	ZEPHIR_CPY_WRT(events, _2);
 	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_STRING(_0, "event", ZEPHIR_TEMP_PARAM_COPY);
 	ZEPHIR_CALL_METHOD(&event, listener, "getmetadatum", NULL, _0);
 	zephir_check_temp_parameter(_0);
 	zephir_check_call_status();
-	_4 = !zephir_is_true(event);
-	if (!(_4)) {
-		zephir_array_fetch(&_5, events, event, PH_NOISY | PH_READONLY, "zendframework/eventmanager/eventmanager.zep", 386 TSRMLS_CC);
-		_4 = ZEPHIR_IS_EMPTY(_5);
+	_3 = !zephir_is_true(event);
+	if (!(_3)) {
+		zephir_array_fetch(&_4, events, event, PH_NOISY | PH_READONLY, "zendframework/eventmanager/eventmanager.zep", 386 TSRMLS_CC);
+		_3 = ZEPHIR_IS_EMPTY(_4);
 	}
-	if (_4) {
+	if (_3) {
 		RETURN_MM_BOOL(0);
 	}
-	zephir_array_fetch(&_6, events, event, PH_NOISY | PH_READONLY, "zendframework/eventmanager/eventmanager.zep", 390 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(&returns, _6, "remove", NULL, listener);
+	zephir_array_fetch(&_5, events, event, PH_NOISY | PH_READONLY, "zendframework/eventmanager/eventmanager.zep", 390 TSRMLS_CC);
+	ZEPHIR_CALL_METHOD(&returns, _5, "remove", NULL, listener);
 	zephir_check_call_status();
 	if (!(zephir_is_true(returns))) {
 		RETURN_MM_BOOL(0);
 	}
-	zephir_array_fetch(&_7, events, event, PH_NOISY | PH_READONLY, "zendframework/eventmanager/eventmanager.zep", 395 TSRMLS_CC);
-	if (!(zephir_fast_count_int(_7 TSRMLS_CC))) {
-		_3 = zephir_fetch_nproperty_this(this_ptr, SL("events"), PH_NOISY_CC);
-		zephir_array_unset(&_3, event, PH_SEPARATE);
+	zephir_array_fetch(&_6, events, event, PH_NOISY | PH_READONLY, "zendframework/eventmanager/eventmanager.zep", 395 TSRMLS_CC);
+	if (!(zephir_fast_count_int(_6 TSRMLS_CC))) {
+		_2 = zephir_fetch_nproperty_this(this_ptr, SL("events"), PH_NOISY_CC);
+		zephir_array_unset(&_2, event, PH_SEPARATE);
 	}
 	RETURN_MM_BOOL(1);
 
@@ -700,7 +702,7 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, detachAggregate) {
 
 
 	if (!(zephir_instance_of_ev(aggregate, zendframework_eventmanager_listeneraggregateinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'aggregate' must be an instance of 'ZendFramework\\\\EventManager\\\\ListenerAggregateInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'aggregate' must be an instance of 'ZendFramework\\EventManager\\ListenerAggregateInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_CALL_METHOD(NULL, aggregate, "detach", NULL, this_ptr);
@@ -856,7 +858,7 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, triggerListeners) {
 
 
 	if (!(zephir_instance_of_ev(e, zendframework_eventmanager_eventinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'e' must be an instance of 'ZendFramework\\\\EventManager\\\\EventInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'e' must be an instance of 'ZendFramework\\EventManager\\EventInterface'", "", 0);
 		return;
 	}
 	ZEPHIR_INIT_VAR(responses);
@@ -875,7 +877,7 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, triggerListeners) {
 	ZEPHIR_CALL_METHOD(&sharedWildcardListeners, this_ptr, "getsharedlisteners", NULL, _1);
 	zephir_check_temp_parameter(_1);
 	zephir_check_call_status();
-	ZEPHIR_INIT_BNVAR(_1);
+	ZEPHIR_INIT_NVAR(_1);
 	ZVAL_STRING(_1, "*", ZEPHIR_TEMP_PARAM_COPY);
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getlisteners", NULL, _1);
 	zephir_check_temp_parameter(_1);
@@ -908,13 +910,13 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, triggerListeners) {
 	  ; zephir_hash_move_forward_ex(_6, &_5)
 	) {
 		ZEPHIR_GET_HVALUE(listener, _7);
-		ZEPHIR_CALL_METHOD(&listenerCallback, listener, "getcallback",  NULL);
+		ZEPHIR_CALL_METHOD(&listenerCallback, listener, "getcallback", NULL);
 		zephir_check_call_status();
 		ZEPHIR_CALL_FUNCTION(&listenerCallbackResponse, "call_user_func", &_8, listenerCallback, e);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, responses, "push", &_9, listenerCallbackResponse);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(&_0, e, "propagationisstopped",  NULL);
+		ZEPHIR_CALL_METHOD(&_0, e, "propagationisstopped", NULL);
 		zephir_check_call_status();
 		if (zephir_is_true(_0)) {
 			ZEPHIR_INIT_NVAR(_1);
@@ -924,7 +926,7 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, triggerListeners) {
 			break;
 		}
 		if (zephir_is_true(callback)) {
-			ZEPHIR_CALL_METHOD(&last, responses, "last",  &_11);
+			ZEPHIR_CALL_METHOD(&last, responses, "last", &_11);
 			zephir_check_call_status();
 			ZEPHIR_CALL_FUNCTION(&callbackResponse, "call_user_func", &_8, callback, last);
 			zephir_check_call_status();
@@ -965,13 +967,13 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, getSharedListeners) {
 	array_init(sharedListeners);
 
 
-	ZEPHIR_CALL_METHOD(&sharedManager, this_ptr, "getsharedmanager",  NULL);
+	ZEPHIR_CALL_METHOD(&sharedManager, this_ptr, "getsharedmanager", NULL);
 	zephir_check_call_status();
 	if (!(zephir_is_true(sharedManager))) {
 		array_init(return_value);
 		RETURN_MM();
 	}
-	ZEPHIR_CALL_METHOD(&identifiers, this_ptr, "getidentifiers",  NULL);
+	ZEPHIR_CALL_METHOD(&identifiers, this_ptr, "getidentifiers", NULL);
 	zephir_check_call_status();
 	ZEPHIR_SINIT_VAR(_0);
 	ZVAL_STRING(&_0, "*", 0);
@@ -1038,11 +1040,11 @@ PHP_METHOD(ZendFramework_EventManager_EventManager, insertListeners) {
 
 
 	if (!(zephir_instance_of_ev(masterListeners, zendframework_stdlib_priorityqueue_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'masterListeners' must be an instance of 'ZendFramework\\\\Stdlib\\\\PriorityQueue'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'masterListeners' must be an instance of 'ZendFramework\\Stdlib\\PriorityQueue'", "", 0);
 		return;
 	}
 	if (!(zephir_instance_of_ev(listeners, zendframework_stdlib_priorityqueue_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'listeners' must be an instance of 'ZendFramework\\\\Stdlib\\\\PriorityQueue'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'listeners' must be an instance of 'ZendFramework\\Stdlib\\PriorityQueue'", "", 0);
 		return;
 	}
 	zephir_is_iterable(listeners, &_1, &_0, 0, 0, "zendframework/eventmanager/eventmanager.zep", 610);

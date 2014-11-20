@@ -50,7 +50,7 @@ PHP_METHOD(ZendFramework_EventManager_AbstractListenerAggregate, detach) {
 
 
 	if (!(zephir_instance_of_ev(events, zendframework_eventmanager_eventmanagerinterface_ce TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'events' must be an instance of 'ZendFramework\\\\EventManager\\\\EventManagerInterface'", "", 0);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'events' must be an instance of 'ZendFramework\\EventManager\\EventManagerInterface'", "", 0);
 		return;
 	}
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("listeners"), PH_NOISY_CC);
@@ -59,7 +59,7 @@ PHP_METHOD(ZendFramework_EventManager_AbstractListenerAggregate, detach) {
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
 	) {
-		ZEPHIR_GET_HMKEY(index, _2, _1);
+		ZEPHIR_GET_HKEY(index, _2, _1);
 		ZEPHIR_GET_HVALUE(callback, _3);
 		ZEPHIR_CALL_METHOD(&detached, events, "detach", NULL, callback);
 		zephir_check_call_status();

@@ -109,7 +109,7 @@ PHP_METHOD(ZendFramework_Permissions_Rbac_Rbac, addRole) {
 		zephir_check_call_status();
 	}
 	if (unlikely(!(zephir_instance_of_ev(child, zendframework_permissions_rbac_roleinterface_ce TSRMLS_CC)))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_permissions_rbac_exception_invalidargumentexception_ce, "Child must be a string or implement Zend\\\\Permissions\\\\Rbac\\\\RoleInterface", "zendframework/permissions/rbac/rbac.zep", 61);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_permissions_rbac_exception_invalidargumentexception_ce, "Child must be a string or implement Zend\\Permissions\\Rbac\\RoleInterface", "zendframework/permissions/rbac/rbac.zep", 61);
 		return;
 	}
 	if (!(ZEPHIR_IS_EMPTY(parents))) {
@@ -173,7 +173,7 @@ PHP_METHOD(ZendFramework_Permissions_Rbac_Rbac, hasRole) {
 	if (EG(exception)) {
 		ZEPHIR_INIT_VAR(_0);
 		ZEPHIR_CPY_WRT(_0, EG(exception));
-		if (zephir_is_instance_of(_0, SL("Exception\\InvalidArgumentException") TSRMLS_CC)) {
+		if (zephir_instance_of_ev(_0, zendframework_permissions_rbac_exception_invalidargumentexception_ce TSRMLS_CC)) {
 			zend_clear_exception(TSRMLS_C);
 			RETURN_MM_BOOL(0);
 		}
@@ -196,7 +196,7 @@ PHP_METHOD(ZendFramework_Permissions_Rbac_Rbac, getRole) {
 	int ZEPHIR_LAST_CALL_STATUS;
 	zend_bool _0;
 	zval *exceptionMsg = NULL;
-	zval *objectOrName, *iterator, *leaf = NULL, *requiredRole = NULL, *name = NULL, *_1, **_4, *_5, *_6;
+	zval *objectOrName, *iterator, *leaf = NULL, *requiredRole = NULL, *name = NULL, *_1 = NULL, **_4, *_5;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &objectOrName);
@@ -208,11 +208,11 @@ PHP_METHOD(ZendFramework_Permissions_Rbac_Rbac, getRole) {
 		_0 = !(zephir_instance_of_ev(objectOrName, zendframework_permissions_rbac_roleinterface_ce TSRMLS_CC));
 	}
 	if (unlikely(_0)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_permissions_rbac_exception_invalidargumentexception_ce, "Expected string or implement Zend\\\\Permissions\\\\Rbac\\\\RoleInterface", "zendframework/permissions/rbac/rbac.zep", 115);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_permissions_rbac_exception_invalidargumentexception_ce, "Expected string or implement Zend\\Permissions\\Rbac\\RoleInterface", "zendframework/permissions/rbac/rbac.zep", 115);
 		return;
 	}
 	if (Z_TYPE_P(objectOrName) == IS_OBJECT) {
-		ZEPHIR_CALL_METHOD(&requiredRole, objectOrName, "getname",  NULL);
+		ZEPHIR_CALL_METHOD(&requiredRole, objectOrName, "getname", NULL);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_CPY_WRT(requiredRole, objectOrName);
@@ -229,7 +229,7 @@ PHP_METHOD(ZendFramework_Permissions_Rbac_Rbac, getRole) {
 	  ; zephir_hash_move_forward_ex(_3, &_2)
 	) {
 		ZEPHIR_GET_HVALUE(leaf, _4);
-		ZEPHIR_CALL_METHOD(&name, leaf, "getname",  NULL);
+		ZEPHIR_CALL_METHOD(&name, leaf, "getname", NULL);
 		zephir_check_call_status();
 		if (ZEPHIR_IS_EQUAL(name, requiredRole)) {
 			RETURN_CCTOR(leaf);
@@ -238,11 +238,11 @@ PHP_METHOD(ZendFramework_Permissions_Rbac_Rbac, getRole) {
 	ZEPHIR_INIT_VAR(_5);
 	ZEPHIR_CONCAT_SVS(_5, "No role with name \"", requiredRole, "\" could be found");
 	zephir_get_strval(exceptionMsg, _5);
-	ZEPHIR_INIT_VAR(_6);
-	object_init_ex(_6, zendframework_permissions_rbac_exception_invalidargumentexception_ce);
-	ZEPHIR_CALL_METHOD(NULL, _6, "__construct", NULL, exceptionMsg);
+	ZEPHIR_INIT_NVAR(_1);
+	object_init_ex(_1, zendframework_permissions_rbac_exception_invalidargumentexception_ce);
+	ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, exceptionMsg);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(_6, "zendframework/permissions/rbac/rbac.zep", 129 TSRMLS_CC);
+	zephir_throw_exception_debug(_1, "zendframework/permissions/rbac/rbac.zep", 129 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -282,7 +282,7 @@ PHP_METHOD(ZendFramework_Permissions_Rbac_Rbac, isGranted) {
 			}
 		} else {
 			if (unlikely(!zephir_is_callable(assert TSRMLS_CC))) {
-				ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_permissions_rbac_exception_invalidargumentexception_ce, "Assertions must be a Callable or an instance of Zend\\\\Permissions\\\\Rbac\\\\AssertionInterface", "zendframework/permissions/rbac/rbac.zep", 154);
+				ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_permissions_rbac_exception_invalidargumentexception_ce, "Assertions must be a Callable or an instance of Zend\\Permissions\\Rbac\\AssertionInterface", "zendframework/permissions/rbac/rbac.zep", 154);
 				return;
 			}
 			ZEPHIR_CALL_FUNCTION(&_0, "call_user_func", &_1, assert, this_ptr);

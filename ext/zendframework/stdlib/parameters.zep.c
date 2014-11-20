@@ -56,7 +56,7 @@ PHP_METHOD(ZendFramework_Stdlib_Parameters, __construct) {
 
 	if (!values_param) {
 	ZEPHIR_INIT_VAR(values);
-	ZVAL_NULL(values);
+	array_init(values);
 	} else {
 	if (unlikely(Z_TYPE_P(values_param) != IS_ARRAY)) {
 		zephir_throw_exception_string(spl_ce_InvalidArgumentException, SL("Parameter 'values' must be an array") TSRMLS_CC);

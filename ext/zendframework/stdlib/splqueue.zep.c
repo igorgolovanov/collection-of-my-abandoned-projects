@@ -82,7 +82,7 @@ PHP_METHOD(ZendFramework_Stdlib_SplQueue, serialize) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&data, this_ptr, "toarray",  NULL);
+	ZEPHIR_CALL_METHOD(&data, this_ptr, "toarray", NULL);
 	zephir_check_call_status();
 	ZEPHIR_CALL_FUNCTION(&serialized, "serialize", &_0, data);
 	zephir_check_call_status();
