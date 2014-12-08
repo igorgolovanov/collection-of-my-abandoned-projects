@@ -29,8 +29,8 @@ if (class_exists('PHPUnit_Runner_Version', true)) {
  * distribution.
  */
 $zfRoot        = realpath(dirname(__DIR__));
-$zfCoreLibrary = "$zfRoot/library";
-$zfCoreTests   = "$zfRoot/tests";
+$zfCoreLibrary = "$zfRoot/php-src";
+$zfCoreTests   = "$zfRoot/unit-tests";
 
 /*
  * Prepend the Zend Framework library/ and tests/ directories to the
