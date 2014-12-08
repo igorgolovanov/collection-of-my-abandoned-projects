@@ -20,7 +20,7 @@ before_script:
 
 script:
   # Run tests for the various components in parallel
-  - ls -d unit-tests/ZendTest/* | parallel --gnu --keep-order 'echo "Running {} tests"; ./vendor/bin/phpunit -c unit-tests/phpunit.xml.dist --coverage-php build/coverage/coverage-{/.}.cov {};' || exit 1
+  - ls -d unit-tests/ZendTest/* | parallel --gnu --keep-order 'phpenv config-add unit-tests/ci/zendframework.ini; echo "Running {} tests"; ./vendor/bin/phpunit -c unit-tests/phpunit.xml.dist --coverage-php build/coverage/coverage-{/.}.cov {};' || exit 1
 
 after_script:
   # Merges the individual clover reports of each component into a single clover.xml
