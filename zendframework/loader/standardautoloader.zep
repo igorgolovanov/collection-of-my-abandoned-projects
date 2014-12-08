@@ -317,7 +317,7 @@ class StandardAutoloader implements SplAutoloader
     {
         var fileName, resolvedName, paths, leader, path, trimmedClass;
 
-        if in_array(type, [self::LOAD_NS, self::LOAD_PREFIX, self::ACT_AS_FALLBACK]) {
+        if unlikely !in_array(type, [self::LOAD_NS, self::LOAD_PREFIX, self::ACT_AS_FALLBACK]) {
             throw new Exception\InvalidArgumentException();
         }
 
