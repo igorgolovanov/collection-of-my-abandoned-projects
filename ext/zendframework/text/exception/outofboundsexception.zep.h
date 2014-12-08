@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_text_exception_outofboundsexception_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Text_Exception_OutOfBoundsException);
-

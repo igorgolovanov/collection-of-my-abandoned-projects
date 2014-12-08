@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_modulemanager_exception_missingdependencymoduleexception_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_ModuleManager_Exception_MissingDependencyModuleException);
-

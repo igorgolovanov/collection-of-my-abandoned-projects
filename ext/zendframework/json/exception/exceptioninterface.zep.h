@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_json_exception_exceptioninterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Json_Exception_ExceptionInterface);
-

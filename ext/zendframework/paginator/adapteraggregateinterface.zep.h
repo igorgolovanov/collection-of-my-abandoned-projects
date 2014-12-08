@@ -1,9 +1,0 @@
-
-extern zend_class_entry *zendframework_paginator_adapteraggregateinterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Paginator_AdapterAggregateInterface);
-
-ZEPHIR_INIT_FUNCS(zendframework_paginator_adapteraggregateinterface_method_entry) {
-	PHP_ABSTRACT_ME(ZendFramework_Paginator_AdapterAggregateInterface, getPaginatorAdapter, NULL)
-  PHP_FE_END
-};

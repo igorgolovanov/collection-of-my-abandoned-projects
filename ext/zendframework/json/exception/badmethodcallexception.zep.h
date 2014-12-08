@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_json_exception_badmethodcallexception_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Json_Exception_BadMethodCallException);
-

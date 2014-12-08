@@ -1,9 +1,0 @@
-
-extern zend_class_entry *zendframework_code_generator_generatorinterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Code_Generator_GeneratorInterface);
-
-ZEPHIR_INIT_FUNCS(zendframework_code_generator_generatorinterface_method_entry) {
-	PHP_ABSTRACT_ME(ZendFramework_Code_Generator_GeneratorInterface, generate, NULL)
-  PHP_FE_END
-};

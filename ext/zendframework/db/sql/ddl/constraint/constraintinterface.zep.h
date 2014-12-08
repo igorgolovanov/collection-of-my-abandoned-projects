@@ -1,9 +1,0 @@
-
-extern zend_class_entry *zendframework_db_sql_ddl_constraint_constraintinterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Db_Sql_Ddl_Constraint_ConstraintInterface);
-
-ZEPHIR_INIT_FUNCS(zendframework_db_sql_ddl_constraint_constraintinterface_method_entry) {
-	PHP_ABSTRACT_ME(ZendFramework_Db_Sql_Ddl_Constraint_ConstraintInterface, getColumns, NULL)
-  PHP_FE_END
-};

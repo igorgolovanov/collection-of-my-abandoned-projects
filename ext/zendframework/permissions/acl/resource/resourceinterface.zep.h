@@ -1,9 +1,0 @@
-
-extern zend_class_entry *zendframework_permissions_acl_resource_resourceinterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Permissions_Acl_Resource_ResourceInterface);
-
-ZEPHIR_INIT_FUNCS(zendframework_permissions_acl_resource_resourceinterface_method_entry) {
-	PHP_ABSTRACT_ME(ZendFramework_Permissions_Acl_Resource_ResourceInterface, getResourceId, NULL)
-  PHP_FE_END
-};

@@ -1,9 +1,0 @@
-
-extern zend_class_entry *zendframework_code_reflection_docblock_tag_phpdoctypedtaginterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Code_Reflection_DocBlock_Tag_PhpDocTypedTagInterface);
-
-ZEPHIR_INIT_FUNCS(zendframework_code_reflection_docblock_tag_phpdoctypedtaginterface_method_entry) {
-	PHP_ABSTRACT_ME(ZendFramework_Code_Reflection_DocBlock_Tag_PhpDocTypedTagInterface, getTypes, NULL)
-  PHP_FE_END
-};

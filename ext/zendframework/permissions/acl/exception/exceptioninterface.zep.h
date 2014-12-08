@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_permissions_acl_exception_exceptioninterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Permissions_Acl_Exception_ExceptionInterface);
-

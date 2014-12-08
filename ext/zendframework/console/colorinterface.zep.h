@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_console_colorinterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Console_ColorInterface);
-
