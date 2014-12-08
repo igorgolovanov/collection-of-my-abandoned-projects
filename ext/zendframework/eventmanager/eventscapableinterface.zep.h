@@ -1,9 +1,0 @@
-
-extern zend_class_entry *zendframework_eventmanager_eventscapableinterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_EventManager_EventsCapableInterface);
-
-ZEPHIR_INIT_FUNCS(zendframework_eventmanager_eventscapableinterface_method_entry) {
-	PHP_ABSTRACT_ME(ZendFramework_EventManager_EventsCapableInterface, getEventManager, NULL)
-  PHP_FE_END
-};

@@ -1,9 +1,0 @@
-
-extern zend_class_entry *zendframework_code_reflection_reflectioninterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Code_Reflection_ReflectionInterface);
-
-ZEPHIR_INIT_FUNCS(zendframework_code_reflection_reflectioninterface_method_entry) {
-	PHP_ABSTRACT_ME(ZendFramework_Code_Reflection_ReflectionInterface, toString, NULL)
-  PHP_FE_END
-};

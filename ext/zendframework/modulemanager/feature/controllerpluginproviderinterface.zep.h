@@ -1,9 +1,0 @@
-
-extern zend_class_entry *zendframework_modulemanager_feature_controllerpluginproviderinterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_ModuleManager_Feature_ControllerPluginProviderInterface);
-
-ZEPHIR_INIT_FUNCS(zendframework_modulemanager_feature_controllerpluginproviderinterface_method_entry) {
-	PHP_ABSTRACT_ME(ZendFramework_ModuleManager_Feature_ControllerPluginProviderInterface, getControllerPluginConfig, NULL)
-  PHP_FE_END
-};

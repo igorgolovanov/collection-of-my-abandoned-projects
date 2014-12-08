@@ -20,7 +20,8 @@
         "mikey179/vfsStream": "1.2.*",
         "fabpot/php-cs-fixer": "dev-master",
         "satooshi/php-coveralls": "dev-master",
-        "phpunit/phpcov": "*"
+        "phpunit/phpcov": "*",
+        "zendframework/zendxml": "~1.0-dev"
     },
     "bin": [
         "bin/classmap_generator.php",
@@ -28,14 +29,14 @@
         "bin/templatemap_generator.php"
     ],
     "autoload": {
-        "psr-4": {
-            "Zend\\": "php-src/Zend"
+        "psr-0": {
+            "Zend\\": "php-src"
         }
     },
     "autoload-dev": {
-        "psr-4": {
-            "ZephirExtra\\": "php-src/ZephirExtra",
-            "ZendTest\\": "tests/ZendTest"
+        "psr-0": {
+            "ZephirExtra\\": "php-src",
+            "ZendTest\\": "unit-tests"
         }
     },
     "authors": [

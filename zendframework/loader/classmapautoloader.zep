@@ -233,7 +233,4 @@ class ClassMapAutoloader implements SplAutoloader
         }
         return "";
     }
-
-
-
 }

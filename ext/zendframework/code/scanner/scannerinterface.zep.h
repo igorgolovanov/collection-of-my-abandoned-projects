@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_code_scanner_scannerinterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Code_Scanner_ScannerInterface);
-

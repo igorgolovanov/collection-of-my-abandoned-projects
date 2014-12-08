@@ -1,9 +1,0 @@
-
-extern zend_class_entry *zendframework_inputfilter_inputproviderinterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_InputFilter_InputProviderInterface);
-
-ZEPHIR_INIT_FUNCS(zendframework_inputfilter_inputproviderinterface_method_entry) {
-	PHP_ABSTRACT_ME(ZendFramework_InputFilter_InputProviderInterface, getInputSpecification, NULL)
-  PHP_FE_END
-};
