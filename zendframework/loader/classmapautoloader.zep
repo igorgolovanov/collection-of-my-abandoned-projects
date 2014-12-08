@@ -53,6 +53,7 @@ class ClassMapAutoloader implements SplAutoloader
     public function setOptions(var options) -> <ClassMapAutoloader>
     {
         this->registerAutoloadMaps(options);
+
         return this;
     }
 
@@ -151,11 +152,7 @@ class ClassMapAutoloader implements SplAutoloader
      */
     public function register() -> void
     {
-        array autoload;
-
-        let autoload = [this, "autoload"];
-
-        spl_autoload_register(autoload, true, true);
+        spl_autoload_register([this, "autoload"], true, true);
     }
 
     /**

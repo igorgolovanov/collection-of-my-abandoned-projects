@@ -19,5 +19,6 @@
 #include "zendframework/loader/pluginclasslocator.zep.h"
 #include "zendframework/loader/shortnamelocator.zep.h"
 #include "zendframework/loader/splautoloader.zep.h"
+#include "zendframework/loader/standardautoloader.zep.h"
 
 #endif

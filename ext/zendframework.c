@@ -41,6 +41,7 @@ zend_class_entry *zendframework_loader_exception_runtimeexception_ce;
 zend_class_entry *zendframework_loader_exception_securityexception_ce;
 zend_class_entry *zendframework_loader_moduleautoloader_ce;
 zend_class_entry *zendframework_loader_pluginclassloader_ce;
+zend_class_entry *zendframework_loader_standardautoloader_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(zendframework)
 
@@ -77,6 +78,7 @@ static PHP_MINIT_FUNCTION(zendframework)
 	ZEPHIR_INIT(ZendFramework_Loader_Exception_SecurityException);
 	ZEPHIR_INIT(ZendFramework_Loader_ModuleAutoloader);
 	ZEPHIR_INIT(ZendFramework_Loader_PluginClassLoader);
+	ZEPHIR_INIT(ZendFramework_Loader_StandardAutoloader);
 
 #if PHP_VERSION_ID < 50500
 	setlocale(LC_ALL, old_lc_all);

@@ -22,7 +22,7 @@ interface SplAutoloader
      *
      * @param  null|array|Traversable $options
      */
-    public function __construct(var options = null);
+    public function __construct(var options = null) -> void;
 
     /**
      * Configure the autoloader
