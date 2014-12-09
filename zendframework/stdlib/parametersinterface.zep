@@ -1,32 +1,31 @@
-<?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
+/*
+
+This file is part of the php-ext-zendframework package.
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+*/
 
 namespace Zend\Stdlib;
 
 use ArrayAccess;
 use Countable;
 use Serializable;
-use Traversable;
 
 /*
- * Basically, an ArrayObject. You could simply define something like:
- *     class QueryParams extends ArrayObject implements Parameters {}
- * and have 90% of the functionality
- */
-interface ParametersInterface extends ArrayAccess, Countable, Serializable, Traversable
+* Basically, an ArrayObject. You could simply define something like:
+* class QueryParams extends ArrayObject implements Parameters {}
+* and have 90% of the functionality
+*/
+interface ParametersInterface extends ArrayAccess, Countable, Serializable // todo: Traversable
 {
     /**
      * Constructor
      *
      * @param array $values
      */
-    public function __construct(array $values = null);
+    public function __construct(array! values = null);
 
     /**
      * From array
@@ -36,7 +35,7 @@ interface ParametersInterface extends ArrayAccess, Countable, Serializable, Trav
      * @param array $values
      * @return mixed
      */
-    public function fromArray(array $values);
+    public function fromArray(array! values);
 
     /**
      * From string
@@ -73,7 +72,7 @@ interface ParametersInterface extends ArrayAccess, Countable, Serializable, Trav
      * @param mixed|null $default
      * @return mixed
      */
-    public function get($name, $default = null);
+    public function get(string name, var $default = null);
 
     /**
      * Set
@@ -82,5 +81,6 @@ interface ParametersInterface extends ArrayAccess, Countable, Serializable, Trav
      * @param mixed $value
      * @return ParametersInterface
      */
-    public function set($name, $value);
+    public function set(string name, var value) -> <ParametersInterface>;
+
 }

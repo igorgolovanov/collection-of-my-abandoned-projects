@@ -1,17 +1,18 @@
-<?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
+/*
+
+This file is part of the php-ext-zendframework package.
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+*/
 
 namespace Zend\Stdlib;
 
 use Countable;
 use IteratorAggregate;
 use Serializable;
+use SplPriorityQueue;
 
 /**
  * Re-usable, serializable priority queue implementation
@@ -27,28 +28,28 @@ use Serializable;
  */
 class PriorityQueue implements Countable, IteratorAggregate, Serializable
 {
-    const EXTR_DATA     = 0x00000001;
-    const EXTR_PRIORITY = 0x00000002;
-    const EXTR_BOTH     = 0x00000003;
+    const EXTR_DATA = 1;
+    const EXTR_PRIORITY = 2;
+    const EXTR_BOTH = 3;
 
     /**
      * Inner queue class to use for iteration
      * @var string
      */
-    protected $queueClass = 'Zend\Stdlib\SplPriorityQueue';
+    protected queueClass = "Zend\\Stdlib\\SplPriorityQueue";
 
     /**
      * Actual items aggregated in the priority queue. Each item is an array
      * with keys "data" and "priority".
      * @var array
      */
-    protected $items      = array();
+    protected items = [];
 
     /**
      * Inner queue object
      * @var SplPriorityQueue
      */
-    protected $queue;
+    protected queue;
 
     /**
      * Insert an item into the queue
@@ -59,15 +60,18 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * @param  int $priority
      * @return PriorityQueue
      */
-    public function insert($data, $priority = 1)
+    public function insert(data, int priority = 1) -> <PriorityQueue>
     {
-        $priority = (int) $priority;
-        $this->items[] = array(
-            'data'     => $data,
-            'priority' => $priority,
-        );
-        $this->getQueue()->insert($data, $priority);
-        return $this;
+        var queue;
+        array datum;
+
+        let datum = ["data" : data, "priority" : priority];
+        let this->items[] = data;
+
+        let queue = <SplPriorityQueue> this->getQueue();
+        queue->insert(datum, priority);
+
+        return this;
     }
 
     /**
@@ -86,23 +90,29 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * @param  mixed $datum
      * @return bool False if the item was not found, true otherwise.
      */
-    public function remove($datum)
+    public function remove(datum) -> boolean
     {
-        $found = false;
-        foreach ($this->items as $key => $item) {
-            if ($item['data'] === $datum) {
-                $found = true;
+        boolean found = false;
+        var key, item, queue, data, priority;
+
+        for key, item in this->items {
+            if item["data"] === datum {
+                let found = true;
                 break;
             }
         }
-        if ($found) {
-            unset($this->items[$key]);
-            $this->queue = null;
 
-            if (!$this->isEmpty()) {
-                $queue = $this->getQueue();
-                foreach ($this->items as $item) {
-                    $queue->insert($item['data'], $item['priority']);
+        if found {
+            unset this->items[key];
+            let this->queue = null;
+
+            if !this->isEmpty() {
+                let queue = <SplPriorityQueue> this->getQueue();
+                for item in this->items {
+                    let data = item["data"];
+                    let priority = item["priority"];
+
+                    queue->insert(data, priority);
                 }
             }
             return true;
@@ -115,9 +125,9 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      *
      * @return bool
      */
-    public function isEmpty()
+    public function isEmpty() -> boolean
     {
-        return (0 === $this->count());
+        return 0 === this->count();
     }
 
     /**
@@ -125,9 +135,9 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      *
      * @return int
      */
-    public function count()
+    public function count() -> int
     {
-        return count($this->items);
+        return count(this->items);
     }
 
     /**
@@ -137,7 +147,12 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      */
     public function top()
     {
-        return $this->getIterator()->top();
+        var iterator, item;
+
+        let iterator = <SplPriorityQueue> this->getIterator();
+        let item = iterator->top();
+
+        return item;
     }
 
     /**
@@ -147,7 +162,12 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      */
     public function extract()
     {
-        return $this->getQueue()->extract();
+        var queue, item;
+
+        let queue = <SplPriorityQueue> this->getQueue();
+        let item = queue->extract();
+
+        return item;
     }
 
     /**
@@ -162,10 +182,12 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      *
      * @return SplPriorityQueue
      */
-    public function getIterator()
+    public function getIterator() -> <SplPriorityQueue>
     {
-        $queue = $this->getQueue();
-        return clone $queue;
+        var queue;
+        let queue = <SplPriorityQueue> this->getQueue();
+
+        return clone queue;
     }
 
     /**
@@ -173,9 +195,14 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      *
      * @return string
      */
-    public function serialize()
+    public function serialize() -> string
     {
-        return serialize($this->items);
+        var items, serialized;
+
+        let items = this->items;
+        let serialized = serialize(items);
+
+        return serialized;
     }
 
     /**
@@ -186,10 +213,17 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * @param  string $data
      * @return void
      */
-    public function unserialize($data)
+    public function unserialize(string data) -> void
     {
-        foreach (unserialize($data) as $item) {
-            $this->insert($item['data'], $item['priority']);
+        var unserialized, datum, item, priority;
+
+        let unserialized = unserialize(data);
+
+        for item in unserialized {
+            let datum = item["data"];
+            let priority = item["priority"];
+
+            this->insert(datum, priority);
         }
     }
 
@@ -203,22 +237,41 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * @param  int $flag
      * @return array
      */
-    public function toArray($flag = self::EXTR_DATA)
+    public function toArray(var flag = self::EXTR_DATA) -> array
     {
-        switch ($flag) {
+        var result, items;
+        array callback;
+
+        let items = this->items;
+
+        switch flag {
             case self::EXTR_BOTH:
-                return $this->items;
+                let result = items;
                 break;
+
             case self::EXTR_PRIORITY:
-                return array_map(function ($item) {
-                    return $item['priority'];
-                }, $this->items);
+                let callback = [this, "toPriorityArray"];
+                let result = array_map(callback, items);
+                break;
+                
             case self::EXTR_DATA:
             default:
-                return array_map(function ($item) {
-                    return $item['data'];
-                }, $this->items);
+                let callback = [this, "toDataArray"];
+                let result = array_map(callback, items);
+                break;        
         }
+
+        return result;
+    }
+
+    private function toDataArray(array! item)
+    {
+        return item["data"];
+    }
+
+    private function toPriorityArray(array! item)
+    {
+        return item["priority"];
     }
 
     /**
@@ -230,10 +283,10 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * @param  string $class
      * @return PriorityQueue
      */
-    public function setInternalQueueClass($class)
+    public function setInternalQueueClass(string $class) -> <PriorityQueue>
     {
-        $this->queueClass = (string) $class;
-        return $this;
+        let this->queueClass = $class;
+        return this;
     }
 
     /**
@@ -242,10 +295,12 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * @param  mixed $datum
      * @return bool
      */
-    public function contains($datum)
+    public function contains(var datum) -> boolean
     {
-        foreach ($this->items as $item) {
-            if ($item['data'] === $datum) {
+        var item;
+
+        for item in this->items {
+            if item["data"] === datum {
                 return true;
             }
         }
@@ -258,10 +313,12 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * @param  int $priority
      * @return bool
      */
-    public function hasPriority($priority)
+    public function hasPriority(int priority) -> boolean
     {
-        foreach ($this->items as $item) {
-            if ($item['priority'] === $priority) {
+        var item;
+
+        for item in this->items {
+            if item["priority"] === priority {
                 return true;
             }
         }
@@ -274,18 +331,24 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * @throws Exception\DomainException
      * @return SplPriorityQueue
      */
-    protected function getQueue()
+    protected function getQueue() -> <SplPriorityQueue>
     {
-        if (null === $this->queue) {
-            $this->queue = new $this->queueClass();
-            if (!$this->queue instanceof \SplPriorityQueue) {
-                throw new Exception\DomainException(sprintf(
-                    'PriorityQueue expects an internal queue of type SplPriorityQueue; received "%s"',
-                    get_class($this->queue)
-                ));
+        string exceptionMsg;
+        var queue, queueClass;
+
+        let queue = this->queue;
+        if this->queue === null {
+            let queueClass = this->queueClass;
+            let queue = new {queueClass}();
+
+            if unlikely !(queue instanceof SplPriorityQueue) {
+                let exceptionMsg = "PriorityQueue expects an internal queue of type SplPriorityQueue; received \"" . queueClass . "\"";
+                throw new Exception\DomainException(exceptionMsg);
             }
+            let this->queue = queue;
         }
-        return $this->queue;
+
+        return queue;
     }
 
     /**
@@ -293,10 +356,11 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      *
      * @return void
      */
-    public function __clone()
+    public function __clone() -> void
     {
-        if (null !== $this->queue) {
-            $this->queue = clone $this->queue;
+        if this->queue !== null {
+            let this->queue = clone this->queue;
         }
     }
+
 }
