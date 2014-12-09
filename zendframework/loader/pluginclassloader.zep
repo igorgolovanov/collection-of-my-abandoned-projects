@@ -22,7 +22,7 @@ class PluginClassLoader implements PluginClassLocator
      * List of plugin name => class name pairs
      * @var array
      */
-    protected plugins = [];
+    protected plugins;
 
     /**
      * Static map allow global seeding of plugin loader
@@ -38,14 +38,17 @@ class PluginClassLoader implements PluginClassLocator
     public function __construct(var map = null)
     {
         var staticMap = null, className;
-
         let className = get_called_class();
         %{
             zephir_read_static_property(&staticMap, Z_STRVAL_P(className), Z_STRLEN_P(className), SL("staticMap") TSRMLS_CC);
         }%
         // Merge in static overrides
-        if !empty staticMap {
-            this->registerPlugins(staticMap);
+        if staticMap !== null {
+            if typeof staticMap == "array" {
+                if count(staticMap) > 0 {
+                    this->registerPlugins(staticMap);
+                }
+            }
         }
         // Merge in constructor arguments
         if map !== null {
@@ -68,14 +71,18 @@ class PluginClassLoader implements PluginClassLocator
 
         let className = get_called_class();
         if map === null {
+            let map = [];
             %{
                 zephir_update_static_property(Z_STRVAL_P(className), Z_STRLEN_P(className), SL("staticMap"), &staticMap TSRMLS_CC);
             }%
             return;
         }
 
-        if unlikely typeof map != "array" && !(map instanceof Traversable) {
-            throw new Exception\InvalidArgumentException("Expects an array or Traversable object");
+        if typeof map != "array" {
+            if unlikely !is_subclass_of(map, "Traversable") { // todo: map instanceof Traversable
+                throw new Exception\InvalidArgumentException("Expects an array or Traversable object");
+            }
+            let map = iterator_to_array(map);
         }
         %{
             zephir_read_static_property(&staticMap, Z_STRVAL_P(className), Z_STRLEN_P(className), SL("staticMap") TSRMLS_CC);
@@ -83,7 +90,6 @@ class PluginClassLoader implements PluginClassLocator
         if typeof staticMap != "array" {
             let staticMap = [];
         }
-
         for key, value in map {
             let staticMap[key] = value;
         }
@@ -101,8 +107,15 @@ class PluginClassLoader implements PluginClassLocator
      */
     public function registerPlugin(string shortName, string className) -> <PluginClassLoader>
     {
+        var plugins;
+
         let shortName = shortName->lower();
-        let this->plugins[shortName] = className;
+        let plugins = this->plugins;
+        if typeof plugins != "array" {
+            let plugins = [];
+        }
+        let plugins[shortName] = className;
+        let this->plugins = plugins;
 
         return this;
     }
@@ -126,15 +139,17 @@ class PluginClassLoader implements PluginClassLocator
      */
     public function registerPlugins(var map) -> <PluginClassLoader>
     {
-        var name, className;
+        var name, className, classNamePlugin;
 
         if typeof map == "string" {
             if unlikely !class_exists(map) {
                 throw new Exception\InvalidArgumentException("Map class provided is invalid");
             }
-            let map = new {map}();
+            let className = map;
+            let map = new {className}();
         } elseif typeof map == "array" {
-            let map = new ArrayIterator(map);
+            let className = map;
+            let map = new ArrayIterator(className);
         }
 
         if unlikely !(map instanceof Traversable) {
@@ -144,12 +159,15 @@ class PluginClassLoader implements PluginClassLocator
         for name, className in iterator(map) {
             if typeof name == "integer" || is_numeric(name) {
                 if typeof className != "object" && class_exists(className) {
-                    let className = new {className}();
+                    let classNamePlugin = new {className}();
+                } else {
+                    let classNamePlugin = className;
                 }
-                if className instanceof Traversable {
-                    this->registerPlugins(className);
+                if classNamePlugin instanceof Traversable {
+                    this->registerPlugins(classNamePlugin);
                     continue;
                 }
+                let className = classNamePlugin;
             }
             this->registerPlugin(name, className);
         }
@@ -169,9 +187,13 @@ class PluginClassLoader implements PluginClassLocator
         let lookup = strtolower(shortName);
         let plugins = this->plugins;
 
-        if array_key_exists(lookup, plugins) {
-            unset this->plugins[lookup];
+        if typeof plugins != "array" {
+            let plugins = [];
         }
+        if array_key_exists(lookup, plugins) {
+            unset plugins[lookup];
+        }
+        let this->plugins = plugins;
 
         return this;
     }
@@ -195,9 +217,14 @@ class PluginClassLoader implements PluginClassLocator
     public function isLoaded(string name) -> boolean
     {
         string lookup;
-        let lookup = name->lower();
+        var plugins;
 
-        return isset this->plugins[lookup];
+        let lookup = name->lower();
+        let plugins = this->plugins;
+        if typeof plugins != "array" {
+            let plugins = [];
+        }
+        return isset plugins[lookup];
     }
 
     /**
@@ -222,13 +249,17 @@ class PluginClassLoader implements PluginClassLocator
      */
     public function load(string name) -> string|boolean
     {
-        var className, lookup;
+        var className, lookup, plugins;
 
         if !this->isLoaded(name) {
             return false;
         }
         let lookup = name->lower();
-        if fetch className, this->plugins[lookup] {
+        let plugins = this->plugins;
+        if typeof plugins != "array" {
+            let plugins = [];
+        }
+        if fetch className, plugins[lookup] {
             return className;
         }
         return false;
@@ -247,6 +278,9 @@ class PluginClassLoader implements PluginClassLocator
         var plugins, iterator;
         
         let plugins = this->plugins;
+        if typeof plugins != "array" {
+            let plugins = [];
+        }
         let iterator = new ArrayIterator(plugins);
 
         return iterator;

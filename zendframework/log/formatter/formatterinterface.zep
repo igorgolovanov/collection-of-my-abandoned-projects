@@ -19,7 +19,7 @@ interface FormatterInterface
      * @param array $event event data
      * @return string formatted line to write to the log
      */
-    public function format(array event) -> string;
+    public function format(var event) -> string; // todo: update event type to array
 
     /**
      * Get the format specifier for DateTime objects

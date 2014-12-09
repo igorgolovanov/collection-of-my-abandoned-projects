@@ -4,7 +4,7 @@ extern zend_class_entry *zendframework_log_formatter_formatterinterface_ce;
 ZEPHIR_INIT_CLASS(ZendFramework_Log_Formatter_FormatterInterface);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_log_formatter_formatterinterface_format, 0, 0, 1)
-	ZEND_ARG_ARRAY_INFO(0, event, 0)
+	ZEND_ARG_INFO(0, event)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_log_formatter_formatterinterface_setdatetimeformat, 0, 0, 1)

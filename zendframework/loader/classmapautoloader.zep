@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Loader;
 
+use Traversable;
+
 /**
  * Class-map autoloader
  *
