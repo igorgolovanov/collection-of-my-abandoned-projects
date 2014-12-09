@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_dom_exception_badmethodcallexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Dom_Exception_BadMethodCallException);
+

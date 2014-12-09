@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_crypt_key_derivation_exception_invalidargumentexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Crypt_Key_Derivation_Exception_InvalidArgumentException);
+

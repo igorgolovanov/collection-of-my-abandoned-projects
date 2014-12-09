@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_db_adapter_exception_errorexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Db_Adapter_Exception_ErrorException);
+

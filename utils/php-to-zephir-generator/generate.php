@@ -8,7 +8,7 @@
 
 require_once __DIR__ . '/common.php';
 
-$dir = __DIR__ . '/../../vendor/zendframework/zendframework/library';
+$dir = __DIR__ . '/../../php-src';
 $dir = realpath($dir);
 $dirTo = realpath(__DIR__ . '/../../');
 
@@ -17,10 +17,11 @@ $skipClasses = include __DIR__ . '/skip-classes.php';
 $skipFiles = include __DIR__ . '/skip-files.php';
 $skipNamespaces = include __DIR__ . '/skip-namespaces.php';
 
-$generateInterfaces = false;
-$generateExceptions = false;
-$generateClasses = true;
-$onlyNotExists = false;
+$generateInterfaces = true;
+$generateExceptions = true;
+$generateClasses = false;
+$onlyNotExists = true;
+$onlyExceptionInterfaces = true;
 
 $allowClasses = include __DIR__ . '/allow-classes.php';
 $allowNamespaces = include __DIR__ . '/allow-namespaces.php';
@@ -96,18 +97,24 @@ foreach ($iterator as $k => $file) {
         continue; // not supported
     }
 
-    if($generateInterfaces && !$ref->isInterface()) {
+    if(!$generateInterfaces && !$ref->isInterface()) {
         printf("Class %s not interface!\n", $className);
         continue;
     }
 
-    if($generateExceptions && !$ref->isSubclassOf('Exception')) {
+    if(!$generateExceptions && !$ref->isSubclassOf('Exception')) {
         printf("Class %s not exception!\n", $className);
         continue;
     }
 
     if(!$generateClasses && (!$ref->isInterface() && !$ref->isSubclassOf('Exception'))) {
         continue;
+    }
+
+    if ($ref->isInterface() && $onlyExceptionInterfaces) {
+        if(false === stripos($ref->getShortName(), 'Exception')) {
+            continue;
+        }
     }
 
     // file exists, skip!

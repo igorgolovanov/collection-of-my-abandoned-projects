@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_barcode_exception_exceptioninterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Barcode_Exception_ExceptionInterface);
+
