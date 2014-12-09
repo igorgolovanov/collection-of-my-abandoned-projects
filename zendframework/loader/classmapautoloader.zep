@@ -81,7 +81,7 @@ class ClassMapAutoloader implements SplAutoloader
      */
     public function registerAutoloadMap(var map) -> <ClassMapAutoloader>
     {
-        var exceptionMsg, location, merged;
+        var exceptionMsg, location, merged, baseMap, mapsLoaded;
 
         if typeof map == "string" {
             let location = map;
@@ -99,12 +99,20 @@ class ClassMapAutoloader implements SplAutoloader
             let exceptionMsg = exceptionMsg . location . "\"";
             throw new Exception\InvalidArgumentException(exceptionMsg);
         }
-
-        let merged = array_merge(this->map, map);
+        let baseMap = this->map;
+        if typeof baseMap != "array" {
+            let baseMap = [];
+        }
+        let merged = array_merge(baseMap, map);
         let this->map = merged;
 
         if !empty location {
-            let this->mapsLoaded[] = location;
+            let mapsLoaded = this->mapsLoaded;
+            if typeof mapsLoaded != "array" {
+                let mapsLoaded = [];
+            }
+            let mapsLoaded[] = location;
+            let this->mapsLoaded = mapsLoaded;
         }
         return this;
     }
@@ -148,9 +156,15 @@ class ClassMapAutoloader implements SplAutoloader
      */
     public function autoload(string $class) -> string|boolean
     {
-        var path;
+        var path, map;
 
-        if fetch path, this->map[$class] {
+        let map = this->map;
+        if typeof map != "array" {
+            let this->map = [];
+            return false;
+        }
+
+        if fetch path, map[$class] {
             require path;
             return $class;
         }
@@ -181,7 +195,7 @@ class ClassMapAutoloader implements SplAutoloader
     protected function loadMapFromFile(string location)
     {
         string exceptionMsg;
-        var path, map;
+        var path, map, mapsLoaded;
         
         if unlikely !file_exists(location) {
             if typeof location != "string" {
@@ -194,6 +208,11 @@ class ClassMapAutoloader implements SplAutoloader
         let path = static::realPharPath(location);
         if !path {
             let path = realpath(location);
+        }
+        let mapsLoaded = this->mapsLoaded;
+        if typeof mapsLoaded != "array" {
+            let mapsLoaded = [];
+            let this->mapsLoaded = mapsLoaded;
         }
         if in_array(path, this->mapsLoaded) {
             // Already loaded this map
@@ -215,7 +234,7 @@ class ClassMapAutoloader implements SplAutoloader
     public static function realPharPath(string path) -> string
     {
         var match = null, value, key, parts, partsFiltered = [], realPath;
-        int prefixLength;
+        var prefixLength;
 
         if !preg_match("|^phar:(/{2,3})|", path, match) {
             return "";

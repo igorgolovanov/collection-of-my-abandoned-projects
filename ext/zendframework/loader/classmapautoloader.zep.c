@@ -141,7 +141,7 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, setOptions) {
 PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, registerAutoloadMap) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *map = NULL, *exceptionMsg = NULL, *location = NULL, *merged, *_0 = NULL, *_1, *_2;
+	zval *map = NULL, *exceptionMsg = NULL, *location = NULL, *merged, *baseMap = NULL, *mapsLoaded = NULL, *_0 = NULL, *_1, *_2;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &map);
@@ -177,12 +177,24 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, registerAutoloadMap) {
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
+	ZEPHIR_OBS_VAR(baseMap);
+	zephir_read_property_this(&baseMap, this_ptr, SL("map"), PH_NOISY_CC);
+	if (Z_TYPE_P(baseMap) != IS_ARRAY) {
+		ZEPHIR_INIT_NVAR(baseMap);
+		array_init(baseMap);
+	}
 	ZEPHIR_INIT_VAR(merged);
-	_2 = zephir_fetch_nproperty_this(this_ptr, SL("map"), PH_NOISY_CC);
-	zephir_fast_array_merge(merged, &(_2), &(map) TSRMLS_CC);
+	zephir_fast_array_merge(merged, &(baseMap), &(map) TSRMLS_CC);
 	zephir_update_property_this(this_ptr, SL("map"), merged TSRMLS_CC);
 	if (!(ZEPHIR_IS_EMPTY(location))) {
-		zephir_update_property_array_append(this_ptr, SL("mapsLoaded"), location TSRMLS_CC);
+		_2 = zephir_fetch_nproperty_this(this_ptr, SL("mapsLoaded"), PH_NOISY_CC);
+		ZEPHIR_CPY_WRT(mapsLoaded, _2);
+		if (Z_TYPE_P(mapsLoaded) != IS_ARRAY) {
+			ZEPHIR_INIT_NVAR(mapsLoaded);
+			array_init(mapsLoaded);
+		}
+		zephir_array_append(&mapsLoaded, location, PH_SEPARATE, "zendframework/loader/classmapautoloader.zep", 114);
+		zephir_update_property_this(this_ptr, SL("mapsLoaded"), mapsLoaded TSRMLS_CC);
 	}
 	RETURN_THIS();
 
@@ -216,14 +228,14 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, registerAutoloadMaps) {
 		ZEPHIR_CALL_FUNCTION(&_1, "is_subclass_of", &_2, locations, &_0);
 		zephir_check_call_status();
 		if (unlikely(!zephir_is_true(_1))) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_loader_exception_invalidargumentexception_ce, "Map list must be an array or implement Traversable", "zendframework/loader/classmapautoloader.zep", 125);
+			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_loader_exception_invalidargumentexception_ce, "Map list must be an array or implement Traversable", "zendframework/loader/classmapautoloader.zep", 133);
 			return;
 		}
 		ZEPHIR_CALL_FUNCTION(&_3, "iterator_to_array", NULL, locations);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(locations, _3);
 	}
-	zephir_is_iterable(locations, &_5, &_4, 0, 0, "zendframework/loader/classmapautoloader.zep", 133);
+	zephir_is_iterable(locations, &_5, &_4, 0, 0, "zendframework/loader/classmapautoloader.zep", 141);
 	for (
 	  ; zephir_hash_get_current_data_ex(_5, (void**) &_6, &_4) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_5, &_4)
@@ -253,7 +265,7 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, getAutoloadMap) {
  */
 PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, autoload) {
 
-	zval *class_param = NULL, *path, *_0;
+	zval *class_param = NULL, *path, *map = NULL, *_0, *_1;
 	zval *class = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -262,9 +274,16 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, autoload) {
 	zephir_get_strval(class, class_param);
 
 
-	ZEPHIR_OBS_VAR(path);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("map"), PH_NOISY_CC);
-	if (zephir_array_isset_fetch(&path, _0, class, 0 TSRMLS_CC)) {
+	ZEPHIR_CPY_WRT(map, _0);
+	if (Z_TYPE_P(map) != IS_ARRAY) {
+		ZEPHIR_INIT_VAR(_1);
+		array_init(_1);
+		zephir_update_property_this(this_ptr, SL("map"), _1 TSRMLS_CC);
+		RETURN_MM_BOOL(0);
+	}
+	ZEPHIR_OBS_VAR(path);
+	if (zephir_array_isset_fetch(&path, map, class, 0 TSRMLS_CC)) {
 		if (zephir_require_zval(path TSRMLS_CC) == FAILURE) {
 			RETURN_MM_NULL();
 		}
@@ -314,7 +333,7 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, loadMapFromFile) {
 
 	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *location_param = NULL, *path = NULL, *map = NULL, *_0 = NULL, *_1, *_3, *_4 = NULL;
+	zval *location_param = NULL, *path = NULL, *map = NULL, *mapsLoaded = NULL, *_0 = NULL, *_1, *_3, *_4 = NULL;
 	zval *location = NULL, *exceptionMsg = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -337,7 +356,7 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, loadMapFromFile) {
 		object_init_ex(_0, zendframework_loader_exception_invalidargumentexception_ce);
 		ZEPHIR_CALL_METHOD(NULL, _0, "__construct", NULL, exceptionMsg);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_0, "zendframework/loader/classmapautoloader.zep", 191 TSRMLS_CC);
+		zephir_throw_exception_debug(_0, "zendframework/loader/classmapautoloader.zep", 205 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -346,6 +365,13 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, loadMapFromFile) {
 	if (!(zephir_is_true(path))) {
 		ZEPHIR_CALL_FUNCTION(&path, "realpath", &_2, location);
 		zephir_check_call_status();
+	}
+	_3 = zephir_fetch_nproperty_this(this_ptr, SL("mapsLoaded"), PH_NOISY_CC);
+	ZEPHIR_CPY_WRT(mapsLoaded, _3);
+	if (Z_TYPE_P(mapsLoaded) != IS_ARRAY) {
+		ZEPHIR_INIT_NVAR(mapsLoaded);
+		array_init(mapsLoaded);
+		zephir_update_property_this(this_ptr, SL("mapsLoaded"), mapsLoaded TSRMLS_CC);
 	}
 	_3 = zephir_fetch_nproperty_this(this_ptr, SL("mapsLoaded"), PH_NOISY_CC);
 	if (zephir_fast_in_array(path, _3 TSRMLS_CC)) {
@@ -373,9 +399,9 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, realPharPath) {
 	HashTable *_10, *_15;
 	HashPosition _9, _14;
 	zval *_4;
-	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL, *_8 = NULL, *_13 = NULL, *_21 = NULL;
-	int prefixLength, ZEPHIR_LAST_CALL_STATUS;
-	zval *path_param = NULL, *match = NULL, *value = NULL, *key = NULL, *parts = NULL, *partsFiltered, *realPath, *_0 = NULL, *_1 = NULL, *_3, *_5 = NULL, _6 = zval_used_for_init, *_7 = NULL, **_11, **_16, *_17 = NULL, _18, _19, _20;
+	int ZEPHIR_LAST_CALL_STATUS;
+	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL, *_7 = NULL, *_13 = NULL, *_20 = NULL;
+	zval *path_param = NULL, *match = NULL, *value = NULL, *key = NULL, *parts = NULL, *partsFiltered, *realPath, *prefixLength, *_0 = NULL, *_1 = NULL, *_3, *_5 = NULL, *_6 = NULL, _8, **_11, **_16, *_17 = NULL, _18, _19;
 	zval *path = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -398,8 +424,9 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, realPharPath) {
 	if (!(zephir_is_true(_1))) {
 		RETURN_MM_STRING("", 1);
 	}
-	zephir_array_fetch_long(&_3, match, 1, PH_NOISY | PH_READONLY, "zendframework/loader/classmapautoloader.zep", 223 TSRMLS_CC);
-	prefixLength = (5 + zephir_fast_strlen_ev(_3));
+	zephir_array_fetch_long(&_3, match, 1, PH_NOISY | PH_READONLY, "zendframework/loader/classmapautoloader.zep", 242 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(prefixLength);
+	ZVAL_LONG(prefixLength, (5 + zephir_fast_strlen_ev(_3)));
 	ZEPHIR_INIT_VAR(parts);
 	ZEPHIR_INIT_NVAR(_0);
 	ZEPHIR_INIT_VAR(_4);
@@ -410,15 +437,13 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, realPharPath) {
 	ZEPHIR_INIT_NVAR(_5);
 	ZVAL_STRING(_5, "\\", 1);
 	zephir_array_fast_append(_4, _5);
-	ZEPHIR_SINIT_VAR(_6);
-	ZVAL_LONG(&_6, prefixLength);
-	ZEPHIR_CALL_FUNCTION(&_7, "substr", &_8, path, &_6);
+	ZEPHIR_CALL_FUNCTION(&_6, "substr", &_7, path, prefixLength);
 	zephir_check_call_status();
-	ZEPHIR_SINIT_NVAR(_6);
-	ZVAL_STRING(&_6, "/", 0);
-	zephir_fast_str_replace(_0, _4, &_6, _7 TSRMLS_CC);
+	ZEPHIR_SINIT_VAR(_8);
+	ZVAL_STRING(&_8, "/", 0);
+	zephir_fast_str_replace(_0, _4, &_8, _6 TSRMLS_CC);
 	zephir_fast_explode_str(parts, SL("/"), _0, LONG_MAX TSRMLS_CC);
-	zephir_is_iterable(parts, &_10, &_9, 0, 0, "zendframework/loader/classmapautoloader.zep", 230);
+	zephir_is_iterable(parts, &_10, &_9, 0, 0, "zendframework/loader/classmapautoloader.zep", 249);
 	for (
 	  ; zephir_hash_get_current_data_ex(_10, (void**) &_11, &_9) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_10, &_9)
@@ -429,12 +454,12 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, realPharPath) {
 			_12 = !ZEPHIR_IS_STRING_IDENTICAL(value, ".");
 		}
 		if (_12) {
-			zephir_array_append(&partsFiltered, value, PH_SEPARATE, "zendframework/loader/classmapautoloader.zep", 227);
+			zephir_array_append(&partsFiltered, value, PH_SEPARATE, "zendframework/loader/classmapautoloader.zep", 246);
 		}
 	}
 	ZEPHIR_CALL_FUNCTION(&parts, "array_values", &_13, partsFiltered);
 	zephir_check_call_status();
-	zephir_is_iterable(parts, &_15, &_14, 1, 0, "zendframework/loader/classmapautoloader.zep", 239);
+	zephir_is_iterable(parts, &_15, &_14, 1, 0, "zendframework/loader/classmapautoloader.zep", 258);
 	for (
 	  ; zephir_hash_get_current_data_ex(_15, (void**) &_16, &_14) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_15, &_14)
@@ -452,10 +477,8 @@ PHP_METHOD(ZendFramework_Loader_ClassMapAutoloader, realPharPath) {
 	ZEPHIR_SINIT_VAR(_18);
 	ZVAL_STRING(&_18, "phar:", 0);
 	ZEPHIR_SINIT_VAR(_19);
-	ZVAL_LONG(&_19, prefixLength);
-	ZEPHIR_SINIT_VAR(_20);
-	ZVAL_STRING(&_20, "/", 0);
-	ZEPHIR_CALL_FUNCTION(&_17, "str_pad", &_21, &_18, &_19, &_20);
+	ZVAL_STRING(&_19, "/", 0);
+	ZEPHIR_CALL_FUNCTION(&_17, "str_pad", &_20, &_18, prefixLength, &_19);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(_5);
 	zephir_fast_join_str(_5, SL("/"), parts TSRMLS_CC);
