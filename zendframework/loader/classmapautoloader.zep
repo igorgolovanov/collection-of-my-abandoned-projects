@@ -81,7 +81,7 @@ class ClassMapAutoloader implements SplAutoloader
      */
     public function registerAutoloadMap(var map) -> <ClassMapAutoloader>
     {
-        var exceptionMsg, location, merged, baseMap, mapsLoaded;
+        var exceptionMsg, location = null, merged, baseMap, mapsLoaded;
 
         if typeof map == "string" {
             let location = map;
@@ -192,7 +192,7 @@ class ClassMapAutoloader implements SplAutoloader
      * @return ClassMapAutoloader|mixed
      * @throws Exception\InvalidArgumentException for nonexistent locations
      */
-    protected function loadMapFromFile(string location)
+    protected function loadMapFromFile(var location)
     {
         string exceptionMsg;
         var path, map, mapsLoaded;
@@ -214,7 +214,7 @@ class ClassMapAutoloader implements SplAutoloader
             let mapsLoaded = [];
             let this->mapsLoaded = mapsLoaded;
         }
-        if in_array(path, this->mapsLoaded) {
+        if in_array(path, mapsLoaded) {
             // Already loaded this map
             return this;
         }
@@ -233,14 +233,16 @@ class ClassMapAutoloader implements SplAutoloader
      */
     public static function realPharPath(string path) -> string
     {
-        var match = null, value, key, parts, partsFiltered = [], realPath;
+        var match = [], value, key, parts, partsFiltered = [], realPath;
         var prefixLength;
 
         if !preg_match("|^phar:(/{2,3})|", path, match) {
             return "";
         }
         let prefixLength = 5 + strlen(match[1]);
-        let parts = explode("/", str_replace(["/", "\\"], "/", substr(path, prefixLength)));
+        let parts = substr(path, prefixLength);
+        let parts = str_replace(["/", "\\"], "/", parts);
+        let parts = explode("/", parts);
         for value in parts {
             if value !== "" && value !== "." {
                 let partsFiltered[] = value;
@@ -255,7 +257,9 @@ class ClassMapAutoloader implements SplAutoloader
             }
         }
 
-        let realPath =  str_pad("phar:", prefixLength, "/") . implode("/", parts);
+        let realPath = str_pad("phar:", prefixLength, "/");
+        let realPath = realPath . implode("/", parts);
+
         if file_exists(realPath) {
             return realPath;
         }
