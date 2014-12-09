@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_cache_exception_logicexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Cache_Exception_LogicException);
+
