@@ -183,9 +183,12 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
 
     public function testCanTellAutoloaderToRegisterZendNamespaceAtInstantiation()
     {
+		$this->markTestSkipped('ZF Classes loaded as extension.');
+
         $loader = new StandardAutoloader(array('autoregister_zf' => true));
         $r      = new ReflectionClass($loader);
         $file   = $r->getFileName();
+
         $expected = array(
             'Zend\\'    => dirname(dirname($file)) . DIRECTORY_SEPARATOR,
             'ZendXml\\' => dirname(dirname(dirname($file))) . DIRECTORY_SEPARATOR . 'ZendXml' . DIRECTORY_SEPARATOR,

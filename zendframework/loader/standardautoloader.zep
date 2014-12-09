@@ -30,12 +30,12 @@ class StandardAutoloader implements SplAutoloader
     /**
      * @var array Namespace/directory pairs to search; ZF library added by default
      */
-    protected namespaces = [];
+    protected namespaces; // todo: []
 
     /**
      * @var array Prefix/directory pairs to search
      */
-    protected prefixes = [];
+    protected prefixes; // todo: []
 
     /**
      * @var bool Whether or not the autoloader should also act as a fallback autoloader
@@ -49,7 +49,14 @@ class StandardAutoloader implements SplAutoloader
      */
     public function __construct(var options = null)
     {
-        if null !== $options {
+        if typeof this->namespaces != "array" {
+            let this->namespaces = [];
+        }
+        if typeof this->prefixes != "array" {
+            let this->prefixes = [];
+        }
+
+        if options !== null {
             this->setOptions(options);
         }
     }
@@ -80,11 +87,10 @@ class StandardAutoloader implements SplAutoloader
     {
         var type, pairs;
 
-        if unlikely typeof options != "array" && !(options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException("Options must be either an array or Traversable");
-        }
-
-        if typeof options == "object" {
+        if typeof options != "array" {
+            if unlikely !is_subclass_of(options, "Traversable") { // todo: options instanceof Traversable
+                throw new Exception\InvalidArgumentException("Options must be either an array or Traversable");
+            }
             let options = iterator_to_array(options);
         }
 
@@ -94,12 +100,12 @@ class StandardAutoloader implements SplAutoloader
                     // skip, already loaded
                     break;
                 case self::LOAD_NS:
-                    if typeof pairs == "array" || pairs instanceof Traversable {
+                    if typeof pairs == "array" || is_subclass_of(pairs, "Traversable") { // todo: pairs instanceof Traversable
                         this->registerNamespaces(pairs);
                     }
                     break;
                 case self::LOAD_PREFIX:
-                    if typeof pairs == "array" || pairs instanceof Traversable {
+                    if typeof pairs == "array" || is_subclass_of(pairs, "Traversable") { // todo: pairs instanceof Traversable
                         this->registerPrefixes(pairs);
                     }
                     break;
@@ -169,14 +175,12 @@ class StandardAutoloader implements SplAutoloader
     {
         var ns, dir;
 
-        if unlikely typeof namespaces != "array" && !(namespaces instanceof Traversable) {
-            throw new Exception\InvalidArgumentException("Namespace pairs must be either an array or Traversable");
-        }
-
-        if typeof namespaces == "object" {
+        if typeof namespaces != "array" {
+            if unlikely !is_subclass_of(namespaces, "Traversable") { // todo: namespaces instanceof Traversable
+                throw new Exception\InvalidArgumentException("Namespace pairs must be either an array or Traversable");
+            }
             let namespaces = iterator_to_array(namespaces);
         }
-
         for ns, dir in namespaces {
             this->registerNamespace(ns, dir);
         }
@@ -214,14 +218,12 @@ class StandardAutoloader implements SplAutoloader
     {
         var prefix, dir;
 
-        if unlikely typeof prefixes != "array" && !(prefixes instanceof Traversable) {
-            throw new Exception\InvalidArgumentException("Prefix pairs must be either an array or Traversable");
-        }
-
-        if typeof prefixes == "object" {
+        if typeof prefixes != "array" {
+            if unlikely !is_subclass_of(prefixes, "Traversable") { // todo: prefixes instanceof Traversable
+                throw new Exception\InvalidArgumentException("Prefix pairs must be either an array or Traversable");
+            }
             let prefixes = iterator_to_array(prefixes);
         }
-
         for prefix, dir in prefixes {
             this->registerPrefix(prefix, dir);
         }
@@ -237,10 +239,12 @@ class StandardAutoloader implements SplAutoloader
     public function autoload(string $class) -> boolean|string
     {
         boolean isFallback;
+        var pos;
 
         let isFallback = (boolean) this->isFallbackAutoloader();
+        let pos = $class->index(self::NS_SEPARATOR);
 
-        if false !== $class->index(self::NS_SEPARATOR) {
+        if pos !== false {
             if this->loadClass($class, self::LOAD_NS) {
                 return $class;
             } elseif isFallback {
@@ -248,7 +252,8 @@ class StandardAutoloader implements SplAutoloader
             }
             return false;
         }
-        if false !== $class->index(self::PREFIX_SEPARATOR) {
+        let pos = $class->index(self::PREFIX_SEPARATOR);
+        if pos !== false {
             if this->loadClass($class, self::LOAD_PREFIX) {
                 return $class;
             } elseif isFallback {
@@ -294,7 +299,7 @@ class StandardAutoloader implements SplAutoloader
             let cl = "";
         }
 
-        if !fetch ns, matches["namespace"] {
+        if fetch ns, matches["namespace"] {
             let ns = str_replace(self::NS_SEPARATOR, "/", ns);
         } else {
             let ns = "";
@@ -328,20 +333,34 @@ class StandardAutoloader implements SplAutoloader
             let resolvedName = stream_resolve_include_path(fileName);
 
             if resolvedName !== false {
-                return require resolvedName;
+                require resolvedName;
+                return $class;
             }
             return false;
         }
 
-        let paths = (array) this->{type};
+        switch type {
+            case self::LOAD_NS:
+                let paths = this->namespaces;
+                break;
+            case self::LOAD_PREFIX:
+                let paths = this->prefixes;
+                break;
+        }
+        if typeof paths != "array" {
+            let paths = [];
+        }
+
         for leader, path in paths {
+
             if 0 === $class->index(leader) {
                 // Trim off leader (namespace or prefix)
                 let trimmedClass = substr($class, strlen(leader));
                 let fileName = this->transformClassNameToFilename(trimmedClass, path);
 
                 if file_exists(fileName) {
-                    return require fileName;
+                    require fileName;
+                    return $class;
                 }
             }
         }
