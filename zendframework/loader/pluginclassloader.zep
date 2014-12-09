@@ -152,7 +152,7 @@ class PluginClassLoader implements PluginClassLocator
             let map = new ArrayIterator(className);
         }
 
-        if unlikely !(map instanceof Traversable) {
+        if unlikely !is_subclass_of(map, "Traversable") { // todo: map instanceof Traversable
             throw new Exception\InvalidArgumentException("Map provided is invalid; must be traversable");
         }
 
@@ -163,7 +163,7 @@ class PluginClassLoader implements PluginClassLocator
                 } else {
                     let classNamePlugin = className;
                 }
-                if classNamePlugin instanceof Traversable {
+                if is_subclass_of(classNamePlugin, "Traversable") { // todo: classNamePlugin instanceof Traversable
                     this->registerPlugins(classNamePlugin);
                     continue;
                 }

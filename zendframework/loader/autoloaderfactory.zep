@@ -85,11 +85,10 @@ abstract class AutoloaderFactory
             return;
         }
 
-        if unlikely typeof options != "array" && !(options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException("Options provided must be an array or Traversable");
-        }
-
-        if typeof options == "object" {
+        if typeof options != "array" {
+            if unlikely !is_subclass_of(options, "Traversable") { // todo: options instanceof Traversable
+                throw new Exception\InvalidArgumentException("Options provided must be an array or Traversable");
+            }
             let options = iterator_to_array(options);
         }
 

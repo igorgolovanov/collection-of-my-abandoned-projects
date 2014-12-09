@@ -22,13 +22,13 @@ class ClassMapAutoloader implements SplAutoloader
      * Registry of map files that have already been loaded
      * @var array
      */
-    protected mapsLoaded = [];
+    protected mapsLoaded; // todo: []
 
     /**
      * Class name/filename map
      * @var array
      */
-    protected map = [];
+    protected map; // todo: []
 
     /**
      * Constructor
@@ -39,6 +39,13 @@ class ClassMapAutoloader implements SplAutoloader
      */
     public function __construct(var options = null)
     {
+        if typeof this->mapsLoaded != "array" {
+            let this->mapsLoaded = [];
+        }
+        if typeof this->map != "array" {
+            let this->map = [];
+        }
+
         if options !== null {
             this->setOptions(options);
         }
@@ -93,7 +100,7 @@ class ClassMapAutoloader implements SplAutoloader
             throw new Exception\InvalidArgumentException(exceptionMsg);
         }
 
-        let merged = array_map(this->map, map);
+        let merged = array_merge(this->map, map);
         let this->map = merged;
 
         if !empty location {
@@ -113,8 +120,11 @@ class ClassMapAutoloader implements SplAutoloader
     {
         var location;
 
-        if unlikely typeof locations != "array" && !(locations instanceof Traversable) {
-            throw new Exception\InvalidArgumentException("Map list must be an array or implement Traversable");
+        if typeof locations != "array" {
+            if unlikely !is_subclass_of(locations, "Traversable") { // todo: locations instanceof Traversable
+                throw new Exception\InvalidArgumentException("Map list must be an array or implement Traversable");
+            }
+            let locations = iterator_to_array(locations);
         }
 
         for location in locations {

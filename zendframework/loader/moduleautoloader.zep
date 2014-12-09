@@ -17,27 +17,27 @@ class ModuleAutoloader implements SplAutoloader
     /**
      * @var array An array of module paths to scan
      */
-    protected paths = [];
+    protected paths; // todo: []
 
     /**
      * @var array An array of modulename => path
      */
-    protected explicitPaths = [];
+    protected explicitPaths; // todo: []
 
     /**
      * @var array An array of namespaceName => namespacePath
      */
-    protected namespacedPaths = [];
+    protected namespacedPaths; // todo: []
 
     /**
      * @var array An array of supported phar extensions (filled on constructor)
      */
-    protected pharExtensions = [];
+    protected pharExtensions; // todo: []
 
     /**
      * @var array An array of module classes to their containing files
      */
-    protected moduleClassMap = [];
+    protected moduleClassMap; // todo: []
 
     /**
      * Constructor
@@ -48,6 +48,22 @@ class ModuleAutoloader implements SplAutoloader
      */
     public function __construct(var options = null)
     {
+        if typeof this->paths != "array" {
+            let this->paths = [];
+        }
+        if typeof this->explicitPaths != "array" {
+            let this->explicitPaths = [];
+        }
+        if typeof this->namespacedPaths != "array" {
+            let this->namespacedPaths = [];
+        }
+        if typeof this->pharExtensions != "array" {
+            let this->pharExtensions = [];
+        }
+        if typeof this->moduleClassMap != "array" {
+            let this->moduleClassMap = [];
+        }
+
         if extension_loaded("phar") {
             let this->pharExtensions = ["phar", "phar.tar", "tar"];
 
@@ -122,7 +138,8 @@ class ModuleAutoloader implements SplAutoloader
     {
         var str, classLoaded, className, pos, basePath, entry, glob,
             moduleClassFile, moduleName, ns, path, moduleNameBuffer,
-            moduleClassPath, pharSuffixPattern, namespacedPaths, exts;
+            moduleClassPath, pharSuffixPattern = null, namespacedPaths, exts, paths,
+            pharExtensions;
 
         let className = $class;
         // Limit scope of this autoloader
@@ -150,8 +167,12 @@ class ModuleAutoloader implements SplAutoloader
         }
 
         let namespacedPaths = this->namespacedPaths;
+        if typeof namespacedPaths != "array" {
+            let namespacedPaths = [];
+            let this->namespacedPaths = namespacedPaths;
+        }
         if count(namespacedPaths) >= 1 {
-            for path, ns in namespacedPaths {
+            for ns, path in namespacedPaths {
                 let pos = strpos(moduleName, ns);
                 if pos === false {
                     continue;
@@ -172,13 +193,23 @@ class ModuleAutoloader implements SplAutoloader
         }
 
         let moduleClassPath = str_replace("\\", DIRECTORY_SEPARATOR, moduleName);
-        if !empty this->pharExtensions {
+        let pharExtensions = this->pharExtensions;
+        if typeof pharExtensions != "array" {
+            let pharExtensions = [];
+            let this->pharExtensions = pharExtensions;
+        }
+        if count(pharExtensions) > 0 {
             let exts = array_map("preg_quote", this->pharExtensions);
             let pharSuffixPattern = "(" . implode("|", exts) . ")";
             let pharSuffixPattern = "#.+\\." . pharSuffixPattern . "$#";
         }
+        let paths = this->paths;
+        if typeof paths != "array" {
+            let paths = [];
+            let this->paths = paths;
+        }
 
-        for path in this->paths {
+        for path in paths {
             let path = path .  moduleClassPath;
             let str = substr(path, 0, 2);
 
@@ -196,9 +227,9 @@ class ModuleAutoloader implements SplAutoloader
             }
 
             // No directory with Module.php, searching for phars
-            if !empty pharSuffixPattern {
+            if pharSuffixPattern !== null {
                 let glob = new GlobIterator(path . ".*");
-                for entry in glob {
+                for entry in iterator(glob) {
                     if entry->isDir() {
                         continue;
                     }
@@ -214,7 +245,6 @@ class ModuleAutoloader implements SplAutoloader
                 }
             }
         }
-        
         return false;
     }
 
@@ -317,10 +347,7 @@ class ModuleAutoloader implements SplAutoloader
      */
     public function register() -> void
     {
-        array callback;
-
-        let callback = [this, "autoload"];
-        spl_autoload_register(callback);
+        spl_autoload_register([this, "autoload"]);
     }
 
     /**
@@ -330,10 +357,7 @@ class ModuleAutoloader implements SplAutoloader
      */
     public function unregister() -> void
     {
-        array callback;
-
-        let callback = [this, "autoload"];
-        spl_autoload_unregister(callback);
+        spl_autoload_unregister([this, "autoload"]);
     }
 
     /**
@@ -347,10 +371,13 @@ class ModuleAutoloader implements SplAutoloader
     {
         var module, path;
 
-        if unlikely typeof paths != "array" && !(paths instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(
-                "Parameter to \\Zend\\Loader\\ModuleAutoloader's registerPaths method must be an array or implement the Traversable interface"
-            );
+        if typeof paths != "array" {
+            if unlikely !is_subclass_of(paths, "Traversable") { // todo: paths instanceof Traversable
+                throw new Exception\InvalidArgumentException(
+                    "Parameter to \\Zend\\Loader\\ModuleAutoloader's registerPaths method must be an array or implement the Traversable interface"
+                );
+            }
+            let paths = iterator_to_array(paths);
         }
 
         for module, path in paths {
@@ -375,8 +402,7 @@ class ModuleAutoloader implements SplAutoloader
     public function registerPath(var path, var moduleName = false) -> <ModuleAutoloader>
     {
         string exceptionMsg;
-        var moduleNamePart, normalizedPath;
-        array patterns = ["\\*", "\\%"];
+        var moduleNamePart, normalizedPath, patterns = ["\\*", "\\%"];
 
         if unlikely typeof path != "string" {
             let exceptionMsg = "Invalid path provided; must be a string, received " . typeof path;
@@ -388,6 +414,7 @@ class ModuleAutoloader implements SplAutoloader
         if moduleName {
             let moduleNamePart = substr(moduleName, -2);
             if in_array(moduleNamePart, patterns) {
+                let moduleNamePart = substr(moduleName, 0, -2);
                 let this->namespacedPaths[moduleNamePart] = normalizedPath;
             } else {
                 let this->explicitPaths[moduleName] = normalizedPath;
@@ -440,7 +467,7 @@ class ModuleAutoloader implements SplAutoloader
     public static function normalizePath(string path, boolean trailingSlash = true) -> string
     {
         let path = rtrim(path, "/");
-        let path = rtrim(path, "\\\\");
+        let path = rtrim(path, "\\");
         
         if trailingSlash {
             let path = path . DIRECTORY_SEPARATOR;

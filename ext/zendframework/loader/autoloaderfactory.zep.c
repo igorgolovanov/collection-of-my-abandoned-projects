@@ -79,15 +79,15 @@ ZEPHIR_INIT_CLASS(ZendFramework_Loader_AutoloaderFactory) {
  */
 PHP_METHOD(ZendFramework_Loader_AutoloaderFactory, factory) {
 
-	zend_class_entry *_16;
-	zephir_fcall_cache_entry *_7 = NULL, *_10 = NULL;
-	HashTable *_5;
-	HashPosition _4;
-	zend_bool _2, _8;
+	zend_class_entry *_15;
+	zend_bool _10;
+	zephir_fcall_cache_entry *_9 = NULL, *_12 = NULL;
+	HashTable *_7;
+	HashPosition _6;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL, *_13 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL, *_4 = NULL;
 	zval *exceptionMsg = NULL;
-	zval *options = NULL, *className, *loaders = NULL, *autoloaderClass = NULL, *autoloader = NULL, *autoloaderOptions = NULL, *autoloaderClassDefault = NULL, *_0 = NULL, *_3 = NULL, **_6, *_9 = NULL, _11 = zval_used_for_init, *_12 = NULL, *_14 = NULL, *_15 = NULL;
+	zval *options = NULL, *className, *loaders = NULL, *autoloaderClass = NULL, *autoloader = NULL, *autoloaderOptions = NULL, *autoloaderClassDefault = NULL, *_0 = NULL, _2 = zval_used_for_init, *_3 = NULL, *_5 = NULL, **_8, *_11 = NULL, *_13 = NULL, *_14 = NULL;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 1, &options);
@@ -127,26 +127,26 @@ PHP_METHOD(ZendFramework_Loader_AutoloaderFactory, factory) {
 		}
 		RETURN_MM_NULL();
 	}
-	_2 = Z_TYPE_P(options) != IS_ARRAY;
-	if (_2) {
-		_2 = !(zephir_is_instance_of(options, SL("Traversable") TSRMLS_CC));
-	}
-	if (unlikely(_2)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_loader_exception_invalidargumentexception_ce, "Options provided must be an array or Traversable", "zendframework/loader/autoloaderfactory.zep", 89);
-		return;
-	}
-	if (Z_TYPE_P(options) == IS_OBJECT) {
-		ZEPHIR_CALL_FUNCTION(&_3, "iterator_to_array", NULL, options);
+	if (Z_TYPE_P(options) != IS_ARRAY) {
+		ZEPHIR_SINIT_VAR(_2);
+		ZVAL_STRING(&_2, "Traversable", 0);
+		ZEPHIR_CALL_FUNCTION(&_3, "is_subclass_of", &_4, options, &_2);
 		zephir_check_call_status();
-		ZEPHIR_CPY_WRT(options, _3);
+		if (unlikely(!zephir_is_true(_3))) {
+			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_loader_exception_invalidargumentexception_ce, "Options provided must be an array or Traversable", "zendframework/loader/autoloaderfactory.zep", 90);
+			return;
+		}
+		ZEPHIR_CALL_FUNCTION(&_5, "iterator_to_array", NULL, options);
+		zephir_check_call_status();
+		ZEPHIR_CPY_WRT(options, _5);
 	}
-	zephir_is_iterable(options, &_5, &_4, 0, 0, "zendframework/loader/autoloaderfactory.zep", 133);
+	zephir_is_iterable(options, &_7, &_6, 0, 0, "zendframework/loader/autoloaderfactory.zep", 132);
 	for (
-	  ; zephir_hash_get_current_data_ex(_5, (void**) &_6, &_4) == SUCCESS
-	  ; zephir_hash_move_forward_ex(_5, &_4)
+	  ; zephir_hash_get_current_data_ex(_7, (void**) &_8, &_6) == SUCCESS
+	  ; zephir_hash_move_forward_ex(_7, &_6)
 	) {
-		ZEPHIR_GET_HMKEY(autoloaderClass, _5, _4);
-		ZEPHIR_GET_HVALUE(autoloaderOptions, _6);
+		ZEPHIR_GET_HMKEY(autoloaderClass, _7, _6);
+		ZEPHIR_GET_HVALUE(autoloaderOptions, _8);
 		
                 zephir_read_static_property(&loaders, Z_STRVAL_P(className), Z_STRLEN_P(className), SL("loaders") TSRMLS_CC);
             
@@ -160,54 +160,54 @@ PHP_METHOD(ZendFramework_Loader_AutoloaderFactory, factory) {
 			zephir_check_call_status();
 			continue;
 		}
-		ZEPHIR_CALL_STATIC(&autoloader, "getstandardautoloader", &_7);
+		ZEPHIR_CALL_STATIC(&autoloader, "getstandardautoloader", &_9);
 		zephir_check_call_status();
-		_8 = !zephir_class_exists(autoloaderClass, 1 TSRMLS_CC);
-		if (_8) {
+		_10 = !zephir_class_exists(autoloaderClass, 1 TSRMLS_CC);
+		if (_10) {
 			ZEPHIR_CALL_METHOD(&_3, autoloader, "autoload", NULL, autoloaderClass);
 			zephir_check_call_status();
-			_8 = !zephir_is_true(_3);
+			_10 = !zephir_is_true(_3);
 		}
-		if (unlikely(_8)) {
+		if (unlikely(_10)) {
 			ZEPHIR_INIT_LNVAR(_0);
 			ZEPHIR_CONCAT_SVS(_0, "Autoloader class \"", autoloaderClass, "\" not loaded");
 			zephir_get_strval(exceptionMsg, _0);
-			ZEPHIR_INIT_NVAR(_9);
-			object_init_ex(_9, zendframework_loader_exception_invalidargumentexception_ce);
-			ZEPHIR_CALL_METHOD(NULL, _9, "__construct", &_10, exceptionMsg);
+			ZEPHIR_INIT_NVAR(_11);
+			object_init_ex(_11, zendframework_loader_exception_invalidargumentexception_ce);
+			ZEPHIR_CALL_METHOD(NULL, _11, "__construct", &_12, exceptionMsg);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(_9, "zendframework/loader/autoloaderfactory.zep", 111 TSRMLS_CC);
+			zephir_throw_exception_debug(_11, "zendframework/loader/autoloaderfactory.zep", 110 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
-		ZEPHIR_SINIT_NVAR(_11);
-		ZVAL_STRING(&_11, "Zend\\Loader\\SplAutoloader", 0);
-		ZEPHIR_CALL_FUNCTION(&_12, "is_subclass_of", &_13, autoloaderClass, &_11);
+		ZEPHIR_SINIT_NVAR(_2);
+		ZVAL_STRING(&_2, "Zend\\Loader\\SplAutoloader", 0);
+		ZEPHIR_CALL_FUNCTION(&_5, "is_subclass_of", &_4, autoloaderClass, &_2);
 		zephir_check_call_status();
-		if (unlikely(!zephir_is_true(_12))) {
-			ZEPHIR_INIT_LNVAR(_14);
-			ZEPHIR_CONCAT_SVS(_14, "Autoloader class ", autoloaderClass, " must implement Zend\\Loader\\SplAutoloader");
-			zephir_get_strval(exceptionMsg, _14);
-			ZEPHIR_INIT_NVAR(_9);
-			object_init_ex(_9, zendframework_loader_exception_invalidargumentexception_ce);
-			ZEPHIR_CALL_METHOD(NULL, _9, "__construct", &_10, exceptionMsg);
+		if (unlikely(!zephir_is_true(_5))) {
+			ZEPHIR_INIT_LNVAR(_13);
+			ZEPHIR_CONCAT_SVS(_13, "Autoloader class ", autoloaderClass, " must implement Zend\\Loader\\SplAutoloader");
+			zephir_get_strval(exceptionMsg, _13);
+			ZEPHIR_INIT_NVAR(_11);
+			object_init_ex(_11, zendframework_loader_exception_invalidargumentexception_ce);
+			ZEPHIR_CALL_METHOD(NULL, _11, "__construct", &_12, exceptionMsg);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(_9, "zendframework/loader/autoloaderfactory.zep", 116 TSRMLS_CC);
+			zephir_throw_exception_debug(_11, "zendframework/loader/autoloaderfactory.zep", 115 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
-		ZEPHIR_INIT_LNVAR(_14);
-		ZEPHIR_CONCAT_VS(_14, className, "::STANDARD_AUTOLOADER");
-		ZEPHIR_CALL_FUNCTION(&autoloaderClassDefault, "constant", &_1, _14);
+		ZEPHIR_INIT_LNVAR(_13);
+		ZEPHIR_CONCAT_VS(_13, className, "::STANDARD_AUTOLOADER");
+		ZEPHIR_CALL_FUNCTION(&autoloaderClassDefault, "constant", &_1, _13);
 		zephir_check_call_status();
 		if (ZEPHIR_IS_IDENTICAL(autoloaderClassDefault, autoloaderClass)) {
 			ZEPHIR_CALL_METHOD(NULL, autoloader, "setoptions", NULL, autoloaderOptions);
 			zephir_check_call_status();
 		} else {
 			ZEPHIR_INIT_NVAR(autoloader);
-			zephir_fetch_safe_class(_15, autoloaderClass);
-			_16 = zend_fetch_class(Z_STRVAL_P(_15), Z_STRLEN_P(_15), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-			object_init_ex(autoloader, _16);
+			zephir_fetch_safe_class(_14, autoloaderClass);
+			_15 = zend_fetch_class(Z_STRVAL_P(_14), Z_STRLEN_P(_14), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+			object_init_ex(autoloader, _15);
 			if (zephir_has_constructor(autoloader TSRMLS_CC)) {
 				ZEPHIR_CALL_METHOD(NULL, autoloader, "__construct", NULL, autoloaderOptions);
 				zephir_check_call_status();
@@ -292,7 +292,7 @@ PHP_METHOD(ZendFramework_Loader_AutoloaderFactory, getRegisteredAutoloader) {
 	object_init_ex(_1, zendframework_loader_exception_invalidargumentexception_ce);
 	ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, exceptionMsg);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(_1, "zendframework/loader/autoloaderfactory.zep", 183 TSRMLS_CC);
+	zephir_throw_exception_debug(_1, "zendframework/loader/autoloaderfactory.zep", 182 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -321,7 +321,7 @@ PHP_METHOD(ZendFramework_Loader_AutoloaderFactory, unregisterAutoloaders) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(className);
 	zephir_get_called_class(className TSRMLS_CC);
-	zephir_is_iterable(autoloaders, &_1, &_0, 0, 0, "zendframework/loader/autoloaderfactory.zep", 211);
+	zephir_is_iterable(autoloaders, &_1, &_0, 0, 0, "zendframework/loader/autoloaderfactory.zep", 210);
 	for (
 	  ; zephir_hash_get_current_data_ex(_1, (void**) &_2, &_0) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_1, &_0)

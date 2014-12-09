@@ -220,12 +220,13 @@ PHP_METHOD(ZendFramework_Loader_PluginClassLoader, registerPlugin) {
  */
 PHP_METHOD(ZendFramework_Loader_PluginClassLoader, registerPlugins) {
 
-	zephir_fcall_cache_entry *_7 = NULL, *_8 = NULL;
-	zend_bool _3, _4;
-	zend_object_iterator *_2;
+	zephir_fcall_cache_entry *_11 = NULL, *_12 = NULL;
+	zend_bool _6, _7;
+	zend_object_iterator *_5;
+	zephir_nts_static zephir_fcall_cache_entry *_4 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_class_entry *_1, *_6;
-	zval *map = NULL, *name = NULL, *className = NULL, *classNamePlugin = NULL, *_0 = NULL, *_5 = NULL;
+	zend_class_entry *_1, *_9;
+	zval *map = NULL, *name = NULL, *className = NULL, *classNamePlugin = NULL, *_0 = NULL, _2 = zval_used_for_init, *_3 = NULL, *_8 = NULL, *_10 = NULL;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &map);
@@ -254,32 +255,36 @@ PHP_METHOD(ZendFramework_Loader_PluginClassLoader, registerPlugins) {
 		ZEPHIR_CALL_METHOD(NULL, map, "__construct", NULL, className);
 		zephir_check_call_status();
 	}
-	if (unlikely(!(zephir_is_instance_of(map, SL("Traversable") TSRMLS_CC)))) {
+	ZEPHIR_SINIT_VAR(_2);
+	ZVAL_STRING(&_2, "Traversable", 0);
+	ZEPHIR_CALL_FUNCTION(&_3, "is_subclass_of", &_4, map, &_2);
+	zephir_check_call_status();
+	if (unlikely(!zephir_is_true(_3))) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zendframework_loader_exception_invalidargumentexception_ce, "Map provided is invalid; must be traversable", "zendframework/loader/pluginclassloader.zep", 156);
 		return;
 	}
-	_2 = zephir_get_iterator(map TSRMLS_CC);
-	_2->funcs->rewind(_2 TSRMLS_CC);
-	for (;_2->funcs->valid(_2 TSRMLS_CC) == SUCCESS && !EG(exception); _2->funcs->move_forward(_2 TSRMLS_CC)) {
-		ZEPHIR_GET_IMKEY(name, _2);
+	_5 = zephir_get_iterator(map TSRMLS_CC);
+	_5->funcs->rewind(_5 TSRMLS_CC);
+	for (;_5->funcs->valid(_5 TSRMLS_CC) == SUCCESS && !EG(exception); _5->funcs->move_forward(_5 TSRMLS_CC)) {
+		ZEPHIR_GET_IMKEY(name, _5);
 		{ zval **tmp; 
-		_2->funcs->get_current_data(_2, &tmp TSRMLS_CC);
+		_5->funcs->get_current_data(_5, &tmp TSRMLS_CC);
 		className = *tmp;
 		}
-		_3 = Z_TYPE_P(name) == IS_LONG;
-		if (!(_3)) {
-			_3 = zephir_is_numeric(name);
+		_6 = Z_TYPE_P(name) == IS_LONG;
+		if (!(_6)) {
+			_6 = zephir_is_numeric(name);
 		}
-		if (_3) {
-			_4 = Z_TYPE_P(className) != IS_OBJECT;
-			if (_4) {
-				_4 = zephir_class_exists(className, 1 TSRMLS_CC);
+		if (_6) {
+			_7 = Z_TYPE_P(className) != IS_OBJECT;
+			if (_7) {
+				_7 = zephir_class_exists(className, 1 TSRMLS_CC);
 			}
-			if (_4) {
+			if (_7) {
 				ZEPHIR_INIT_NVAR(classNamePlugin);
-				zephir_fetch_safe_class(_5, className);
-				_6 = zend_fetch_class(Z_STRVAL_P(_5), Z_STRLEN_P(_5), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-				object_init_ex(classNamePlugin, _6);
+				zephir_fetch_safe_class(_8, className);
+				_9 = zend_fetch_class(Z_STRVAL_P(_8), Z_STRLEN_P(_8), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+				object_init_ex(classNamePlugin, _9);
 				if (zephir_has_constructor(classNamePlugin TSRMLS_CC)) {
 					ZEPHIR_CALL_METHOD(NULL, classNamePlugin, "__construct", NULL);
 					zephir_check_call_status();
@@ -287,17 +292,21 @@ PHP_METHOD(ZendFramework_Loader_PluginClassLoader, registerPlugins) {
 			} else {
 				ZEPHIR_CPY_WRT(classNamePlugin, className);
 			}
-			if (zephir_is_instance_of(classNamePlugin, SL("Traversable") TSRMLS_CC)) {
-				ZEPHIR_CALL_METHOD(NULL, this_ptr, "registerplugins", &_7, classNamePlugin);
+			ZEPHIR_SINIT_NVAR(_2);
+			ZVAL_STRING(&_2, "Traversable", 0);
+			ZEPHIR_CALL_FUNCTION(&_10, "is_subclass_of", &_4, classNamePlugin, &_2);
+			zephir_check_call_status();
+			if (zephir_is_true(_10)) {
+				ZEPHIR_CALL_METHOD(NULL, this_ptr, "registerplugins", &_11, classNamePlugin);
 				zephir_check_call_status();
 				continue;
 			}
 			ZEPHIR_CPY_WRT(className, classNamePlugin);
 		}
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "registerplugin", &_8, name, className);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "registerplugin", &_12, name, className);
 		zephir_check_call_status();
 	}
-	_2->funcs->dtor(_2 TSRMLS_CC);
+	_5->funcs->dtor(_5 TSRMLS_CC);
 	RETURN_THIS();
 
 }
