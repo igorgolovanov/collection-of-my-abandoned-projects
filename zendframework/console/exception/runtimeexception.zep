@@ -24,9 +24,10 @@ class RuntimeException extends \RuntimeException implements ExceptionInterface
      * @param string $message
      * @param string $usage
      */
-    public function __construct(string message, string usage = "")
+    public function __construct(string message, string usage = "") -> void
     {
-
+        let this->usage = usage;
+        parent::__construct(message);
     }
 
     /**
@@ -36,7 +37,6 @@ class RuntimeException extends \RuntimeException implements ExceptionInterface
      */
     public function getUsageMessage() -> string
     {
-
+        return this->usage;
     }
-
 }

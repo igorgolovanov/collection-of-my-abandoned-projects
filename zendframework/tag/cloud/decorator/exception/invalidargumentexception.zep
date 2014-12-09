@@ -9,6 +9,9 @@ file that was distributed with this source code.
 
 namespace Zend\Tag\Cloud\Decorator\Exception;
 
-class InvalidArgumentException extends \Zend\Tag\Exception\InvalidArgumentException implements ExceptionInterface
-{
-}
+use Zend\Tag\Exception;
+
+class InvalidArgumentException
+    extends Exception\InvalidArgumentException
+    implements ExceptionInterface
+{}

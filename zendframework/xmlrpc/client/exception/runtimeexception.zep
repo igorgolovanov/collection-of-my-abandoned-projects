@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\XmlRpc\Client\Exception;
 
-class RuntimeException extends \Zend\XmlRpc\Exception\RuntimeException implements ExceptionInterface
+use Zend\XmlRpc\Exception;
+
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
 {
 }

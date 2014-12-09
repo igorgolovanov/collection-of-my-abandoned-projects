@@ -10,5 +10,4 @@ file that was distributed with this source code.
 namespace Zend\File\Transfer\Exception;
 
 class PhpEnvironmentException extends RuntimeException
-{
-}
+{}

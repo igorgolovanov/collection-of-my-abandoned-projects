@@ -9,9 +9,11 @@ file that was distributed with this source code.
 
 namespace Zend\ModuleManager\Listener\Exception;
 
+use Zend\ModuleManager\Exception\ExceptionInterface as Exception;
+
 /**
  * Exception interface
  */
-interface ExceptionInterface extends \Zend\ModuleManager\Exception\ExceptionInterface
+interface ExceptionInterface extends Exception
 {
 }

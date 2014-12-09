@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Http\Client\Adapter\Exception;
 
-interface ExceptionInterface extends \Zend\Http\Client\Exception\ExceptionInterface
-{
-}
+use Zend\Http\Client\Exception\ExceptionInterface as HttpClientException;
+
+interface ExceptionInterface extends HttpClientException
+{}

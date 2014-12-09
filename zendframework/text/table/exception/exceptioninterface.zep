@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Text\Table\Exception;
 
-interface ExceptionInterface extends \Zend\Text\Exception\ExceptionInterface
-{
-}
+use Zend\Text\Exception\ExceptionInterface as Exception;
+
+interface ExceptionInterface extends Exception
+{}

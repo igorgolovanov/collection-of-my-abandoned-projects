@@ -26,6 +26,7 @@ ZEPHIR_INIT_CLASS(ZendFramework_Db_Adapter_Exception_InvalidQueryException) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Zend\\Db\\Adapter\\Exception, InvalidQueryException, zendframework, db_adapter_exception_invalidqueryexception, zendframework_db_adapter_exception_unexpectedvalueexception_ce, NULL, 0);
 
+	zend_class_implements(zendframework_db_adapter_exception_invalidqueryexception_ce TSRMLS_CC, 1, zendframework_db_adapter_exception_exceptioninterface_ce);
 	return SUCCESS;
 
 }

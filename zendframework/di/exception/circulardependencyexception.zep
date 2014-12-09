@@ -9,6 +9,9 @@ file that was distributed with this source code.
 
 namespace Zend\Di\Exception;
 
-class CircularDependencyException extends \DomainException implements ExceptionInterface
+use DomainException;
+
+class CircularDependencyException extends DomainException implements ExceptionInterface
 {
 }
+

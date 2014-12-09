@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\I18n\Exception;
 
-class ExtensionNotLoadedException extends \DomainException implements ExceptionInterface
-{
-}
+use DomainException;
+
+class ExtensionNotLoadedException extends DomainException implements
+    ExceptionInterface
+{}

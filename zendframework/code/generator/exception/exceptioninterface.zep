@@ -9,6 +9,9 @@ file that was distributed with this source code.
 
 namespace Zend\Code\Generator\Exception;
 
-interface ExceptionInterface extends \Zend\Code\Exception\ExceptionInterface
+use Zend\Code\Exception\ExceptionInterface as Exception;
+
+interface ExceptionInterface extends Exception
 {
 }
+

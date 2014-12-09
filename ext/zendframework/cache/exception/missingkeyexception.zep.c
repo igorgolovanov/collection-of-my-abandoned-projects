@@ -26,7 +26,6 @@ ZEPHIR_INIT_CLASS(ZendFramework_Cache_Exception_MissingKeyException) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Zend\\Cache\\Exception, MissingKeyException, zendframework, cache_exception_missingkeyexception, zendframework_cache_exception_runtimeexception_ce, NULL, 0);
 
-	zend_class_implements(zendframework_cache_exception_missingkeyexception_ce TSRMLS_CC, 1, zendframework_cache_exception_exceptioninterface_ce);
 	return SUCCESS;
 
 }

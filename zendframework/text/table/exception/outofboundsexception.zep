@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Text\Table\Exception;
 
-class OutOfBoundsException extends \Zend\Text\Exception\OutOfBoundsException implements ExceptionInterface
-{
-}
+use Zend\Text\Exception;
+
+class OutOfBoundsException extends Exception\OutOfBoundsException implements ExceptionInterface
+{}

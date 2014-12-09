@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Feed\Reader\Exception;
 
-class BadMethodCallException extends \Zend\Feed\Exception\BadMethodCallException implements ExceptionInterface
-{
-}
+use Zend\Feed\Exception;
+
+class BadMethodCallException extends Exception\BadMethodCallException implements ExceptionInterface
+{}

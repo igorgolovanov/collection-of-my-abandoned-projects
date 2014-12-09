@@ -9,9 +9,11 @@ file that was distributed with this source code.
 
 namespace Zend\XmlRpc\Server\Exception;
 
+use Zend\XmlRpc\Exception\ExceptionInterface as Exception;
+
 /**
  * Zend\XmlRpc\Server\Exception
  */
-interface ExceptionInterface extends \Zend\XmlRpc\Exception\ExceptionInterface
+interface ExceptionInterface extends Exception
 {
 }

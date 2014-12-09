@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Authentication\Adapter\DbTable\Exception;
 
-interface ExceptionInterface extends \Zend\Authentication\Adapter\Exception\ExceptionInterface
+use Zend\Authentication\Adapter\Exception\ExceptionInterface as Exception;
+
+interface ExceptionInterface extends Exception
 {
 }

@@ -9,6 +9,9 @@ file that was distributed with this source code.
 
 namespace Zend\Permissions\Acl\Assertion\Exception;
 
-class InvalidAssertionException extends \InvalidArgumentException implements \Zend\Permissions\Acl\Exception\ExceptionInterface
+use Zend\Permissions\Acl\Exception\ExceptionInterface;
+
+class InvalidAssertionException extends \InvalidArgumentException implements ExceptionInterface
 {
 }
+

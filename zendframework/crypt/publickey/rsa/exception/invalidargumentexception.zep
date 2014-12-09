@@ -9,9 +9,11 @@ file that was distributed with this source code.
 
 namespace Zend\Crypt\PublicKey\Rsa\Exception;
 
+use Zend\Crypt\Exception;
+
 /**
  * Invalid argument exception
  */
-class InvalidArgumentException extends \Zend\Crypt\Exception\InvalidArgumentException implements ExceptionInterface
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
 {
 }

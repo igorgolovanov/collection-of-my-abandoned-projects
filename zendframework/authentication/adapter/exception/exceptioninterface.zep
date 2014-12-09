@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Authentication\Adapter\Exception;
 
-interface ExceptionInterface extends \Zend\Authentication\Exception\ExceptionInterface
+use Zend\Authentication\Exception\ExceptionInterface as Exception;
+
+interface ExceptionInterface extends Exception
 {
 }

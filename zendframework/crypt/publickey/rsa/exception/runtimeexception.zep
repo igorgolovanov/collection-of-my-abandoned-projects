@@ -9,9 +9,11 @@ file that was distributed with this source code.
 
 namespace Zend\Crypt\PublicKey\Rsa\Exception;
 
+use Zend\Crypt\Exception;
+
 /**
  * Runtime argument exception
  */
-class RuntimeException extends \Zend\Crypt\Exception\RuntimeException implements ExceptionInterface
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
 {
 }

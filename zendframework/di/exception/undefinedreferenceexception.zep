@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Di\Exception;
 
-class UndefinedReferenceException extends \DomainException implements ExceptionInterface
+use DomainException;
+
+class UndefinedReferenceException extends DomainException implements ExceptionInterface
 {
 }

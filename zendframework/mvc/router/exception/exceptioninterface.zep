@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Mvc\Router\Exception;
 
-interface ExceptionInterface extends \Zend\Mvc\Exception\ExceptionInterface
+use Zend\Mvc\Exception\ExceptionInterface as Exception;
+
+interface ExceptionInterface extends Exception
 {
 }

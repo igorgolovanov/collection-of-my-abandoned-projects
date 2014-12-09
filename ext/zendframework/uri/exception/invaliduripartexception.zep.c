@@ -26,6 +26,11 @@ ZEPHIR_INIT_CLASS(ZendFramework_Uri_Exception_InvalidUriPartException) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Zend\\Uri\\Exception, InvalidUriPartException, zendframework, uri_exception_invaliduripartexception, zendframework_uri_exception_invalidargumentexception_ce, NULL, 0);
 
+	/**
+	 * Part-specific error codes
+	 *
+	 * @var int
+	 */
 	zend_declare_class_constant_long(zendframework_uri_exception_invaliduripartexception_ce, SL("INVALID_SCHEME"), 1 TSRMLS_CC);
 
 	zend_declare_class_constant_long(zendframework_uri_exception_invaliduripartexception_ce, SL("INVALID_USER"), 2 TSRMLS_CC);

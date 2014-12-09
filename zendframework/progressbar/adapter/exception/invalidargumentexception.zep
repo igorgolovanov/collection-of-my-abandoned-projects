@@ -9,9 +9,11 @@ file that was distributed with this source code.
 
 namespace Zend\ProgressBar\Adapter\Exception;
 
+use Zend\ProgressBar\Exception;
+
 /**
  * Exception for Zend\Progressbar component.
  */
-class InvalidArgumentException extends \Zend\ProgressBar\Exception\InvalidArgumentException implements ExceptionInterface
-{
-}
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
+    ExceptionInterface
+{}

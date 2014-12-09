@@ -9,9 +9,12 @@ file that was distributed with this source code.
 
 namespace Zend\Barcode\Object\Exception;
 
+use Zend\Barcode\Exception;
+
 /**
  * Exception for Zend\Barcode component.
  */
-class RuntimeException extends \Zend\Barcode\Exception\RuntimeException implements ExceptionInterface
+class RuntimeException extends Exception\RuntimeException implements
+    ExceptionInterface
 {
 }

@@ -9,9 +9,11 @@ file that was distributed with this source code.
 
 namespace Zend\ModuleManager\Listener\Exception;
 
+use Zend\ModuleManager\Exception;
+
 /**
  * Runtime Exception
  */
-class RuntimeException extends \Zend\ModuleManager\Exception\RuntimeException implements ExceptionInterface
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
 {
 }

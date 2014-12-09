@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Mail\Storage\Part\Exception;
 
-interface ExceptionInterface extends \Zend\Mail\Storage\Exception\ExceptionInterface
+use Zend\Mail\Storage\Exception\ExceptionInterface as StorageException;
+
+interface ExceptionInterface extends StorageException
 {
 }

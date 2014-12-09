@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Text\Table\Exception;
 
-class OverflowException extends \Zend\Text\Exception\OverflowException implements ExceptionInterface
-{
-}
+use Zend\Text\Exception;
+
+class OverflowException extends Exception\OverflowException implements ExceptionInterface
+{}

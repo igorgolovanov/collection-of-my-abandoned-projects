@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Json\Server\Exception;
 
-class RuntimeException extends \Zend\Json\Exception\RuntimeException implements ExceptionInterface
-{
-}
+use Zend\Json\Exception;
+
+class RuntimeException extends Exception\RuntimeException implements
+    ExceptionInterface
+{}

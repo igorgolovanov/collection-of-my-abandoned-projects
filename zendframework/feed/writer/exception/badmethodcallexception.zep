@@ -9,11 +9,14 @@ file that was distributed with this source code.
 
 namespace Zend\Feed\Writer\Exception;
 
+use Zend\Feed\Exception;
+
 /**
  * Feed exceptions
  *
  * Class to represent exceptions that occur during Feed operations.
  */
-class BadMethodCallException extends \Zend\Feed\Exception\BadMethodCallException implements ExceptionInterface
+class BadMethodCallException extends Exception\BadMethodCallException implements ExceptionInterface
 {
+	
 }

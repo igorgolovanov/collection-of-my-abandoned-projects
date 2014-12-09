@@ -9,9 +9,10 @@ file that was distributed with this source code.
 
 namespace Zend\Text\Figlet\Exception;
 
+use Zend\Text\Exception;
+
 /**
  * Exception class for Zend\Text
  */
-class InvalidArgumentException extends \Zend\Text\Exception\InvalidArgumentException implements ExceptionInterface
-{
-}
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
+{}

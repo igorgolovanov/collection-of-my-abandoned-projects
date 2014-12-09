@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Mail\Header\Exception;
 
-class InvalidArgumentException extends \Zend\Mail\Exception\InvalidArgumentException implements ExceptionInterface
-{
-}
+use Zend\Mail\Exception;
+
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
+    ExceptionInterface
+{}

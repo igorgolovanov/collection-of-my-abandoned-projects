@@ -15,6 +15,7 @@
 #include "kernel/memory.h"
 #include "kernel/object.h"
 #include "kernel/operators.h"
+#include "kernel/fcall.h"
 
 ZEPHIR_INIT_CLASS(ZendFramework_Db_Adapter_Driver_Sqlsrv_Exception_ErrorException) {
 
@@ -39,22 +40,27 @@ ZEPHIR_INIT_CLASS(ZendFramework_Db_Adapter_Driver_Sqlsrv_Exception_ErrorExceptio
  */
 PHP_METHOD(ZendFramework_Db_Adapter_Driver_Sqlsrv_Exception_ErrorException, __construct) {
 
-	zval *errors_param = NULL, *_0;
-	zend_bool errors;
+	int ZEPHIR_LAST_CALL_STATUS;
+	zval *errors = NULL, *_0;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &errors_param);
+	zephir_fetch_params(1, 0, 1, &errors);
 
-	if (!errors_param) {
-		errors = 0;
+	if (!errors) {
+		ZEPHIR_CPY_WRT(errors, ZEPHIR_GLOBAL(global_false));
 	} else {
-		errors = zephir_get_boolval(errors_param);
+		ZEPHIR_SEPARATE_PARAM(errors);
 	}
 
 
 	ZEPHIR_INIT_VAR(_0);
 	array_init(_0);
 	zephir_update_property_this(this_ptr, SL("errors"), _0 TSRMLS_CC);
+	if (ZEPHIR_IS_FALSE_IDENTICAL(errors)) {
+		ZEPHIR_CALL_FUNCTION(&errors, "sqlsrv_errors", NULL);
+		zephir_check_call_status();
+	}
+	zephir_update_property_this(this_ptr, SL("errors"), errors TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 
 }

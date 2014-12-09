@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Http\Client\Exception;
 
-class OutOfRangeException extends \Zend\Http\Exception\OutOfRangeException implements ExceptionInterface
-{
-}
+use Zend\Http\Exception;
+
+class OutOfRangeException extends Exception\OutOfRangeException implements
+    ExceptionInterface
+{}

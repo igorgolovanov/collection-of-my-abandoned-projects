@@ -9,9 +9,11 @@ file that was distributed with this source code.
 
 namespace Zend\Mail\Protocol\Exception;
 
+use Zend\Mail\Exception;
+
 /**
  * Exception for Zend\Mail component.
  */
-class RuntimeException extends \Zend\Mail\Exception\RuntimeException implements ExceptionInterface
-{
-}
+class RuntimeException extends Exception\RuntimeException implements
+    ExceptionInterface
+{}

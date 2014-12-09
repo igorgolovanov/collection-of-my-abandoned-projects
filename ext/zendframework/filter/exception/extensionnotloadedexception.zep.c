@@ -26,7 +26,6 @@ ZEPHIR_INIT_CLASS(ZendFramework_Filter_Exception_ExtensionNotLoadedException) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Zend\\Filter\\Exception, ExtensionNotLoadedException, zendframework, filter_exception_extensionnotloadedexception, zendframework_filter_exception_runtimeexception_ce, NULL, 0);
 
-	zend_class_implements(zendframework_filter_exception_extensionnotloadedexception_ce TSRMLS_CC, 1, zendframework_filter_exception_exceptioninterface_ce);
 	return SUCCESS;
 
 }

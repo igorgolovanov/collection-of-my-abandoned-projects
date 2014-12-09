@@ -15,3 +15,4 @@ namespace Zend\Barcode\Exception;
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 }
+

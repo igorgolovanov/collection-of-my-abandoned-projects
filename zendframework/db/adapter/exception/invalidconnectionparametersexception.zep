@@ -22,7 +22,8 @@ class InvalidConnectionParametersException extends RuntimeException
      */
     public function __construct(string message, int parameters)
     {
-
+        parent::__construct(message);
+        let this->parameters = parameters;
     }
 
 }

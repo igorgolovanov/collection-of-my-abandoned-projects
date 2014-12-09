@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Db\Adapter\Exception;
 
-class ErrorException extends \Zend\Db\Exception\ErrorException implements ExceptionInterface
+use Zend\Db\Exception;
+
+class ErrorException extends Exception\ErrorException implements ExceptionInterface
 {
 }

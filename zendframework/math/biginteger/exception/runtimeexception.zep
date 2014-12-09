@@ -9,9 +9,10 @@ file that was distributed with this source code.
 
 namespace Zend\Math\BigInteger\Exception;
 
+use Zend\Math\Exception;
+
 /**
  * Runtime exception
  */
-class RuntimeException extends \Zend\Math\Exception\RuntimeException implements ExceptionInterface
-{
-}
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
+{}

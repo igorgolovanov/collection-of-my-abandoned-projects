@@ -9,6 +9,9 @@ file that was distributed with this source code.
 
 namespace Zend\Db\RowGateway\Exception;
 
-class InvalidArgumentException extends \Zend\Db\Exception\InvalidArgumentException implements ExceptionInterface
+use Zend\Db\Exception;
+
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
 {
 }
+

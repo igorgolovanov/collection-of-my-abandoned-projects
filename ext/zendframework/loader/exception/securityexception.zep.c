@@ -26,7 +26,6 @@ ZEPHIR_INIT_CLASS(ZendFramework_Loader_Exception_SecurityException) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Zend\\Loader\\Exception, SecurityException, zendframework, loader_exception_securityexception, zendframework_loader_exception_domainexception_ce, NULL, 0);
 
-	zend_class_implements(zendframework_loader_exception_securityexception_ce TSRMLS_CC, 1, zendframework_loader_exception_exceptioninterface_ce);
 	return SUCCESS;
 
 }

@@ -9,9 +9,10 @@ file that was distributed with this source code.
 
 namespace Zend\Tag\Cloud\Decorator\Exception;
 
+use Zend\Tag\Exception\ExceptionInterface as Exception;
+
 /**
  * Exception class for Zend\Tag\Cloud\Decorator
  */
-interface ExceptionInterface extends \Zend\Tag\Exception\ExceptionInterface
-{
-}
+interface ExceptionInterface extends Exception
+{}

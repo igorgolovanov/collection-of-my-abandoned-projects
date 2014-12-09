@@ -9,6 +9,6 @@ file that was distributed with this source code.
 
 namespace Zend\Cache\Exception;
 
-class MissingKeyException extends RuntimeException implements ExceptionInterface
+class MissingKeyException extends RuntimeException
 {
 }

@@ -9,9 +9,11 @@ file that was distributed with this source code.
 
 namespace Zend\Authentication\Adapter\Http\Exception;
 
+use Zend\Authentication\Adapter\Exception\ExceptionInterface as Exception;
+
 /**
  * HTTP Auth Resolver Exception
  */
-interface ExceptionInterface extends \Zend\Authentication\Adapter\Exception\ExceptionInterface
+interface ExceptionInterface extends Exception
 {
 }

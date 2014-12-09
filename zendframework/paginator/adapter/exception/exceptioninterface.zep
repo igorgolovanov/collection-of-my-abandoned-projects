@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Paginator\Adapter\Exception;
 
-interface ExceptionInterface extends \Zend\Paginator\Exception\ExceptionInterface
-{
-}
+use Zend\Paginator\Exception\ExceptionInterface as Exception;
+
+interface ExceptionInterface extends Exception
+{}

@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\File\Transfer\Exception;
 
-class BadMethodCallException extends \Zend\File\Exception\BadMethodCallException implements ExceptionInterface
-{
-}
+use Zend\File\Exception;
+
+class BadMethodCallException extends Exception\BadMethodCallException implements
+    ExceptionInterface
+{}

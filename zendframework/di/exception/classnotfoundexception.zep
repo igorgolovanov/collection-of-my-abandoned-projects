@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Di\Exception;
 
-class ClassNotFoundException extends \DomainException implements ExceptionInterface
+use DomainException;
+
+class ClassNotFoundException extends DomainException implements ExceptionInterface
 {
 }

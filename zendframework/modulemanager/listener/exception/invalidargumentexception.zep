@@ -9,9 +9,11 @@ file that was distributed with this source code.
 
 namespace Zend\ModuleManager\Listener\Exception;
 
+use Zend\ModuleManager\Exception;
+
 /**
  * Invalid Argument Exception
  */
-class InvalidArgumentException extends \Zend\ModuleManager\Exception\InvalidArgumentException implements ExceptionInterface
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
 {
 }

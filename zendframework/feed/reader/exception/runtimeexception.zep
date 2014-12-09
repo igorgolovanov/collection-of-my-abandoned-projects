@@ -9,6 +9,9 @@ file that was distributed with this source code.
 
 namespace Zend\Feed\Reader\Exception;
 
-class RuntimeException extends \Zend\Feed\Exception\RuntimeException implements ExceptionInterface
+use Zend\Feed\Exception;
+
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
 {
+
 }

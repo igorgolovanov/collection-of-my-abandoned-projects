@@ -9,9 +9,12 @@ file that was distributed with this source code.
 
 namespace Zend\Barcode\Renderer\Exception;
 
+use Zend\Barcode\Exception;
+
 /**
  * Exception for Zend\Barcode component.
  */
-class UnexpectedValueException extends \Zend\Barcode\Exception\UnexpectedValueException implements ExceptionInterface
+class UnexpectedValueException extends Exception\UnexpectedValueException implements
+    ExceptionInterface
 {
 }

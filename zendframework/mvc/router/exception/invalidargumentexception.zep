@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Mvc\Router\Exception;
 
-class InvalidArgumentException extends \Zend\Mvc\Exception\InvalidArgumentException implements ExceptionInterface
+use Zend\Mvc\Exception;
+
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
 {
 }

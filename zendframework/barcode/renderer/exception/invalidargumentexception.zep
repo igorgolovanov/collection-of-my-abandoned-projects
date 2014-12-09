@@ -9,9 +9,12 @@ file that was distributed with this source code.
 
 namespace Zend\Barcode\Renderer\Exception;
 
+use Zend\Barcode\Exception;
+
 /**
  * Exception for Zend\Barcode component.
  */
-class InvalidArgumentException extends \Zend\Barcode\Exception\InvalidArgumentException implements ExceptionInterface
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
+    ExceptionInterface
 {
 }

@@ -14,5 +14,4 @@ namespace Zend\Http\Client\Adapter\Exception;
 class TimeoutException extends RuntimeException
 {
     const READ_TIMEOUT = 1000;
-
 }

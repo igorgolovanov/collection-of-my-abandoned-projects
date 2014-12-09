@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Server\Reflection\Exception;
 
-class InvalidArgumentException extends \Zend\Server\Exception\InvalidArgumentException implements ExceptionInterface
-{
-}
+use Zend\Server\Exception;
+
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
+{}

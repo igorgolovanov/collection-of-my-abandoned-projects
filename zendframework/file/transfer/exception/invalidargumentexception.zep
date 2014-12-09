@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\File\Transfer\Exception;
 
-class InvalidArgumentException extends \Zend\File\Exception\InvalidArgumentException implements ExceptionInterface
-{
-}
+use Zend\File\Exception;
+
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
+    ExceptionInterface
+{}

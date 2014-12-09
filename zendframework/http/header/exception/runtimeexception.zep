@@ -9,6 +9,9 @@ file that was distributed with this source code.
 
 namespace Zend\Http\Header\Exception;
 
-class RuntimeException extends \Zend\Http\Exception\RuntimeException implements ExceptionInterface
+use Zend\Http\Exception;
+
+class RuntimeException extends Exception\RuntimeException implements
+    ExceptionInterface
 {
 }

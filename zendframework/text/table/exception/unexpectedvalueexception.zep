@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Text\Table\Exception;
 
-class UnexpectedValueException extends \Zend\Text\Exception\UnexpectedValueException implements ExceptionInterface
-{
-}
+use Zend\Text\Exception;
+
+class UnexpectedValueException extends Exception\UnexpectedValueException implements ExceptionInterface
+{}

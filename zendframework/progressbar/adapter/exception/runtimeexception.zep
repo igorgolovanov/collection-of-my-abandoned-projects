@@ -9,9 +9,11 @@ file that was distributed with this source code.
 
 namespace Zend\ProgressBar\Adapter\Exception;
 
+use Zend\ProgressBar\Exception;
+
 /**
  * Exception for Zend\Progressbar component.
  */
-class RuntimeException extends \Zend\ProgressBar\Exception\RuntimeException implements ExceptionInterface
-{
-}
+class RuntimeException extends Exception\RuntimeException implements
+    ExceptionInterface
+{}

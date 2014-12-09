@@ -9,6 +9,9 @@ file that was distributed with this source code.
 
 namespace Zend\Authentication\Adapter\Http\Exception;
 
-class RuntimeException extends \Zend\Authentication\Adapter\Exception\RuntimeException implements ExceptionInterface
+use Zend\Authentication\Adapter\Exception;
+
+class RuntimeException extends Exception\RuntimeException implements
+    ExceptionInterface
 {
 }

@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv\Exception;
 
-interface ExceptionInterface extends \Zend\Db\Adapter\Exception\ExceptionInterface
+use Zend\Db\Adapter\Exception;
+
+interface ExceptionInterface extends Exception\ExceptionInterface
 {
 }

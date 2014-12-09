@@ -12,6 +12,8 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
+#include "kernel/object.h"
+#include "kernel/fcall.h"
 #include "kernel/operators.h"
 #include "kernel/memory.h"
 
@@ -48,6 +50,7 @@ ZEPHIR_INIT_CLASS(ZendFramework_Console_Exception_RuntimeException) {
  */
 PHP_METHOD(ZendFramework_Console_Exception_RuntimeException, __construct) {
 
+	int ZEPHIR_LAST_CALL_STATUS;
 	zval *message_param = NULL, *usage_param = NULL;
 	zval *message = NULL, *usage = NULL;
 
@@ -63,6 +66,10 @@ PHP_METHOD(ZendFramework_Console_Exception_RuntimeException, __construct) {
 	}
 
 
+	zephir_update_property_this(this_ptr, SL("usage"), usage TSRMLS_CC);
+	ZEPHIR_CALL_PARENT(NULL, zendframework_console_exception_runtimeexception_ce, this_ptr, "__construct", NULL, message);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
 
 }
 
@@ -74,6 +81,7 @@ PHP_METHOD(ZendFramework_Console_Exception_RuntimeException, __construct) {
 PHP_METHOD(ZendFramework_Console_Exception_RuntimeException, getUsageMessage) {
 
 
+	RETURN_MEMBER(this_ptr, "usage");
 
 }
 

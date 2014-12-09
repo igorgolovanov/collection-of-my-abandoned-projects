@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Json\Server\Exception;
 
-interface ExceptionInterface extends \Zend\Json\Exception\ExceptionInterface
-{
-}
+use Zend\Json\Exception\ExceptionInterface as Exception;
+
+interface ExceptionInterface extends Exception
+{}

@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Paginator\Adapter\Exception;
 
-class InvalidArgumentException extends \Zend\Paginator\Exception\InvalidArgumentException implements ExceptionInterface
-{
-}
+use Zend\Paginator\Exception;
+
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
+    ExceptionInterface
+{}

@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\XmlRpc\Server\Exception;
 
-class InvalidArgumentException extends \Zend\XmlRpc\Exception\InvalidArgumentException implements ExceptionInterface
+use Zend\XmlRpc\Exception;
+
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
 {
 }

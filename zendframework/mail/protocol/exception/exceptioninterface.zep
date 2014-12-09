@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Mail\Protocol\Exception;
 
-interface ExceptionInterface extends \Zend\Mail\Exception\ExceptionInterface
+use Zend\Mail\Exception\ExceptionInterface as MailException;
+
+interface ExceptionInterface extends MailException
 {
 }

@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\XmlRpc\Server\Exception;
 
-class BadMethodCallException extends \Zend\XmlRpc\Exception\BadMethodCallException implements ExceptionInterface
+use Zend\XmlRpc\Exception;
+
+class BadMethodCallException extends Exception\BadMethodCallException implements ExceptionInterface
 {
 }

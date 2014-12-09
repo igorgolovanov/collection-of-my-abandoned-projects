@@ -26,6 +26,7 @@ ZEPHIR_INIT_CLASS(ZendFramework_I18n_Exception_ParseException) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Zend\\I18n\\Exception, ParseException, zendframework, i18n_exception_parseexception, zendframework_i18n_exception_runtimeexception_ce, NULL, 0);
 
+	zend_class_implements(zendframework_i18n_exception_parseexception_ce TSRMLS_CC, 1, zendframework_i18n_exception_exceptioninterface_ce);
 	return SUCCESS;
 
 }

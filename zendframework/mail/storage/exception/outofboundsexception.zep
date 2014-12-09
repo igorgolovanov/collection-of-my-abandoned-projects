@@ -9,9 +9,11 @@ file that was distributed with this source code.
 
 namespace Zend\Mail\Storage\Exception;
 
+use Zend\Mail\Exception;
+
 /**
  * Exception for Zend\Mail component.
  */
-class OutOfBoundsException extends \Zend\Mail\Exception\OutOfBoundsException implements ExceptionInterface
-{
-}
+class OutOfBoundsException extends Exception\OutOfBoundsException implements
+    ExceptionInterface
+{}

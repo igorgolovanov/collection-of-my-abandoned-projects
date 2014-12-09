@@ -9,6 +9,9 @@ file that was distributed with this source code.
 
 namespace Zend\Feed\PubSubHubbub\Exception;
 
-interface ExceptionInterface extends \Zend\Feed\Exception\ExceptionInterface
+use Zend\Feed\Exception\ExceptionInterface as Exception;
+
+interface ExceptionInterface extends Exception
 {
+	
 }

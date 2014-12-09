@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Loader\Exception;
 
-class SecurityException extends DomainException implements ExceptionInterface
+class SecurityException extends DomainException
 {
+	
 }

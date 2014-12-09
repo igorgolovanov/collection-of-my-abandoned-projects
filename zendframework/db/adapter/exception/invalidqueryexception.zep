@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Db\Adapter\Exception;
 
-class InvalidQueryException extends UnexpectedValueException
+class InvalidQueryException extends UnexpectedValueException implements ExceptionInterface
 {
 }
+

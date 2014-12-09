@@ -9,11 +9,14 @@ file that was distributed with this source code.
 
 namespace Zend\Feed\Writer\Exception;
 
+use Zend\Feed\Exception;
+
 /**
  * Feed exceptions
  *
  * Class to represent exceptions that occur during Feed operations.
  */
-class InvalidArgumentException extends \Zend\Feed\Exception\InvalidArgumentException implements ExceptionInterface
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
 {
+	
 }

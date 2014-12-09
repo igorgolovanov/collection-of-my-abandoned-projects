@@ -9,9 +9,11 @@ file that was distributed with this source code.
 
 namespace Zend\ProgressBar\Adapter\Exception;
 
+use Zend\ProgressBar\Exception\ExceptionInterface as ProgressBarException;
+
 /**
  * Exception class for Zend\ProgressBar\Adapter
  */
-interface ExceptionInterface extends \Zend\ProgressBar\Exception\ExceptionInterface
+interface ExceptionInterface extends ProgressBarException
 {
 }

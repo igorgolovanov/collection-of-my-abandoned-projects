@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Barcode\Renderer\Exception;
 
-interface ExceptionInterface extends \Zend\Barcode\Exception\ExceptionInterface
+use Zend\Barcode\Exception\ExceptionInterface as BarcodeException;
+
+interface ExceptionInterface extends BarcodeException
 {
 }

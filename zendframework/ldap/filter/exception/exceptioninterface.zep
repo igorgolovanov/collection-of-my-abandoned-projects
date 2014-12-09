@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Ldap\Filter\Exception;
 
-interface ExceptionInterface extends \Zend\Ldap\Exception\ExceptionInterface
+use Zend\Ldap\Exception\ExceptionInterface as MainLdapException;
+
+interface ExceptionInterface extends MainLdapException
 {
 }

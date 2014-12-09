@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Paginator\Adapter\Exception;
 
-class UnexpectedValueException extends \Zend\Paginator\Exception\UnexpectedValueException implements ExceptionInterface
-{
-}
+use Zend\Paginator\Exception;
+
+class UnexpectedValueException extends Exception\UnexpectedValueException implements
+    ExceptionInterface
+{}

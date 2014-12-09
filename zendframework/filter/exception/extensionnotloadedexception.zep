@@ -9,6 +9,6 @@ file that was distributed with this source code.
 
 namespace Zend\Filter\Exception;
 
-class ExtensionNotLoadedException extends RuntimeException implements ExceptionInterface
+class ExtensionNotLoadedException extends RuntimeException
 {
 }

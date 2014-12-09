@@ -26,7 +26,6 @@ ZEPHIR_INIT_CLASS(ZendFramework_Cache_Exception_MissingDependencyException) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Zend\\Cache\\Exception, MissingDependencyException, zendframework, cache_exception_missingdependencyexception, zendframework_cache_exception_runtimeexception_ce, NULL, 0);
 
-	zend_class_implements(zendframework_cache_exception_missingdependencyexception_ce TSRMLS_CC, 1, zendframework_cache_exception_exceptioninterface_ce);
 	return SUCCESS;
 
 }

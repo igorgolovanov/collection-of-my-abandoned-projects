@@ -12,8 +12,10 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/operators.h"
+#include "kernel/fcall.h"
+#include "kernel/object.h"
 #include "kernel/memory.h"
+#include "kernel/operators.h"
 
 
 /*
@@ -43,8 +45,8 @@ ZEPHIR_INIT_CLASS(ZendFramework_Db_Adapter_Exception_InvalidConnectionParameters
  */
 PHP_METHOD(ZendFramework_Db_Adapter_Exception_InvalidConnectionParametersException, __construct) {
 
-	int parameters;
-	zval *message_param = NULL, *parameters_param = NULL;
+	int parameters, ZEPHIR_LAST_CALL_STATUS;
+	zval *message_param = NULL, *parameters_param = NULL, *_0;
 	zval *message = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -54,6 +56,12 @@ PHP_METHOD(ZendFramework_Db_Adapter_Exception_InvalidConnectionParametersExcepti
 	parameters = zephir_get_intval(parameters_param);
 
 
+	ZEPHIR_CALL_PARENT(NULL, zendframework_db_adapter_exception_invalidconnectionparametersexception_ce, this_ptr, "__construct", NULL, message);
+	zephir_check_call_status();
+	ZEPHIR_INIT_ZVAL_NREF(_0);
+	ZVAL_LONG(_0, parameters);
+	zephir_update_property_this(this_ptr, SL("parameters"), _0 TSRMLS_CC);
+	ZEPHIR_MM_RESTORE();
 
 }
 

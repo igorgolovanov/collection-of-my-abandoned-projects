@@ -9,6 +9,9 @@ file that was distributed with this source code.
 
 namespace Zend\Authentication\Adapter\Exception;
 
-class InvalidArgumentException extends \Zend\Authentication\Exception\InvalidArgumentException implements ExceptionInterface
+use Zend\Authentication\Exception;
+
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
 {
 }
+

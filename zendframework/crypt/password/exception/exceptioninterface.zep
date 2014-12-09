@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Crypt\Password\Exception;
 
-interface ExceptionInterface extends \Zend\Crypt\Exception\ExceptionInterface
+use Zend\Crypt\Exception\ExceptionInterface as Exception;
+
+interface ExceptionInterface extends Exception
 {
 }

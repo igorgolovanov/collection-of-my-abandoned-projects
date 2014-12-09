@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Db\Adapter\Exception;
 
-class UnexpectedValueException extends \Zend\Db\Exception\UnexpectedValueException implements ExceptionInterface
+use Zend\Db\Exception;
+
+class UnexpectedValueException extends Exception\UnexpectedValueException implements ExceptionInterface
 {
 }

@@ -10,5 +10,4 @@ file that was distributed with this source code.
 namespace Zend\I18n\Exception;
 
 class RangeException extends \RangeException implements ExceptionInterface
-{
-}
+{}

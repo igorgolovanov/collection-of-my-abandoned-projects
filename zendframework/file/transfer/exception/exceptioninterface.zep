@@ -9,10 +9,14 @@ file that was distributed with this source code.
 
 namespace Zend\File\Transfer\Exception;
 
+use Zend\File\Exception\ExceptionInterface as FileException;
+
 /**
  * Exception class for Zend\File\Transfer
  *
  */
-interface ExceptionInterface extends \Zend\File\Exception\ExceptionInterface
+interface ExceptionInterface
+    extends FileException
 {
+
 }

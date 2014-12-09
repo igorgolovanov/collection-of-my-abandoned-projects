@@ -9,9 +9,10 @@ file that was distributed with this source code.
 
 namespace Zend\Math\BigInteger\Exception;
 
+use Zend\Math\Exception;
+
 /**
  * Invalid argument exception
  */
-interface ExceptionInterface extends \Zend\Math\Exception\ExceptionInterface
-{
-}
+interface ExceptionInterface extends Exception\ExceptionInterface
+{}

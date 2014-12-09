@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 namespace Zend\Cache\Exception;
 
-class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
+class UnexpectedValueException extends \UnexpectedValueException implements
+    ExceptionInterface
 {
 }

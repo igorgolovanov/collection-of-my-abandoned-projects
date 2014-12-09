@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Authentication\Exception;
 
-class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
+class UnexpectedValueException extends \UnexpectedValueException implements
+    ExceptionInterface
 {
 }
+

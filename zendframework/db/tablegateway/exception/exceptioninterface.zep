@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Db\TableGateway\Exception;
 
-interface ExceptionInterface extends \Zend\Db\Exception\ExceptionInterface
+use Zend\Db\Exception;
+
+interface ExceptionInterface extends Exception\ExceptionInterface
 {
 }

@@ -12,6 +12,6 @@ namespace Zend\Loader\Exception;
 /**
  * Plugin class loader exceptions
  */
-class PluginLoaderException extends DomainException implements ExceptionInterface
+class PluginLoaderException extends DomainException
 {
 }

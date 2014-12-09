@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Json\Server\Exception;
 
-class InvalidArgumentException extends \Zend\Json\Exception\InvalidArgumentException implements ExceptionInterface
-{
-}
+use Zend\Json\Exception;
+
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
+    ExceptionInterface
+{}

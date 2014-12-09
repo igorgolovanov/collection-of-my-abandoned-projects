@@ -9,9 +9,12 @@ file that was distributed with this source code.
 
 namespace Zend\Barcode\Renderer\Exception;
 
+use Zend\Barcode\Exception;
+
 /**
  * Exception for Zend\Barcode component.
  */
-class OutOfRangeException extends \Zend\Barcode\Exception\OutOfRangeException implements ExceptionInterface
+class OutOfRangeException extends Exception\OutOfRangeException implements
+    ExceptionInterface
 {
 }

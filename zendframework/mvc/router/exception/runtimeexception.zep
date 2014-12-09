@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 namespace Zend\Mvc\Router\Exception;
 
-class RuntimeException extends \Zend\Mvc\Exception\RuntimeException implements ExceptionInterface
+use Zend\Mvc\Exception;
+
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
 {
 }

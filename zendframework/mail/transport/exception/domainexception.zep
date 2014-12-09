@@ -9,9 +9,11 @@ file that was distributed with this source code.
 
 namespace Zend\Mail\Transport\Exception;
 
+use Zend\Mail\Exception;
+
 /**
  * Exception for Zend\Mail\Transport component.
  */
-class DomainException extends \Zend\Mail\Exception\DomainException implements ExceptionInterface
+class DomainException extends Exception\DomainException implements ExceptionInterface
 {
 }

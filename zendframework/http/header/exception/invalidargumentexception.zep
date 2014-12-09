@@ -9,6 +9,9 @@ file that was distributed with this source code.
 
 namespace Zend\Http\Header\Exception;
 
-class InvalidArgumentException extends \Zend\Http\Exception\InvalidArgumentException implements ExceptionInterface
+use Zend\Http\Exception;
+
+class InvalidArgumentException extends Exception\InvalidArgumentException implements
+    ExceptionInterface
 {
 }
