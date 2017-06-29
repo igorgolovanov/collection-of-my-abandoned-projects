@@ -1,0 +1,26 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+  - 5.6
+
+install:
+  - composer --prefer-source --no-scripts install
+
+before_script:
+ - (cd vendor/phalcon/zephir; ./unit-tests/ci/before_install.sh; ./install)
+ - ./vendor/bin/zephir generate
+ - (cd ext; export CFLAGS="-g3 -O1 -std=gnu90 -Wall -DZEPHIR_RELEASE=1"; phpize && ./configure --enable-zendxml && make --silent -j4 && sudo make --silent install && phpenv config-add ../unit-tests/ci/zendxml.ini)
+ - ulimit -c unlimited || true
+
+script:
+  - phpunit ./vendor/zendframework/zendxml/tests/
+
+after_failure:
+  - ./unit-tests/ci/after_failure.sh
+
+notifications:
+  email:
+    - igor.golovanov@gmail.com
