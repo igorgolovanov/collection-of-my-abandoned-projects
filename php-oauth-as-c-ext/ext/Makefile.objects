@@ -1,0 +1,94 @@
+oauth.lo: /home/igor/projects/OAuth/ext/oauth.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth.c -o oauth.lo 
+kernel/main.lo: /home/igor/projects/OAuth/ext/kernel/main.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/main.c -o kernel/main.lo 
+kernel/memory.lo: /home/igor/projects/OAuth/ext/kernel/memory.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/memory.c -o kernel/memory.lo 
+kernel/exception.lo: /home/igor/projects/OAuth/ext/kernel/exception.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/exception.c -o kernel/exception.lo 
+kernel/hash.lo: /home/igor/projects/OAuth/ext/kernel/hash.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/hash.c -o kernel/hash.lo 
+kernel/debug.lo: /home/igor/projects/OAuth/ext/kernel/debug.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/debug.c -o kernel/debug.lo 
+kernel/backtrace.lo: /home/igor/projects/OAuth/ext/kernel/backtrace.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/backtrace.c -o kernel/backtrace.lo 
+kernel/object.lo: /home/igor/projects/OAuth/ext/kernel/object.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/object.c -o kernel/object.lo 
+kernel/array.lo: /home/igor/projects/OAuth/ext/kernel/array.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/array.c -o kernel/array.lo 
+kernel/extended/array.lo: /home/igor/projects/OAuth/ext/kernel/extended/array.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/extended/array.c -o kernel/extended/array.lo 
+kernel/string.lo: /home/igor/projects/OAuth/ext/kernel/string.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/string.c -o kernel/string.lo 
+kernel/fcall.lo: /home/igor/projects/OAuth/ext/kernel/fcall.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/fcall.c -o kernel/fcall.lo 
+kernel/require.lo: /home/igor/projects/OAuth/ext/kernel/require.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/require.c -o kernel/require.lo 
+kernel/alternative/fcall.lo: /home/igor/projects/OAuth/ext/kernel/alternative/fcall.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/alternative/fcall.c -o kernel/alternative/fcall.lo 
+kernel/file.lo: /home/igor/projects/OAuth/ext/kernel/file.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/file.c -o kernel/file.lo 
+kernel/operators.lo: /home/igor/projects/OAuth/ext/kernel/operators.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/operators.c -o kernel/operators.lo 
+kernel/concat.lo: /home/igor/projects/OAuth/ext/kernel/concat.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/concat.c -o kernel/concat.lo 
+kernel/variables.lo: /home/igor/projects/OAuth/ext/kernel/variables.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/kernel/variables.c -o kernel/variables.lo 
+oauth/client.lo: /home/igor/projects/OAuth/ext/oauth/client.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/client.c -o oauth/client.lo 
+oauth/clientinterface.lo: /home/igor/projects/OAuth/ext/oauth/clientinterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/clientinterface.c -o oauth/clientinterface.lo 
+oauth/credentials.lo: /home/igor/projects/OAuth/ext/oauth/credentials.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/credentials.c -o oauth/credentials.lo 
+oauth/credentialsinterface.lo: /home/igor/projects/OAuth/ext/oauth/credentialsinterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/credentialsinterface.c -o oauth/credentialsinterface.lo 
+oauth/exceptioninterface.lo: /home/igor/projects/OAuth/ext/oauth/exceptioninterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/exceptioninterface.c -o oauth/exceptioninterface.lo 
+oauth/service.lo: /home/igor/projects/OAuth/ext/oauth/service.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/service.c -o oauth/service.lo 
+oauth/serviceinterface.lo: /home/igor/projects/OAuth/ext/oauth/serviceinterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/serviceinterface.c -o oauth/serviceinterface.lo 
+oauth/token.lo: /home/igor/projects/OAuth/ext/oauth/token.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/token.c -o oauth/token.lo 
+oauth/tokenexpiredexception.lo: /home/igor/projects/OAuth/ext/oauth/tokenexpiredexception.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/tokenexpiredexception.c -o oauth/tokenexpiredexception.lo 
+oauth/tokeninterface.lo: /home/igor/projects/OAuth/ext/oauth/tokeninterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/tokeninterface.c -o oauth/tokeninterface.lo 
+oauth/tokennotfoundexception.lo: /home/igor/projects/OAuth/ext/oauth/tokennotfoundexception.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/tokennotfoundexception.c -o oauth/tokennotfoundexception.lo 
+oauth/tokenstorage/memory.lo: /home/igor/projects/OAuth/ext/oauth/tokenstorage/memory.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/tokenstorage/memory.c -o oauth/tokenstorage/memory.lo 
+oauth/tokenstorageinterface.lo: /home/igor/projects/OAuth/ext/oauth/tokenstorageinterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/tokenstorageinterface.c -o oauth/tokenstorageinterface.lo 
+oauth/uri.lo: /home/igor/projects/OAuth/ext/oauth/uri.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/uri.c -o oauth/uri.lo 
+oauth/uriinterface.lo: /home/igor/projects/OAuth/ext/oauth/uriinterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/uriinterface.c -o oauth/uriinterface.lo 
+oauth/v1/service.lo: /home/igor/projects/OAuth/ext/oauth/v1/service.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/v1/service.c -o oauth/v1/service.lo 
+oauth/v1/serviceinterface.lo: /home/igor/projects/OAuth/ext/oauth/v1/serviceinterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/v1/serviceinterface.c -o oauth/v1/serviceinterface.lo 
+oauth/v1/signature.lo: /home/igor/projects/OAuth/ext/oauth/v1/signature.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/v1/signature.c -o oauth/v1/signature.lo 
+oauth/v1/signatureinterface.lo: /home/igor/projects/OAuth/ext/oauth/v1/signatureinterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/v1/signatureinterface.c -o oauth/v1/signatureinterface.lo 
+oauth/v1/token.lo: /home/igor/projects/OAuth/ext/oauth/v1/token.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/v1/token.c -o oauth/v1/token.lo 
+oauth/v1/tokeninterface.lo: /home/igor/projects/OAuth/ext/oauth/v1/tokeninterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/v1/tokeninterface.c -o oauth/v1/tokeninterface.lo 
+oauth/v1/unsupportedhashalgorithmexception.lo: /home/igor/projects/OAuth/ext/oauth/v1/unsupportedhashalgorithmexception.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/v1/unsupportedhashalgorithmexception.c -o oauth/v1/unsupportedhashalgorithmexception.lo 
+oauth/v2/service.lo: /home/igor/projects/OAuth/ext/oauth/v2/service.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/v2/service.c -o oauth/v2/service.lo 
+oauth/v2/serviceinterface.lo: /home/igor/projects/OAuth/ext/oauth/v2/serviceinterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/v2/serviceinterface.c -o oauth/v2/serviceinterface.lo 
+oauth/v2/token.lo: /home/igor/projects/OAuth/ext/oauth/v2/token.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/v2/token.c -o oauth/v2/token.lo 
+oauth/v2/tokeninterface.lo: /home/igor/projects/OAuth/ext/oauth/v2/tokeninterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/igor/projects/OAuth/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/igor/projects/OAuth/ext/oauth/v2/tokeninterface.c -o oauth/v2/tokeninterface.lo 
+$(phplibdir)/oauth.la: ./oauth.la
+	$(LIBTOOL) --mode=install cp ./oauth.la $(phplibdir)
+
+./oauth.la: $(shared_objects_oauth) $(OAUTH_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_oauth) $(OAUTH_SHARED_LIBADD)
+
