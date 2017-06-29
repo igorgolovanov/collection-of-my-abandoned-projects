@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_captcha_exception_exceptioninterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Captcha_Exception_ExceptionInterface);
-

@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_file_transfer_exception_invalidargumentexception_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_File_Transfer_Exception_InvalidArgumentException);
-

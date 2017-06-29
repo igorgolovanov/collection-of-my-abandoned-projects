@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_mvc_exception_invalidcontrollerexception_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Mvc_Exception_InvalidControllerException);
-

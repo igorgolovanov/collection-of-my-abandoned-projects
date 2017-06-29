@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_http_exception_outofrangeexception_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Http_Exception_OutOfRangeException);
-

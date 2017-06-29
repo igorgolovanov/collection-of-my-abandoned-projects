@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_xmlrpc_exception_runtimeexception_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_XmlRpc_Exception_RuntimeException);
-

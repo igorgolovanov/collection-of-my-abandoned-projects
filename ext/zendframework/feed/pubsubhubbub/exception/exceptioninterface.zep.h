@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_feed_pubsubhubbub_exception_exceptioninterface_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Feed_PubSubHubbub_Exception_ExceptionInterface);
-

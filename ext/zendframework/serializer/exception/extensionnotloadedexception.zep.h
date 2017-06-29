@@ -1,5 +1,0 @@
-
-extern zend_class_entry *zendframework_serializer_exception_extensionnotloadedexception_ce;
-
-ZEPHIR_INIT_CLASS(ZendFramework_Serializer_Exception_ExtensionNotLoadedException);
-
