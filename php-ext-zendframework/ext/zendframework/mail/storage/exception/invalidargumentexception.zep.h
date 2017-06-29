@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_mail_storage_exception_invalidargumentexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Mail_Storage_Exception_InvalidArgumentException);
+

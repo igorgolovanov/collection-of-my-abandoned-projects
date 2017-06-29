@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_captcha_exception_domainexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Captcha_Exception_DomainException);
+

@@ -1,0 +1,35 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+  - 5.6
+
+install:
+  - sudo apt-get install parallel
+  - composer install --dev --prefer-source
+
+before_script:
+  - mkdir -p build/coverage
+  - cp unit-tests/TestConfiguration.php.travis unit-tests/TestConfiguration.php
+  - (cd vendor/phalcon/zephir; ./unit-tests/ci/before_install.sh; ./install)
+  - ./bin/zf-zephir generate
+  - (cd ext; export CFLAGS="-g3 -O1 -std=gnu90 -Wall -DZEPHIR_RELEASE=1"; phpize && ./configure --enable-zendframework && make --silent -j4 && sudo make --silent install && phpenv config-add ../unit-tests/ci/zendframework.ini)
+  - ulimit -c unlimited || true
+
+script:
+  # Run tests for the various components in parallel
+  - ls -d unit-tests/ZendTest/* | parallel --gnu --keep-order 'phpenv config-add unit-tests/ci/zendframework.ini; echo "Running {} tests"; ./vendor/bin/phpunit -c unit-tests/phpunit.xml.dist --coverage-php build/coverage/coverage-{/.}.cov {};' || exit 1
+
+after_script:
+  # Merges the individual clover reports of each component into a single clover.xml
+  - php vendor/bin/phpcov.php --merge --clover build/logs/clover.xml --whitelist library build/coverage
+  - php vendor/bin/coveralls
+
+after_failure:
+  - ./unit-tests/ci/after_failure.sh
+
+notifications:
+  email:
+    - igor.golovanov@gmail.com

@@ -1,0 +1,19 @@
+
+extern zend_class_entry *zendframework_log_formatter_formatterinterface_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Log_Formatter_FormatterInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_log_formatter_formatterinterface_format, 0, 0, 1)
+	ZEND_ARG_INFO(0, event)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zendframework_log_formatter_formatterinterface_setdatetimeformat, 0, 0, 1)
+	ZEND_ARG_INFO(0, dateTimeFormat)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zendframework_log_formatter_formatterinterface_method_entry) {
+	PHP_ABSTRACT_ME(ZendFramework_Log_Formatter_FormatterInterface, format, arginfo_zendframework_log_formatter_formatterinterface_format)
+	PHP_ABSTRACT_ME(ZendFramework_Log_Formatter_FormatterInterface, getDateTimeFormat, NULL)
+	PHP_ABSTRACT_ME(ZendFramework_Log_Formatter_FormatterInterface, setDateTimeFormat, arginfo_zendframework_log_formatter_formatterinterface_setdatetimeformat)
+  PHP_FE_END
+};

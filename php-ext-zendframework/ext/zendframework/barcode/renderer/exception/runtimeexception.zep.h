@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_barcode_renderer_exception_runtimeexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Barcode_Renderer_Exception_RuntimeException);
+

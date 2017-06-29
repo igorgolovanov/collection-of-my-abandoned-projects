@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if [ -h $0 ]; then
+    REALPATH="`dirname $0`/`readlink $0`"
+    CURDIR=`dirname $REALPATH`
+else
+    CURDIR=`dirname $0`
+fi
+PARENTDIR=`cd $CURDIR/..; pwd`
+
+if [ -z "$ZEPHIRDIR" ]; then
+  ZEPHIRDIR="%ZEPHIRDIR%"
+  if [[ "$ZEPHIRDIR" == "%""ZEPHIRDIR""%" ]]; then
+
+    if [ -f $PARENTDIR/compiler.php ]; then
+      export ZEPHIRDIR="$PARENTDIR/vendor/phalcon/zephir"
+    else
+      echo "Environment variable ZEPHIRDIR is not set"
+      exit 1
+    fi
+  fi
+fi
+
+if [ ! -r $ZEPHIRDIR/bin/zephir-parser ]; then
+    echo "You didn't install zephir. Install?"
+    read ch
+    case "$ch" in
+        n|N|no ) "You have to install zephir at first"
+            exit 1
+            ;;
+        * ) cd $ZEPHIRDIR
+            ./install
+            ;;
+    esac
+fi
+
+if [[ $1 && $2 && $3 && "$1"=="-c" ]]; then
+    php -c $2 $PARENTDIR/compiler.php ${*:3}
+else
+    php $PARENTDIR/compiler.php $*
+fi
+

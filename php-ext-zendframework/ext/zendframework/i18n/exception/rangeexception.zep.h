@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_i18n_exception_rangeexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_I18n_Exception_RangeException);
+

@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zendframework_tag_exception_invalidelementnameexception_ce;
+
+ZEPHIR_INIT_CLASS(ZendFramework_Tag_Exception_InvalidElementNameException);
+
